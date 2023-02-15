@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>HackerRank中SQL练习_简单 | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="MySQL" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="简单 题目来源于 Hackerrake easy 部分，解题部分的注释为问题拆解过程，收录原因是这些题目是基础的 SELECT 中常用的基本函数的使用场景，故记录下解题思路和解法，以备翻阅，欢迎交流，如有侵权，望告知，即删~  Weather Observation Station 3  题目 Query a list of CITY names from STATION for cities">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackerRank中SQL练习_简单">
+<meta property="og:url" content="http://example.com/2022/11/07/MySQL/hacker/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="简单 题目来源于 Hackerrake easy 部分，解题部分的注释为问题拆解过程，收录原因是这些题目是基础的 SELECT 中常用的基本函数的使用场景，故记录下解题思路和解法，以备翻阅，欢迎交流，如有侵权，望告知，即删~  Weather Observation Station 3  题目 Query a list of CITY names from STATION for cities">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Station.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/high_than_75.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Triangle_type.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/AVG_population.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Blunder-1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Top_Earners.png">
+<meta property="article:published_time" content="2022-11-07T14:33:36.000Z">
+<meta property="article:modified_time" content="2023-02-15T09:28:11.378Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Station.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file active"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-MySQL/hacker" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/MySQL/">MySQL</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/MySQL/%E7%BB%83%E4%B9%A0%E9%A2%98%E9%9B%86/">练习题集</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/MySQL/" rel="tag">MySQL</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2022/11/07/MySQL/hacker/">
+            <time datetime="2022-11-07T14:33:36.000Z" itemprop="datePublished">2022-11-07</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/MySQL/hacker.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/MySQL/hacker.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/MySQL/hacker.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            HackerRank中SQL练习_简单
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95"><span class="toc-number">1.</span> <span class="toc-text"> 简单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#weather-observation-station-3"><span class="toc-number">1.1.</span> <span class="toc-text"> Weather Observation Station 3</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">1.1.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98"><span class="toc-number">1.1.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weather-observation-station-6"><span class="toc-number">1.2.</span> <span class="toc-text"> Weather Observation Station 6</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-2"><span class="toc-number">1.2.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-2"><span class="toc-number">1.2.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weather-observation-station-7"><span class="toc-number">1.3.</span> <span class="toc-text"> Weather Observation Station 7</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-3"><span class="toc-number">1.3.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-3"><span class="toc-number">1.3.2.</span> <span class="toc-text"> 解题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E4%BC%BC%E9%A2%98%E7%9B%AE"><span class="toc-number">1.3.3.</span> <span class="toc-text"> 类似题目</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weather-observation-station-9"><span class="toc-number">1.4.</span> <span class="toc-text"> Weather Observation Station 9</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-4"><span class="toc-number">1.4.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-4"><span class="toc-number">1.4.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#higher-than-75-marks"><span class="toc-number">1.5.</span> <span class="toc-text"> Higher Than 75 Marks</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-5"><span class="toc-number">1.5.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-5"><span class="toc-number">1.5.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weather-observation-station-15"><span class="toc-number">1.6.</span> <span class="toc-text"> Weather Observation Station 15</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-6"><span class="toc-number">1.6.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-6"><span class="toc-number">1.6.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weather-observation-station-5"><span class="toc-number">1.7.</span> <span class="toc-text"> Weather Observation Station 5</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-7"><span class="toc-number">1.7.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-7"><span class="toc-number">1.7.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#type-of-triangle"><span class="toc-number">1.8.</span> <span class="toc-text"> Type of Triangle</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-8"><span class="toc-number">1.8.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-8"><span class="toc-number">1.8.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#average-population"><span class="toc-number">1.9.</span> <span class="toc-text"> Average Population</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-9"><span class="toc-number">1.9.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-9"><span class="toc-number">1.9.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#the-blunder"><span class="toc-number">1.10.</span> <span class="toc-text"> The Blunder</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-10"><span class="toc-number">1.10.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-10"><span class="toc-number">1.10.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#top-earners"><span class="toc-number">1.11.</span> <span class="toc-text"> Top Earners</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-11"><span class="toc-number">1.11.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-11"><span class="toc-number">1.11.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li></ol></li></ol>
+                </div>
+            
+        
+        
+            <h2 id="简单"><a class="markdownIt-Anchor" href="#简单"></a> 简单</h2>
+<p>题目来源于 <a target="_blank" rel="noopener" href="https://www.hackerrank.com/domains/sql">Hackerrake</a> easy 部分，解题部分的注释为问题拆解过程，收录原因是这些题目是基础的 SELECT 中常用的基本函数的使用场景，故记录下解题思路和解法，以备翻阅，欢迎交流，如有侵权，望告知，即删~</p>
+<h3 id="weather-observation-station-3"><a class="markdownIt-Anchor" href="#weather-observation-station-3"></a> Weather Observation Station 3</h3>
+<h4 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h4>
+<p>Query a list of <strong>CITY</strong> names from <strong>STATION</strong> for cities that have an even <strong>ID</strong> number. Print the results in any order, but exclude duplicates from the answer.<br />
+The <strong>STATION</strong> table is described as follows:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Station.jpg" alt="Station" /></p>
+<h4 id="解题"><a class="markdownIt-Anchor" href="#解题"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Query CITY names </span></span><br><span class="line"><span class="comment">-- from STATION </span></span><br><span class="line"><span class="comment">-- for cities that have an even ID number.</span></span><br><span class="line"><span class="comment">-- in any order, but exclude duplicates from the answer.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> CITY</span><br><span class="line"><span class="keyword">FROM</span> STATION</span><br><span class="line"><span class="keyword">WHERE</span> <span class="built_in">MOD</span>(ID,<span class="number">2</span>) <span class="operator">=</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：MOD函数，匹配奇/偶数行
+<ul>
+<li>以此类推，奇数行为：MOD(ID，2) = 1</li>
+</ul>
+</li>
+</ul>
+<h3 id="weather-observation-station-6"><a class="markdownIt-Anchor" href="#weather-observation-station-6"></a> Weather Observation Station 6</h3>
+<h4 id="题目-2"><a class="markdownIt-Anchor" href="#题目-2"></a> 题目</h4>
+<p>Query the list of <em>CITY</em> names starting with vowels (i.e., <code>a</code>, <code>e</code>, <code>i</code>, <code>o</code>, or <code>u</code>) from <strong>STATION</strong>. Your result <em>cannot</em> contain duplicates.</p>
+<h4 id="解题-2"><a class="markdownIt-Anchor" href="#解题-2"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- from STATION.</span></span><br><span class="line"><span class="comment">-- starting with vowels (i.e., a, e, i, o, or u) from STATION. </span></span><br><span class="line"><span class="comment">-- Query the list of CITY names </span></span><br><span class="line"><span class="comment">-- Your result cannot contain duplicates.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> CITY</span><br><span class="line"><span class="keyword">FROM</span> STATION</span><br><span class="line"><span class="keyword">WHERE</span> CITY REGEXP <span class="string">&#x27;^[aeiou].*&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：正则匹配，以什么开头
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/mysql/mysql-regexp.html">MYSQL正则表达式</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="weather-observation-station-7"><a class="markdownIt-Anchor" href="#weather-observation-station-7"></a> Weather Observation Station 7</h3>
+<h4 id="题目-3"><a class="markdownIt-Anchor" href="#题目-3"></a> 题目</h4>
+<p>Query the list of <em>CITY</em> names ending with vowels (a, e, i, o, u) from <strong>STATION</strong>. Your result <em>cannot</em> contain duplicates.</p>
+<h4 id="解题-3"><a class="markdownIt-Anchor" href="#解题-3"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- from STATION. </span></span><br><span class="line"><span class="comment">-- Query the list of CITY names ending with vowels (a, e, i, o, u)</span></span><br><span class="line"><span class="comment">-- Your result cannot contain duplicates.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> CITY</span><br><span class="line"><span class="keyword">FROM</span> STATION</span><br><span class="line"><span class="keyword">WHERE</span> CITY REGEXP <span class="string">&#x27;[aeiou]$&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：正则匹配，以什么结尾
+<ul>
+<li>正则匹配时，不需要像 LIKE 函数规定一个位置，只需要条件正确就能匹配成功</li>
+</ul>
+</li>
+</ul>
+<h4 id="类似题目"><a class="markdownIt-Anchor" href="#类似题目"></a> 类似题目</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Query the list <span class="keyword">of</span> CITY names <span class="keyword">from</span> STATION which have vowels (i.e., a, e, i, o, <span class="keyword">and</span> u) <span class="keyword">as</span> <span class="keyword">both</span> their <span class="keyword">first</span> <span class="keyword">and</span> <span class="keyword">last</span> characters. Your <span class="keyword">result</span> cannot contain duplicates.</span><br><span class="line"></span><br><span class="line"><span class="comment">-- from STATION </span></span><br><span class="line"><span class="comment">-- which have vowels (i.e., a, e, i, o, and u) as both their first and last characters</span></span><br><span class="line"><span class="comment">-- Query the list of CITY names</span></span><br><span class="line"><span class="comment">-- cannot contain duplicates.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> CITY</span><br><span class="line"><span class="keyword">FROM</span> STATION</span><br><span class="line"><span class="keyword">WHERE</span> CITY REGEXP <span class="string">&#x27;^[aeiou].*[aeiou]$&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：正则匹配
+<ul>
+<li>在首尾都需要进行匹配时，需要空出位置</li>
+</ul>
+</li>
+</ul>
+<h3 id="weather-observation-station-9"><a class="markdownIt-Anchor" href="#weather-observation-station-9"></a> Weather Observation Station 9</h3>
+<h4 id="题目-4"><a class="markdownIt-Anchor" href="#题目-4"></a> 题目</h4>
+<p>Query the list of <em>CITY</em> names from <strong>STATION</strong> that <em>do not start</em> with vowels. Your result cannot contain duplicates.</p>
+<h4 id="解题-4"><a class="markdownIt-Anchor" href="#解题-4"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- from STATION</span></span><br><span class="line"><span class="comment">-- that do not start with vowels</span></span><br><span class="line"><span class="comment">-- Query the list of CITY names</span></span><br><span class="line"><span class="comment">-- cannot contain duplicates.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> CITY</span><br><span class="line"><span class="keyword">FROM</span> STATION</span><br><span class="line"><span class="keyword">WHERE</span> CITY REGEXP <span class="string">&#x27;^[^aeiou]&#x27;</span>;</span><br><span class="line"></span><br><span class="line"># 另一种写法</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> CITY</span><br><span class="line"><span class="keyword">FROM</span> STATION</span><br><span class="line"><span class="keyword">WHERE</span> CITY <span class="keyword">NOT</span> REGEXP <span class="string">&#x27;^[aeiou]&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：正则匹配
+<ul>
+<li>NOT 函数等同于反向选择</li>
+</ul>
+</li>
+</ul>
+<h3 id="higher-than-75-marks"><a class="markdownIt-Anchor" href="#higher-than-75-marks"></a> Higher Than 75 Marks</h3>
+<h4 id="题目-5"><a class="markdownIt-Anchor" href="#题目-5"></a> 题目</h4>
+<p>Query the <em>Name</em> of any student in <strong>STUDENTS</strong> who scored higher than 75 <em>Marks</em>. Order your output by the <em>last three characters</em> of each name. If two or more students both have names ending in the same last three characters (i.e.: Bobby, Robby, etc.), secondary sort them by ascending <em>ID</em>.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/high_than_75.png" alt="high_than_75" /></p>
+<h4 id="解题-5"><a class="markdownIt-Anchor" href="#解题-5"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- in STUDENTS </span></span><br><span class="line"><span class="comment">-- Query the Name of any student</span></span><br><span class="line"><span class="comment">-- who scored higher than  Marks. </span></span><br><span class="line"><span class="comment">-- Order your output by the last three characters of each name. </span></span><br><span class="line"><span class="comment">-- If two or more students both have names ending in the same last three characters </span></span><br><span class="line"><span class="comment">-- secondary sort them by ascending ID.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> NAME</span><br><span class="line"><span class="keyword">FROM</span> STUDENTS</span><br><span class="line"><span class="keyword">WHERE</span> Marks <span class="operator">&gt;</span> <span class="number">75</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">RIGHT</span>(NAME,<span class="number">3</span>), ID;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：字符串截取，LEFT / RIGHT 函数
+<ul>
+<li>LEFT(str,length)</li>
+<li>RIGHT(str,length)</li>
+</ul>
+</li>
+</ul>
+<h3 id="weather-observation-station-15"><a class="markdownIt-Anchor" href="#weather-observation-station-15"></a> Weather Observation Station 15</h3>
+<h4 id="题目-6"><a class="markdownIt-Anchor" href="#题目-6"></a> 题目</h4>
+<p>Query the <em>Western Longitude</em> (<em>LONG_W</em>) for the largest <em>Northern Latitude</em> (<em>LAT_N</em>) in <strong>STATION</strong> that is less than 137.2345 . Round your answer to 4 decimal places.</p>
+<h4 id="解题-6"><a class="markdownIt-Anchor" href="#解题-6"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Query the Western Longitude (LONG_W) </span></span><br><span class="line"><span class="comment">-- for the largest Northern Latitude (LAT_N)</span></span><br><span class="line"><span class="comment">-- that is less than 137.2345</span></span><br><span class="line"><span class="comment">-- Round your answer to 4 decimal places.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> ROUND(LONG_W,<span class="number">4</span>)</span><br><span class="line"><span class="keyword">FROM</span> STATION</span><br><span class="line"><span class="keyword">WHERE</span> LAT_N <span class="operator">&lt;</span> <span class="number">137.2345</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> LAT_N <span class="keyword">DESC</span></span><br><span class="line">LIMIT <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：子查询 / 排序
+<ul>
+<li>这个查询使用排序获得最大的LAT_N，进而获得相对应的LONG_W，问题在于如果存在相同的最大LAT_N，那么LONG_W根据题意要求使用LIMIT 1就是错误答案，所以使用子查询是最正确的姿势</li>
+</ul>
+</li>
+</ul>
+<h3 id="weather-observation-station-5"><a class="markdownIt-Anchor" href="#weather-observation-station-5"></a> Weather Observation Station 5</h3>
+<h4 id="题目-7"><a class="markdownIt-Anchor" href="#题目-7"></a> 题目</h4>
+<p>Query the two cities in <strong>STATION</strong> with the shortest and longest <em>CITY</em> names, as well as their respective lengths (i.e.: number of characters in the name). If there is more than one smallest or largest city, choose the one that comes first when ordered alphabetically.</p>
+<h4 id="解题-7"><a class="markdownIt-Anchor" href="#解题-7"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- in STATION</span></span><br><span class="line"><span class="comment">-- Query the two cities with the shortest and longest CITY names,</span></span><br><span class="line"><span class="comment">-- as well as their respective lengths </span></span><br><span class="line"><span class="comment">-- If there is more than one smallest or largest city, choose the one that comes first when ordered alphabetically.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- SELECT CITY,LENGTH(CITY)</span></span><br><span class="line"><span class="comment">-- FROM STATION</span></span><br><span class="line"><span class="comment">-- GROUP BY 2</span></span><br><span class="line"><span class="comment">-- HAVING LENGTH(CITY) = (SELECT MAX(LENGTH(CITY)) FROM STATION) </span></span><br><span class="line"><span class="comment">-- OR LENGTH(CITY) = (SELECT MIN(LENGTH(CITY)) FROM STATION)</span></span><br><span class="line"><span class="comment">-- ORDER BY 1</span></span><br><span class="line"><span class="comment">-- LIMIT 1;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- SELECT MIN(LENGTH(CITY)) FROM STATION;</span></span><br><span class="line"></span><br><span class="line"># 解法一</span><br><span class="line">(<span class="keyword">SELECT</span> CITY,LENGTH(CITY) <span class="keyword">FROM</span> STATION <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">2</span> <span class="keyword">DESC</span>,<span class="number">1</span> <span class="keyword">ASC</span> LIMIT <span class="number">1</span>)</span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line">(<span class="keyword">SELECT</span> CITY,LENGTH(CITY) <span class="keyword">FROM</span> STATION <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">2</span> <span class="keyword">ASC</span>, <span class="number">1</span> <span class="keyword">ASC</span> LIMIT <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"># 解法二</span><br><span class="line"><span class="keyword">select</span> t2.city , t2.t  </span><br><span class="line"><span class="keyword">from</span>  </span><br><span class="line">(  </span><br><span class="line">    <span class="keyword">select</span> t1.city , t1.t , <span class="built_in">row_number</span>() <span class="keyword">over</span> (<span class="keyword">partition</span> <span class="keyword">by</span> t1.t <span class="keyword">order</span> <span class="keyword">by</span> t1.city) <span class="keyword">as</span> ro </span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">        ( <span class="keyword">select</span> city , length(city)<span class="keyword">as</span> t </span><br><span class="line">          <span class="keyword">from</span> station </span><br><span class="line">        ) t1</span><br><span class="line">    <span class="keyword">group</span> <span class="keyword">by</span> t1.city,t1.t</span><br><span class="line">    <span class="keyword">having</span> </span><br><span class="line">        t1.t <span class="operator">=</span> (<span class="keyword">select</span> <span class="built_in">min</span>(length(city)) <span class="keyword">from</span> station )</span><br><span class="line">                           <span class="keyword">or</span> </span><br><span class="line">        t1.t <span class="operator">=</span> (<span class="keyword">select</span> <span class="built_in">max</span>(length(city)) <span class="keyword">from</span> station)</span><br><span class="line">) t2</span><br><span class="line"><span class="keyword">where</span> t2.ro <span class="operator">=</span> <span class="number">1</span>;    </span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：UNION / 子查询
+<ul>
+<li>解法二是在网上找的，其实解题思路是一致的，求出CITY的最大最小长度，然后通过分组并匹配长度，再通过排序得出最终结果</li>
+<li>能理解，但…写不出，其实写出来了一部分，卡在排序，即解法二的ROW_NUMBER，需要多加练习</li>
+</ul>
+</li>
+</ul>
+<h3 id="type-of-triangle"><a class="markdownIt-Anchor" href="#type-of-triangle"></a> Type of Triangle</h3>
+<h4 id="题目-8"><a class="markdownIt-Anchor" href="#题目-8"></a> 题目</h4>
+<p>Write a query identifying the <em>type</em> of each record in the <strong>TRIANGLES</strong> table using its three side lengths. Output one of the following statements for each record in the table:</p>
+<ul>
+<li><strong>Equilateral</strong>: It’s a triangle with sides of equal length.</li>
+<li><strong>Isosceles</strong>: It’s a triangle with sides of equal length.</li>
+<li><strong>Scalene</strong>: It’s a triangle with sides of differing lengths.</li>
+<li><strong>Not A Triangle</strong>: The given values of <em>A</em>, <em>B</em>, and <em>C</em> don’t form a triangle.</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Triangle_type.png" alt="Triangle_type" /></p>
+<h4 id="解题-8"><a class="markdownIt-Anchor" href="#解题-8"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Write a query identifying the type of each record in the TRIANGLES table using its three side lengths.</span></span><br><span class="line"><span class="comment">-- Equilateral: It&#x27;s a triangle with  sides of equal length.</span></span><br><span class="line"><span class="comment">-- Isosceles: It&#x27;s a triangle with  sides of equal length.</span></span><br><span class="line"><span class="comment">-- Scalene: It&#x27;s a triangle with  sides of differing lengths.</span></span><br><span class="line"><span class="comment">-- Not A Triangle: The given values of A, B, and C don&#x27;t form a triangle.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CASE</span> </span><br><span class="line">            <span class="keyword">WHEN</span> A <span class="operator">+</span> B <span class="operator">&gt;</span> C <span class="keyword">AND</span> A <span class="operator">+</span> C <span class="operator">&gt;</span> B <span class="keyword">AND</span> B <span class="operator">+</span> C <span class="operator">&gt;</span> A <span class="keyword">THEN</span></span><br><span class="line">                <span class="keyword">CASE</span> </span><br><span class="line">                    <span class="keyword">WHEN</span> A <span class="operator">=</span> B <span class="keyword">AND</span> B <span class="operator">=</span> C <span class="keyword">THEN</span> <span class="string">&#x27;Equilateral&#x27;</span></span><br><span class="line">                    <span class="keyword">WHEN</span> A <span class="operator">=</span> B <span class="keyword">OR</span> B <span class="operator">=</span> C <span class="keyword">OR</span> C <span class="operator">=</span> A <span class="keyword">THEN</span> <span class="string">&#x27;Isosceles&#x27;</span></span><br><span class="line">                    <span class="keyword">ELSE</span> <span class="string">&#x27;Scalene&#x27;</span> </span><br><span class="line">                <span class="keyword">END</span></span><br><span class="line">            <span class="keyword">ELSE</span> <span class="string">&#x27;Not A Triangle&#x27;</span> </span><br><span class="line">        <span class="keyword">END</span></span><br><span class="line"><span class="keyword">FROM</span> TRIANGLES;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：三角形判定条件 + CASE WHEN + CASE WHEN 嵌套
+<ul>
+<li>嵌套的性能需要验证，只是该题目可以这样处理</li>
+</ul>
+</li>
+</ul>
+<h3 id="average-population"><a class="markdownIt-Anchor" href="#average-population"></a> Average Population</h3>
+<h4 id="题目-9"><a class="markdownIt-Anchor" href="#题目-9"></a> 题目</h4>
+<p>Query the average population for all cities in <strong>CITY</strong>, rounded <em>down</em> to the nearest integer.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/AVG_population.jpg" alt="AVG_population" /></p>
+<h4 id="解题-9"><a class="markdownIt-Anchor" href="#解题-9"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- in CITY</span></span><br><span class="line"><span class="comment">-- Query the average population for all cities </span></span><br><span class="line"><span class="comment">-- rounded down to the nearest integer.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- SELECT ROUND(AVG(POPULATION))</span></span><br><span class="line"><span class="comment">-- FROM CITY;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">FLOOR</span>(<span class="built_in">AVG</span>(POPULATION))</span><br><span class="line"><span class="keyword">FROM</span> CITY;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：AVG 函数 + 小数取整
+<ul>
+<li>ROUND(X,D)，默认D=0</li>
+<li>FLOOR(number)：向下取整，参数必须为数字类型</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-blunder"><a class="markdownIt-Anchor" href="#the-blunder"></a> The Blunder</h3>
+<h4 id="题目-10"><a class="markdownIt-Anchor" href="#题目-10"></a> 题目</h4>
+<p>Samantha was tasked with calculating the average monthly salaries for all employees in the <strong>EMPLOYEES</strong> table, but did not realize her keyboard’s key was broken until after completing the calculation. She wants your help finding the difference between her miscalculation (using salaries with any zeros removed), and the actual average salary.</p>
+<p>Write a query calculating the amount of error (i.e.: actual - miscalculated average monthly salaries), and round it up to the next integer.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Blunder-1.png" alt="Blunder-1" /></p>
+<h4 id="解题-10"><a class="markdownIt-Anchor" href="#解题-10"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Write a query calculating the amount of error (i.e.:  average monthly salaries)</span></span><br><span class="line"><span class="comment">-- fix monthly salaries --&gt; before average monthly salaries - fix average monthly salaries</span></span><br><span class="line"><span class="comment">-- round it up to the next integer.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">CEIL</span>(<span class="built_in">AVG</span>(Salary) <span class="operator">-</span> <span class="built_in">AVG</span>(REPLACE(Salary,<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;&#x27;</span>))) <span class="keyword">AS</span> diff</span><br><span class="line"><span class="keyword">FROM</span> EMPLOYEES;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：REPLACE 函数 + 向上取整
+<ul>
+<li>CEIL(X)：返回最小整数值，但不能小于X</li>
+<li>REPLACE(str,old_string,new_string)</li>
+</ul>
+</li>
+</ul>
+<h3 id="top-earners"><a class="markdownIt-Anchor" href="#top-earners"></a> Top Earners</h3>
+<h4 id="题目-11"><a class="markdownIt-Anchor" href="#题目-11"></a> 题目</h4>
+<p>We define an employee’s <em>total earnings</em> to be their monthly salary X months worked, and the <em>maximum total earnings</em> to be the maximum total earnings for any employee in the <strong>Employee</strong> table. Write a query to find the <em>maximum total earnings</em> for all employees as well as the total number of employees who have maximum total earnings. Then print these values as 2 space-separated integers.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Top_Earners.png" alt="Top_Earners" /></p>
+<h4 id="解题-11"><a class="markdownIt-Anchor" href="#解题-11"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- define an employee&#x27;s total earnings</span></span><br><span class="line"><span class="comment">-- Write a query to find the maximum total earnings for all employees </span></span><br><span class="line"><span class="comment">-- the total number of employees who have maximum total earnings. </span></span><br><span class="line"><span class="comment">-- these values as  space-separated integers.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> salary<span class="operator">*</span>months <span class="keyword">AS</span> earnings , <span class="built_in">COUNT</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">FROM</span> Employee</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">1</span> <span class="keyword">DESC</span></span><br><span class="line">LIMIT <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：排序获得最大值 + COUNT 函数 + LIMIT 函数</li>
+</ul>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    jupyter-notebook 安装&amp;美化
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2022/10/07/MySQL/hack_no_easy/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">HackerRank中SQL练习非简单部分</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

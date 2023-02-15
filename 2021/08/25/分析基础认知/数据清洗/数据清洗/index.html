@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>数据分析中的数据清洗流程 | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="数据清洗" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="预处理阶段 1、数据导入 2、查看数据。这里包含两个部分：一是看源数据，包括字段解释、数据来源、代码表等等一切描述数据的信息；二是抽取一部分数据，使用人工查看方式，对数据本身有一个直观的了解，并且初步发现一些问题，为之后的处理做准备。  缺失值清洗 1、**定缺失值范围：**对每个字段都计算其缺失值比例，然后按照缺失比例和字段重要性，分别制定策略，策略规则：  2、筛选字段：删除不需要的字段，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据分析中的数据清洗流程">
+<meta property="og:url" content="http://example.com/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="预处理阶段 1、数据导入 2、查看数据。这里包含两个部分：一是看源数据，包括字段解释、数据来源、代码表等等一切描述数据的信息；二是抽取一部分数据，使用人工查看方式，对数据本身有一个直观的了解，并且初步发现一些问题，为之后的处理做准备。  缺失值清洗 1、**定缺失值范围：**对每个字段都计算其缺失值比例，然后按照缺失比例和字段重要性，分别制定策略，策略规则：  2、筛选字段：删除不需要的字段，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pic4.zhimg.com/8aee59b038c0f3a15d4e2d871bfd5ffb_r.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/80/20af3ec040211ec769d1b1a4e4ddb43d_hd.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/8df128a1da564c830db8ea7703491aa1_r.jpg">
+<meta property="article:published_time" content="2021-08-25T12:41:02.000Z">
+<meta property="article:modified_time" content="2023-02-15T02:29:36.184Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="数据清洗">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic4.zhimg.com/8aee59b038c0f3a15d4e2d871bfd5ffb_r.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-分析基础认知/数据清洗/数据清洗" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/">分析基础</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据清洗</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/" rel="tag">数据清洗</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">
+            <time datetime="2021-08-25T12:41:02.000Z" itemprop="datePublished">2021-08-25</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/分析基础认知/数据清洗/数据清洗.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/分析基础认知/数据清洗/数据清洗.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/分析基础认知/数据清洗/数据清洗.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            数据分析中的数据清洗流程
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%A4%84%E7%90%86%E9%98%B6%E6%AE%B5"><span class="toc-number">1.</span> <span class="toc-text"> 预处理阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E6%B8%85%E6%B4%97"><span class="toc-number">2.</span> <span class="toc-text"> 缺失值清洗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E5%86%85%E5%AE%B9%E6%B8%85%E6%B4%97"><span class="toc-number">3.</span> <span class="toc-text"> 格式内容清洗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E9%94%99%E8%AF%AF%E6%B8%85%E6%B4%97"><span class="toc-number">4.</span> <span class="toc-text"> 逻辑错误清洗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E9%9C%80%E6%B1%82%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97"><span class="toc-number">5.</span> <span class="toc-text"> 非需求数据清洗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E8%81%94%E6%80%A7%E9%AA%8C%E8%AF%81"><span class="toc-number">6.</span> <span class="toc-text"> 关联性验证</span></a></li></ol>
+                </div>
+            
+        
+        
+            <p><img src="https://pic4.zhimg.com/8aee59b038c0f3a15d4e2d871bfd5ffb_r.jpg" alt="preview" /></p>
+<h3 id="预处理阶段"><a class="markdownIt-Anchor" href="#预处理阶段"></a> 预处理阶段</h3>
+<p>1、数据导入</p>
+<p>2、查看数据。这里包含两个部分：一是看源数据，包括字段解释、数据来源、代码表等等一切描述数据的信息；二是抽取一部分数据，使用人工查看方式，对数据本身有一个直观的了解，并且初步发现一些问题，为之后的处理做准备。</p>
+<h3 id="缺失值清洗"><a class="markdownIt-Anchor" href="#缺失值清洗"></a> 缺失值清洗</h3>
+<p>1、**定缺失值范围：**对每个字段都计算其缺失值比例，然后按照缺失比例和字段重要性，分别制定策略，策略规则：</p>
+<p><img src="https://pic2.zhimg.com/80/20af3ec040211ec769d1b1a4e4ddb43d_hd.jpg" alt="img" /></p>
+<p>2、<strong>筛选字段</strong>：删除不需要的字段，或者提取需要的字段另建新数据表格~强烈建议清洗每做一步都备份一下，或者在小规模数据上试验成功再处理全量数据（小tips：写SQL的时候delete一定要配where！）</p>
+<p>3、**填充缺失内容：**某些缺失值可以进行填充，方法有以下三种：</p>
+<ul>
+<li>以业务知识或经验推测填充缺失值</li>
+<li>以同一指标的计算结果（均值、中位数、众数等）填充缺失值</li>
+<li>以不同指标的计算结果填充缺失值（例子：年龄字段缺失，可以根据有屏蔽后六位的身份证号进行填充）</li>
+</ul>
+<p>4、**重新取数：**如果某些指标非常重要又缺失率高，那就需要和取数人员或业务人员了解，是否有其他渠道可以取到相关数据。</p>
+<h3 id="格式内容清洗"><a class="markdownIt-Anchor" href="#格式内容清洗"></a> 格式内容清洗</h3>
+<p>如果数据是由系统日志而来，那么通常在格式和内容方面，会与源数据的描述一致。而如果数据是由人工收集或用户填写而来，则有很大可能性在格式和内容上存在一些问题，简单来说，格式内容问题有以下几类：</p>
+<p><strong>1、时间、日期、数值、全半角等显示格式不一致</strong></p>
+<p>这种问题通常与输入端有关，在整合多来源数据时也有可能遇到，将其处理成一致的某种格式即可。</p>
+<p><strong>2、内容中有不该存在的字符</strong></p>
+<p>某些内容可能只包括一部分字符，比如身份证号是数字+字母，中国人姓名是汉字（赵C这种情况还是少数）。最典型的就是头、尾、中间的空格，也可能出现姓名中存在数字符号、身份证号中出现汉字等问题。这种情况下，需要以半自动校验半人工方式来找出可能存在的问题，并去除不需要的字符。</p>
+<p><strong>3、内容与该字段应有内容不符</strong></p>
+<p>姓名写了性别，身份证号写了手机号等等，均属这种问题。 但该问题特殊性在于：并不能简单的以删除来处理，因为成因有可能是人工填写错误，也有可能是前端没有校验，还有可能是导入数据时部分或全部存在列没有对齐的问题，因此要详细识别问题类型。</p>
+<p>格式内容问题是比较细节的问题，但很多分析失误都是栽在这个坑上，比如跨表关联或VLOOKUP失败（多个空格导致工具认为“陈丹奕”和“陈 丹奕”不是一个人）、统计值不全（数字里掺个字母当然求和时结果有问题）、模型输出失败或效果不好（数据对错列了，把日期和年龄混了，so……）。尤其是在处理的数据是人工收集而来，或者你确定产品前端校验设计不太好的时候……</p>
+<h3 id="逻辑错误清洗"><a class="markdownIt-Anchor" href="#逻辑错误清洗"></a> 逻辑错误清洗</h3>
+<p>这部分的工作是去掉一些使用简单逻辑推理就可以直接发现问题的数据，防止分析结果走偏。主要包含以下几个步骤：</p>
+<p><strong>1、去重</strong></p>
+<p>有的分析师喜欢把去重放在第一步，但我强烈建议把去重放在格式内容清洗之后，原因已经说过了（多个空格导致工具认为“陈丹奕”和“陈 丹奕”不是一个人，去重失败）。而且，并不是所有的重复都能这么简单的去掉……</p>
+<p>我曾经做过电话销售相关的数据分析，发现销售们为了抢单简直无所不用其极……例如，一家公司叫做“ABC管家有限公司“，在销售A手里，然后销售B为了抢这个客户，在系统里录入一个”ABC官家有限公司“。你看，不仔细看你都看不出两者的区别，而且就算看出来了，你能保证没有”ABC官家有限公司“这种东西的存在么……这种时候，要么去抱RD大腿要求人家给你写模糊匹配算法，要么肉眼看吧。</p>
+<p>上边这个还不是最狠的，请看下图：</p>
+<p><img src="https://pic2.zhimg.com/8df128a1da564c830db8ea7703491aa1_r.jpg" alt="preview" /></p>
+<p>你用的系统里很有可能两条路都叫八里庄路，敢直接去重不？（附送去重小tips：两个八里庄路的门牌号范围不一样）</p>
+<p><strong>2、去除不合理值</strong></p>
+<p>一句话就能说清楚：有人填表时候瞎填，年龄200岁，年收入100000万（估计是没看见”万“字），这种的就要么删掉，要么按缺失值处理。这种值如何发现？提示：可用但不限于箱形图（Box-plot）.</p>
+<p><strong>3、修正矛盾内容</strong></p>
+<p>有些字段是可以互相验证的，举例：身份证号是1101031980XXXXXXXX，然后年龄填18岁，我们虽然理解人家永远18岁的想法，但得知真实年龄可以给用户提供更好的服务啊（又瞎扯……）。在这种时候，需要根据字段的数据来源，来判定哪个字段提供的信息更为可靠，去除或重构不可靠的字段。</p>
+<p>逻辑错误除了以上列举的情况，还有很多未列举的情况，在实际操作中要酌情处理。另外，这一步骤在之后的数据分析建模过程中有可能重复，因为即使问题很简单，也并非所有问题都能够一次找出，我们能做的是使用工具和方法，尽量减少问题出现的可能性，使分析过程更为高效。</p>
+<h3 id="非需求数据清洗"><a class="markdownIt-Anchor" href="#非需求数据清洗"></a> 非需求数据清洗</h3>
+<p>简单来说：把不要的字段删了。</p>
+<p>但实际操作起来，有很多问题，例如：</p>
+<ul>
+<li>把看上去不需要但实际上对业务很重要的字段删了；</li>
+<li>某个字段觉得有用，但又没想好怎么用，不知道是否该删；</li>
+<li>一时看走眼，删错字段了。</li>
+</ul>
+<p>前两种情况：如果数据量没有大到不删字段就没办法处理的程度，那么能不删的字段尽量不删。</p>
+<p>第三种情况，请勤备份数据……</p>
+<h3 id="关联性验证"><a class="markdownIt-Anchor" href="#关联性验证"></a> 关联性验证</h3>
+<p>如果你的数据有多个来源，那么有必要进行关联性验证。例如，你有汽车的线下购买信息，也有电话客服问卷信息，两者通过姓名和手机号关联，那么要看一下，同一个人线下登记的车辆信息和线上问卷问出来的车辆信息是不是同一辆，如果不是（别笑，业务流程设计不好是有可能出现这种问题的！），那么需要调整或去除数据。</p>
+<p>严格意义上来说，这已经脱离数据清洗的范畴了，而且关联数据变动在数据库模型中就应该涉及。但我还是希望提醒大家，多个来源的数据整合是非常复杂的工作，一定要注意数据之间的关联性，尽量在分析过程中不要出现数据之间互相矛盾，而你却毫无察觉的情况。</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    框架下的指标
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">一眼就get到数据分布情况的图表？</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

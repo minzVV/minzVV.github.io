@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Seaborn - 基础风格展示 &amp; 调色盘 | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="Python库" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="摘要 Seaborn库的使用，包括一些基础风格的参数设置，以及调色盘(各色系的设置)～">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Seaborn - 基础风格展示 &amp; 调色盘">
+<meta property="og:url" content="http://example.com/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="摘要 Seaborn库的使用，包括一些基础风格的参数设置，以及调色盘(各色系的设置)～">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/2_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/3_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/4_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/5_2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/6_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/7_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_2_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_3_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_4_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_5_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_6_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_6_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_6_2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_7_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_7_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_7_2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_7_3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_8_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_9_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_11_0.png">
+<meta property="article:published_time" content="2021-08-11T12:41:02.000Z">
+<meta property="article:modified_time" content="2023-02-15T09:29:59.711Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="Python库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/2_0.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file active"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Python/库的使用/Seaborn风格设置与调色盘" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Python/">Python</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/">库的使用</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Python%E5%BA%93/" rel="tag">Python库</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">
+            <time datetime="2021-08-11T12:41:02.000Z" itemprop="datePublished">2021-08-11</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/Python/库的使用/Seaborn风格设置与调色盘.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/Python/库的使用/Seaborn风格设置与调色盘.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/Python/库的使用/Seaborn风格设置与调色盘.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Seaborn - 基础风格展示 &amp; 调色盘
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-number">1.</span> <span class="toc-text"> 写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text"> seaborn风格设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97"><span class="toc-number">2.1.</span> <span class="toc-text"> 导入模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set"><span class="toc-number">2.2.</span> <span class="toc-text"> set</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set_style"><span class="toc-number">2.3.</span> <span class="toc-text"> set_style</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#despine"><span class="toc-number">2.4.</span> <span class="toc-text"> despine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#axes_style"><span class="toc-number">2.5.</span> <span class="toc-text"> axes_style</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set_context"><span class="toc-number">2.6.</span> <span class="toc-text"> set_context</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E8%89%B2%E7%9B%98"><span class="toc-number">3.</span> <span class="toc-text"> 调色盘</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#color_palette"><span class="toc-number">3.1.</span> <span class="toc-text"> color_palette</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#husl_palette"><span class="toc-number">3.2.</span> <span class="toc-text"> husl_palette</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cubehelix_palette"><span class="toc-number">3.3.</span> <span class="toc-text"> cubehelix_palette</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dark_palette-light_palette"><span class="toc-number">3.4.</span> <span class="toc-text"> dark_palette &#x2F; light_palette</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#diverging_palette"><span class="toc-number">3.5.</span> <span class="toc-text"> diverging_palette</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-number">3.6.</span> <span class="toc-text"> 应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%AD%E5%8A%9B%E5%9B%BE"><span class="toc-number">3.6.1.</span> <span class="toc-text"> 热力图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A3%8E%E6%A0%BC%E6%BC%94%E7%A4%BA"><span class="toc-number">3.6.2.</span> <span class="toc-text"> 风格演示</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text"> 总结</span></a></li></ol>
+                </div>
+            
+        
+        
+            <blockquote>
+<p>摘要<br />
+Seaborn库的使用，包括一些基础风格的参数设置，以及调色盘(各色系的设置)～</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="写在前面"><a class="markdownIt-Anchor" href="#写在前面"></a> 写在前面</h2>
+<p>Matplotlib试着让简单的事情更加简单，困难的事情变得可能，而Seaborn就是让困难的东西更加简单。</p>
+<p>实际上，Seaborn 是在matplotlib的基础上进行了更高级的 API 封装，从而使得作图更加容易</p>
+<p>用Matplotlib最大的困难是其默认的各种参数，而Seaborn则完全避免了这一问题。</p>
+<p>seaborn是针对统计绘图的，一般来说，seaborn能满足数据分析大部分的基本绘图需求，就能做出很具有吸引力的图，如果需要复杂的自定义图形，还是要Matplotlib。</p>
+<ul>
+<li>官网：<a target="_blank" rel="noopener" href="http://seaborn.pydata.org/index.html">http://seaborn.pydata.org/index.html</a></li>
+<li>安装：直接 <strong>pip3 install seaborn</strong> 即可</li>
+</ul>
+<h2 id="seaborn风格设置"><a class="markdownIt-Anchor" href="#seaborn风格设置"></a> seaborn风格设置</h2>
+<blockquote>
+<p>Seaborn模块自带许多定制的主题和高级的接口，包括对图表整体颜色、比例等进行风格设置,包括颜色色板等，调用其系统风格即可实现各种不同风格的数据可视化</p>
+</blockquote>
+<h3 id="导入模块"><a class="markdownIt-Anchor" href="#导入模块"></a> 导入模块</h3>
+<blockquote>
+<p>本文基于jupyter notebook环境，先导入使用到的python模块，并创建一个正弦函数及绘制图表</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建正弦函数及图表</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sinplot</span>(<span class="params">flip = <span class="number">1</span></span>):</span><br><span class="line">    x = np.linspace(<span class="number">0</span>,<span class="number">14</span>,<span class="number">100</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">7</span>):</span><br><span class="line">        plt.plot(x,np.sin(x + i * <span class="number">.5</span>) * (<span class="number">7</span> - i) * flip)</span><br><span class="line">sinplot()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/2_0.png" alt="" /></p>
+<h3 id="set"><a class="markdownIt-Anchor" href="#set"></a> set</h3>
+<blockquote>
+<p>set( ) ：通过设置参数可以用来设置背景，调色板等，最为常用。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tips：在jupyter notebook中，一旦设定了风格,所有图表的创建均自动带有风格,重启服务后才会重置为无风格状态</span></span><br><span class="line"><span class="comment"># 使用默认设置</span></span><br><span class="line"></span><br><span class="line">sns.<span class="built_in">set</span>()</span><br><span class="line">sinplot()</span><br><span class="line">plt.grid(linestyle = <span class="string">&#x27;--&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/3_0.png" alt="" /></p>
+<h3 id="set_style"><a class="markdownIt-Anchor" href="#set_style"></a> set_style</h3>
+<blockquote>
+<p>set_style() ：设置主题，即切换seaborn图表风格</p>
+<p>Seaborn有五个预设好的主题： darkgrid , whitegrid , dark , white ,和 ticks  默认： darkgrid</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize = (<span class="number">6</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># whitegrid主题</span></span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">&#x27;whitegrid&#x27;</span>)</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">data = np.random.normal(size = (<span class="number">20</span>,<span class="number">6</span>)) + np.arange(<span class="number">6</span>) / <span class="number">2</span></span><br><span class="line">sns.boxplot(data = data)</span><br><span class="line">plt.title(<span class="string">&#x27;style -- whitegrid&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># dark主题</span></span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">&#x27;dark&#x27;</span>)</span><br><span class="line">ax2 = fig.add_subplot(<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">sinplot()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/4_0.png" alt="" /></p>
+<h3 id="despine"><a class="markdownIt-Anchor" href="#despine"></a> despine</h3>
+<blockquote>
+<p>despine()  ：设置图表坐标轴，可以根据需求将坐标轴的展现与否进行设置，更好的讲故事～</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># despine()  -- 设置图表坐标轴</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># sns.despine(&#x27;fig=None&#x27;, &#x27;ax=None&#x27;, &#x27;top=True&#x27;, &#x27;right=True&#x27;, &#x27;left=False&#x27;,  &#x27;bottom=False&#x27;, &#x27;offset=None&#x27;, &#x27;trim=False&#x27;)</span></span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">&#x27;ticks&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fig = plt.figure(figsize = (<span class="number">6</span>,<span class="number">9</span>))</span><br><span class="line">plt.subplots_adjust(hspace=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">ax1 = fig.add_subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">sinplot()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除上、右坐标轴</span></span><br><span class="line"></span><br><span class="line">sns.despine()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建小提琴图</span></span><br><span class="line"></span><br><span class="line">ax2 = fig.add_subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">sns.violinplot(data = data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># sns.despine(offset = 10,trim = True)</span></span><br><span class="line"><span class="comment"># offset: 与坐标轴之间的偏移</span></span><br><span class="line"><span class="comment"># trim：为True时,将坐标轴限制在数据最大值最小值</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ax3 = fig.add_subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">sns.boxplot(data = data,palette=<span class="string">&#x27;deep&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># sns.despine(left = True,right = False)</span></span><br><span class="line"><span class="comment"># top,right,left,bottom: 布尔型,为True时不显示</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;matplotlib.axes._subplots.AxesSubplot at 0xeddb830&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/5_2.png" alt="" /></p>
+<h3 id="axes_style"><a class="markdownIt-Anchor" href="#axes_style"></a> axes_style</h3>
+<blockquote>
+<p>axes_style() ：设置局部图表风格，配合with使用可以很方便的将想要表达的图表更加凸显出来</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># with：只在sns这个图表中设置风格，其他图表风格还是与之前设置的一致</span></span><br><span class="line"><span class="comment"># 设置局部图表风格,用with做代码块区分</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sns.axes_style(<span class="string">&#x27;darkgrid&#x27;</span>):</span><br><span class="line">    plt.subplot(<span class="number">211</span>)</span><br><span class="line">    sinplot()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置外部表格风格</span></span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">&#x27;whitegrid&#x27;</span>)</span><br><span class="line">plt.subplot(<span class="number">212</span>)</span><br><span class="line">sinplot()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/6_0.png" alt="" /></p>
+<h3 id="set_context"><a class="markdownIt-Anchor" href="#set_context"></a> set_context</h3>
+<blockquote>
+<p>set_context() ：设置显示的比例尺度，方便在不用显示器或不同分辨率下设置不同的显示比例</p>
+<p>seaborn内置四种显示比例：‘paper’  ‘notebook’  ‘talk’  ‘poster’，左往右依次 变大</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认为notebook</span></span><br><span class="line"></span><br><span class="line">sns.set_context(<span class="string">&#x27;talk&#x27;</span>)</span><br><span class="line">sinplot()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/7_0.png" alt="" /></p>
+<h2 id="调色盘"><a class="markdownIt-Anchor" href="#调色盘"></a> 调色盘</h2>
+<blockquote>
+<ul>
+<li>seaborn的调色盘用于对图表整体颜色、比例等进行风格设置,包括颜色色板等</li>
+<li>调色盘分为三类
+<ol>
+<li><strong>Sequential</strong>：按顺序渐变的。 - Light colours for low data, dark for high data</li>
+<li><strong>Diverging</strong>：彼此之间差异变化较大的。 - Light colours for mid-range data, low and high contrasting dark colours</li>
+<li><strong>Qualitative</strong>：这个用于最大程度地显示不同类之间的差别。 - Colours designed to give maximum visual difference between classes</li>
+</ol>
+</li>
+<li>一般调用seaborn内置系统风格和简单设置参数即能实现很炫酷的数据可视化</li>
+</ul>
+</blockquote>
+<h3 id="color_palette"><a class="markdownIt-Anchor" href="#color_palette"></a> color_palette</h3>
+<blockquote>
+<p>seaborn.color_palette(palette=None, n_colors =None, desat =None)</p>
+<ol>
+<li>**palette：None，string或sequence，可选，默认有6种主题：**deep,muted, pastel, bright, dark, colorblind</li>
+<li><strong>n_colors：颜色个数</strong></li>
+<li><strong>desat：每种颜色去饱和的比例</strong></li>
+</ol>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">current_palette = sns.color_palette()</span><br><span class="line">sns.palplot(current_palette)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_2_0.png" alt="" /></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sns.color_palette(pal, size=1)</span></span><br><span class="line"><span class="comment"># pal → 颜色风格, size → 颜色色块个数</span></span><br><span class="line"><span class="comment"># Reds/Reds_r  代表 颜色风格反转(不是所有颜色都可以反转)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sns.palplot(sns.color_palette(<span class="string">&#x27;hls&#x27;</span>,<span class="number">8</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_3_0.png" alt="" /></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 分组颜色设置 - &#x27;Paired&#x27;</span></span><br><span class="line"></span><br><span class="line">sns.palplot(sns.color_palette(<span class="string">&#x27;Paired&#x27;</span>,<span class="number">8</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_4_0.png" alt="" /></p>
+<h3 id="husl_palette"><a class="markdownIt-Anchor" href="#husl_palette"></a> husl_palette</h3>
+<blockquote>
+<p>设置亮度和饱和度</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置亮度、饱和度</span></span><br><span class="line"><span class="comment"># 1、husl_palette([n_colors,h,s,l])</span></span><br><span class="line"><span class="comment"># 2、hls_palette([n_colors,h,s,l])</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># l  -  亮度、s  -  饱和度</span></span><br><span class="line"></span><br><span class="line">sns.palplot(sns.hls_palette(<span class="number">8</span>,l = <span class="number">.7</span>,s =<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_5_0.png" alt="" /></p>
+<h3 id="cubehelix_palette"><a class="markdownIt-Anchor" href="#cubehelix_palette"></a> cubehelix_palette</h3>
+<blockquote>
+<p>按照线性增长计算,设置颜色</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sns.cubehelix_palette(&#x27;n_colors=6&#x27;, &#x27;start=0&#x27;, &#x27;rot=0.4&#x27;, &#x27;gamma=1.0&#x27;, &#x27;hue=0.8&#x27;, </span></span><br><span class="line"><span class="comment">#                      &#x27;light=0.85&#x27;, &#x27;dark=0.15&#x27;, &#x27;reverse=False&#x27;, &#x27;as_cmap=False&#x27;)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sns.palplot(sns.cubehelix_palette(<span class="number">8</span>,gamma = <span class="number">2</span>))</span><br><span class="line">sns.palplot(sns.cubehelix_palette(<span class="number">8</span>,start = <span class="number">1.2</span>,rot = -<span class="number">.5</span>))</span><br><span class="line">sns.palplot(sns.cubehelix_palette(<span class="number">8</span>,start = <span class="number">2</span>,rot = <span class="number">0</span>,dark = <span class="number">0</span>,light = <span class="number">.95</span>,reverse = <span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 参数解析：</span></span><br><span class="line"><span class="comment"># n_colors：颜色个数</span></span><br><span class="line"><span class="comment"># start：值区间在0 - 3 , 开始颜色</span></span><br><span class="line"><span class="comment"># rot：颜色旋转角度</span></span><br><span class="line"><span class="comment"># gamma：颜色伽马值,值越大颜色越暗</span></span><br><span class="line"><span class="comment"># dark,light：值区间在0 - 1,颜色深浅</span></span><br><span class="line"><span class="comment"># reverse：布尔值,默认为False,由浅到深</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_6_0.png" alt="" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_6_1.png" alt="" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_6_2.png" alt="" /></p>
+<h3 id="dark_palette-light_palette"><a class="markdownIt-Anchor" href="#dark_palette-light_palette"></a> dark_palette / light_palette</h3>
+<blockquote>
+<ul>
+<li>深色/浅色调色板</li>
+<li>seaborn.dark_palette（color，n_colors =6，reverse =False，as_cmap = False，input =‘rgb’）
+<ol>
+<li><strong>color</strong> ：高值的颜色</li>
+<li><strong>n_colors</strong> ：颜色个数</li>
+<li><strong>reverse</strong> ：默认为False</li>
+<li><strong>as_cmap</strong> ：如果为True，则返回matplotlib colormap；为False，则返回list</li>
+<li><strong>input</strong>：{‘rgb’，‘hls’，‘husl’，‘xkcd’}</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># dark_palette() / light_palette()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照green做浅色调色盘</span></span><br><span class="line">sns.palplot(sns.light_palette(<span class="string">&#x27;green&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照green做深色调色盘</span></span><br><span class="line">sns.palplot(sns.dark_palette(<span class="string">&#x27;green&#x27;</span>,reverse = <span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置cmap为Greens风格</span></span><br><span class="line"></span><br><span class="line">sns.palplot(sns.color_palette(<span class="string">&#x27;Greens&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># reverse → 转制颜色</span></span><br><span class="line"></span><br><span class="line">sns.palplot(sns.color_palette(<span class="string">&#x27;Greens_r&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_7_0.png" alt="" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_7_1.png" alt="" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_7_2.png" alt="" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_7_3.png" alt="" /></p>
+<h3 id="diverging_palette"><a class="markdownIt-Anchor" href="#diverging_palette"></a> diverging_palette</h3>
+<blockquote>
+<p>diverging_palette ：创建分散颜色</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建分散颜色</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># sns.diverging_palette(&#x27;h_neg&#x27;, &#x27;h_pos&#x27;, &#x27;s=75&#x27;, &#x27;l=50&#x27;, &#x27;sep=10&#x27;, &#x27;n=6&#x27;, </span></span><br><span class="line"><span class="comment">#                      &quot;center=&#x27;light&#x27;&quot;, &#x27;as_cmap=False&#x27;)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sns.palplot(sns.diverging_palette(<span class="number">145</span>,<span class="number">280</span>,s = <span class="number">85</span>,l = <span class="number">25</span>,n = <span class="number">7</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 参数解析:</span></span><br><span class="line"><span class="comment"># h_neg, h_pos：起始/终止颜色值</span></span><br><span class="line"><span class="comment"># s ：值区间0 - 100,饱和度</span></span><br><span class="line"><span class="comment"># l ：值区间0 - 100,亮度</span></span><br><span class="line"><span class="comment"># n ：颜色个数</span></span><br><span class="line"><span class="comment"># center ：中心颜色为浅色还是深色&#x27;light&#x27; , &#x27;dark&#x27; ,默认为light</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_8_0.png" alt="" /></p>
+<h3 id="应用"><a class="markdownIt-Anchor" href="#应用"></a> 应用</h3>
+<h4 id="热力图"><a class="markdownIt-Anchor" href="#热力图"></a> 热力图</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 例子</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">12</span>,<span class="number">8</span>))</span><br><span class="line">x = np.arange(<span class="number">25</span>).reshape(<span class="number">5</span>,<span class="number">5</span>)</span><br><span class="line">cmap = sns.diverging_palette(<span class="number">200</span>,<span class="number">20</span>,sep = <span class="number">20</span>,as_cmap = <span class="literal">True</span>)</span><br><span class="line">sns.heatmap(x,cmap=cmap)</span><br><span class="line"></span><br><span class="line"><span class="comment"># heatmap : 热力图</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x5b28c50&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_9_1.png" alt="" /></p>
+<h4 id="风格演示"><a class="markdownIt-Anchor" href="#风格演示"></a> 风格演示</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sns.set_style(<span class="string">&#x27;whitegrid&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sns.color_palette(<span class="string">&#x27;PuBuGn_d&#x27;</span>):</span><br><span class="line">    plt.subplot(<span class="number">211</span>)</span><br><span class="line">    sinplot()</span><br><span class="line"></span><br><span class="line">sns.set_palette(<span class="string">&#x27;husl&#x27;</span>)</span><br><span class="line">plt.subplot(<span class="number">212</span>)</span><br><span class="line">sinplot()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-1/output_11_0.png" alt="" /></p>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<p>本文介绍了python的绘图模块seaborn的基础认知，也就是绘图的基础风格设置与调色盘的基础知识，感谢阅读</p>
+<p>本文版权归作者所有，欢迎转载，转载请注明出处和链接来源。</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    一眼就get到数据分布情况的图表？
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Matplotlib - 常用图表 &amp; python表格样式</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

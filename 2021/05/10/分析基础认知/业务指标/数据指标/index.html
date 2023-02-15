@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>到底什么是数据指标？ | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="数据指标" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="摘要 深入了解什么是数据指标？以及数据指标的作用和分类～">
+<meta property="og:type" content="article">
+<meta property="og:title" content="到底什么是数据指标？">
+<meta property="og:url" content="http://example.com/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="摘要 深入了解什么是数据指标？以及数据指标的作用和分类～">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-10T12:41:02.000Z">
+<meta property="article:modified_time" content="2023-02-15T02:10:41.051Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="数据指标">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-分析基础认知/业务指标/数据指标" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/">分析基础</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/">业务指标</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/" rel="tag">数据指标</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">
+            <time datetime="2021-05-10T12:41:02.000Z" itemprop="datePublished">2021-05-10</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/分析基础认知/业务指标/数据指标.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/分析基础认知/业务指标/数据指标.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/分析基础认知/业务指标/数据指标.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            到底什么是数据指标？
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%A5%BD%E7%9A%84%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text"> 什么是好的数据指标？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text"> 数据指标的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text"> 数据指标的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%80%A7%E6%8C%87%E6%A0%87%E4%B8%8E%E9%87%8F%E5%8C%96%E6%8C%87%E6%A0%87"><span class="toc-number">3.1.</span> <span class="toc-text"> 定性指标与量化指标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-number">3.1.1.</span> <span class="toc-text"> 定量指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E6%80%A7%E6%8C%87%E6%A0%87"><span class="toc-number">3.1.2.</span> <span class="toc-text"> 定性指标</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E8%8D%A3%E6%8C%87%E6%A0%87%E4%B8%8E%E5%8F%AF%E4%BB%98%E8%AF%B8%E8%A1%8C%E5%8A%A8%E6%8C%87%E6%A0%87"><span class="toc-number">3.2.</span> <span class="toc-text"> 虚荣指标与可付诸行动指标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E8%8D%A3%E6%8C%87%E6%A0%87"><span class="toc-number">3.2.1.</span> <span class="toc-text"> 虚荣指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E4%BB%98%E8%AF%B8%E8%A1%8C%E5%8A%A8%E6%8C%87%E6%A0%87"><span class="toc-number">3.2.2.</span> <span class="toc-text"> 可付诸行动指标</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A2%E7%B4%A2%E6%80%A7%E6%8C%87%E6%A0%87%E4%B8%8E%E6%8A%A5%E5%91%8A%E6%80%A7%E6%8C%87%E6%A0%87"><span class="toc-number">3.3.</span> <span class="toc-text"> 探索性指标与报告性指标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%94%90%E7%BA%B3%E5%BE%B7%E7%90%86%E8%AE%BA"><span class="toc-number">3.3.1.</span> <span class="toc-text"> 唐纳德理论</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A2%E7%B4%A2%E6%80%A7%E6%8C%87%E6%A0%87"><span class="toc-number">3.3.2.</span> <span class="toc-text"> 探索性指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A5%E5%91%8A%E6%80%A7%E6%8C%87%E6%A0%87"><span class="toc-number">3.3.3.</span> <span class="toc-text"> 报告性指标</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E8%A7%81%E6%80%A7%E6%8C%87%E6%A0%87%E4%B8%8E%E5%90%8E%E8%A7%81%E6%80%A7%E6%8C%87%E6%A0%87"><span class="toc-number">3.4.</span> <span class="toc-text"> 先见性指标与后见性指标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%88%E8%A7%81%E6%80%A7%E6%8C%87%E6%A0%87"><span class="toc-number">3.4.1.</span> <span class="toc-text"> 先见性指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8E%E8%A7%81%E6%80%A7%E6%8C%87%E6%A0%87"><span class="toc-number">3.4.2.</span> <span class="toc-text"> 后见性指标</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%80%A7%E6%8C%87%E6%A0%87%E4%B8%8E%E5%9B%A0%E6%9E%9C%E6%8C%87%E6%A0%87"><span class="toc-number">3.5.</span> <span class="toc-text"> 相关性指标与因果指标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%80%A7%E6%8C%87%E6%A0%87"><span class="toc-number">3.5.1.</span> <span class="toc-text"> 相关性指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%A0%E6%9E%9C%E6%8C%87%E6%A0%87"><span class="toc-number">3.5.2.</span> <span class="toc-text"> 因果指标</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text"> 总结</span></a></li></ol>
+                </div>
+            
+        
+        
+            <blockquote>
+<p>摘要<br />
+深入了解什么是数据指标？以及数据指标的作用和分类～</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="什么是好的数据指标"><a class="markdownIt-Anchor" href="#什么是好的数据指标"></a> <strong>什么是好的数据指标？</strong></h2>
+<blockquote>
+<p>好的数据指标能带来你所期望的变化。</p>
+</blockquote>
+<p>以下是一些衡量数据指标好坏的重要准则：</p>
+<ul>
+<li>好的数据指标是有<strong>比较性</strong>的
+<ul>
+<li>例如比较某数据指标在不同时间段、用户群体、竞争产品之间的表现，能更好的洞察产品的实际走向</li>
+</ul>
+</li>
+<li>好的数据指标是<strong>简单易懂</strong>的，换言之就是人们比较容易记住以及讨论的某数据指标</li>
+<li>好的数据指标是一个<strong>比率</strong>。
+<ul>
+<li><strong>比率</strong>的<strong>可操作性强</strong>，是行动的导向。例如开车，里程只是距离信息，而速度则告诉你当前行驶状态，以及是否需要进行调整以确保按时抵达</li>
+<li><strong>比率</strong>是天生的比较性指标。</li>
+<li><strong>比率</strong>还适用于比较各种因素间的相生和相克，也就是<strong>正相关</strong>和<strong>负相关</strong>。</li>
+</ul>
+</li>
+<li>好的数据指标会<strong>改变行为</strong>。即随着指标的变化，是否会采取相应的措施。
+<ul>
+<li>'试验’指标，如一个测试结果，其作用在于帮助你优化产品、定价以及市场定位。这些数据的变化会极大地影响接下来的行为决策</li>
+</ul>
+</li>
+</ul>
+</br>
+<h2 id="数据指标的作用"><a class="markdownIt-Anchor" href="#数据指标的作用"></a> <strong>数据指标的作用</strong></h2>
+<ol>
+<li>一个好的数据指标之所以能<strong>改变商业行为</strong>，是因为它和你的目标是一致的：保留用户、有效获取新用户、或者创造营收等</li>
+<li>一个错误数据指标则会极大影响公司的营运。例如某公司将销售员的季度奖金与其正在接洽的订单数据挂钩，而不是与已签订订单数量或订单利润率挂钩，这样会导致业务员为了个人收入制造大量低质量的潜在客户，并将其停在&quot;接洽&quot;状态，而不是促成订单签订。</li>
+<li>数据指标之间的<strong>耦合现象</strong>。譬如<strong>转换率</strong>(访客中真正发生购买行为的比例)通常就是和<strong>购买所需时间</strong>(客户需要花多长时间才能完成购买)相绑定的。类似的，<strong>病毒式传播系数</strong>(平均每个用户邀请来的新用户数)和<strong>病毒传播周期</strong>(用户完成一次邀请需要的时间)共同推动产品的普及率。</li>
+</ol>
+</br>
+<h2 id="数据指标的分类"><a class="markdownIt-Anchor" href="#数据指标的分类"></a> <strong>数据指标的分类</strong></h2>
+<h3 id="定性指标与量化指标"><a class="markdownIt-Anchor" href="#定性指标与量化指标"></a> <strong>定性指标与量化指标</strong></h3>
+<blockquote>
+<p>定性指标通常是<strong>非结构化的、经验性的、揭示性的、难以归类的</strong>；量化指标则涉及很多<strong>数值和统计数据</strong>，提供可靠的量化结果，但一般<strong>缺乏直观</strong>的洞察。</p>
+</blockquote>
+</br>
+<h4 id="定量指标"><a class="markdownIt-Anchor" href="#定量指标"></a> <strong>定量指标</strong></h4>
+<ul>
+<li>概念：定量数据是指我们<strong>跟踪和衡量的数字</strong></li>
+<li>特点：量化数据使用<strong>方便</strong>，具有<strong>科学性</strong>，也(假设算得正确)<strong>易于归类、外推和置入表格</strong></li>
+</ul>
+</br>
+<h4 id="定性指标"><a class="markdownIt-Anchor" href="#定性指标"></a> <strong>定性指标</strong></h4>
+<ul>
+<li>概念：定向指标是<strong>杂乱的、主观的、不精确的</strong>；类似从采访或者辩论中获得的信息，极难量化</li>
+<li>特点：定性数据吸纳<strong>主观因素</strong>，且极<strong>难量化</strong></li>
+</ul>
+</br>
+<h3 id="虚荣指标与可付诸行动指标"><a class="markdownIt-Anchor" href="#虚荣指标与可付诸行动指标"></a> <strong>虚荣指标与可付诸行动指标</strong></h3>
+<h4 id="虚荣指标"><a class="markdownIt-Anchor" href="#虚荣指标"></a> <strong>虚荣指标</strong></h4>
+<ul>
+<li>概念：如果你有一个数据，却不知如何<strong>根据它采取行动</strong>，该数据就仅仅是一个虚荣指标
+<ul>
+<li>例如：“总注册用户数”，这个数据会随着时间增长，并不能传达关于用户的行为信息</li>
+</ul>
+</li>
+<li>举例一些需要<strong>提防</strong>的虚荣数据指标
+<ul>
+<li><strong>点击量。相比之下，或许更应该统计点击人数</strong></li>
+<li><strong>页面浏览量</strong>(PV值)。除非商业模式直接与PV值挂钩(类似展示广告)，或许更应该统计访问人数</li>
+<li><strong>访问量</strong>。问题在于100的访问量是一个用户访问了100次还是100个访问了一次的用户，毫无意义</li>
+<li><strong>独立访客数</strong>。只能告诉你有多少人访问了网页，不能反馈出用户在这个页面做了什么，为何停留，是否离开</li>
+<li><strong>粉丝/好友/赞的数量</strong>。统计当你呼吁时，有多少人会响应，这个数据更有意义</li>
+<li><strong>网站停留时间/浏览页数</strong>。用这两个指标来替代客户参与度或活跃度并不一定有说服力。比如，客户在客服或者投诉页面上停留了很长时间</li>
+<li><strong>收集的用户邮件地址数量</strong>。同粉丝/好友那个类似，更好的做法是：向一部分注册用户发送测试邮件，看看是否会按照邮件中的提示去做</li>
+<li><strong>下载量</strong>。尽管会影响应用商店中的排名，但需要重要衡量的是：应用下载后的激活量、帐号创建量等</li>
+</ul>
+</li>
+</ul>
+</br>
+<h4 id="可付诸行动指标"><a class="markdownIt-Anchor" href="#可付诸行动指标"></a> <strong>可付诸行动指标</strong></h4>
+<ul>
+<li>概念：可付诸行动指标可以帮你遴选出一个行动方案，从而<strong>指导</strong>你的<strong>商业行为</strong>。且当产品作出调整，这个指标也会<strong>相应地变化</strong>
+<ul>
+<li>例如：活跃用户占总用户数的百分比。这个指标揭示了产品的用户参与度。如果产品的调整思路是正确的，这个占比就应该相应的上升。也意味着这个可付诸行动指标可以指导试验、学习和迭代。</li>
+</ul>
+</li>
+<li>重点：可付诸行动的指标，并不会直接告诉你该做什么；而是可以指导后续的商业行为。其重点在于：根据收集到的数据行动</li>
+</ul>
+</br>
+<h3 id="探索性指标与报告性指标"><a class="markdownIt-Anchor" href="#探索性指标与报告性指标"></a> <strong>探索性指标与报告性指标</strong></h3>
+<h4 id="唐纳德理论"><a class="markdownIt-Anchor" href="#唐纳德理论"></a> <strong>唐纳德理论</strong></h4>
+<blockquote>
+<p>世界上的事物可以分为这样几类：我们知道我们知道的，我们知道我们不知道的，我们不知道我们知道的，以及我们不知道我们不知道的</p>
+</blockquote>
+<ul>
+<li>我们知道我们知道的：是可能并不为真的事实，须经由数据的检验
+<ul>
+<li><strong>检验</strong>我们手头上的事实和假设(如打开率和转化率)，以确保我们的商业计划是可行的</li>
+</ul>
+</li>
+<li>我们知道我们不知道的：是可以通过调研解答的问题，可使之成为我们的行为基准并流程化
+<ul>
+<li><strong>验证</strong>我们的直觉，把假设变成证据</li>
+</ul>
+</li>
+<li>我们不知道我们知道的：是<strong>直觉</strong>，需要我们评估并训练以提高其效能及效率
+<ul>
+<li>为业务预测表、瀑布式开发流程图和会议<strong>提供数据支持</strong></li>
+</ul>
+</li>
+<li>我们不知道我们不知道的：是<strong>探索</strong>，蕴含着我们自身独特的优势，能带来有趣的顿悟
+<ul>
+<li>帮助我们发现黄金机遇</li>
+</ul>
+</li>
+</ul>
+</br>
+<h4 id="探索性指标"><a class="markdownIt-Anchor" href="#探索性指标"></a> <strong>探索性指标</strong></h4>
+<ul>
+<li>概念：探索性指标是<strong>推测性</strong>的，提供原本不为所知的洞见，旨于在商业竞争中取得先手优势</li>
+<li>大致上可以归为上述的我们不知道我们不知道的，极其重要，可以在未来转变成秘密武器</li>
+</ul>
+</br>
+<h4 id="报告性指标"><a class="markdownIt-Anchor" href="#报告性指标"></a> <strong>报告性指标</strong></h4>
+<ul>
+<li>概念：报告性指标是让你时刻对公司的日常运营、管理性活动保持信息通畅、步调一致。</li>
+<li>属于某种度量行为。由于我们不知道这一类指标的具体数值，类似清点用户量，统计销售总额等，所以需要度量它。主要应用于核算或用于衡量实验的结果。</li>
+</ul>
+</br>
+<h3 id="先见性指标与后见性指标"><a class="markdownIt-Anchor" href="#先见性指标与后见性指标"></a> <strong>先见性指标与后见性指标</strong></h3>
+<blockquote>
+<p>无论先见性数据指标或后见性数据指标都是有意义的，只不过解决的问题不同</p>
+</blockquote>
+<h4 id="先见性指标"><a class="markdownIt-Anchor" href="#先见性指标"></a> <strong>先见性指标</strong></h4>
+<ul>
+<li>概念：先见性数据指标用于<strong>预言</strong>未来
+<ul>
+<li>例如：透过&quot;销售漏斗&quot;中现有的潜在客户数，可以大致预测将来所能获得的新客户数；所以努力增加潜在客户，将来就可能得到更多的新增客户</li>
+</ul>
+</li>
+<li>如若要启用先见性数据指标，需要首先进行<strong>同期群分析</strong>并比较客户<strong>对照</strong>在不同时间段的表现
+<ul>
+<li>用户投诉量例子：可以通过跟踪每日接到的客服电话数；另一方面，可能以90天为期来跟踪用户投诉量。这两者都可以作为用户流失的先见性指示剂：即如果投诉量增加，很多客户可能就会停用你的产品或服务。而作为一个先见性数据指标，客户投诉可以帮你深入了解和服务的真实状况，分析投诉量上升原因，可以变相解决产品或服务中出现的问题。</li>
+</ul>
+</li>
+</ul>
+</br>
+<h4 id="后见性指标"><a class="markdownIt-Anchor" href="#后见性指标"></a> <strong>后见性指标</strong></h4>
+<ul>
+<li>概念：后见性数据指标用于<strong>解释</strong>过去，即能提示问题的存在
+<ul>
+<li>例如：用户流失(即某时间段内离开某产品或服务的客户量)，这一数据指标能指出产品或服务存在某些问题。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>tips：在一个公司中，某一团队的后见性数据指标有时会是另一个团队的先见性指标。</p>
+</blockquote>
+</br>
+<h3 id="相关性指标与因果指标"><a class="markdownIt-Anchor" href="#相关性指标与因果指标"></a> <strong>相关性指标与因果指标</strong></h3>
+<h4 id="相关性指标"><a class="markdownIt-Anchor" href="#相关性指标"></a> <strong>相关性指标</strong></h4>
+<ul>
+<li>概念：如果两个指标总是<strong>一同变化</strong>，那么说明它们是相关的</li>
+</ul>
+</br>
+<h4 id="因果指标"><a class="markdownIt-Anchor" href="#因果指标"></a> <strong>因果指标</strong></h4>
+<ul>
+<li>概念：如果一个指标可以<strong>导致</strong>另一个指标的变化，则它们之间具有因果关系</li>
+<li>通常，因果关系并不是简单的一对一关系。一些独立的数据指标(分析多个独立的数据指标作为自变量)，其中每一个都能在一定程度上&quot;解释&quot;某个依存的数据指标(也就是因变量)。</li>
+<li>如何证明一个因果关系：
+<ul>
+<li>找到一个相关性，进行控制变量试验并测量因变量的变化</li>
+<li>重点在于满足试验的良好控制条件，而一个足够大的数据样本，最终其他自变量对因变量的影响都会被样本数量拉平，所以在很小的样本容量下进行试验，需要尽可能<strong>简化</strong>测试</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>tips：相关性很好，因果性更佳。有时，只能找到一些相关性，但应永不停止的寻找因果性。</p>
+</blockquote>
+</br>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<p>以上是在阅读《精益数据分析》一书时，所做的读书笔记，记录下来以便时常翻阅。感谢阅读～</p>
+</br>
+<p>参考文章:</p>
+<p>[书籍 - 精益数据分析]</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    A/B 测试的概念认识
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">用户消费有哪些特征？用户质量又如何界定？</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

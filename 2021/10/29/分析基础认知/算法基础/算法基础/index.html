@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>什么是监督学习和非监督学习？ | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="算法基础" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="摘要 监督学习与非监督学习的基本认识，以及常用的几种基础算法的介绍～">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是监督学习和非监督学习？">
+<meta property="og:url" content="http://example.com/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="摘要 监督学习与非监督学习的基本认识，以及常用的几种基础算法的介绍～">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/xxhg-1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/xxhg-2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/xxhg-3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/knn-1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/knn-2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/knn-3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/pca-1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/pca-2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/pca-3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/pca-4.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/kmeans-1.png">
+<meta property="article:published_time" content="2021-10-29T12:41:02.000Z">
+<meta property="article:modified_time" content="2023-02-15T09:26:25.124Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="算法基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/xxhg-1.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-分析基础认知/算法基础/算法基础" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/">分析基础</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95/">算法</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" rel="tag">算法基础</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">
+            <time datetime="2021-10-29T12:41:02.000Z" itemprop="datePublished">2021-10-29</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/分析基础认知/算法基础/算法基础.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/分析基础认知/算法基础/算法基础.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/分析基础认知/算法基础/算法基础.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            什么是监督学习和非监督学习？
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.</span> <span class="toc-text"> 监督学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">3.</span> <span class="toc-text"> 非监督学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text"> 随机算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97%E7%AE%97%E6%B3%95"><span class="toc-number">4.1.</span> <span class="toc-text"> 蒙特卡罗算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="toc-number">5.</span> <span class="toc-text"> 线性回归</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="toc-number">5.1.</span> <span class="toc-text"> 一元线性回归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="toc-number">5.2.</span> <span class="toc-text"> 多元线性回归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0"><span class="toc-number">5.3.</span> <span class="toc-text"> 线性回归模型评估</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#knn-%E6%9C%80%E9%82%BB%E8%BF%91%E5%88%86%E7%B1%BB"><span class="toc-number">6.</span> <span class="toc-text"> KNN-最邻近分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pca%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90"><span class="toc-number">7.</span> <span class="toc-text"> PCA主成分分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#k-means%E8%81%9A%E7%B1%BB"><span class="toc-number">8.</span> <span class="toc-text"> K-means聚类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">9.</span> <span class="toc-text"> 写在最后</span></a></li></ol>
+                </div>
+            
+        
+        
+            <blockquote>
+<p>摘要<br />
+监督学习与非监督学习的基本认识，以及常用的几种基础算法的介绍～</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>本文将记录下学习数据分析中几个最为常见的基本算法，先来了解一下其算法概念</p>
+<h2 id="监督学习"><a class="markdownIt-Anchor" href="#监督学习"></a> 监督学习</h2>
+<blockquote>
+<p>监督学习，是一个机器学习中的方法。通过已有的样本数据的样本值x和结果值y去训练得到一个最优模型,再利用这个模型将所有的输入映射为相应的输出。</p>
+</blockquote>
+<p>根据输出数据又分为回归问题和分类问题。回归问题通常输出是一个连续的数值,分类问题的输出是几个特定的数值。</p>
+<ol>
+<li>
+<p>回归问题</p>
+<p>概念：在统计学中,回归分析指的是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法</p>
+<p>按照自变量和因变量之间的关系类型,可分为线性回归分析和非线性回归分析，线性回归是监督学习中最为常用，也是最为重要的一个方法</p>
+</li>
+<li>
+<p>分类问题</p>
+<p>监督学习中针对分类问题最常用的算法是：最邻近分类算法，简称KNN。</p>
+<p>核心逻辑：在距离空间里，如果一个样本的最接近的k个邻居里，绝大多数属于某个类别，则该样本也属于这个类别</p>
+</li>
+</ol>
+<h2 id="非监督学习"><a class="markdownIt-Anchor" href="#非监督学习"></a> 非监督学习</h2>
+<blockquote>
+<p>无监督学习，是人工智能网络的一种算法。其目的是去对原始资料进行分类，以便了解资料内部结构。</p>
+<p>简言之，就是根据未知类别的训练样本解决模式识别中的各种问题。一般来说非监督学习的训练样本全是特征量x,无结果值y；非监督学习更多时候做聚类或降维</p>
+</blockquote>
+<ol>
+<li>
+<p>PCA主成分分析</p>
+<p>PCA主成分分析是最广泛的无监督算法，也是最基础的降维算法</p>
+<p>通过线性变换将原始数据变换为一组各维度线性无关的表示,用于提取数据的主要特征量 → 高维数据降维</p>
+</li>
+<li>
+<p>K—means聚类</p>
+<p>最常用的机器学习聚类算法,且为典型的基于距离的聚类算法</p>
+<p>K均值：基于原型的、划分的距离技术，它试图发现用户指定个数(K)的簇，以欧式距离作为相似度测度。</p>
+</li>
+</ol>
+<h2 id="随机算法"><a class="markdownIt-Anchor" href="#随机算法"></a> 随机算法</h2>
+<h3 id="蒙特卡罗算法"><a class="markdownIt-Anchor" href="#蒙特卡罗算法"></a> 蒙特卡罗算法</h3>
+<blockquote>
+<p>蒙特卡罗算法，又称随机抽样或统计实验方法,是以概率和统计理论方法为基础的一种计算方法</p>
+<p>使用随机数(或更常见的伪随机数)来解决很多计算问题,将所求解的问题同一定的概率模型向联系,用电子计算机实现统计模拟或抽样,以获得问题的近似解</p>
+</blockquote>
+<p>蒙特卡罗算法特点：采样越多，越近似最优解。</p>
+<hr />
+<p>以下是几种常见算法的基本应用</p>
+<h2 id="线性回归"><a class="markdownIt-Anchor" href="#线性回归"></a> 线性回归</h2>
+<p>线性回归使用最佳的拟合直线在因变量(Y)和一个或多个自变量(X)之间建立一种关系。</p>
+<blockquote>
+<p>简单线性回归(一元线性回归)表达式： Y = a + b * X<br />
+多元线性回归表达式：Y = a + b1 * X + b2 * X , 可根据给定的预测变量S来预测目标变量的值</p>
+</blockquote>
+<blockquote>
+<p>tips：核心在于拟合直线与样本值的误差项满足均值为0,方差为某个特定值的正态分布<br />
+<br></p>
+</blockquote>
+<h3 id="一元线性回归"><a class="markdownIt-Anchor" href="#一元线性回归"></a> 一元线性回归</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建数据</span></span><br><span class="line"></span><br><span class="line">rng = np.random.RandomState(<span class="number">1</span>)</span><br><span class="line">xtrain = <span class="number">10</span> + rng.rand(<span class="number">30</span>)</span><br><span class="line">ytrain = <span class="number">8</span> + <span class="number">4</span> * xtrain + rng.rand(<span class="number">30</span>)</span><br><span class="line"></span><br><span class="line">fig = plt.figure(figsize = (<span class="number">17</span>,<span class="number">9</span>))</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">plt.scatter(xtrain,ytrain,marker = <span class="string">&#x27;.&#x27;</span>,color = <span class="string">&#x27;k&#x27;</span>)</span><br><span class="line">plt.grid()</span><br><span class="line">plt.title(<span class="string">&#x27;样本数据散点图&#x27;</span>)</span><br><span class="line"></span><br><span class="line">model = LinearRegression()</span><br><span class="line">model.fit(xtrain[:,np.newaxis],ytrain)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 斜率</span></span><br><span class="line"><span class="built_in">print</span>(model.coef_)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 截距</span></span><br><span class="line"><span class="built_in">print</span>(model.intercept_)</span><br><span class="line"></span><br><span class="line">xtest = np.linspace(<span class="number">10</span>,<span class="number">11</span>,<span class="number">1000</span>)</span><br><span class="line">ytest = model.predict(xtest[:,np.newaxis])</span><br><span class="line"></span><br><span class="line">ax2 = fig.add_subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">plt.scatter(xtrain,ytrain,marker = <span class="string">&#x27;.&#x27;</span>,color = <span class="string">&#x27;k&#x27;</span>)</span><br><span class="line">plt.plot(xtest,ytest,color = <span class="string">&#x27;k&#x27;</span>)</span><br><span class="line">plt.grid()</span><br><span class="line">plt.title(<span class="string">&#x27;线性回归拟合&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 输出</span><br><span class="line">[4.04484138]</span><br><span class="line">7.9992457345747</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/xxhg-1.png" alt="" /></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 误差</span></span><br><span class="line"></span><br><span class="line">rng = np.random.RandomState(<span class="number">8</span>)</span><br><span class="line">xtrain = <span class="number">10</span> * rng.rand(<span class="number">15</span>)</span><br><span class="line">ytrain = <span class="number">8</span> + <span class="number">4</span> * xtrain + rng.rand(<span class="number">15</span>) * <span class="number">30</span></span><br><span class="line">model.fit(xtrain[:,np.newaxis],ytrain)</span><br><span class="line">xtest = np.linspace(<span class="number">0</span>,<span class="number">10</span>,<span class="number">1000</span>)</span><br><span class="line">ytest = model.predict(xtest[:,np.newaxis])</span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">17</span>,<span class="number">9</span>))</span><br><span class="line"></span><br><span class="line"> <span class="comment"># 拟合直线</span></span><br><span class="line">    </span><br><span class="line">plt.plot(xtest,ytest,color = <span class="string">&#x27;r&#x27;</span>,linestyle = <span class="string">&#x27;--&#x27;</span>)</span><br><span class="line">plt.scatter(xtrain,ytrain,marker = <span class="string">&#x27;.&#x27;</span>,color = <span class="string">&#x27;k&#x27;</span>)</span><br><span class="line">ytest2 = model.predict(xtrain[:,np.newaxis])</span><br><span class="line">plt.scatter(xtrain,ytest2,marker = <span class="string">&#x27;x&#x27;</span>,color = <span class="string">&#x27;g&#x27;</span>)</span><br><span class="line">plt.plot([xtrain,xtrain],[ytrain,ytest2],color = <span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">plt.grid()</span><br><span class="line">plt.xlim(<span class="number">0</span>,<span class="number">10</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;误差&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Text(0.5, 1.0, &#x27;误差&#x27;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/xxhg-2.png" alt="" /><br />
+<br></p>
+<h3 id="多元线性回归"><a class="markdownIt-Anchor" href="#多元线性回归"></a> 多元线性回归</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 构建数据</span></span><br><span class="line"></span><br><span class="line">rng = np.random.RandomState(<span class="number">3</span>)</span><br><span class="line">xtrain = <span class="number">10</span> * rng.rand(<span class="number">150</span>,<span class="number">4</span>)</span><br><span class="line"><span class="comment"># ytrain = 20 + np.dot(xtrain,[1.5,2,-4,3])</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ytrain = <span class="number">20</span> + np.dot(xtrain,[<span class="number">1.5</span>,<span class="number">2</span>,-<span class="number">4</span>,<span class="number">3</span>]) + rng.rand(<span class="number">150</span>)</span><br><span class="line">df = pd.DataFrame(xtrain,columns = [<span class="string">&#x27;b1&#x27;</span>,<span class="string">&#x27;b2&#x27;</span>,<span class="string">&#x27;b3&#x27;</span>,<span class="string">&#x27;b4&#x27;</span>])</span><br><span class="line">df[<span class="string">&#x27;y&#x27;</span>] = ytrain</span><br><span class="line">pd.scatter_matrix(df[[<span class="string">&#x27;b1&#x27;</span>,<span class="string">&#x27;b2&#x27;</span>,<span class="string">&#x27;b3&#x27;</span>,<span class="string">&#x27;b4&#x27;</span>]],figsize = (<span class="number">17</span>,<span class="number">9</span>),</span><br><span class="line">                 diagonal= <span class="string">&#x27;kde&#x27;</span>,</span><br><span class="line">                 alpha=<span class="number">0.5</span>,range_padding=<span class="number">0.1</span>)</span><br><span class="line"><span class="built_in">print</span>(df.head())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看4个自变量是否有线性相关</span></span><br><span class="line"></span><br><span class="line">model = LinearRegression()</span><br><span class="line">model.fit(df[[<span class="string">&#x27;b1&#x27;</span>,<span class="string">&#x27;b2&#x27;</span>,<span class="string">&#x27;b3&#x27;</span>,<span class="string">&#x27;b4&#x27;</span>]],df[<span class="string">&#x27;y&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;斜率为：&#x27;</span>,model.coef_)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;截距为：%.4f&#x27;</span> % model.intercept_)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;线性回归函数为： \n y = %.1fx1 + %.1fx2 + %.1fx3 + %.1fx4 + %.1f&#x27;</span> </span><br><span class="line">      % (model.coef_[<span class="number">0</span>],model.coef_[<span class="number">1</span>],model.coef_[<span class="number">2</span>],model.coef_[<span class="number">3</span>],model.intercept_))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">         b1        b2        b3        b4          y</span><br><span class="line">0  5.507979  7.081478  2.909047  5.108276  46.364656</span><br><span class="line">1  8.929470  8.962931  1.255853  2.072429  52.751766</span><br><span class="line">2  0.514672  4.408098  0.298762  4.568332  42.365920</span><br><span class="line">3  6.491440  2.784873  6.762549  5.908628  26.245785</span><br><span class="line">4  0.239819  5.588541  2.592524  4.151012  34.592464</span><br><span class="line">斜率为： [ 1.5012069   2.00117753 -4.00340344  3.00076621]</span><br><span class="line">截距为：20.4865</span><br><span class="line">线性回归函数为： </span><br><span class="line"> y = 1.5x1 + 2.0x2 + -4.0x3 + 3.0x4 + 20.5</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/xxhg-3.png" alt="" /><br />
+<br></p>
+<h3 id="线性回归模型评估"><a class="markdownIt-Anchor" href="#线性回归模型评估"></a> 线性回归模型评估</h3>
+<p>一般通过以下几个参数验证回归模型:</p>
+<p>SSE → (和方差、误差平方和)：拟合数据和原始数据对应点的误差的平方和</p>
+<p>MSE → (均方差、方差)：预测数据和原始数据对应点误差的平方和的均值</p>
+<p>RMSE → (均方差、标准差)：回归系统的拟合标准差,就是MSE的平方根</p>
+<p>R-square(确定系数)：SSR与SST的比值</p>
+<p>SSR：预测数据与原始数据均值之差的平方和</p>
+<p>SST：原始数据与均值之差的平方和  →  SST = SSE + SSR</p>
+<blockquote>
+<p>tips：SSE越接近0,说明模型选择和拟合越好,数据预测也越成功 ; MSE越小越好<br />
+R-square(确定系数)的取值范围[0,1],越接近1，表明方程的变量对Y的解释能力越强,这个模型对数据拟合的越好</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics</span><br><span class="line"></span><br><span class="line">rng = np.random.RandomState(<span class="number">1</span>)</span><br><span class="line">xtrain = <span class="number">10</span> * rng.rand(<span class="number">30</span>)</span><br><span class="line">ytrain = <span class="number">8</span> + <span class="number">4</span> * xtrain + rng.rand(<span class="number">30</span>) * <span class="number">3</span></span><br><span class="line"></span><br><span class="line">model = LinearRegression()</span><br><span class="line">model.fit(xtrain[:,np.newaxis],ytrain)</span><br><span class="line"></span><br><span class="line">ytest = model.predict(xtrain[:,np.newaxis])</span><br><span class="line">mse = metrics.mean_squared_error(ytrain,ytest)</span><br><span class="line">rmse = np.sqrt(mse)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ssr = ((ytest - ytrain.mean())**2).sum()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># sst = ((ytrain - ytrain.mean())**2).sum()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># r2 = ssr / sst</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r2 = model.score(xtrain[:,np.newaxis],ytrain)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;均方差MSE为：%.5f&#x27;</span> % mse)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;均方根RMSE为：%.5f&#x27;</span> % rmse)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;确定系数R-square为：%.5f&#x27;</span> % r2)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">均方差MSE为：0.78471</span><br><span class="line">均方根RMSE为：0.88584</span><br><span class="line">确定系数R-square为：0.99465</span><br></pre></td></tr></table></figure>
+<br>
+<h2 id="knn-最邻近分类"><a class="markdownIt-Anchor" href="#knn-最邻近分类"></a> KNN-最邻近分类</h2>
+<p>在距离空间里，如果一个样本的最接近的k个邻居里，绝大多数属于某个类别，则该样本也属于这个类别</p>
+<p>以下是几个KNN-最邻近分类的案例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入KNN分类模块</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> neighbors</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建一组电影数据</span></span><br><span class="line"></span><br><span class="line">data = pd.DataFrame(&#123;<span class="string">&#x27;name&#x27;</span>:[<span class="string">&#x27;北京遇上西雅图&#x27;</span>,<span class="string">&#x27;喜欢你&#x27;</span>,<span class="string">&#x27;疯狂动物城&#x27;</span>,<span class="string">&#x27;战狼2&#x27;</span>,<span class="string">&#x27;力王&#x27;</span>,<span class="string">&#x27;敢死队&#x27;</span>],</span><br><span class="line">                    <span class="string">&#x27;fight&#x27;</span>:[<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">101</span>,<span class="number">99</span>,<span class="number">98</span>],</span><br><span class="line">                    <span class="string">&#x27;kiss&#x27;</span>:[<span class="number">104</span>,<span class="number">100</span>,<span class="number">81</span>,<span class="number">10</span>,<span class="number">5</span>,<span class="number">2</span>],</span><br><span class="line">                    <span class="string">&#x27;type&#x27;</span>:[<span class="string">&#x27;Romance&#x27;</span>,<span class="string">&#x27;Romance&#x27;</span>,<span class="string">&#x27;Romance&#x27;</span>,<span class="string">&#x27;Action&#x27;</span>,<span class="string">&#x27;Action&#x27;</span>,<span class="string">&#x27;Action&#x27;</span>]&#125;)</span><br><span class="line"></span><br><span class="line">knn = neighbors.KNeighborsClassifier()</span><br><span class="line">knn.fit(data[[<span class="string">&#x27;fight&#x27;</span>,<span class="string">&#x27;kiss&#x27;</span>]],data[<span class="string">&#x27;type&#x27;</span>])</span><br><span class="line"><span class="comment"># cat = np.array([[18,90]])</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;预测电影类型为：&#x27;</span> , knn.predict([[<span class="number">18</span>,<span class="number">90</span>]]))</span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">17</span>,<span class="number">9</span>))</span><br><span class="line">plt.scatter(data[data[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;Romance&#x27;</span>][<span class="string">&#x27;fight&#x27;</span>],</span><br><span class="line">            data[data[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;Romance&#x27;</span>][<span class="string">&#x27;kiss&#x27;</span>],</span><br><span class="line">           color = <span class="string">&#x27;r&#x27;</span>,marker = <span class="string">&#x27;x&#x27;</span>,label = <span class="string">&#x27;Romance&#x27;</span>)</span><br><span class="line">plt.scatter(data[data[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;Action&#x27;</span>][<span class="string">&#x27;fight&#x27;</span>],</span><br><span class="line">            data[data[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;Action&#x27;</span>][<span class="string">&#x27;kiss&#x27;</span>],</span><br><span class="line">           color = <span class="string">&#x27;g&#x27;</span>,marker = <span class="string">&#x27;x&#x27;</span>,label = <span class="string">&#x27;Action&#x27;</span>)</span><br><span class="line">plt.grid()</span><br><span class="line">plt.legend()</span><br><span class="line"></span><br><span class="line">plt.scatter(<span class="number">18</span>,<span class="number">90</span>,color = <span class="string">&#x27;r&#x27;</span>,marker = <span class="string">&#x27;o&#x27;</span>,label = <span class="string">&#x27;Romance&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;kiss&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;fight&#x27;</span>)</span><br><span class="line">plt.text(<span class="number">18</span>,<span class="number">90</span>,<span class="string">&#x27;&lt;你的名字&gt;&#x27;</span>,color = <span class="string">&#x27;y&#x27;</span>,fontsize = <span class="number">18</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">预测电影类型为： [&#x27;Romance&#x27;]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Text(18, 90, &#x27;&lt;你的名字&gt;&#x27;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/knn-1.png" alt="" /><br />
+<br></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 随机值模拟</span></span><br><span class="line"></span><br><span class="line">data2 = pd.DataFrame(np.random.randn(<span class="number">200</span>,<span class="number">2</span>)*<span class="number">50</span>,columns=[<span class="string">&#x27;fight&#x27;</span>,<span class="string">&#x27;kiss&#x27;</span>])</span><br><span class="line">data2[<span class="string">&#x27;typetest&#x27;</span>] = knn.predict(data2)</span><br><span class="line">data2.head()</span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">17</span>,<span class="number">9</span>))</span><br><span class="line">plt.scatter(data[data[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;Romance&#x27;</span>][<span class="string">&#x27;fight&#x27;</span>],</span><br><span class="line">            data[data[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;Romance&#x27;</span>][<span class="string">&#x27;kiss&#x27;</span>],</span><br><span class="line">           color = <span class="string">&#x27;r&#x27;</span>,marker = <span class="string">&#x27;x&#x27;</span>,label = <span class="string">&#x27;Romance&#x27;</span>)</span><br><span class="line">plt.scatter(data[data[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;Action&#x27;</span>][<span class="string">&#x27;fight&#x27;</span>],</span><br><span class="line">            data[data[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;Action&#x27;</span>][<span class="string">&#x27;kiss&#x27;</span>],</span><br><span class="line">           color = <span class="string">&#x27;g&#x27;</span>,marker = <span class="string">&#x27;x&#x27;</span>,label = <span class="string">&#x27;Action&#x27;</span>)</span><br><span class="line">plt.grid()</span><br><span class="line">plt.legend()</span><br><span class="line"></span><br><span class="line">plt.scatter(data2[data2[<span class="string">&#x27;typetest&#x27;</span>] == <span class="string">&#x27;Romance&#x27;</span>][<span class="string">&#x27;fight&#x27;</span>],</span><br><span class="line">            data2[data2[<span class="string">&#x27;typetest&#x27;</span>] == <span class="string">&#x27;Romance&#x27;</span>][<span class="string">&#x27;kiss&#x27;</span>],</span><br><span class="line">           color = <span class="string">&#x27;r&#x27;</span>,marker = <span class="string">&#x27;o&#x27;</span>,label = <span class="string">&#x27;Romance&#x27;</span>)</span><br><span class="line">plt.scatter(data2[data2[<span class="string">&#x27;typetest&#x27;</span>] == <span class="string">&#x27;Action&#x27;</span>][<span class="string">&#x27;fight&#x27;</span>],</span><br><span class="line">            data2[data2[<span class="string">&#x27;typetest&#x27;</span>] == <span class="string">&#x27;Action&#x27;</span>][<span class="string">&#x27;kiss&#x27;</span>],</span><br><span class="line">           color = <span class="string">&#x27;g&#x27;</span>,marker = <span class="string">&#x27;o&#x27;</span>,label = <span class="string">&#x27;Action&#x27;</span>)</span><br><span class="line">plt.grid()</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/knn-2.png" alt="" /><br />
+<br></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多参数分类</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line"><span class="built_in">print</span>(iris.keys())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;数据长度为：%i条&#x27;</span> % <span class="built_in">len</span>(iris[<span class="string">&#x27;data&#x27;</span>]))</span><br><span class="line"><span class="built_in">print</span>(iris.feature_names)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 特征分类：萼片长度、萼片宽度、花瓣长度、花瓣宽度</span></span><br><span class="line"><span class="built_in">print</span>(iris.target_names)</span><br><span class="line"><span class="comment"># print(iris.target)</span></span><br><span class="line"></span><br><span class="line">data = pd.DataFrame(iris.data,columns= iris.feature_names)</span><br><span class="line">data[<span class="string">&#x27;target&#x27;</span>] = iris.target</span><br><span class="line">ty = pd.DataFrame(&#123;<span class="string">&#x27;target&#x27;</span>:[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>],</span><br><span class="line">                  <span class="string">&#x27;target_names&#x27;</span>:iris.target_names&#125;)</span><br><span class="line">df = pd.merge(data,ty,on = <span class="string">&#x27;target&#x27;</span>)</span><br><span class="line"></span><br><span class="line">knn = neighbors.KNeighborsClassifier()</span><br><span class="line">knn.fit(iris.data,iris.target)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多参数进行分类</span></span><br><span class="line"></span><br><span class="line">pre_data = knn.predict([[<span class="number">0.2</span>,<span class="number">0.1</span>,<span class="number">0.3</span>,<span class="number">0.4</span>]])</span><br><span class="line"><span class="built_in">print</span>(pre_data)</span><br><span class="line"></span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dict_keys([&#x27;data&#x27;, &#x27;target&#x27;, &#x27;target_names&#x27;, &#x27;DESCR&#x27;, &#x27;feature_names&#x27;, &#x27;filename&#x27;])</span><br><span class="line">数据长度为：150条</span><br><span class="line">[&#x27;sepal length (cm)&#x27;, &#x27;sepal width (cm)&#x27;, &#x27;petal length (cm)&#x27;, &#x27;petal width (cm)&#x27;]</span><br><span class="line">[&#x27;setosa&#x27; &#x27;versicolor&#x27; &#x27;virginica&#x27;]</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/knn-3.png" alt="knn-3" /></p>
+<br>
+<h2 id="pca主成分分析"><a class="markdownIt-Anchor" href="#pca主成分分析"></a> PCA主成分分析</h2>
+<blockquote>
+<p>通过线性变换将原始数据变换为一组各维度线性无关的表示,用于提取数据的主要特征分类</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义随机种子</span></span><br><span class="line"></span><br><span class="line">rng = np.random.RandomState(<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建数据</span></span><br><span class="line"></span><br><span class="line">data = np.dot(rng.rand(<span class="number">2</span>,<span class="number">2</span>),rng.randn(<span class="number">2</span>,<span class="number">200</span>)).T</span><br><span class="line">df = pd.DataFrame(&#123;<span class="string">&#x27;X1&#x27;</span>:data[:,<span class="number">0</span>],</span><br><span class="line">                  <span class="string">&#x27;X2&#x27;</span>:data[:,<span class="number">1</span>]&#125;)</span><br><span class="line"><span class="built_in">print</span>(df.head())</span><br><span class="line"><span class="built_in">print</span>(df.shape)</span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">16</span>,<span class="number">6</span>))</span><br><span class="line">plt.scatter(df[<span class="string">&#x27;X1&#x27;</span>],df[<span class="string">&#x27;X2&#x27;</span>],alpha=<span class="number">0.7</span>,marker = <span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">plt.axis(<span class="string">&#x27;auto&#x27;</span>)</span><br><span class="line"><span class="comment"># plt.xlim(-1,2)</span></span><br><span class="line"></span><br><span class="line">plt.grid()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">         X1        X2</span><br><span class="line">0 -1.174787 -1.404131</span><br><span class="line">1 -1.374449 -1.294660</span><br><span class="line">2 -2.316007 -2.166109</span><br><span class="line">3  0.947847  1.460480</span><br><span class="line">4  1.762375  1.640622</span><br><span class="line">(200, 2)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/pca-1.png" alt="" /></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 二维数据降维  -  构建模型,分析主成分</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">PCA参数：(&#x27;n_components=None&#x27;, &#x27;copy=True&#x27;, &#x27;whiten=False&#x27;, &quot;svd_solver=&#x27;auto&#x27;&quot;,&#x27;tol=0.0&#x27;, &quot;iterated_power=&#x27;auto&#x27;&quot;, &#x27;random_state=None&#x27;)</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"></span><br><span class="line">pca = PCA(n_components= <span class="number">1</span>)</span><br><span class="line">pca.fit(df)</span><br><span class="line"><span class="comment"># pca.fit(X, y=None)  → 调用fit方法的对象本身,如pca.fit(X),表示用X对pca这个对象进行训练</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># n_components :PCA算法中所要保留的主成分个数n,也即保留下来的特征个数n</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># copy :默认为True, → 表示是否在运行算法时,将原始训练数据复制一份</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 特征值</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(pca.explained_variance_)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 特征向量 - 具有最大方差的成分</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(pca.components_)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 特征值个数 - 返回所保留的成分个数n</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(pca.n_components)</span><br><span class="line"><span class="comment"># 2.797 * (0.779 * x1 + 0.627 * x2)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据转换</span></span><br><span class="line"></span><br><span class="line">x_pca = pca.transform(df)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将降维后的数据转换成原始数据</span></span><br><span class="line"></span><br><span class="line">x_new = pca.inverse_transform(x_pca)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;original shape：&#x27;</span>,df.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;transformd shape：&#x27;</span>,x_pca.shape)</span><br><span class="line"><span class="built_in">print</span>(x_pca[:<span class="number">5</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;-------------------------------&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">17</span>,<span class="number">6</span>))</span><br><span class="line">plt.scatter(df[<span class="string">&#x27;X1&#x27;</span>],df[<span class="string">&#x27;X2&#x27;</span>],alpha=<span class="number">0.7</span>,marker = <span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">plt.scatter(x_new[:,<span class="number">0</span>],x_new[:,<span class="number">1</span>],alpha=<span class="number">0.8</span>,marker = <span class="string">&#x27;.&#x27;</span>,color = <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">plt.axis(<span class="string">&#x27;equal&#x27;</span>)</span><br><span class="line">plt.grid()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[2.79699086]</span><br><span class="line">[[-0.7788006  -0.62727158]]</span><br><span class="line">1</span><br><span class="line">original shape： (200, 2)</span><br><span class="line">transformd shape： (200, 1)</span><br><span class="line">[[ 1.77885258]</span><br><span class="line"> [ 1.8656813 ]</span><br><span class="line"> [ 3.14560277]</span><br><span class="line"> [-1.67114513]</span><br><span class="line"> [-2.41849842]]</span><br><span class="line">-------------------------------</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/pca-2.png" alt="" /></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多维数据降维</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_digits</span><br><span class="line">digits = load_digits()</span><br><span class="line"><span class="built_in">print</span>(digits.keys())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;数据长度为：%i条&#x27;</span> % <span class="built_in">len</span>(digits[<span class="string">&#x27;data&#x27;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;数据形状为：%i条&#x27;</span> , digits.data.shape)</span><br><span class="line"><span class="built_in">print</span>(digits.data[:<span class="number">2</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;---------------------------------------&#x27;</span>)</span><br><span class="line"></span><br><span class="line">pca = PCA(n_components= <span class="number">2</span>)</span><br><span class="line">pca.fit(digits.data)</span><br><span class="line">prj = pca.transform(digits.data)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;original shape：&#x27;</span>,digits.data.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;transformd shape：&#x27;</span>,prj.shape)</span><br><span class="line"><span class="comment"># prj = pca.fit_transform(digits.data)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(prj[:<span class="number">5</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;---------------------------------------&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看特征值</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(pca.explained_variance_)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;--------------------------------------&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(pca.components_)    #特征向量 - 具有最大方差的成分</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(pca.n_components)   #特征值个数 - 返回所保留的成分个数n</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">13</span>,<span class="number">6</span>))</span><br><span class="line">plt.scatter(prj[:,<span class="number">0</span>],prj[:,<span class="number">1</span>],</span><br><span class="line">           c = digits.target,edgecolor = <span class="string">&#x27;none&#x27;</span>,alpha = <span class="number">0.6</span>,</span><br><span class="line">           cmap = <span class="string">&#x27;Reds&#x27;</span>,s = <span class="number">5</span>)</span><br><span class="line">plt.axis(<span class="string">&#x27;equal&#x27;</span>)</span><br><span class="line">plt.grid()</span><br><span class="line">plt.colorbar()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">dict_keys([&#x27;data&#x27;, &#x27;target&#x27;, &#x27;target_names&#x27;, &#x27;images&#x27;, &#x27;DESCR&#x27;])</span><br><span class="line">数据长度为：1797条</span><br><span class="line">数据形状为：%i条 (1797, 64)</span><br><span class="line">[[ 0.  0.  5. 13.  9.  1.  0.  0.  0.  0. 13. 15. 10. 15.  5.  0.  0.  3.</span><br><span class="line">  15.  2.  0. 11.  8.  0.  0.  4. 12.  0.  0.  8.  8.  0.  0.  5.  8.  0.</span><br><span class="line">   0.  9.  8.  0.  0.  4. 11.  0.  1. 12.  7.  0.  0.  2. 14.  5. 10. 12.</span><br><span class="line">   0.  0.  0.  0.  6. 13. 10.  0.  0.  0.]</span><br><span class="line"> [ 0.  0.  0. 12. 13.  5.  0.  0.  0.  0.  0. 11. 16.  9.  0.  0.  0.  0.</span><br><span class="line">   3. 15. 16.  6.  0.  0.  0.  7. 15. 16. 16.  2.  0.  0.  0.  0.  1. 16.</span><br><span class="line">  16.  3.  0.  0.  0.  0.  1. 16. 16.  6.  0.  0.  0.  0.  1. 16. 16.  6.</span><br><span class="line">   0.  0.  0.  0.  0. 11. 16. 10.  0.  0.]]</span><br><span class="line">---------------------------------------</span><br><span class="line">original shape： (1797, 64)</span><br><span class="line">transformd shape： (1797, 2)</span><br><span class="line">---------------------------------------</span><br><span class="line">[179.0069301  163.71774688]</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/pca-3.png" alt="" /></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 主成分筛选</span></span><br><span class="line"></span><br><span class="line">pca = PCA(n_components= <span class="number">10</span>)</span><br><span class="line">pca.fit(digits.data)</span><br><span class="line">prj = pca.transform(digits.data)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;original shape：&#x27;</span>,digits.data.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;transformd shape：&#x27;</span>,prj.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># prj = pca.fit_transform(digits.data)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">prj[:<span class="number">5</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;---------------------------------------&#x27;</span>)</span><br><span class="line"></span><br><span class="line">s = pca.explained_variance_</span><br><span class="line">c_s = pd.DataFrame(&#123;<span class="string">&#x27;b&#x27;</span>:s,</span><br><span class="line">                  <span class="string">&#x27;b_sum&#x27;</span>:s.cumsum() / s.<span class="built_in">sum</span>()&#125;)</span><br><span class="line">c_s[<span class="string">&#x27;b_sum&#x27;</span>].plot(style = <span class="string">&#x27;--ko&#x27;</span>,figsize = (<span class="number">16</span>,<span class="number">6</span>))</span><br><span class="line">plt.axhline(<span class="number">0.85</span>,color = <span class="string">&#x27;r&#x27;</span>,linestyle = <span class="string">&#x27;--&#x27;</span>,alpha = <span class="number">0.6</span>)</span><br><span class="line">plt.text(<span class="number">6</span>,c_s[<span class="string">&#x27;b_sum&#x27;</span>].iloc[<span class="number">6</span>] - <span class="number">0.08</span>,<span class="string">&#x27;第七个成分累计贡献率超过85%&#x27;</span>,color = <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">plt.grid()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">original shape： (1797, 64)</span><br><span class="line">transformd shape： (1797, 10)</span><br><span class="line">---------------------------------------</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/pca-4.png" alt="" /><br />
+<br></p>
+<h2 id="k-means聚类"><a class="markdownIt-Anchor" href="#k-means聚类"></a> K-means聚类</h2>
+<p>聚类分析：是一种将研究对象分为相对同质的群组的统计分析技术</p>
+<p>将观测对象的群体按照相似性和相异性进行不同群组的划分,划分后每个群组内部各对象相似度很高, 而不同群组之间的对象彼此相异度很高</p>
+<p>聚类分析后会产生一组集合,主要用于降维</p>
+<p>K均值算法实现逻辑：<br />
+K均值算法需要输入待聚类的数据和欲聚类的簇数K<br />
+1、随机生成k个初始点作为质心<br />
+2、将数据集中的数据按照距离质心的远近分到各个簇中<br />
+3、将各个簇中的数据求平均值,作为新的质心,重复上一步,直到所有的簇不再改变</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># make_blobs 聚类数据生成器</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.datasets.samples_generator <span class="keyword">import</span> make_blobs</span><br><span class="line"></span><br><span class="line">x,y_ture = make_blobs(n_samples= <span class="number">300</span>,</span><br><span class="line">                     centers= <span class="number">4</span>,</span><br><span class="line">                     cluster_std= <span class="number">0.5</span>,</span><br><span class="line">                     random_state= <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">参数解析：</span></span><br><span class="line"><span class="string">n_samples : 待生成的样本总数</span></span><br><span class="line"><span class="string">centers : 类别数</span></span><br><span class="line"><span class="string">cluster_std : 每个类别的方差,如多类数据不同方差,可设置为区间类似[1.0,3.0]这里针对2类数据</span></span><br><span class="line"><span class="string">random_state : 随机数种子</span></span><br><span class="line"><span class="string">x → 生成数据值 , y → 生成数据对应的类别标签</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(x[:<span class="number">5</span>])</span><br><span class="line"><span class="built_in">print</span>(y_ture[:<span class="number">5</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;-------------------------------------&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plt.figure(figsize = (16,6))</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># plt.scatter(x[:,0],x[:,1],s = 10 , alpha = 0.6)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># plt.grid()</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> KMeans</span><br><span class="line"></span><br><span class="line">kmeans = KMeans(n_clusters= <span class="number">4</span>)</span><br><span class="line">kmeans.fit(x)</span><br><span class="line">y_kmeans = kmeans.predict(x)</span><br><span class="line">centroids = kmeans.cluster_centers_</span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">16</span>,<span class="number">6</span>))</span><br><span class="line">plt.scatter(x[:,<span class="number">0</span>],x[:,<span class="number">1</span>],c = y_kmeans,cmap = <span class="string">&#x27;Dark2&#x27;</span>,s = <span class="number">50</span>,alpha = <span class="number">0.5</span>,marker = <span class="string">&#x27;x&#x27;</span>)</span><br><span class="line">plt.scatter(centroids[:,<span class="number">0</span>],centroids[:,<span class="number">1</span>],c = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],cmap = <span class="string">&#x27;Dark2&#x27;</span>,s = <span class="number">70</span>,marker = <span class="string">&#x27;o&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;K-means 300 points\n&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;value1&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;value2&#x27;</span>)</span><br><span class="line">plt.grid()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[[ 1.03992529  1.92991009]</span><br><span class="line"> [-1.38609104  7.48059603]</span><br><span class="line"> [ 1.12538917  4.96698028]</span><br><span class="line"> [-1.05688956  7.81833888]</span><br><span class="line"> [ 1.4020041   1.726729  ]]</span><br><span class="line">[1 3 0 3 1]</span><br><span class="line">-------------------------------------</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/suanfa1/kmeans-1.png" alt="" /><br />
+<br></p>
+<h2 id="写在最后"><a class="markdownIt-Anchor" href="#写在最后"></a> 写在最后</h2>
+<p>以上是在数据分析过程中常用到的几种基本算法，可以快速的定位数据分析的方向和数据类型。其中线性回归和主成分分析会更常见一下，这份笔记也是为了随时翻阅而记录，欢迎指正，感谢阅读～</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    随机算法之蒙特卡罗
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">数据的相关性分析 &amp; 统计分析</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

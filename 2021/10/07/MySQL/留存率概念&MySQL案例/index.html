@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>MySQL中如何对留存进行分析？ | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="MySQL" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="摘要 关于留存的基本概念认知，以及在MySQL中如何对留存进行分析的场景模拟…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL中如何对留存进行分析？">
+<meta property="og:url" content="http://example.com/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="摘要 关于留存的基本概念认知，以及在MySQL中如何对留存进行分析的场景模拟…">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-07T14:33:36.000Z">
+<meta property="article:modified_time" content="2023-02-14T12:47:12.629Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file active"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-MySQL/留存率概念&amp;MySQL案例" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/MySQL/">MySQL</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/MySQL/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/">基础学习</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/MySQL/" rel="tag">MySQL</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">
+            <time datetime="2021-10-07T14:33:36.000Z" itemprop="datePublished">2021-10-07</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/MySQL/留存率概念&amp;MySQL案例.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/MySQL/留存率概念&amp;MySQL案例.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/MySQL/留存率概念&amp;MySQL案例.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            MySQL中如何对留存进行分析？
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%95%99%E5%AD%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text"> 留存的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%95%8C%E5%AE%9A%E6%A0%87%E5%87%86"><span class="toc-number">1.1.</span> <span class="toc-text"> 关于界定&#x2F;标准</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql-%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F"><span class="toc-number">2.</span> <span class="toc-text"> MySQL - 场景模拟</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE"><span class="toc-number">2.1.</span> <span class="toc-text"> 创建数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E7%AD%94%E6%A1%88"><span class="toc-number">2.2.</span> <span class="toc-text"> 思路&amp;答案</span></a></li></ol></li></ol>
+                </div>
+            
+        
+        
+            <blockquote>
+<p>摘要<br />
+关于留存的基本概念认知，以及在MySQL中如何对留存进行分析的场景模拟…</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="留存的基本概念"><a class="markdownIt-Anchor" href="#留存的基本概念"></a> 留存的基本概念</h2>
+<h3 id="关于界定标准"><a class="markdownIt-Anchor" href="#关于界定标准"></a> 关于界定/标准</h3>
+<ul>
+<li>新增 = 新 + 增，理论上在处于一个流程内的不同的节点，都可以作为一次新增；例如：
+<ul>
+<li>用户通过不同渠道衔接进入到渠道页</li>
+<li>下载</li>
+<li>安装启动</li>
+<li>激活行为：例如注册、购买商品等</li>
+</ul>
+</li>
+<li>新的定义
+<ul>
+<li>基于设备：用户第一次下载安装启动，记录设备；再次安装则不记录；另还有不同系统的设备的区分，即用户数 = 访问过服务的设备数</li>
+<li>基于帐号关联，即用户数 = 访问过服务的ID数</li>
+</ul>
+</li>
+<li>留存的定义：某段时间内的新增用户，经过一段时间后，仍继续使用应用的，为留存用户；
+<ul>
+<li>留存一般是离散的概念，不要求用户在N天内每一天都登录或者使用</li>
+</ul>
+</li>
+<li>统计留存用户的时间粒度：
+<ul>
+<li>自然日：先列出每个新用户第一次登录的日期，以及此日期之后仍登录的日期
+<ul>
+<li>至于是第几天还是几天后，这个根据不同的业务有不同的定义</li>
+<li>次日留存：即第一次登录日期之后，第二天也登录的用户；即登录日期的差值为1天</li>
+<li>三日留存：即第一次登录日期之后，第三天也登录的用户；即登录日期的差值为3天</li>
+<li>七日留存：即第一次登录日期之后，第七天也登录的用户；即登录日期的差值为1天</li>
+</ul>
+</li>
+<li>自然周
+<ul>
+<li>需要注意的是，所谓周留存与七日留存并不是同概念</li>
+</ul>
+</li>
+<li>自然月</li>
+</ul>
+</li>
+<li>留存率
+<ul>
+<li>概念：登录用户数 / 新增用户数 × 100%
+<ul>
+<li>次日留存率 = (当天新增用户中，第二天还登录的用户数) / 第一天新增的总用户数</li>
+<li>3日留存率 = (当天新增用户中，往后的第3天还登录的用户数) / 第一天新增的总用户数</li>
+<li>7日留存率 = (当天新增用户中，往后的第7天还登录的用户数) / 第一天新增的总用户数</li>
+</ul>
+</li>
+<li>最主要的是该留存率指标的界定标准，例如：怎么样的用户才算新增用户、用户在第三天登录还是第四天还有登录为3日留存等，这个是根据项目的不同来定义的</li>
+</ul>
+</li>
+</ul>
+</br>
+<h2 id="mysql-场景模拟"><a class="markdownIt-Anchor" href="#mysql-场景模拟"></a> MySQL - 场景模拟</h2>
+</br>
+<p><strong>[题目]</strong></p>
+<p>用户行为信息表存有以下字段：用户id、应用名称、启用时长、启动次数以及登录时间</p>
+<ul>
+<li>uid：用户的唯一标识</li>
+<li>app_name：应用的名称</li>
+<li>duration：某一天中使用了某应用多长时间(分钟)</li>
+<li>times：某一天中启动了某应用多少次</li>
+<li>login_date：登录的日期</li>
+</ul>
+</br>
+<p>现需要统计某日活跃用户在后续一周内的留存情况，也就是计算活跃用户数、次日留存用户数、3日留存用户数、7日留存用户数、次日留存率、3日留存率以及7日留存率</p>
+</br>
+<h3 id="创建数据"><a class="markdownIt-Anchor" href="#创建数据"></a> <strong>创建数据</strong></h3>
+</br>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line">#创建表</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> userinfo(</span><br><span class="line">    uid <span class="type">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment &quot;用户ID&quot;,</span><br><span class="line">    app_name <span class="type">varchar</span>(<span class="number">20</span>) comment &quot;应用名称&quot;,</span><br><span class="line">    duration <span class="type">int</span>(<span class="number">10</span>) comment &quot;启用时长&quot;,</span><br><span class="line">    times <span class="type">int</span>(<span class="number">10</span>) comment &quot;启动次数&quot;,</span><br><span class="line">    login_date <span class="type">date</span> comment &quot;登录时间&quot;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">#查看表</span><br><span class="line"><span class="keyword">desc</span> userinfo;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+-------------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> Field      <span class="operator">|</span> Type        <span class="operator">|</span> <span class="keyword">Null</span> <span class="operator">|</span> Key <span class="operator">|</span> <span class="keyword">Default</span> <span class="operator">|</span> Extra <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+-------------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> uid        <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">10</span>) <span class="operator">|</span> <span class="keyword">NO</span>   <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> app_name   <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">20</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> duration   <span class="operator">|</span> <span class="type">int</span>(<span class="number">10</span>)     <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> times      <span class="operator">|</span> <span class="type">int</span>(<span class="number">10</span>)     <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> login_date <span class="operator">|</span> <span class="type">date</span>        <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+-------------+------+-----+---------+-------+</span></span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> userinfo(uid,app_name,duration,times,login_date)</span><br><span class="line"><span class="keyword">values</span></span><br><span class="line">(<span class="number">01</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-01&#x27;</span>),</span><br><span class="line">(<span class="number">02</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-02&#x27;</span>),</span><br><span class="line">(<span class="number">03</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-03&#x27;</span>),</span><br><span class="line">(<span class="number">04</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">6</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-01&#x27;</span>),</span><br><span class="line">(<span class="number">05</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="string">&#x27;2018-05-03&#x27;</span>),</span><br><span class="line">(<span class="number">06</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-01&#x27;</span>),</span><br><span class="line">(<span class="number">07</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-02&#x27;</span>),</span><br><span class="line">(<span class="number">08</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="string">&#x27;2018-05-01&#x27;</span>),</span><br><span class="line">(<span class="number">09</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-02&#x27;</span>),</span><br><span class="line">(<span class="number">10</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-03&#x27;</span>),</span><br><span class="line">(<span class="number">11</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="string">&#x27;2018-05-02&#x27;</span>),</span><br><span class="line">(<span class="number">12</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="string">&#x27;2018-05-01&#x27;</span>),</span><br><span class="line">(<span class="number">13</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="string">&#x27;2018-05-02&#x27;</span>),</span><br><span class="line">(<span class="number">14</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-03&#x27;</span>),</span><br><span class="line">(<span class="number">15</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-01&#x27;</span>),</span><br><span class="line">(<span class="number">01</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-01&#x27;</span>),</span><br><span class="line">(<span class="number">02</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-04&#x27;</span>),</span><br><span class="line">(<span class="number">03</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-03&#x27;</span>),</span><br><span class="line">(<span class="number">04</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-01&#x27;</span>),</span><br><span class="line">(<span class="number">05</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-03&#x27;</span>),</span><br><span class="line">(<span class="number">06</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-04&#x27;</span>),</span><br><span class="line">(<span class="number">07</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-04&#x27;</span>),</span><br><span class="line">(<span class="number">08</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-04&#x27;</span>),</span><br><span class="line">(<span class="number">09</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-04&#x27;</span>),</span><br><span class="line">(<span class="number">10</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-03&#x27;</span>),</span><br><span class="line">(<span class="number">11</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="string">&#x27;2018-05-01&#x27;</span>),</span><br><span class="line">(<span class="number">12</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="string">&#x27;2018-05-02&#x27;</span>),</span><br><span class="line">(<span class="number">13</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="string">&#x27;2018-05-03&#x27;</span>),</span><br><span class="line">(<span class="number">14</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-02&#x27;</span>),</span><br><span class="line">(<span class="number">15</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-01&#x27;</span>),</span><br><span class="line">(<span class="number">01</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-05&#x27;</span>),</span><br><span class="line">(<span class="number">02</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-06&#x27;</span>),</span><br><span class="line">(<span class="number">03</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-04&#x27;</span>),</span><br><span class="line">(<span class="number">04</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-01&#x27;</span>),</span><br><span class="line">(<span class="number">05</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-04&#x27;</span>),</span><br><span class="line">(<span class="number">06</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-04&#x27;</span>),</span><br><span class="line">(<span class="number">07</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-05&#x27;</span>),</span><br><span class="line">(<span class="number">08</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-06&#x27;</span>),</span><br><span class="line">(<span class="number">09</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-06&#x27;</span>),</span><br><span class="line">(<span class="number">10</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-05&#x27;</span>),</span><br><span class="line">(<span class="number">11</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="string">&#x27;2018-05-04&#x27;</span>),</span><br><span class="line">(<span class="number">12</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="string">&#x27;2018-05-02&#x27;</span>),</span><br><span class="line">(<span class="number">13</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="string">&#x27;2018-05-05&#x27;</span>),</span><br><span class="line">(<span class="number">14</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-06&#x27;</span>),</span><br><span class="line">(<span class="number">15</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-06&#x27;</span>),</span><br><span class="line">(<span class="number">01</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-08&#x27;</span>),</span><br><span class="line">(<span class="number">02</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-06&#x27;</span>),</span><br><span class="line">(<span class="number">03</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-04&#x27;</span>),</span><br><span class="line">(<span class="number">04</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-10&#x27;</span>),</span><br><span class="line">(<span class="number">05</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-08&#x27;</span>),</span><br><span class="line">(<span class="number">06</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-07&#x27;</span>),</span><br><span class="line">(<span class="number">07</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-09&#x27;</span>),</span><br><span class="line">(<span class="number">08</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-09&#x27;</span>),</span><br><span class="line">(<span class="number">09</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-09&#x27;</span>),</span><br><span class="line">(<span class="number">10</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-05&#x27;</span>),</span><br><span class="line">(<span class="number">11</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="string">&#x27;2018-05-05&#x27;</span>),</span><br><span class="line">(<span class="number">12</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="string">&#x27;2018-05-10&#x27;</span>),</span><br><span class="line">(<span class="number">13</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="string">&#x27;2018-05-09&#x27;</span>),</span><br><span class="line">(<span class="number">14</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-06&#x27;</span>),</span><br><span class="line">(<span class="number">15</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-06&#x27;</span>),</span><br><span class="line">(<span class="number">01</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-08&#x27;</span>),</span><br><span class="line">(<span class="number">02</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-06&#x27;</span>),</span><br><span class="line">(<span class="number">03</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-04&#x27;</span>),</span><br><span class="line">(<span class="number">04</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-10&#x27;</span>),</span><br><span class="line">(<span class="number">05</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-10&#x27;</span>),</span><br><span class="line">(<span class="number">06</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-07&#x27;</span>),</span><br><span class="line">(<span class="number">07</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-09&#x27;</span>),</span><br><span class="line">(<span class="number">08</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-08&#x27;</span>),</span><br><span class="line">(<span class="number">09</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-09&#x27;</span>),</span><br><span class="line">(<span class="number">10</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-10&#x27;</span>),</span><br><span class="line">(<span class="number">11</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="string">&#x27;2018-05-05&#x27;</span>),</span><br><span class="line">(<span class="number">12</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="string">&#x27;2018-05-10&#x27;</span>),</span><br><span class="line">(<span class="number">13</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="string">&#x27;2018-05-08&#x27;</span>),</span><br><span class="line">(<span class="number">14</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-07&#x27;</span>),</span><br><span class="line">(<span class="number">15</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-07&#x27;</span>),</span><br><span class="line">(<span class="number">01</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-08&#x27;</span>),</span><br><span class="line">(<span class="number">02</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-06&#x27;</span>),</span><br><span class="line">(<span class="number">03</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-10&#x27;</span>),</span><br><span class="line">(<span class="number">04</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-10&#x27;</span>),</span><br><span class="line">(<span class="number">05</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-10&#x27;</span>),</span><br><span class="line">(<span class="number">06</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-07&#x27;</span>),</span><br><span class="line">(<span class="number">07</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-09&#x27;</span>),</span><br><span class="line">(<span class="number">08</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-08&#x27;</span>),</span><br><span class="line">(<span class="number">09</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-10&#x27;</span>),</span><br><span class="line">(<span class="number">10</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="string">&#x27;2018-05-10&#x27;</span>),</span><br><span class="line">(<span class="number">11</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="string">&#x27;2018-05-05&#x27;</span>),</span><br><span class="line">(<span class="number">12</span>,<span class="string">&#x27;美团&#x27;</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="string">&#x27;2018-05-10&#x27;</span>),</span><br><span class="line">(<span class="number">13</span>,<span class="string">&#x27;微信&#x27;</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="string">&#x27;2018-05-08&#x27;</span>),</span><br><span class="line">(<span class="number">14</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-07&#x27;</span>),</span><br><span class="line">(<span class="number">15</span>,<span class="string">&#x27;相机&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">&#x27;2018-05-07&#x27;</span>);</span><br><span class="line"></span><br><span class="line">#查看数据</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> userinfo limit <span class="number">10</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">-----+----------+----------+-------+------------+</span></span><br><span class="line"><span class="operator">|</span> uid <span class="operator">|</span> app_name <span class="operator">|</span> duration <span class="operator">|</span> times <span class="operator">|</span> login_date <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----+----------+----------+-------+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span> 相机     <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span>     <span class="number">2</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-01</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span> 微信     <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span>     <span class="number">3</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-02</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>   <span class="operator">|</span> 美团     <span class="operator">|</span>        <span class="number">4</span> <span class="operator">|</span>     <span class="number">2</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>   <span class="operator">|</span> 微信     <span class="operator">|</span>        <span class="number">6</span> <span class="operator">|</span>     <span class="number">3</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-01</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>   <span class="operator">|</span> 相机     <span class="operator">|</span>        <span class="number">3</span> <span class="operator">|</span>     <span class="number">1</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>   <span class="operator">|</span> 相机     <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span>     <span class="number">3</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-01</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">7</span>   <span class="operator">|</span> 相机     <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span>     <span class="number">2</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-02</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">8</span>   <span class="operator">|</span> 微信     <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span>     <span class="number">1</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-01</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">9</span>   <span class="operator">|</span> 美团     <span class="operator">|</span>        <span class="number">3</span> <span class="operator">|</span>     <span class="number">2</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-02</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">10</span>  <span class="operator">|</span> 相机     <span class="operator">|</span>        <span class="number">4</span> <span class="operator">|</span>     <span class="number">3</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----+----------+----------+-------+------------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<h3 id="思路答案"><a class="markdownIt-Anchor" href="#思路答案"></a> <strong>思路&amp;答案</strong></h3>
+</br>
+<p>[思路]</p>
+<ul>
+<li>读题：现需要统计手机应用中相机的活跃情况，即某日<strong>活跃用户</strong>在后续一周内的留存情况，也就是计算<strong>活跃用户数</strong>、<strong>次日留存用户数</strong>、<strong>3日留存用户数</strong>、<strong>7日留存用户数</strong>、<strong>次日留存率</strong>、<strong>3日留存率</strong>以及<strong>7日留存率</strong></li>
+<li>解题：
+<ul>
+<li>活跃用户数定义：某日有登录行为记为活跃，首次登录日期记为第一天登录日期</li>
+<li>次日留存用户数定义：在第一天登录日期，第二天有登录行为的用户</li>
+<li>3日留存用户数定义：在第一天登录日期，第3天有登录行为的用户</li>
+<li>7日留存用户数定义：在第一天登录日期，第7天有登录行为的用户</li>
+<li>次日留存率定义：次日留存用户数 / 该用户第一天登录日期的活跃用户数</li>
+<li>3日留存率定义：3日留存用户数 / 该用户第一天登录日期的活跃用户数</li>
+<li>7日留存率定义：7日留存用户数 / 该用户第一天登录日期的活跃用户数</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> login_date,<span class="built_in">count</span>(<span class="keyword">distinct</span> uid) <span class="keyword">as</span> &quot;活跃用户数&quot; </span><br><span class="line"><span class="keyword">from</span> userinfo </span><br><span class="line"><span class="keyword">where</span> app_name <span class="operator">=</span> &quot;相机&quot;</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> login_date;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+-----------------+</span></span><br><span class="line"><span class="operator">|</span> login_date <span class="operator">|</span> 活跃用户数      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+-----------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-01</span> <span class="operator">|</span>               <span class="number">4</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-02</span> <span class="operator">|</span>               <span class="number">3</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span>               <span class="number">4</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-04</span> <span class="operator">|</span>               <span class="number">5</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-05</span> <span class="operator">|</span>               <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-06</span> <span class="operator">|</span>               <span class="number">3</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-07</span> <span class="operator">|</span>               <span class="number">3</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-08</span> <span class="operator">|</span>               <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-09</span> <span class="operator">|</span>               <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-10</span> <span class="operator">|</span>               <span class="number">4</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+-----------------+</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span>,timestampdiff(<span class="keyword">day</span>,a_date,b_date) <span class="keyword">as</span> &quot;时间间隔&quot;</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">(<span class="keyword">select</span> a.uid,a.login_date <span class="keyword">as</span> a_date,b.login_date <span class="keyword">as</span> b_date</span><br><span class="line"><span class="keyword">from</span> userinfo <span class="keyword">as</span> a <span class="keyword">join</span> userinfo <span class="keyword">as</span> b</span><br><span class="line"><span class="keyword">on</span> a.uid <span class="operator">=</span> b.uid</span><br><span class="line"><span class="keyword">where</span> a.app_name <span class="operator">=</span> &quot;相机&quot;) <span class="keyword">as</span> c;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">-----+------------+------------+--------------+</span></span><br><span class="line"><span class="operator">|</span> uid <span class="operator">|</span> a_date     <span class="operator">|</span> b_date     <span class="operator">|</span> 时间间隔     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----+------------+------------+--------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-01</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-01</span> <span class="operator">|</span>            <span class="number">0</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>   <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span>            <span class="number">0</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>   <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-04</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span>           <span class="number">-1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>   <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-04</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span>           <span class="number">-1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>   <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-04</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span>           <span class="number">-1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>   <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-10</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span>           <span class="number">-7</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>   <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span>            <span class="number">0</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>   <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span>            <span class="number">0</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>   <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-04</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span>           <span class="number">-1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>   <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-08</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span>           <span class="number">-5</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>   <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-10</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span>           <span class="number">-7</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>   <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-10</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-03</span> <span class="operator">|</span>           <span class="number">-7</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>   <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-01</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-01</span> <span class="operator">|</span>            <span class="number">0</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>   <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-04</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-01</span> <span class="operator">|</span>           <span class="number">-3</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>   <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-04</span> <span class="operator">|</span> <span class="number">2018</span><span class="number">-05</span><span class="number">-01</span> <span class="operator">|</span>           <span class="number">-3</span> <span class="operator">|</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#最终答案</span><br><span class="line"><span class="keyword">select</span> a_date,<span class="built_in">count</span>(<span class="keyword">distinct</span> d.uid) <span class="keyword">as</span> &quot;活跃用户数&quot;,</span><br><span class="line"><span class="built_in">count</span>(<span class="keyword">distinct</span> <span class="keyword">case</span> <span class="keyword">when</span> 时间间隔 <span class="operator">=</span> <span class="number">1</span> <span class="keyword">then</span> d.uid <span class="keyword">else</span> <span class="keyword">null</span> <span class="keyword">end</span>) <span class="keyword">as</span> &quot;次日留存用户数&quot;,</span><br><span class="line"><span class="built_in">count</span>(<span class="keyword">distinct</span> <span class="keyword">case</span> <span class="keyword">when</span> 时间间隔 <span class="operator">=</span> <span class="number">3</span> <span class="keyword">then</span> d.uid <span class="keyword">else</span> <span class="keyword">null</span> <span class="keyword">end</span>) <span class="keyword">as</span> &quot;3日留存用户数&quot;,</span><br><span class="line"><span class="built_in">count</span>(<span class="keyword">distinct</span> <span class="keyword">case</span> <span class="keyword">when</span> 时间间隔 <span class="operator">=</span> <span class="number">7</span> <span class="keyword">then</span> d.uid <span class="keyword">else</span> <span class="keyword">null</span> <span class="keyword">end</span>) <span class="keyword">as</span> &quot;7日留存用户数&quot;,</span><br><span class="line"><span class="built_in">count</span>(<span class="keyword">distinct</span> <span class="keyword">case</span> <span class="keyword">when</span> 时间间隔 <span class="operator">=</span> <span class="number">1</span> <span class="keyword">then</span> d.uid <span class="keyword">else</span> <span class="keyword">null</span> <span class="keyword">end</span>) <span class="operator">/</span> <span class="built_in">count</span>(<span class="keyword">distinct</span> d.uid) <span class="keyword">as</span> &quot;次日留存率&quot;,</span><br><span class="line"><span class="built_in">count</span>(<span class="keyword">distinct</span> <span class="keyword">case</span> <span class="keyword">when</span> 时间间隔 <span class="operator">=</span> <span class="number">3</span> <span class="keyword">then</span> d.uid <span class="keyword">else</span> <span class="keyword">null</span> <span class="keyword">end</span>) <span class="operator">/</span> <span class="built_in">count</span>(<span class="keyword">distinct</span> d.uid) <span class="keyword">as</span> &quot;3日留存率&quot;,</span><br><span class="line"><span class="built_in">count</span>(<span class="keyword">distinct</span> <span class="keyword">case</span> <span class="keyword">when</span> 时间间隔 <span class="operator">=</span> <span class="number">7</span> <span class="keyword">then</span> d.uid <span class="keyword">else</span> <span class="keyword">null</span> <span class="keyword">end</span>) <span class="operator">/</span> <span class="built_in">count</span>(<span class="keyword">distinct</span> d.uid) <span class="keyword">as</span> &quot;7日留存率&quot;</span><br><span class="line"><span class="keyword">from</span> </span><br><span class="line">(<span class="keyword">select</span> <span class="operator">*</span>,timestampdiff(<span class="keyword">day</span>,a_date,b_date) <span class="keyword">as</span> &quot;时间间隔&quot;</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">(<span class="keyword">select</span> a.uid,a.login_date <span class="keyword">as</span> a_date,b.login_date <span class="keyword">as</span> b_date</span><br><span class="line"><span class="keyword">from</span> userinfo <span class="keyword">as</span> a <span class="keyword">join</span> userinfo <span class="keyword">as</span> b</span><br><span class="line"><span class="keyword">on</span> a.uid <span class="operator">=</span> b.uid</span><br><span class="line"><span class="keyword">where</span> a.app_name <span class="operator">=</span> &quot;相机&quot;) <span class="keyword">as</span> c) <span class="keyword">as</span> d</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> a_date;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    什么是正态分布？如何进行正态性检验？
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">MySQL练习 - 场景模拟初级篇(持续更新)</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

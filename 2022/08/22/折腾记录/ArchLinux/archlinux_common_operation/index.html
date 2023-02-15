@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>archlinux的常用操作命令 | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="Linux,ArchLinux" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="记录archlinux的常用操作命令  系统语言 12345678#存放在&#x2F;etc&#x2F;locale-genvim &#x2F;etc&#x2F;locale-gen		#将需要的语言去掉注释#执行，并生成支持的系统语言locale-genvim &#x2F;etc&#x2F;locale.conf	#修改系统语言  系统中英文切换  #设置启动器 vim	~&#x2F;.xinitrc #language export LANG&#x3D;zh_CN.UTF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="archlinux的常用操作命令">
+<meta property="og:url" content="http://example.com/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="记录archlinux的常用操作命令  系统语言 12345678#存放在&#x2F;etc&#x2F;locale-genvim &#x2F;etc&#x2F;locale-gen		#将需要的语言去掉注释#执行，并生成支持的系统语言locale-genvim &#x2F;etc&#x2F;locale.conf	#修改系统语言  系统中英文切换  #设置启动器 vim	~&#x2F;.xinitrc #language export LANG&#x3D;zh_CN.UTF">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-08-22T12:41:02.000Z">
+<meta property="article:modified_time" content="2023-02-15T02:36:00.999Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="Linux,ArchLinux">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-折腾记录/ArchLinux/archlinux_common_operation" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/">折腾记录</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/">ArchLinux</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Linux-ArchLinux/" rel="tag">Linux,ArchLinux</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">
+            <time datetime="2022-08-22T12:41:02.000Z" itemprop="datePublished">2022-08-22</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/折腾记录/ArchLinux/archlinux_common_operation.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/折腾记录/ArchLinux/archlinux_common_operation.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/折腾记录/ArchLinux/archlinux_common_operation.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            archlinux的常用操作命令
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%AF%AD%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 系统语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E4%B8%AD%E8%8B%B1%E6%96%87%E5%88%87%E6%8D%A2"><span class="toc-number">2.</span> <span class="toc-text"> 系统中英文切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5"><span class="toc-number">3.</span> <span class="toc-text"> 网络连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#archlinux%E6%9B%B4%E6%96%B0"><span class="toc-number">4.</span> <span class="toc-text"> archlinux更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%88%E7%AB%AF-alacritty"><span class="toc-number">5.</span> <span class="toc-text"> 终端 - alacritty</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE"><span class="toc-number">6.</span> <span class="toc-text"> 启动配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E9%80%89%E6%8B%A9"><span class="toc-number">7.</span> <span class="toc-text"> 字体选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u%E7%9B%98%E6%8C%82%E8%BD%BD"><span class="toc-number">8.</span> <span class="toc-text"> U盘挂载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9F%B3%E9%87%8F%E8%AE%BE%E7%BD%AE-alsa"><span class="toc-number">9.</span> <span class="toc-text"> 音量设置 - ALSA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%A0%8F"><span class="toc-number">10.</span> <span class="toc-text"> 状态栏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%B3%95-fcitx"><span class="toc-number">11.</span> <span class="toc-text"> 输入法 - fcitx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%8C%E9%9D%A2%E5%A3%81%E7%BA%B8-nitrogen"><span class="toc-number">12.</span> <span class="toc-text"> 桌面壁纸 - nitrogen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0"><span class="toc-number">13.</span> <span class="toc-text"> 更新</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E5%A4%B1%E8%B4%A5%E6%94%B6%E9%9B%86"><span class="toc-number">13.1.</span> <span class="toc-text"> 更新失败收集</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zsh-oh-my-zsh"><span class="toc-number">14.</span> <span class="toc-text"> zsh + oh-my-zsh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%88%E7%AB%AF%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8-ranger"><span class="toc-number">15.</span> <span class="toc-text"> 终端文件管理器 - ranger</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">15.1.</span> <span class="toc-text"> 快捷键</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dwm%E6%89%93%E8%A1%A5%E4%B8%81"><span class="toc-number">16.</span> <span class="toc-text"> dwm打补丁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dwm-%E8%87%AA%E5%A2%9E%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">17.</span> <span class="toc-text"> dwm 自增快捷键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dwm%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">18.</span> <span class="toc-text"> dwm快捷键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#conda"><span class="toc-number">19.</span> <span class="toc-text"> conda</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%8D%E9%9D%A2base%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="toc-number">19.1.</span> <span class="toc-text"> 前面base问题解决</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">19.2.</span> <span class="toc-text"> 环境变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#conda-%E6%BA%90%E6%9B%B4%E6%8D%A2"><span class="toc-number">19.3.</span> <span class="toc-text"> conda 源更换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%B8%E8%BD%BDconda"><span class="toc-number">19.4.</span> <span class="toc-text"> 卸载conda</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#jupyter-notebook"><span class="toc-number">19.5.</span> <span class="toc-text"> jupyter notebook</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#jupyter-%E6%8F%92%E4%BB%B6"><span class="toc-number">19.6.</span> <span class="toc-text"> jupyter 插件</span></a></li></ol></li></ol>
+                </div>
+            
+        
+        
+            <p><strong>记录archlinux的常用操作命令</strong></p>
+<h3 id="系统语言"><a class="markdownIt-Anchor" href="#系统语言"></a> 系统语言</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#存放在/etc/locale-gen</span></span><br><span class="line"></span><br><span class="line">vim /etc/locale-gen		<span class="comment">#将需要的语言去掉注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#执行，并生成支持的系统语言</span></span><br><span class="line">locale-gen</span><br><span class="line"></span><br><span class="line">vim /etc/locale.conf	<span class="comment">#修改系统语言</span></span><br></pre></td></tr></table></figure>
+<h3 id="系统中英文切换"><a class="markdownIt-Anchor" href="#系统中英文切换"></a> 系统中英文切换</h3>
+<blockquote>
+<p>#设置启动器</p>
+<p>vim	~/.xinitrc</p>
+<p>#language</p>
+<p>export LANG=zh_CN.UTF-8<br />
+export LANGUAGE=zh_CN:en_US</p>
+</blockquote>
+<h3 id="网络连接"><a class="markdownIt-Anchor" href="#网络连接"></a> 网络连接</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#其中的一种方式</span></span><br><span class="line"></span><br><span class="line">wpa_passphrase 网络 密码 &gt; internet.conf(文件名)</span><br><span class="line"></span><br><span class="line">vim internet.conf</span><br><span class="line"></span><br><span class="line">network=&#123;</span><br><span class="line">        ssid=<span class="string">&quot;***&quot;</span></span><br><span class="line">        <span class="comment">#psk=&quot;×××&quot;</span></span><br><span class="line">        psk=ac56065c8bc127e4dd75d376790a389b78766cf55c9a6345333f69d6c65e706d</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ip <span class="built_in">link</span></span><br><span class="line"></span><br><span class="line">wpa_supplicant -B -i wlan0 -c internet.conf</span><br><span class="line"></span><br><span class="line">dhcpcd &amp;</span><br></pre></td></tr></table></figure>
+<h3 id="archlinux更新"><a class="markdownIt-Anchor" href="#archlinux更新"></a> archlinux更新</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">系统更新</span></span><br><span class="line">sudo pacman -Syu</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">强制更新</span></span><br><span class="line">sudo pacman -Syyu</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">清理</span></span><br><span class="line">sudo pacman -Scc</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">删除软件并清楚该软件的依赖</span></span><br><span class="line">sudo pacman -Rs &lt;packagename&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="终端-alacritty"><a class="markdownIt-Anchor" href="#终端-alacritty"></a> 终端 - alacritty</h3>
+<p>配置文件：vim ~/.config/alacritty/alacritty.yml</p>
+<h3 id="启动配置"><a class="markdownIt-Anchor" href="#启动配置"></a> 启动配置</h3>
+<p>启动文件：vim ~/.xinitrc</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">fcitx</span></span><br><span class="line">export GTK_IM_MODULE DEFAULT=fcitx</span><br><span class="line">export QT_IM_MODULE  DEFAULT=fcitx</span><br><span class="line">export XMODIFIERS    DEFAULT=&quot;@im=fcitx&quot;</span><br><span class="line"></span><br><span class="line">fcitx &amp;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="built_in">set</span> statusbar</span></span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">        LI=`xbacklight |cut -d. -f1`</span><br><span class="line">        BA=`acpi | cut -d, -f2 | cut -d% -f1 | cut -d&quot; &quot; -f2`</span><br><span class="line">        SO=`amixer get Master | sed -n &#x27;$p&#x27; |cut -d] -f1 | cut -d&quot;[&quot; -f2 | cut -d% -f1`</span><br><span class="line">        DA=`date | cut -d&quot; &quot; -f 1,2,3,4,5`</span><br><span class="line">        xsetroot -name &quot;Vol.$&#123;SO&#125;|Bat.$&#123;BA&#125;|Bal.$&#123;LI&#125;|$&#123;DA&#125; &quot;</span><br><span class="line">        sleep 1s</span><br><span class="line">done &amp;</span><br><span class="line"></span><br><span class="line">nitrogen --restore</span><br><span class="line"></span><br><span class="line">exec dwm</span><br></pre></td></tr></table></figure>
+<h3 id="字体选择"><a class="markdownIt-Anchor" href="#字体选择"></a> 字体选择</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#显示所有字体</span></span><br><span class="line"></span><br><span class="line">fc-match -a</span><br></pre></td></tr></table></figure>
+<h3 id="u盘挂载"><a class="markdownIt-Anchor" href="#u盘挂载"></a> U盘挂载</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看u盘位置</span></span><br><span class="line">fdisk -l</span><br><span class="line"></span><br><span class="line"><span class="comment">#挂载</span></span><br><span class="line">mount /dev/sdx /mnt/usb</span><br><span class="line"></span><br><span class="line"><span class="comment">#卸载</span></span><br><span class="line">umount /dev/sdd1</span><br></pre></td></tr></table></figure>
+<h3 id="音量设置-alsa"><a class="markdownIt-Anchor" href="#音量设置-alsa"></a> 音量设置 - ALSA</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置界面</span></span><br><span class="line">alsamixer</span><br></pre></td></tr></table></figure>
+<h3 id="状态栏"><a class="markdownIt-Anchor" href="#状态栏"></a> 状态栏</h3>
+<blockquote>
+<p>主要命令：xsetroot</p>
+<p>Usage: xsetroot [options]<br />
+where options are:<br />
+-help                           Print this help<br />
+-version                        Print a version message<br />
+-def, -default                  Reset unspecified attributes<br />
+-cursor <cursorfile> <maskfile> Pointer cursor used when outside of any windows<br />
+-cursor_name <cursorfontname>   Use a pointer cursor from the cursor font<br />
+-xcf <cursorfile> <cursorsize>  Load a pointer cursor from an Xcursor file<br />
+-bitmap <filename>              Use the bitmap specified in the file<br />
+-mod <x> <y>                    Use a plaid-like grid pattern on screen<br />
+-gray, -grey                    Make the entire background grey<br />
+-bg,  -background <color>       Set background color<br />
+-fg,  -foreground <color>       Set foreground color<br />
+-rv,  -reverse                  Swap foreground and background colors<br />
+-solid <color>                  Set the background of the root window<br />
+-name <string>                  Set the name of the root window<br />
+-d,   -display <display>        Specifies the server to connect to</p>
+</blockquote>
+<h3 id="输入法-fcitx"><a class="markdownIt-Anchor" href="#输入法-fcitx"></a> 输入法 - fcitx</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fcitx-configtool</span><br></pre></td></tr></table></figure>
+<h3 id="桌面壁纸-nitrogen"><a class="markdownIt-Anchor" href="#桌面壁纸-nitrogen"></a> 桌面壁纸 - nitrogen</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">nitrogen</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line">	--force-setter=[arg]</span><br><span class="line">		Force setter engine: xwindows, xinerama, gnome, pcmanfm</span><br><span class="line">	--<span class="built_in">head</span>=[arg]</span><br><span class="line">		Select xinerama/multihead display <span class="keyword">in</span> GUI, 0..n, -1 <span class="keyword">for</span> full</span><br><span class="line">	--<span class="built_in">help</span>, -h</span><br><span class="line">		Prints this <span class="built_in">help</span> text.</span><br><span class="line">	--no-recurse</span><br><span class="line">		Do not recurse into subdirectories</span><br><span class="line">	--random</span><br><span class="line">		Choose random background from config or given directory</span><br><span class="line">	--restore</span><br><span class="line">		Restore saved backgrounds</span><br><span class="line">	--save</span><br><span class="line">		Saves the background permanently</span><br><span class="line">	--set-auto</span><br><span class="line">		Sets the background to the given file (auto)</span><br><span class="line">	--set-centered</span><br><span class="line">		Sets the background to the given file (centered)</span><br><span class="line">	--set-color=[arg]</span><br><span class="line">		background color <span class="keyword">in</span> hex, <span class="comment">#000000 by default</span></span><br><span class="line">	--set-scaled</span><br><span class="line">		Sets the background to the given file (scaled)</span><br><span class="line">	--set-tiled</span><br><span class="line">		Sets the background to the given file (tiled)</span><br><span class="line">	--set-zoom</span><br><span class="line">		Sets the background to the given file (zoom)</span><br><span class="line">	--set-zoom-fill</span><br><span class="line">		Sets the background to the given file (zoom-fill)</span><br><span class="line">	--<span class="built_in">sort</span>=[arg]</span><br><span class="line">		How to <span class="built_in">sort</span> the backgrounds. Valid options are:</span><br><span class="line">			* alpha, <span class="keyword">for</span> alphanumeric <span class="built_in">sort</span></span><br><span class="line">			* ralpha, <span class="keyword">for</span> reverse alphanumeric <span class="built_in">sort</span></span><br><span class="line">			* time, <span class="keyword">for</span> last modified time <span class="built_in">sort</span> (oldest first)</span><br><span class="line">			* rtime, <span class="keyword">for</span> reverse last modified time <span class="built_in">sort</span> (newest first)</span><br><span class="line">			</span><br><span class="line"><span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<h3 id="更新"><a class="markdownIt-Anchor" href="#更新"></a> 更新</h3>
+<p>更新下载的源列表：	/etc/pacman.d/mirrorlist</p>
+<p>原更新下载的源列表：	/etc/pacman.d/mirrorlist</p>
+<h4 id="更新失败收集"><a class="markdownIt-Anchor" href="#更新失败收集"></a> 更新失败收集</h4>
+<p>1、出现无法升级archlinuxcn(下载数据库出错)：可能是archlinuxcn的更新源没有速度，目前已添加中科大的源</p>
+<p>2、升级时出现冲突：npm：文件系统已存在</p>
+<p>​		原因：系统中npm有些包不是通过pacman下载的，所以出现冲突</p>
+<p>​		解决：目前只有将包进行删除，使得更新继续。在查找更好的处理方式</p>
+<p>3、sudo pacman -Syyu<br />
+:: 正在同步软件包数据库…<br />
+错误：未能同步所有数据库（无法锁定数据库）</p>
+<p>​		原因：/var/lib/pacman/db.lck  文件锁定了pacman的数据库</p>
+<p>​		解决：sudo rm /var/lib/pacman/db.lck</p>
+<h3 id="zsh-oh-my-zsh"><a class="markdownIt-Anchor" href="#zsh-oh-my-zsh"></a> zsh + oh-my-zsh</h3>
+<blockquote>
+<p>配置文件：vim ~/.zshrc</p>
+</blockquote>
+<h3 id="终端文件管理器-ranger"><a class="markdownIt-Anchor" href="#终端文件管理器-ranger"></a> 终端文件管理器 - ranger</h3>
+<h4 id="快捷键"><a class="markdownIt-Anchor" href="#快捷键"></a> 快捷键</h4>
+<blockquote>
+<p>?  查看帮助</p>
+<p><strong>浏览</strong>:</p>
+<p>H 后退<br />
+L 前进<br />
+gg 跳到顶端<br />
+G  跳到底端<br />
+f 查找<br />
+/ 搜素<br />
+g 快速进入目录</p>
+<p><strong>编辑</strong>:</p>
+<p>yy      复制<br />
+dd      剪切<br />
+pp      粘贴<br />
+delete  删除<br />
+cw      重命名<br />
+Ctrl-f  向下翻页<br />
+Ctrl-b  向上翻页</p>
+<p><strong>书签</strong>:</p>
+<p>m       新建书签<br />
+`       打开书签<br />
+um      删除书签</p>
+<p><strong>标签</strong>:</p>
+<p>gn / C-n        新建标签<br />
+TAB / S-TAB     切换标签<br />
+A-Right, A-Left 切换标签<br />
+gc / C-w        关闭标签</p>
+<p>zh              显示隐藏文件</p>
+<p>zp              打开/关闭文件预览功能<br />
+zP              打开目录预览功能</p>
+<p><strong>选择</strong>:</p>
+<p>空格    单选<br />
+v       反选<br />
+V       进入/退出多选模式</p>
+<p><strong>其他</strong>:</p>
+<p>zf      过滤器(如过滤pdf文件, zf+pdf,回车)<br />
+S       在当前目录打开终端<br />
+z(*)    改变设置, <em>表示在弹出选项中的选择<br />
+o(</em>)    改变排序方式<br />
+! / s   使用shell命令(！shell -w ls -hl %s,%s代表当前被选中的文件)<br />
+:       使用ranger命令(3? 查看可用命令)<br />
+:set colorscheme snow 设置颜色模式</p>
+</blockquote>
+<h3 id="dwm打补丁"><a class="markdownIt-Anchor" href="#dwm打补丁"></a> dwm打补丁</h3>
+<p>打补丁				patch &gt; xx.diff<br />
+移除补丁			patch -R &gt; xx.diff</p>
+<h3 id="dwm-自增快捷键"><a class="markdownIt-Anchor" href="#dwm-自增快捷键"></a> dwm 自增快捷键</h3>
+<blockquote>
+<p>#添加command</p>
+<p>static const char *chrome[]  = { “google-chrome-stable”, NULL };</p>
+<p>#添加快捷键</p>
+<p>{ MODKEY,                       XK_g,      spawn,     {.v = chrome } },</p>
+</blockquote>
+<h3 id="dwm快捷键"><a class="markdownIt-Anchor" href="#dwm快捷键"></a> dwm快捷键</h3>
+<blockquote>
+<p>Alt + shift + Enter     # 打开新窗口<br />
+Alt + shift + C         # 关闭当前窗口<br />
+Alt + D                 # 窗口横向排列<br />
+Alt + I                 # 窗口竖向排列<br />
+Alt + Enter             # 窗口位置互换<br />
+Alt + num               # 切换标签页<br />
+Alt + shift + num       # 移动窗口至某标签页<br />
+Alt + T                 # 平铺模式（tiling)<br />
+Alt + M                 # 单窗口模式<br />
+Alt + F                 # 浮动模式（float)</p>
+<p>#在窗口间切换</p>
+<p>Alt + J<br />
+Alt + K</p>
+<p>#改变窗口的长度/比例</p>
+<p>Alt + H<br />
+Alt + L</p>
+<p>#窗口模式切换</p>
+<p>Alt + Space<br />
+Alt + shift + Space</p>
+</blockquote>
+<h3 id="conda"><a class="markdownIt-Anchor" href="#conda"></a> conda</h3>
+<h4 id="前面base问题解决"><a class="markdownIt-Anchor" href="#前面base问题解决"></a> 前面base问题解决</h4>
+<blockquote>
+<p>conda config --show</p>
+<p>conda config --set auto_activate_base False</p>
+</blockquote>
+<h4 id="环境变量"><a class="markdownIt-Anchor" href="#环境变量"></a> 环境变量</h4>
+<blockquote>
+<p>#path</p>
+<p>export PATH=“/home/minz/anaconda3/bin:$PATH”</p>
+<p>#pythonpath</p>
+<p>export PYTHONPATH=“$PYTHONPATH:/home/minz/anaconda3/bin/python”</p>
+</blockquote>
+<h4 id="conda-源更换"><a class="markdownIt-Anchor" href="#conda-源更换"></a> conda 源更换</h4>
+<blockquote>
+<p>conda config --add channels <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</a></p>
+<p>conda config --add channels <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</a></p>
+<p>conda config --add channels <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</a></p>
+<p>conda config --append channels <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/fastai/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/fastai/</a></p>
+<p>conda config --append channels <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/</a></p>
+<p>conda config --append channels <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/</a></p>
+<p>#执行</p>
+<p>conda config --set show_channel_urls yes</p>
+</blockquote>
+<h4 id="卸载conda"><a class="markdownIt-Anchor" href="#卸载conda"></a> 卸载conda</h4>
+<blockquote>
+<p>方法一：打开终端，然后删除整个Anaconda目录即可：</p>
+<p>rm -rf ~/anaconda3</p>
+<p>方法二：完全卸载使用Anaconda-Clean和简单删除</p>
+<p>#首先使用conda安装anaconda清理工具</p>
+<p>conda install anaconda-clean</p>
+<p>anaconda-clean<br />
+or<br />
+anaconda-clean --yes</p>
+<p>最后删除配置文件 .bash_profile中关于Anaconda的内容：</p>
+<p>export PATH=“/Users/jsmith/anaconda3/bin:$PATH”</p>
+</blockquote>
+<h4 id="jupyter-notebook"><a class="markdownIt-Anchor" href="#jupyter-notebook"></a> jupyter notebook</h4>
+<blockquote>
+<p>生成默认配置：</p>
+<p>jupyter notebook --generate-config</p>
+<p><strong>配置文件</strong>：/home/minz/.jupyter/jupyter_notebook_config.py</p>
+</blockquote>
+<h4 id="jupyter-插件"><a class="markdownIt-Anchor" href="#jupyter-插件"></a> jupyter 插件</h4>
+<blockquote>
+<p>#主题</p>
+<p>conda install jupyterthemes</p>
+<p>#补全&amp;其他</p>
+<p>conda install -c conda-forge jupyter_contrib_nbextensions</p>
+</blockquote>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    MySQL练习 - 基础篇(持续更新ing)
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Hexo搭建博客&amp;选择主题</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

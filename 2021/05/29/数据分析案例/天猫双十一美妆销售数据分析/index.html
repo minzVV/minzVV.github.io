@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>剖析天猫双十一的美妆产品销售数据 | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="DA Project" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="摘要 深度挖掘天猫双十一时刻的美妆产品销售数据，分析各品牌之间的销量、热度、价格等～">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剖析天猫双十一的美妆产品销售数据">
+<meta property="og:url" content="http://example.com/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="摘要 深度挖掘天猫双十一时刻的美妆产品销售数据，分析各品牌之间的销量、热度、价格等～">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/tianmao-1-1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/tianmao-1-2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/tianmao-1-3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/tianmao-1-4.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/tianmao-1-5.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/tianmao-1-6.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_43_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_44_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_45_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_46_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_47_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_48_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_49_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_50_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_51_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_52_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_54_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_55_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_56_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_57_0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_58_0.png">
+<meta property="article:published_time" content="2021-05-29T12:41:02.000Z">
+<meta property="article:modified_time" content="2023-02-15T09:27:25.075Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="DA Project">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/tianmao-1-1.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file active"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-数据分析案例/天猫双十一美妆销售数据分析" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">数据案例分析</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/DA-Project/" rel="tag">DA Project</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">
+            <time datetime="2021-05-29T12:41:02.000Z" itemprop="datePublished">2021-05-29</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/数据分析案例/天猫双十一美妆销售数据分析.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/数据分析案例/天猫双十一美妆销售数据分析.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/数据分析案例/天猫双十一美妆销售数据分析.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            剖析天猫双十一的美妆产品销售数据
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text"> 项目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5"><span class="toc-number">2.</span> <span class="toc-text"> 数据导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97"><span class="toc-number">3.</span> <span class="toc-text"> 数据清洗</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B8%85%E9%99%A4%E9%87%8D%E5%A4%8D%E6%95%B0%E6%8D%AE"><span class="toc-number">3.1.</span> <span class="toc-text"> 清除重复数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E9%87%8D%E6%9E%84"><span class="toc-number">3.2.</span> <span class="toc-text"> 索引重构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E5%A4%84%E7%90%86"><span class="toc-number">3.3.</span> <span class="toc-text"> 日期处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%A4%84%E7%90%86"><span class="toc-number">3.4.</span> <span class="toc-text"> 缺失值处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%8F%90%E5%8F%96"><span class="toc-number">4.</span> <span class="toc-text"> 信息提取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC%E4%BF%A1%E6%81%AF%E6%8F%90%E5%8F%96"><span class="toc-number">4.1.</span> <span class="toc-text"> 表格信息提取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%95%86%E5%93%81%E7%B1%BB%E5%88%AB"><span class="toc-number">4.2.</span> <span class="toc-text"> 添加商品类别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E%E4%B8%BB%E7%B1%BB%E5%88%AB-%E5%AD%90%E7%B1%BB%E5%88%AB"><span class="toc-number">4.3.</span> <span class="toc-text"> 新增主类别 &amp; 子类别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E-%E6%98%AF%E5%90%A6%E4%B8%BA%E7%94%B7%E5%A3%AB%E4%B8%93%E7%94%A8-%E7%B1%BB%E5%88%AB"><span class="toc-number">4.4.</span> <span class="toc-text"> 新增 “是否为男士专用” 类别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E%E9%94%80%E5%94%AE%E9%A2%9D-%E8%B4%AD%E4%B9%B0%E6%97%A5%E6%9C%9F"><span class="toc-number">4.5.</span> <span class="toc-text"> 新增销售额 &amp; 购买日期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%88%97%E7%B1%BB%E5%9E%8B%E8%A3%85%E6%8D%A2-%E6%96%B0%E5%A2%9E%E4%BB%A5%E5%A4%A9%E4%B8%BA%E5%8D%95%E4%BD%8D%E6%97%B6%E9%97%B4%E5%88%97"><span class="toc-number">4.6.</span> <span class="toc-text"> 时间列类型装换 &amp; 新增以天为单位时间列</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E5%8F%8A%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">5.</span> <span class="toc-text"> 分析及可视化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E5%93%81%E7%89%8Csku%E6%95%B0"><span class="toc-number">5.1.</span> <span class="toc-text"> 各品牌SKU数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E5%93%81%E7%89%8C%E9%94%80%E9%87%8F%E9%94%80%E5%94%AE%E9%A2%9D"><span class="toc-number">5.2.</span> <span class="toc-text"> 各品牌销量&amp;销售额</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E7%B1%BB%E5%88%AB%E9%94%80%E5%94%AE%E9%87%8F"><span class="toc-number">5.3.</span> <span class="toc-text"> 各类别销售量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E5%93%81%E7%89%8C%E9%94%80%E9%87%8F-%E4%B8%BB%E7%B1%BB%E5%88%AB"><span class="toc-number">5.4.</span> <span class="toc-text"> 各品牌销量 - 主类别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E5%93%81%E7%89%8C%E9%94%80%E5%94%AE%E9%A2%9D-%E4%B8%BB%E7%B1%BB%E5%88%AB"><span class="toc-number">5.5.</span> <span class="toc-text"> 各品牌销售额 - 主类别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E5%93%81%E7%89%8C%E9%94%80%E9%87%8F-%E5%AD%90%E7%B1%BB%E5%88%AB"><span class="toc-number">5.6.</span> <span class="toc-text"> 各品牌销量 - 子类别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E5%93%81%E7%89%8C%E9%94%80%E5%94%AE%E9%A2%9D-%E5%AD%90%E7%B1%BB%E5%88%AB"><span class="toc-number">5.7.</span> <span class="toc-text"> 各品牌销售额 - 子类别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%81%E7%89%8C%E7%83%AD%E5%BA%A6"><span class="toc-number">5.8.</span> <span class="toc-text"> 品牌热度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E5%93%81%E7%89%8C%E4%BB%B7%E6%A0%BC%E5%88%86%E6%9E%90"><span class="toc-number">5.9.</span> <span class="toc-text"> 各品牌价格分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B3%E5%9D%87%E9%94%80%E9%87%8F%E5%B9%B3%E5%9D%87%E9%94%80%E5%94%AE%E9%A2%9D"><span class="toc-number">5.10.</span> <span class="toc-text"> 平均销量&amp;平均销售额</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B7%E6%80%A7%E6%8A%A4%E8%82%A4%E5%93%81%E9%94%80%E9%87%8F%E5%88%86%E6%9E%90"><span class="toc-number">5.11.</span> <span class="toc-text"> 男性护肤品销量分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%AD%E4%B9%B0%E6%97%B6%E9%97%B4%E4%B8%8E%E9%94%80%E9%87%8F%E5%88%86%E6%9E%90"><span class="toc-number">5.12.</span> <span class="toc-text"> 购买时间与销量分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text"> 总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">7.</span> <span class="toc-text"> 写在最后</span></a></li></ol>
+                </div>
+            
+        
+        
+            <blockquote>
+<p>摘要<br />
+深度挖掘天猫双十一时刻的美妆产品销售数据，分析各品牌之间的销量、热度、价格等～</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="项目描述"><a class="markdownIt-Anchor" href="#项目描述"></a> 项目描述</h3>
+<p><strong>项目名称</strong>：天猫双十一美妆产品销售数据分析</p>
+<p><strong>数据来源</strong>：数据来源于网络，为2016年双十一美妆产品天猫数据的采集和整理，原始数据为.xlsx格式。</p>
+<p><strong>字段说明</strong>：</p>
+<blockquote>
+<p>update_time : 更新时间</p>
+<p>id : 商品id(唯一标识)</p>
+<p>title : 商品标题</p>
+<p>price : 价格</p>
+<p>店名 : 即品牌名</p>
+</blockquote>
+<p><strong>项目目的</strong>：</p>
+<p>通过对数据集进行清理整合，并进行以下几个方面的分析：</p>
+<ul>
+<li>双十一期间各品牌的销量以及销售额对比</li>
+<li>各大品牌热度</li>
+<li>各品牌价格分析</li>
+<li>关于男性护肤品销量分析</li>
+<li>消费高峰期分析</li>
+</ul>
+<p><strong>环境解释</strong>：基于jupyter notebook，可视化工具包：matplotlib、seaborn</p>
+<h3 id="数据导入"><a class="markdownIt-Anchor" href="#数据导入"></a> 数据导入</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> ss</span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">os.chdir(<span class="string">&quot;/home/min/data&quot;</span>)</span><br><span class="line">warnings.filterwarnings(<span class="string">&quot;ignore&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据读取</span></span><br><span class="line"></span><br><span class="line">data = pd.read_csv(<span class="string">&#x27;双十一淘宝美妆数据.csv&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据查看</span></span><br><span class="line"></span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/tianmao-1-1.png" alt="" /></p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据基本属性</span></span><br><span class="line"></span><br><span class="line">data.info()</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 27598 entries, 0 to 27597
+Data columns (total 7 columns):
+update_time      27598 non-null object
+id               27598 non-null object
+title            27598 non-null object
+price            27598 non-null float64
+sale_count       25244 non-null float64
+comment_count    25244 non-null float64
+店名               27598 non-null object
+dtypes: float64(3), object(4)
+memory usage: 1.5+ MB
+</code></pre>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 店名统计</span></span><br><span class="line"></span><br><span class="line">data[<span class="string">&#x27;店名&#x27;</span>].value_counts()</span><br></pre></td></tr></table></figure>
+<pre><code>悦诗风吟    3021
+佰草集     2265
+欧莱雅     1974
+雅诗兰黛    1810
+倩碧      1704
+美加净     1678
+欧珀莱     1359
+妮维雅     1329
+相宜本草    1313
+兰蔻      1285
+娇兰      1193
+自然堂     1190
+玉兰油     1135
+兰芝      1091
+美宝莲      825
+资生堂      821
+植村秀      750
+薇姿       746
+雅漾       663
+雪花秀      543
+SKII     469
+蜜丝佛陀     434
+Name: 店名, dtype: int64
+</code></pre>
+</br>
+<h3 id="数据清洗"><a class="markdownIt-Anchor" href="#数据清洗"></a> <strong>数据清洗</strong></h3>
+<h4 id="清除重复数据"><a class="markdownIt-Anchor" href="#清除重复数据"></a> <strong>清除重复数据</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># drop_duplicates -- 重复数据</span></span><br><span class="line"></span><br><span class="line">data = data.drop_duplicates(inplace=<span class="literal">False</span>)</span><br><span class="line">data.shape</span><br></pre></td></tr></table></figure>
+<pre><code>(27512, 7)
+</code></pre>
+</br>
+<h4 id="索引重构"><a class="markdownIt-Anchor" href="#索引重构"></a> <strong>索引重构</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重置索引</span></span><br><span class="line"></span><br><span class="line">data.reset_index(inplace=<span class="literal">True</span>,drop = <span class="literal">True</span>)</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/tianmao-1-2.png" alt="" /></p>
+</br>
+<h4 id="日期处理"><a class="markdownIt-Anchor" href="#日期处理"></a> <strong>日期处理</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 日期处理</span></span><br><span class="line"></span><br><span class="line">data[<span class="string">&#x27;date&#x27;</span>] = pd.to_datetime(data[<span class="string">&#x27;update_time&#x27;</span>])</span><br><span class="line">data[<span class="string">&#x27;month&#x27;</span>] = data[<span class="string">&#x27;date&#x27;</span>].dt.month</span><br><span class="line">data[<span class="string">&#x27;day&#x27;</span>] = data[<span class="string">&#x27;date&#x27;</span>].dt.day</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/tianmao-1-3.png" alt="" /></p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看数据描述性统计</span></span><br><span class="line"></span><br><span class="line">data.describe()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/tianmao-1-4.png" alt="" /></p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看缺失值</span></span><br><span class="line"></span><br><span class="line">data.apply(<span class="keyword">lambda</span> x:<span class="built_in">sum</span>(x.isnull()))</span><br></pre></td></tr></table></figure>
+<pre><code>update_time         0
+id                  0
+title               0
+price               0
+sale_count       2350
+comment_count    2350
+店名                  0
+date                0
+month               0
+day                 0
+dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.isnull().<span class="built_in">any</span>()</span><br></pre></td></tr></table></figure>
+<pre><code>update_time      False
+id               False
+title            False
+price            False
+sale_count        True
+comment_count     True
+店名               False
+date             False
+month            False
+day              False
+dtype: bool
+</code></pre>
+<h4 id="缺失值处理"><a class="markdownIt-Anchor" href="#缺失值处理"></a> <strong>缺失值处理</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sale_count &amp; comment_count 考虑使用众数填充</span></span><br><span class="line"></span><br><span class="line">data[<span class="string">&#x27;sale_count&#x27;</span>].mode()</span><br><span class="line">data[<span class="string">&#x27;comment_count&#x27;</span>].mode()</span><br></pre></td></tr></table></figure>
+<pre><code>0    0.0
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&#x27;sale_count&#x27;</span>] = data[<span class="string">&#x27;sale_count&#x27;</span>].fillna(<span class="number">0</span>)</span><br><span class="line">data[<span class="string">&#x27;comment_count&#x27;</span>] = data[<span class="string">&#x27;comment_count&#x27;</span>].fillna(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 再次确认缺失值</span></span><br><span class="line"></span><br><span class="line">data.apply(<span class="keyword">lambda</span> x : <span class="built_in">sum</span>(x.isnull()))</span><br></pre></td></tr></table></figure>
+<pre><code>update_time      0
+id               0
+title            0
+price            0
+sale_count       0
+comment_count    0
+店名               0
+date             0
+month            0
+day              0
+dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.duplicated().value_counts()</span><br></pre></td></tr></table></figure>
+<pre><code>False    27512
+dtype: int64
+</code></pre>
+</br>
+<h3 id="信息提取"><a class="markdownIt-Anchor" href="#信息提取"></a> <strong>信息提取</strong></h3>
+<h4 id="表格信息提取"><a class="markdownIt-Anchor" href="#表格信息提取"></a> <strong>表格信息提取</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 表格信息提取</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> jieba</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title_cut = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> data.title:</span><br><span class="line">    j = jieba.lcut(i)</span><br><span class="line">    title_cut.append(j)</span><br></pre></td></tr></table></figure>
+<pre><code>Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 1.520 seconds.
+Prefix dict has been built successfully.
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&#x27;item_name_cut&#x27;</span>] = title_cut</span><br><span class="line">data[[<span class="string">&#x27;title&#x27;</span>,<span class="string">&#x27;item_name_cut&#x27;</span>]].head()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/tianmao-1-5.png" alt="" /></p>
+</br>
+<h4 id="添加商品类别"><a class="markdownIt-Anchor" href="#添加商品类别"></a> <strong>添加商品类别</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 给商品添加分类</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 子类别</span></span><br><span class="line"></span><br><span class="line">sub_type = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 主类别</span></span><br><span class="line"></span><br><span class="line">main_type = []</span><br><span class="line">basic_config_data = <span class="string">&quot;&quot;&quot;护肤品	套装	套装							</span></span><br><span class="line"><span class="string">护肤品	乳液类	乳液	美白乳	润肤乳	凝乳	柔肤液&#x27;	亮肤乳	菁华乳	修护乳</span></span><br><span class="line"><span class="string">护肤品	眼部护理	眼霜	眼部精华	眼膜					</span></span><br><span class="line"><span class="string">护肤品	面膜类	面膜													</span></span><br><span class="line"><span class="string">护肤品	清洁类	洗面	洁面	清洁	卸妆	洁颜	洗颜	去角质	磨砂						</span></span><br><span class="line"><span class="string">护肤品	化妆水	化妆水	爽肤水	柔肤水	补水露	凝露	柔肤液	精粹水	亮肤水	润肤水	保湿水	菁华水	保湿喷雾	舒缓喷雾</span></span><br><span class="line"><span class="string">护肤品	面霜类	面霜	日霜	晚霜	柔肤霜	滋润霜	保湿霜	凝霜	日间霜	晚间霜	乳霜	修护霜	亮肤霜	底霜	菁华霜</span></span><br><span class="line"><span class="string">护肤品	精华类	精华液	精华水	精华露	精华素										</span></span><br><span class="line"><span class="string">护肤品	防晒类	防晒霜	防晒喷雾												</span></span><br><span class="line"><span class="string">化妆品	口红类	唇釉	口红	唇彩											</span></span><br><span class="line"><span class="string">化妆品	底妆类	散粉	蜜粉	粉底液	定妆粉 	气垫	粉饼	BB	CC	遮瑕	粉霜	粉底膏	粉底霜		</span></span><br><span class="line"><span class="string">化妆品	眼部彩妆	眉粉	染眉膏	眼线	眼影	睫毛膏									</span></span><br><span class="line"><span class="string">化妆品	修容类	鼻影	修容粉	高光	腮红										</span></span><br><span class="line"><span class="string">其他	其他	其他&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">category_config_map = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> config_line <span class="keyword">in</span> basic_config_data.split(<span class="string">&#x27;\n&#x27;</span>):</span><br><span class="line">    basic_category_list = config_line.strip().strip(<span class="string">&#x27;\n&#x27;</span>).strip(<span class="string">&#x27;\t&#x27;</span>).split(<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line">    main_category = basic_category_list[<span class="number">0</span>]</span><br><span class="line">    sub_category = basic_category_list[<span class="number">1</span>]</span><br><span class="line">    unit_category_list = basic_category_list[<span class="number">2</span>:-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> unit_category <span class="keyword">in</span> unit_category_list:</span><br><span class="line">        <span class="keyword">if</span> unit_category <span class="keyword">and</span> unit_category.strip().strip(<span class="string">&#x27;\t&#x27;</span>):</span><br><span class="line">            category_config_map[unit_category] = (main_category,sub_category)</span><br></pre></td></tr></table></figure>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看主类别 &amp; 子类别</span></span><br><span class="line"></span><br><span class="line">category_config_map</span><br></pre></td></tr></table></figure>
+<pre><code>&#123;'乳液': ('护肤品', '乳液类'),
+ '美白乳': ('护肤品', '乳液类'),
+ '润肤乳': ('护肤品', '乳液类'),
+ '凝乳': ('护肤品', '乳液类'),
+ &quot;柔肤液'&quot;: ('护肤品', '乳液类'),
+ '亮肤乳': ('护肤品', '乳液类'),
+ '菁华乳': ('护肤品', '乳液类'),
+ '眼霜': ('护肤品', '眼部护理'),
+ '眼部精华': ('护肤品', '眼部护理'),
+ '洗面': ('护肤品', '清洁类'),
+ '洁面': ('护肤品', '清洁类'),
+ '清洁': ('护肤品', '清洁类'),
+ '卸妆': ('护肤品', '清洁类'),
+ '洁颜': ('护肤品', '清洁类'),
+ '洗颜': ('护肤品', '清洁类'),
+ '去角质': ('护肤品', '清洁类'),
+ '化妆水': ('护肤品', '化妆水'),
+ '爽肤水': ('护肤品', '化妆水'),
+ '柔肤水': ('护肤品', '化妆水'),
+ '补水露': ('护肤品', '化妆水'),
+ '凝露': ('护肤品', '化妆水'),
+ '柔肤液': ('护肤品', '化妆水'),
+ '精粹水': ('护肤品', '化妆水'),
+ '亮肤水': ('护肤品', '化妆水'),
+ '润肤水': ('护肤品', '化妆水'),
+ '保湿水': ('护肤品', '化妆水'),
+ '菁华水': ('护肤品', '化妆水'),
+ '保湿喷雾': ('护肤品', '化妆水'),
+ '面霜': ('护肤品', '面霜类'),
+ '日霜': ('护肤品', '面霜类'),
+ '晚霜': ('护肤品', '面霜类'),
+ '柔肤霜': ('护肤品', '面霜类'),
+ '滋润霜': ('护肤品', '面霜类'),
+ '保湿霜': ('护肤品', '面霜类'),
+ '凝霜': ('护肤品', '面霜类'),
+ '日间霜': ('护肤品', '面霜类'),
+ '晚间霜': ('护肤品', '面霜类'),
+ '乳霜': ('护肤品', '面霜类'),
+ '修护霜': ('护肤品', '面霜类'),
+ '亮肤霜': ('护肤品', '面霜类'),
+ '底霜': ('护肤品', '面霜类'),
+ '精华液': ('护肤品', '精华类'),
+ '精华水': ('护肤品', '精华类'),
+ '精华露': ('护肤品', '精华类'),
+ '防晒霜': ('护肤品', '防晒类'),
+ '唇釉': ('化妆品', '口红类'),
+ '口红': ('化妆品', '口红类'),
+ '散粉': ('化妆品', '底妆类'),
+ '蜜粉': ('化妆品', '底妆类'),
+ '粉底液': ('化妆品', '底妆类'),
+ '定妆粉 ': ('化妆品', '底妆类'),
+ '气垫': ('化妆品', '底妆类'),
+ '粉饼': ('化妆品', '底妆类'),
+ 'BB': ('化妆品', '底妆类'),
+ 'CC': ('化妆品', '底妆类'),
+ '遮瑕': ('化妆品', '底妆类'),
+ '粉霜': ('化妆品', '底妆类'),
+ '粉底膏': ('化妆品', '底妆类'),
+ '眉粉': ('化妆品', '眼部彩妆'),
+ '染眉膏': ('化妆品', '眼部彩妆'),
+ '眼线': ('化妆品', '眼部彩妆'),
+ '眼影': ('化妆品', '眼部彩妆'),
+ '鼻影': ('化妆品', '修容类'),
+ '修容粉': ('化妆品', '修容类'),
+ '高光': ('化妆品', '修容类')&#125;
+</code></pre>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 分类处理</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data)):</span><br><span class="line">    exist = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">for</span> temp <span class="keyword">in</span> data.item_name_cut[i]:</span><br><span class="line">        <span class="keyword">if</span> temp <span class="keyword">in</span> category_config_map:</span><br><span class="line">            sub_type.append(category_config_map.get(temp)[<span class="number">1</span>])</span><br><span class="line">            main_type.append(category_config_map.get(temp)[<span class="number">0</span>])</span><br><span class="line">            exist = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> exist:</span><br><span class="line">        sub_type.append(<span class="string">&#x27;其他&#x27;</span>)</span><br><span class="line">        main_type.append(<span class="string">&#x27;其他&#x27;</span>)</span><br></pre></td></tr></table></figure>
+</br>
+<h4 id="新增主类别-子类别"><a class="markdownIt-Anchor" href="#新增主类别-子类别"></a> <strong>新增主类别 &amp; 子类别</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新增 子类别 &amp; 主类别 两列</span></span><br><span class="line"></span><br><span class="line">data[<span class="string">&#x27;sub_type&#x27;</span>] = sub_type</span><br><span class="line">data[<span class="string">&#x27;main_type&#x27;</span>] = main_type</span><br></pre></td></tr></table></figure>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 子类别统计</span></span><br><span class="line"></span><br><span class="line">data[<span class="string">&#x27;sub_type&#x27;</span>].value_counts()</span><br></pre></td></tr></table></figure>
+<pre><code>其他      13100
+清洁类      2922
+面霜类      2675
+化妆水      1955
+底妆类      1790
+乳液类      1352
+眼部护理     1114
+精华类       727
+口红类       715
+眼部彩妆      604
+防晒类       494
+修容类        64
+Name: sub_type, dtype: int64
+</code></pre>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 主类别统计</span></span><br><span class="line"></span><br><span class="line">data[<span class="string">&#x27;main_type&#x27;</span>].value_counts()</span><br></pre></td></tr></table></figure>
+<pre><code>其他     13100
+护肤品    11239
+化妆品     3173
+Name: main_type, dtype: int64
+</code></pre>
+<h4 id="新增-是否为男士专用-类别"><a class="markdownIt-Anchor" href="#新增-是否为男士专用-类别"></a> <strong>新增 “是否为男士专用” 类别</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新增 &quot;是否为男士专用&quot; 列</span></span><br><span class="line"></span><br><span class="line">gender = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data)):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;男&#x27;</span> <span class="keyword">in</span> data.item_name_cut[i]:</span><br><span class="line">        gender.append(<span class="string">&#x27;是&#x27;</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&#x27;男士&#x27;</span> <span class="keyword">in</span> data.item_name_cut[i]:</span><br><span class="line">        gender.append(<span class="string">&#x27;是&#x27;</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&#x27;男生&#x27;</span> <span class="keyword">in</span> data.item_name_cut[i]:</span><br><span class="line">        gender.append(<span class="string">&#x27;是&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        gender.append(<span class="string">&#x27;否&#x27;</span>)</span><br></pre></td></tr></table></figure>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&#x27;是否男士专用&#x27;</span>] = gender</span><br><span class="line">data[<span class="string">&#x27;是否男士专用&#x27;</span>].value_counts()</span><br></pre></td></tr></table></figure>
+<pre><code>否    25310
+是     2202
+Name: 是否男士专用, dtype: int64
+</code></pre>
+</br>
+<h4 id="新增销售额-购买日期"><a class="markdownIt-Anchor" href="#新增销售额-购买日期"></a> <strong>新增销售额 &amp; 购买日期</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新增 销售额 &amp; 购买日期(天) 两列</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 销售额 = 销售数量 × 价格</span></span><br><span class="line">data[<span class="string">&#x27;销售额&#x27;</span>] = data.sale_count * data.price</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 时间格式转换</span></span><br><span class="line"></span><br><span class="line">data[<span class="string">&#x27;update_time&#x27;</span>] = pd.to_datetime(data[<span class="string">&#x27;update_time&#x27;</span>])</span><br><span class="line">data[<span class="string">&#x27;update_time&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>0       2016-11-14
+1       2016-11-14
+2       2016-11-14
+3       2016-11-14
+4       2016-11-14
+           ...    
+27507   2016-11-05
+27508   2016-11-05
+27509   2016-11-05
+27510   2016-11-05
+27511   2016-11-05
+Name: update_time, Length: 27512, dtype: datetime64[ns]
+</code></pre>
+</br>
+<h4 id="时间列类型装换-新增以天为单位时间列"><a class="markdownIt-Anchor" href="#时间列类型装换-新增以天为单位时间列"></a> <strong>时间列类型装换 &amp; 新增以天为单位时间列</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将时间列设置为新的index &amp; 新增时间列 &quot;天&quot;</span></span><br><span class="line"></span><br><span class="line">data = data.set_index(<span class="string">&#x27;update_time&#x27;</span>)</span><br><span class="line">data[<span class="string">&#x27;day&#x27;</span>] = data.index.day</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">del</span> data[<span class="string">&#x27;item_name_cut&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 清理后数据查看</span></span><br><span class="line"></span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/tianmao-1-6.png" alt="" /></p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.info()</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+DatetimeIndex: 27512 entries, 2016-11-14 to 2016-11-05
+Data columns (total 13 columns):
+id               27512 non-null object
+title            27512 non-null object
+price            27512 non-null float64
+sale_count       27512 non-null float64
+comment_count    27512 non-null float64
+店名               27512 non-null object
+date             27512 non-null datetime64[ns]
+month            27512 non-null int64
+day              27512 non-null int64
+sub_type         27512 non-null object
+main_type        27512 non-null object
+是否男士专用           27512 non-null object
+销售额              27512 non-null float64
+dtypes: datetime64[ns](1), float64(4), int64(2), object(6)
+memory usage: 2.9+ MB
+</code></pre>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据备份</span></span><br><span class="line"></span><br><span class="line">df = data</span><br></pre></td></tr></table></figure>
+</br>
+<h3 id="分析及可视化"><a class="markdownIt-Anchor" href="#分析及可视化"></a> <strong>分析及可视化</strong></h3>
+<h4 id="各品牌sku数"><a class="markdownIt-Anchor" href="#各品牌sku数"></a> <strong>各品牌SKU数</strong></h4>
+<blockquote>
+<p>SKU :     Stock Keeping Unit。SKU是库存量单位，区分单品。</p>
+<p>​              在电商领域，通常每一个商品详情页对应一个独立的SKU编码。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 图表风格</span></span><br><span class="line"></span><br><span class="line">plt.style.use(<span class="string">&#x27;ggplot&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">16</span>,<span class="number">10</span>))</span><br><span class="line">colors = [<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;g&#x27;</span>,<span class="string">&#x27;yellow&#x27;</span>,<span class="string">&#x27;pink&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;orange&#x27;</span>,<span class="string">&#x27;violet&#x27;</span>,<span class="string">&#x27;slateblue&#x27;</span>,<span class="string">&#x27;gray&#x27;</span>]</span><br><span class="line">df[<span class="string">&#x27;店名&#x27;</span>].value_counts().sort_values(ascending = <span class="literal">False</span>).plot.bar(width = <span class="number">0.8</span>,</span><br><span class="line">                                                                 alpha = <span class="number">0.6</span>,</span><br><span class="line">                                                                 color = colors)</span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">&#x27;各品牌SKU数&#x27;</span>,fontsize = <span class="number">18</span>)</span><br><span class="line">plt.xticks(rotation = <span class="number">60</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;商品数量&#x27;</span>,fontsize = <span class="number">14</span>)</span><br><span class="line">plt.grid(axis=<span class="string">&#x27;x&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_43_0.png" alt="" /></p>
+<p>图表解析：由图可知，仅悦诗风吟与佰草集的商品数量超过两千，且悦诗风吟商品数量达到了3000+，稳居榜首。</p>
+</br>
+<h4 id="各品牌销量销售额"><a class="markdownIt-Anchor" href="#各品牌销量销售额"></a> <strong>各品牌销量&amp;销售额</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">fig,axes = plt.subplots(<span class="number">1</span>,<span class="number">2</span>,figsize=(<span class="number">24</span>,<span class="number">12</span>))</span><br><span class="line">colors = [<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;g&#x27;</span>,<span class="string">&#x27;yellow&#x27;</span>,<span class="string">&#x27;pink&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;orange&#x27;</span>,<span class="string">&#x27;violet&#x27;</span>,<span class="string">&#x27;slateblue&#x27;</span>,<span class="string">&#x27;gray&#x27;</span>]</span><br><span class="line"></span><br><span class="line">ax1 = data.groupby(<span class="string">&#x27;店名&#x27;</span>).sale_count.<span class="built_in">sum</span>().sort_values(ascending=<span class="literal">True</span>).plot(kind=<span class="string">&#x27;barh&#x27;</span>,</span><br><span class="line">                                                                           ax=axes[<span class="number">0</span>],</span><br><span class="line">                                                                           width=<span class="number">0.6</span>,</span><br><span class="line">                                                                          color = colors)</span><br><span class="line">ax1.set_title(<span class="string">&#x27;品牌总销售量&#x27;</span>,fontsize=<span class="number">18</span>)</span><br><span class="line">ax1.set_xlabel(<span class="string">&#x27;总销售量&#x27;</span>)</span><br><span class="line"></span><br><span class="line">ax2 = data.groupby(<span class="string">&#x27;店名&#x27;</span>)[<span class="string">&#x27;销售额&#x27;</span>].<span class="built_in">sum</span>().sort_values(ascending=<span class="literal">True</span>).plot(kind=<span class="string">&#x27;barh&#x27;</span>,</span><br><span class="line">                                                                       ax=axes[<span class="number">1</span>],</span><br><span class="line">                                                                       width=<span class="number">0.6</span>,</span><br><span class="line">                                                                      color = colors)</span><br><span class="line">ax2.set_title(<span class="string">&#x27;品牌总销售额&#x27;</span>,fontsize=<span class="number">18</span>)</span><br><span class="line">ax2.set_xlabel(<span class="string">&#x27;总销售额&#x27;</span>) </span><br><span class="line"></span><br><span class="line">plt.subplots_adjust(wspace=<span class="number">0.4</span>)</span><br><span class="line">paraments = &#123;<span class="string">&#x27;ytick.labelsize&#x27;</span>:<span class="number">16</span>,<span class="string">&#x27;axes.labelsize&#x27;</span>:<span class="number">15</span>&#125;</span><br><span class="line">plt.rcParams.update(paraments)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_44_0.png" alt="" /></p>
+<p>图表解析：相宜本草的销售量和销售额都是最高的。销量第二至第五，分别为美宝莲、悦诗风吟、妮维雅和欧莱雅；而销售额第二至第五，分别为欧莱雅、佰草集、美宝莲、悦诗风吟。其中，美宝莲、悦诗风吟和欧莱雅都在销量&amp;销售额前五内。</p>
+</br>
+<h4 id="各类别销售量"><a class="markdownIt-Anchor" href="#各类别销售量"></a> <strong>各类别销售量</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 各类别的销售量占比情况</span></span><br><span class="line"></span><br><span class="line">fig,axes = plt.subplots(<span class="number">1</span>,<span class="number">2</span>,figsize = (<span class="number">18</span>,<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">df1 = df.groupby(<span class="string">&#x27;main_type&#x27;</span>)[<span class="string">&#x27;sale_count&#x27;</span>].<span class="built_in">sum</span>()</span><br><span class="line">ax1 = df1.plot(kind = <span class="string">&#x27;pie&#x27;</span>,ax = axes[<span class="number">0</span>],autopct = <span class="string">&#x27;%.1f%%&#x27;</span>,</span><br><span class="line">              pctdistance = <span class="number">0.8</span>,labels = df1.index,</span><br><span class="line">              labeldistance = <span class="number">1.05</span>,</span><br><span class="line">              startangle = <span class="number">60</span>,</span><br><span class="line">              radius = <span class="number">1.1</span>,counterclock = <span class="literal">False</span>,</span><br><span class="line">              wedgeprops = &#123;<span class="string">&#x27;linewidth&#x27;</span>:<span class="number">1.2</span>,<span class="string">&#x27;edgecolor&#x27;</span>:<span class="string">&#x27;k&#x27;</span>&#125;,</span><br><span class="line">              textprops = &#123;<span class="string">&#x27;fontsize&#x27;</span>:<span class="number">10</span>,<span class="string">&#x27;color&#x27;</span>:<span class="string">&#x27;k&#x27;</span>&#125;)</span><br><span class="line">ax1.set_title(<span class="string">&#x27;主类别销售量占比&#x27;</span>,fontsize = <span class="number">15</span>)</span><br><span class="line"></span><br><span class="line">df2 = df.groupby(<span class="string">&#x27;sub_type&#x27;</span>)[<span class="string">&#x27;sale_count&#x27;</span>].<span class="built_in">sum</span>()</span><br><span class="line">ax2 = df2.plot(kind = <span class="string">&#x27;pie&#x27;</span>,ax = axes[<span class="number">1</span>],autopct = <span class="string">&#x27;%.1f%%&#x27;</span>,</span><br><span class="line">              pctdistance = <span class="number">0.8</span>,labels = df2.index,</span><br><span class="line">              labeldistance = <span class="number">1.05</span>,</span><br><span class="line">              startangle = <span class="number">60</span>,</span><br><span class="line">              radius = <span class="number">1.1</span>,counterclock = <span class="literal">False</span>,</span><br><span class="line">              wedgeprops = &#123;<span class="string">&#x27;linewidth&#x27;</span>:<span class="number">1.2</span>,<span class="string">&#x27;edgecolor&#x27;</span>:<span class="string">&#x27;k&#x27;</span>&#125;,</span><br><span class="line">              textprops = &#123;<span class="string">&#x27;fontsize&#x27;</span>:<span class="number">12</span>,<span class="string">&#x27;color&#x27;</span>:<span class="string">&#x27;k&#x27;</span>&#125;)</span><br><span class="line">ax2.set_title(<span class="string">&#x27;子类别销售量占比&#x27;</span>,fontsize = <span class="number">15</span>)</span><br><span class="line"></span><br><span class="line">plt.subplots_adjust(wspace=<span class="number">0.4</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_45_0.png" alt="" /></p>
+<p>图表解析：</p>
+<ul>
+<li>从主类别销售量占比情况来看，护肤品的销量远大于化妆品销量</li>
+<li>从子类别销售量占比情况来看，底妆类、口红类在化妆品中销量最多，清洁类、化妆水、面霜在护肤品中销量最多。</li>
+</ul>
+</br>
+<h4 id="各品牌销量-主类别"><a class="markdownIt-Anchor" href="#各品牌销量-主类别"></a> <strong>各品牌销量 - 主类别</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 销量</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">20</span>,<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">ss.barplot(x=<span class="string">&#x27;店名&#x27;</span>,y=<span class="string">&#x27;sale_count&#x27;</span>,hue=<span class="string">&#x27;main_type&#x27;</span>,data=df,saturation=<span class="number">0.75</span>,ci=<span class="number">0</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;各品牌各总类的总销售量&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;销量&#x27;</span>)</span><br><span class="line">plt.text(<span class="number">0</span>,<span class="number">78000</span>,horizontalalignment = <span class="string">&#x27;left&#x27;</span>,color = <span class="string">&#x27;gray&#x27;</span>,fontsize = <span class="number">15</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_46_1.png" alt="" /></p>
+</br>
+<h4 id="各品牌销售额-主类别"><a class="markdownIt-Anchor" href="#各品牌销售额-主类别"></a> <strong>各品牌销售额 - 主类别</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 销售额</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">20</span>,<span class="number">10</span>))</span><br><span class="line">ss.barplot(x = <span class="string">&#x27;店名&#x27;</span>,y = <span class="string">&#x27;销售额&#x27;</span>,hue = <span class="string">&#x27;main_type&#x27;</span>,data = df,</span><br><span class="line">          saturation=<span class="number">0.75</span>,ci = <span class="number">0</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;各品牌各总类的总销售额&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;销售额&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_47_0.png" alt="" /></p>
+<p>图表解析：各品牌的化妆品、护肤品销量以及销售情况均不一样，可能与品牌的定位有关。有的品牌主打化妆品，化妆品销量、销售额表现会相对好很多，例如蜜丝佛陀等；而主打护肤品的品牌，护肤品的销量、销售额会表现较好，如欧莱雅、佰草集等；也有部分品牌如美宝莲、兰蔻、悦诗风吟，化妆品和护肤品的销量、销售额都还不错。</p>
+</br>
+<h4 id="各品牌销量-子类别"><a class="markdownIt-Anchor" href="#各品牌销量-子类别"></a> <strong>各品牌销量 - 子类别</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 各品牌各子类销量</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">26</span>,<span class="number">12</span>))</span><br><span class="line">ss.barplot(x = <span class="string">&#x27;店名&#x27;</span>,y = <span class="string">&#x27;sale_count&#x27;</span>,hue = <span class="string">&#x27;sub_type&#x27;</span>,data = df ,</span><br><span class="line">          saturation=<span class="number">0.75</span>,ci=<span class="number">0</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;各品牌各子类别的总销量&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;销量&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_48_0.png" alt="" /></p>
+</br>
+<h4 id="各品牌销售额-子类别"><a class="markdownIt-Anchor" href="#各品牌销售额-子类别"></a> <strong>各品牌销售额 - 子类别</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">26</span>,<span class="number">15</span>))</span><br><span class="line">ss.barplot(x = <span class="string">&#x27;店名&#x27;</span>,y = <span class="string">&#x27;销售额&#x27;</span>,hue = <span class="string">&#x27;sub_type&#x27;</span>,data = df,saturation=<span class="number">0.75</span>,ci = <span class="number">0</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;各品牌各子类别的总销售额&#x27;</span>)</span><br><span class="line">plt.legend(loc = <span class="string">&#x27;upper right&#x27;</span>,fontsize = <span class="number">13</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;销售额&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_49_0.png" alt="" /></p>
+<p>图表解析：由于子类别较多，图表大致上能呈现出与主类别数据分析结果一致，其中比较突出的是自然堂的化妆水的销售额在自然堂总销售额中占据极大份额。</p>
+</br>
+<h4 id="品牌热度"><a class="markdownIt-Anchor" href="#品牌热度"></a> <strong>品牌热度</strong></h4>
+<blockquote>
+<p>根据数据源分析，本次品牌热度呈现主要根据各品牌商品的平均评论数多少来展现。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 各品牌热度</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">24</span>,<span class="number">10</span>))</span><br><span class="line">prop_iter = <span class="built_in">iter</span>(plt.rcParams[<span class="string">&#x27;axes.prop_cycle&#x27;</span>])</span><br><span class="line">colors = [<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;g&#x27;</span>,<span class="string">&#x27;yellow&#x27;</span>,<span class="string">&#x27;pink&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;orange&#x27;</span>,<span class="string">&#x27;violet&#x27;</span>,<span class="string">&#x27;slateblue&#x27;</span>,<span class="string">&#x27;gray&#x27;</span>]</span><br><span class="line">df.groupby(<span class="string">&#x27;店名&#x27;</span>).comment_count.mean().sort_values(ascending = <span class="literal">False</span>).plot(kind = <span class="string">&#x27;bar&#x27;</span>,</span><br><span class="line">                                                                        width = <span class="number">0.8</span>,</span><br><span class="line">                                                                          color=colors)</span><br><span class="line">plt.title(<span class="string">&#x27;各品牌商品的平均评论数&#x27;</span>,fontsize = <span class="number">18</span>)</span><br><span class="line">plt.xticks(rotation = <span class="number">60</span>,fontsize = <span class="number">18</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;评论数&#x27;</span>,fontsize =<span class="number">18</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_50_0.png" alt="" /></p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 销量热度</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">18</span>,<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">x = df.groupby(<span class="string">&#x27;店名&#x27;</span>)[<span class="string">&#x27;sale_count&#x27;</span>].mean()</span><br><span class="line">y = df.groupby(<span class="string">&#x27;店名&#x27;</span>)[<span class="string">&#x27;comment_count&#x27;</span>].mean()</span><br><span class="line">s = df.groupby(<span class="string">&#x27;店名&#x27;</span>)[<span class="string">&#x27;price&#x27;</span>].mean()</span><br><span class="line">txt = df.groupby(<span class="string">&#x27;店名&#x27;</span>).<span class="built_in">id</span>.count().index</span><br><span class="line"></span><br><span class="line">ss.scatterplot(x,y,size = s,hue = s,sizes=(<span class="number">100</span>,<span class="number">1500</span>),data = df)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(txt)):</span><br><span class="line">    plt.annotate(txt[i],xy = (x[i],y[i]))</span><br><span class="line"></span><br><span class="line">plt.ylabel(<span class="string">&#x27;热度&#x27;</span>,fontsize = <span class="number">18</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;销量&#x27;</span>,fontsize = <span class="number">18</span>)</span><br><span class="line"></span><br><span class="line">plt.legend(loc = <span class="string">&#x27;upper left&#x27;</span>,fontsize = <span class="number">15</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_51_0.png" alt="" /></p>
+<p>图表解析：</p>
+<p>热度越高的品牌越靠上，销量越高的品牌越靠右，价格越高的品牌颜色越深圈越大</p>
+<ul>
+<li>热度与销量呈一定的正相关</li>
+<li>美宝莲热度第一，销量第二；妮维雅热度第二，销量第四；且二者价格均相对较低</li>
+<li>图中显示，价格低的品牌热度和销量相对较高，价格高的品牌热度和销量相对较低；说明价格在热度和销量中有一定影响，也反映出人们较关注性价比问题。</li>
+</ul>
+</br>
+<h4 id="各品牌价格分析"><a class="markdownIt-Anchor" href="#各品牌价格分析"></a> <strong>各品牌价格分析</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 各品牌价格</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">18</span>,<span class="number">10</span>))</span><br><span class="line">ss.boxplot(x = <span class="string">&#x27;店名&#x27;</span>,y = <span class="string">&#x27;price&#x27;</span>,data = df)</span><br><span class="line">plt.ylim(<span class="number">0</span>,<span class="number">4000</span>)</span><br><span class="line">plt.xticks(fontsize = <span class="number">13</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_52_0.png" alt="" /></p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 各品牌的平均价格</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># df.groupby(&#x27;店名&#x27;).price.sum()</span></span><br><span class="line">avg_price = df.groupby(<span class="string">&#x27;店名&#x27;</span>).price.<span class="built_in">sum</span>() / df.groupby(<span class="string">&#x27;店名&#x27;</span>).price.count()</span><br><span class="line">avg_price</span><br></pre></td></tr></table></figure>
+<pre><code>店名
+SKII    1011.727079
+佰草集      289.823171
+倩碧       346.092190
+兰芝       356.615809
+兰蔻       756.400778
+妮维雅       73.789053
+娇兰      1361.043588
+悦诗风吟     121.245945
+植村秀      311.786667
+欧珀莱      276.218543
+欧莱雅      167.282698
+玉兰油      329.657294
+相宜本草     122.958446
+美加净       44.694619
+美宝莲      148.757576
+自然堂      180.130213
+薇姿       281.085791
+蜜丝佛陀     142.118894
+资生堂      577.438490
+雅漾       212.618401
+雅诗兰黛     872.470718
+雪花秀      901.082873
+Name: price, dtype: float64
+</code></pre>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">19</span>,<span class="number">10</span>))</span><br><span class="line">avg_price.sort_values(ascending=<span class="literal">False</span>).plot(kind = <span class="string">&#x27;bar&#x27;</span>,width = <span class="number">0.8</span>,alpha = <span class="number">0.6</span>,</span><br><span class="line">                                           color = <span class="string">&#x27;lightgreen&#x27;</span>,</span><br><span class="line">                                           label = <span class="string">&#x27;各品牌平均价格&#x27;</span>)</span><br><span class="line">y = df.price.mean()</span><br><span class="line">plt.axhline(y,<span class="number">0</span>,<span class="number">5</span>,color = <span class="string">&#x27;yellow&#x27;</span>,label = <span class="string">&#x27;全品牌平均价格&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;各品牌平均价格&#x27;</span>,fontsize = <span class="number">16</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;各品牌产品的平均价格&#x27;</span>,fontsize = <span class="number">24</span>)</span><br><span class="line">plt.xticks(rotation = <span class="number">60</span>,fontsize = <span class="number">16</span>)</span><br><span class="line">plt.legend(loc = <span class="string">&#x27;best&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_54_0.png" alt="" /></p>
+<p>图表解析：</p>
+<ul>
+<li>娇兰、SKII、雪花秀、雅诗兰黛、兰蔻、资生堂均是国际大牌，产品平均价格都在500以上，属于一线大牌；</li>
+<li>兰芝、倩碧、玉兰油、植村秀、佰草集、薇姿、雅漾的平均价格在300~400之间，其中佰草集是最贵的国货品牌；</li>
+<li>美加净作为国货品牌，平均价格最低，性价比高，而妮维雅平均价格第二低；</li>
+<li>全品牌的平均价格低于400元，而除了前六个国际大牌外的其他品牌的平均价格都低于全品牌的平均价格</li>
+</ul>
+</br>
+<h4 id="平均销量平均销售额"><a class="markdownIt-Anchor" href="#平均销量平均销售额"></a> <strong>平均销量&amp;平均销售额</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 各品牌平均销量和平均销售额</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">20</span>,<span class="number">12</span>))</span><br><span class="line"></span><br><span class="line">x = df.groupby(<span class="string">&#x27;店名&#x27;</span>)[<span class="string">&#x27;sale_count&#x27;</span>].mean()</span><br><span class="line">y = df.groupby(<span class="string">&#x27;店名&#x27;</span>)[<span class="string">&#x27;销售额&#x27;</span>].mean()</span><br><span class="line">s = avg_price</span><br><span class="line">txt = df.groupby(<span class="string">&#x27;店名&#x27;</span>).<span class="built_in">id</span>.count().index</span><br><span class="line"></span><br><span class="line">ss.scatterplot(x,y,size = s,sizes=(<span class="number">100</span>,<span class="number">1500</span>),marker=<span class="string">&#x27;v&#x27;</span>,alpha=<span class="number">0.5</span>,color = <span class="string">&#x27;b&#x27;</span>,</span><br><span class="line">              data=df)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(txt)):</span><br><span class="line">    plt.annotate(txt[i],xy = (x[i],y[i]),xytext = (x[i]+<span class="number">0.2</span>,y[i]+<span class="number">0.2</span>),fontsize = <span class="number">14</span>)</span><br><span class="line">    </span><br><span class="line">plt.ylabel(<span class="string">&#x27;销售额&#x27;</span>,fontsize = <span class="number">17</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;销量&#x27;</span>,fontsize = <span class="number">17</span>)</span><br><span class="line"></span><br><span class="line">plt.legend(loc = <span class="string">&#x27;upper left&#x27;</span>,fontsize = <span class="number">18</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_55_0.png" alt="" /></p>
+<p>图表解析：</p>
+<ul>
+<li>销售额越高越靠图像上方，销量越高越靠图像右方，图形越大代表平均价格越高</li>
+<li>销量与销售额呈正相关</li>
+<li>相宜本草、美宝莲、蜜丝佛陀销量与销售额在所有品牌中位列前三，而且平均价格较低</li>
+</ul>
+</br>
+<h4 id="男性护肤品销量分析"><a class="markdownIt-Anchor" href="#男性护肤品销量分析"></a> <strong>男性护肤品销量分析</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 男性护肤品销量情况</span></span><br><span class="line"></span><br><span class="line">gender_data = df[df[<span class="string">&#x27;是否男士专用&#x27;</span>] == <span class="string">&#x27;是&#x27;</span>]</span><br><span class="line">gender_data_1 = gender_data[(gender_data.main_type == <span class="string">&#x27;护肤品&#x27;</span>) | (gender_data.main_type == <span class="string">&#x27;化妆品&#x27;</span>)]</span><br><span class="line">plt.figure(figsize=(<span class="number">19</span>,<span class="number">9</span>))</span><br><span class="line">ss.barplot(x = <span class="string">&#x27;店名&#x27;</span>,y = <span class="string">&#x27;sale_count&#x27;</span>,hue = <span class="string">&#x27;main_type&#x27;</span>,data=gender_data_1,</span><br><span class="line">          saturation = <span class="number">0.75</span>,ci = <span class="number">0</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_56_0.png" alt="" /></p>
+<p>图表分析：男用大多购买的是护肤品</p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">f,[ax1,ax2] = plt.subplots(<span class="number">1</span>,<span class="number">2</span>,figsize=(<span class="number">19</span>,<span class="number">9</span>))</span><br><span class="line">colors = [<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;g&#x27;</span>,<span class="string">&#x27;yellow&#x27;</span>,<span class="string">&#x27;pink&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;orange&#x27;</span>,<span class="string">&#x27;violet&#x27;</span>,<span class="string">&#x27;slateblue&#x27;</span>,<span class="string">&#x27;gray&#x27;</span>]</span><br><span class="line">gender_data.groupby(<span class="string">&#x27;店名&#x27;</span>).sale_count.<span class="built_in">sum</span>().sort_values(ascending = <span class="literal">True</span>).plot(kind=<span class="string">&#x27;barh&#x27;</span>,</span><br><span class="line">                                                                             width = <span class="number">0.8</span>,</span><br><span class="line">                                                                             ax = ax1,</span><br><span class="line">                                                                             color=colors)</span><br><span class="line">ax1.set_title(<span class="string">&#x27;男士护肤品销量排名&#x27;</span>,fontsize = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">gender_data.groupby(<span class="string">&#x27;店名&#x27;</span>)[<span class="string">&#x27;销售额&#x27;</span>].<span class="built_in">sum</span>().sort_values(ascending = <span class="literal">True</span>).plot(kind=<span class="string">&#x27;barh&#x27;</span>,</span><br><span class="line">                                                                             width = <span class="number">0.8</span>,</span><br><span class="line">                                                                             ax = ax2,</span><br><span class="line">                                                                         color = colors)</span><br><span class="line">ax2.set_title(<span class="string">&#x27;男士护肤品销量额排名&#x27;</span>,fontsize = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">plt.subplots_adjust(wspace= <span class="number">0.4</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_57_0.png" alt="" /></p>
+<p>图表分析：</p>
+<ul>
+<li>妮维雅是男士护肤品中购买首选，销量遥遥领先</li>
+<li>欧莱雅、相宜本草、倩碧分别位于男士护肤品销量的二三四位</li>
+</ul>
+</br>
+<h4 id="购买时间与销量分析"><a class="markdownIt-Anchor" href="#购买时间与销量分析"></a> <strong>购买时间与销量分析</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 时间与销量分析 -- 购买高峰期</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> matplotlib.pyplot <span class="keyword">import</span> MultipleLocator</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">19</span>,<span class="number">9</span>))</span><br><span class="line">day_sale = df.groupby(<span class="string">&#x27;day&#x27;</span>)[<span class="string">&#x27;sale_count&#x27;</span>].<span class="built_in">sum</span>()</span><br><span class="line">day_sale.plot()</span><br><span class="line">plt.grid(linestyle = <span class="string">&#x27;-.&#x27;</span>,color = <span class="string">&#x27;gray&#x27;</span>,axis = <span class="string">&#x27;x&#x27;</span>,alpha = <span class="number">0.5</span>)</span><br><span class="line">x_major_locator = MultipleLocator(<span class="number">1</span>)</span><br><span class="line">ax = plt.gca()</span><br><span class="line">ax.xaxis.set_major_locator(x_major_locator)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;日期(11月)&#x27;</span>,fontsize = <span class="number">18</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;销量&#x27;</span>,fontsize = <span class="number">18</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tianmao-double11/output_58_0.png" alt="" /></p>
+<p>图表解析：</p>
+<ul>
+<li>化妆品的购买高峰期在11号的前几天，猜测原因为双十一前商家为提前预热给出了较大优惠，导致了消费者的购买欲望加强</li>
+<li>双十一当天销量最低</li>
+<li>双十一后3天，销量较于11当天稳步上涨，可能是消费余热导致，也有可能是商家给出了新的优惠或是持续打折导致</li>
+</ul>
+</br>
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> <strong>总结</strong></h3>
+<p>基于上方分析，做出以下总结整理：</p>
+<ul>
+<li>美妆类别中护肤品销量远大于化妆品，而护肤品中又以清洁类、化妆水以及面霜等基础护肤类产品销量最高</li>
+<li>男士使用的美妆产品集中在护肤品类别，在众多品牌中妮维雅是最受男士喜爱的品牌</li>
+<li>价格和热度对销量有极大关联，平价的基础产品是大多数消费者的首选，也说明了消费者对性价比高的产品的热衷</li>
+<li>可能是商家在双十一的提前预热，亦或是给出了巨大的优惠和为了避免11当天的消费高峰，不少消费者选择了提前消费，导致了销量高峰出现在双十一的前几天，而非11日当天</li>
+<li>双十一后3天，消费者还留有购物余热，但销量远不如双十一之前</li>
+</ul>
+<h3 id="写在最后"><a class="markdownIt-Anchor" href="#写在最后"></a> <strong>写在最后</strong></h3>
+<p>以上为双十一天猫美妆产品销售数据分析以及可视化。有错误及不足之处，恳请指正，感谢阅读。</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    一条MySQL语句的执行详析
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">A/B 测试的概念认识</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

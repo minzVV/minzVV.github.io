@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>快速了解数据分布的常用方法 | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="数据分布" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="摘要 介绍几种数据分析中对于数据分布的常用方式，包括极差、频率以及分组的使用实例～">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快速了解数据分布的常用方法">
+<meta property="og:url" content="http://example.com/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="摘要 介绍几种数据分析中对于数据分布的常用方式，包括极差、频率以及分组的使用实例～">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tezhengfx-1/fbfx-1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tezhengfx-1/fbfx-2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tezhengfx-1/fbfx-3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tezhengfx-1/fbfx-4.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tezhengfx-1/fbfx-5.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tezhengfx-1/fbfx-6.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tezhengfx-1/fbfx-7.png">
+<meta property="article:published_time" content="2021-09-22T12:41:02.000Z">
+<meta property="article:modified_time" content="2023-02-15T09:25:56.573Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="数据分布">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tezhengfx-1/fbfx-1.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file active"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-分析基础认知/分析框架/数据特征之分布分析" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/">分析基础</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/">分析框架</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83/" rel="tag">数据分布</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">
+            <time datetime="2021-09-22T12:41:02.000Z" itemprop="datePublished">2021-09-22</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/分析基础认知/分析框架/数据特征之分布分析.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/分析基础认知/分析框架/数据特征之分布分析.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/分析基础认知/分析框架/数据特征之分布分析.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            快速了解数据分布的常用方法
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text"> 分布分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%B7%AE"><span class="toc-number">2.1.</span> <span class="toc-text"> 极差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%BB%84"><span class="toc-number">2.2.</span> <span class="toc-text"> 分组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%91%E7%8E%87%E7%BB%9F%E8%AE%A1"><span class="toc-number">2.3.</span> <span class="toc-text"> 频率统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%98%E5%88%B6%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="toc-number">2.4.</span> <span class="toc-text"> 绘制直方图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E5%AE%9A%E6%80%A7"><span class="toc-number">2.5.</span> <span class="toc-text"> 字段定性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">2.6.</span> <span class="toc-text"> 可视化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text"> 总结</span></a></li></ol>
+                </div>
+            
+        
+        
+            <blockquote>
+<p>摘要<br />
+介绍几种数据分析中对于数据分布的常用方式，包括极差、频率以及分组的使用实例～</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>分布分析是数据特征分析中极为常用的一种方法。在数据质量得到保证的前提下，通过绘制图表、计算某些统计量等手段对数据的分布特征和贡献度进行分析，分布分析能够揭示数据的分布特征和分布类型，对于定量数据，可以做出频率分布表、绘制频率分布直方图显示分布特征；对于定性数据，可用饼图和条形图显示分布情况。</p>
+<h2 id="分布分析"><a class="markdownIt-Anchor" href="#分布分析"></a> 分布分析</h2>
+<blockquote>
+<p>分布分析 → 研究数据的分布特征和分布类型，分定量数据、定性数据区分基本统计量</p>
+<p>一般通过以下三种方式来进行分布分析：</p>
+<p>极差 / 频率分布情况 / 分组组距及组数</p>
+</blockquote>
+<p>下面通过一个案例对分布分析进行实操应用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 读取数据</span></span><br><span class="line"></span><br><span class="line">data = pd.read_csv(<span class="string">&#x27;E:/深圳罗湖二手房信息.csv&#x27;</span>,engine = <span class="string">&#x27;python&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制散点图</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">12</span>,<span class="number">8</span>))</span><br><span class="line">plt.scatter(data[<span class="string">&#x27;经度&#x27;</span>],data[<span class="string">&#x27;纬度&#x27;</span>],</span><br><span class="line">           s = data[<span class="string">&#x27;房屋单价&#x27;</span>]/<span class="number">400</span>,</span><br><span class="line">           c = data[<span class="string">&#x27;参考总价&#x27;</span>],</span><br><span class="line">           cmap = <span class="string">&#x27;Reds&#x27;</span>,</span><br><span class="line">           alpha = <span class="number">0.6</span>)</span><br><span class="line">plt.grid()</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>房屋编码</th>
+      <th>小区</th>
+      <th>朝向</th>
+      <th>房屋单价</th>
+      <th>参考首付</th>
+      <th>参考总价</th>
+      <th>经度</th>
+      <th>纬度</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>605093949</td>
+      <td>大望新平村</td>
+      <td>南北</td>
+      <td>5434</td>
+      <td>15.0</td>
+      <td>50.0</td>
+      <td>114.180964</td>
+      <td>22.603698</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>605768856</td>
+      <td>通宝楼</td>
+      <td>南北</td>
+      <td>3472</td>
+      <td>7.5</td>
+      <td>25.0</td>
+      <td>114.179298</td>
+      <td>22.566910</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>606815561</td>
+      <td>罗湖区罗芳村</td>
+      <td>南北</td>
+      <td>5842</td>
+      <td>15.6</td>
+      <td>52.0</td>
+      <td>114.158869</td>
+      <td>22.547223</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>605147285</td>
+      <td>兴华苑</td>
+      <td>南北</td>
+      <td>3829</td>
+      <td>10.8</td>
+      <td>36.0</td>
+      <td>114.158040</td>
+      <td>22.554343</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>606030866</td>
+      <td>京基东方都会</td>
+      <td>西南</td>
+      <td>47222</td>
+      <td>51.0</td>
+      <td>170.0</td>
+      <td>114.149243</td>
+      <td>22.554370</td>
+    </tr>
+  </tbody>
+</table>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tezhengfx-1/fbfx-1.png" alt="" /></p>
+<p>图表解读：点越大代表房屋的单价越高，颜色越深代表总价越高</p>
+<h3 id="极差"><a class="markdownIt-Anchor" href="#极差"></a> 极差</h3>
+<blockquote>
+<p>本案例中，可通过极差中看到销售的稳定程度</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 极差</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">d_range</span>(<span class="params">df,*cols</span>):</span><br><span class="line">    lst = []</span><br><span class="line">    <span class="keyword">for</span> col <span class="keyword">in</span> cols:</span><br><span class="line">        crange = df[col].<span class="built_in">max</span>() - df[col].<span class="built_in">min</span>()</span><br><span class="line">        lst.append(crange)</span><br><span class="line">    <span class="keyword">return</span>(lst)</span><br><span class="line"></span><br><span class="line">key1 = <span class="string">&#x27;参考总价&#x27;</span></span><br><span class="line">key2 = <span class="string">&#x27;参考首付&#x27;</span></span><br><span class="line"></span><br><span class="line">dr = d_range(data,key1,key2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;%s极差为：%.2f \n%s极差为：%.2f&#x27;</span> % (key1,dr[<span class="number">0</span>],key2,dr[<span class="number">1</span>]))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">参考总价极差为：175.00 </span><br><span class="line">参考首付极差为：52.50</span><br></pre></td></tr></table></figure>
+<h3 id="分组"><a class="markdownIt-Anchor" href="#分组"></a> 分组</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 频率分布情况</span></span><br><span class="line"></span><br><span class="line">data[key1].hist(bins = <span class="number">8</span>,edgecolor = <span class="string">&#x27;k&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 分组区间</span></span><br><span class="line"></span><br><span class="line">gcut = pd.cut(data[key1],<span class="number">10</span>,right=<span class="literal">False</span>)</span><br><span class="line">gcut_count = gcut.value_counts(sort = <span class="literal">False</span>)</span><br><span class="line">data[<span class="string">&#x27;%s分组区间&#x27;</span> % key1] = gcut.values</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tezhengfx-1/fbfx-2.png" alt="" /></p>
+<p>图表解读：可以看出主要集中在160万以上，60万以下。</p>
+<p>频率分布的划分方式：直方图可以快速的看到它的排列情况，把它拆分：分组划分</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>房屋编码</th>
+      <th>小区</th>
+      <th>朝向</th>
+      <th>房屋单价</th>
+      <th>参考首付</th>
+      <th>参考总价</th>
+      <th>经度</th>
+      <th>纬度</th>
+      <th>参考总价分组区间</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>605093949</td>
+      <td>大望新平村</td>
+      <td>南北</td>
+      <td>5434</td>
+      <td>15.0</td>
+      <td>50.0</td>
+      <td>114.180964</td>
+      <td>22.603698</td>
+      <td>[42.5, 60.0)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>605768856</td>
+      <td>通宝楼</td>
+      <td>南北</td>
+      <td>3472</td>
+      <td>7.5</td>
+      <td>25.0</td>
+      <td>114.179298</td>
+      <td>22.566910</td>
+      <td>[25.0, 42.5)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>606815561</td>
+      <td>罗湖区罗芳村</td>
+      <td>南北</td>
+      <td>5842</td>
+      <td>15.6</td>
+      <td>52.0</td>
+      <td>114.158869</td>
+      <td>22.547223</td>
+      <td>[42.5, 60.0)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>605147285</td>
+      <td>兴华苑</td>
+      <td>南北</td>
+      <td>3829</td>
+      <td>10.8</td>
+      <td>36.0</td>
+      <td>114.158040</td>
+      <td>22.554343</td>
+      <td>[25.0, 42.5)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>606030866</td>
+      <td>京基东方都会</td>
+      <td>西南</td>
+      <td>47222</td>
+      <td>51.0</td>
+      <td>170.0</td>
+      <td>114.149243</td>
+      <td>22.554370</td>
+      <td>[165.0, 182.5)</td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="频率统计"><a class="markdownIt-Anchor" href="#频率统计"></a> 频率统计</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 区间出现频率</span></span><br><span class="line"></span><br><span class="line">r_zj = pd.DataFrame(gcut_count)</span><br><span class="line">r_zj.rename(columns = &#123;gcut_count.name:<span class="string">&#x27;参考总价频数&#x27;</span>&#125;,inplace = <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算频率</span></span><br><span class="line"></span><br><span class="line">r_zj[<span class="string">&#x27;频率&#x27;</span>] = r_zj[<span class="string">&#x27;参考总价频数&#x27;</span>] / r_zj[<span class="string">&#x27;参考总价频数&#x27;</span>].<span class="built_in">sum</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算累计频率</span></span><br><span class="line"></span><br><span class="line">r_zj[<span class="string">&#x27;累计频率&#x27;</span>] = r_zj[<span class="string">&#x27;频率&#x27;</span>].cumsum()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以百分比显示频率</span></span><br><span class="line"></span><br><span class="line">r_zj[<span class="string">&#x27;百分比&#x27;</span>] = r_zj[<span class="string">&#x27;频率&#x27;</span>].apply(<span class="keyword">lambda</span> x:<span class="string">&#x27;%.2f%%&#x27;</span> % (x*<span class="number">100</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以百分比显示累计频率</span></span><br><span class="line"></span><br><span class="line">r_zj[<span class="string">&#x27;累计频率百分比&#x27;</span>] = r_zj[<span class="string">&#x27;累计频率&#x27;</span>].apply(<span class="keyword">lambda</span> x:<span class="string">&#x27;%.2f%%&#x27;</span> % (x*<span class="number">100</span>))</span><br><span class="line"></span><br><span class="line">r_zj.style.bar(subset = [<span class="string">&#x27;频率&#x27;</span>,<span class="string">&#x27;累计频率&#x27;</span>])		                  <span class="comment"># 表格显示条形图</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tezhengfx-1/fbfx-3.png" alt="" /></p>
+<h3 id="绘制直方图"><a class="markdownIt-Anchor" href="#绘制直方图"></a> 绘制直方图</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 直方图</span></span><br><span class="line"></span><br><span class="line">r_zj[<span class="string">&#x27;频率&#x27;</span>].plot(kind = <span class="string">&#x27;bar&#x27;</span>,</span><br><span class="line">                 figsize = (<span class="number">16</span>,<span class="number">6</span>),</span><br><span class="line">                 grid = <span class="literal">True</span>,</span><br><span class="line">                 color = <span class="string">&#x27;k&#x27;</span>,</span><br><span class="line">                 alpha = <span class="number">0.6</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加标签</span></span><br><span class="line"></span><br><span class="line">x = <span class="built_in">len</span>(r_zj)</span><br><span class="line">y = r_zj[<span class="string">&#x27;频率&#x27;</span>]</span><br><span class="line">m = r_zj[<span class="string">&#x27;参考总价频数&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> i,j,k <span class="keyword">in</span> <span class="built_in">zip</span>(<span class="built_in">range</span>(x),y,m):</span><br><span class="line">    plt.text(i-<span class="number">0.1</span>,j+<span class="number">0.01</span>,<span class="string">&#x27;%i&#x27;</span> % k, color = <span class="string">&#x27;k&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tezhengfx-1/fbfx-4.png" alt="" /></p>
+<h3 id="字段定性"><a class="markdownIt-Anchor" href="#字段定性"></a> 字段定性</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 频率分布：定性字段</span></span><br><span class="line"></span><br><span class="line">cx_g = data[<span class="string">&#x27;朝向&#x27;</span>].value_counts(sort = <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">r_cx = pd.DataFrame(cx_g)</span><br><span class="line">r_cx.rename(columns = &#123;cx_g.name:<span class="string">&#x27;朝向频数&#x27;</span>&#125;,inplace = <span class="literal">True</span>)</span><br><span class="line">r_cx[<span class="string">&#x27;频率&#x27;</span>] = r_cx[<span class="string">&#x27;朝向频数&#x27;</span>] / r_cx[<span class="string">&#x27;朝向频数&#x27;</span>].<span class="built_in">sum</span>()</span><br><span class="line">r_cx[<span class="string">&#x27;累计频率&#x27;</span>] = r_cx[<span class="string">&#x27;频率&#x27;</span>].cumsum()</span><br><span class="line">r_cx[<span class="string">&#x27;百分比&#x27;</span>] = r_cx[<span class="string">&#x27;频率&#x27;</span>].apply(<span class="keyword">lambda</span> x:<span class="string">&#x27;%.2f%%&#x27;</span> % (x*<span class="number">100</span>))</span><br><span class="line">r_cx[<span class="string">&#x27;累计频率百分比&#x27;</span>] = r_cx[<span class="string">&#x27;累计频率&#x27;</span>].apply(<span class="keyword">lambda</span> x:<span class="string">&#x27;%.2f%%&#x27;</span> % (x*<span class="number">100</span>))</span><br><span class="line">r_cx.style.bar(subset = [<span class="string">&#x27;频率&#x27;</span>,<span class="string">&#x27;累计频率&#x27;</span>],color = <span class="string">&#x27;#d35f5f&#x27;</span>,width = <span class="number">100</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tezhengfx-1/fbfx-5.png" alt="" /></p>
+<h3 id="可视化"><a class="markdownIt-Anchor" href="#可视化"></a> 可视化</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可视化：绘制频率直方图、饼图</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.figure(num = <span class="number">1</span>,figsize = (<span class="number">16</span>,<span class="number">6</span>))</span><br><span class="line">r_cx[<span class="string">&#x27;频率&#x27;</span>].plot(kind = <span class="string">&#x27;bar&#x27;</span>,</span><br><span class="line">               width = <span class="number">0.8</span>,</span><br><span class="line">               rot = <span class="number">0</span>,</span><br><span class="line">               color = <span class="string">&#x27;k&#x27;</span>,</span><br><span class="line">               grid = <span class="literal">True</span>,</span><br><span class="line">               alpha = <span class="number">0.6</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;朝向分布频率直方图&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.figure(num = <span class="number">2</span>)</span><br><span class="line">plt.pie(r_cx[<span class="string">&#x27;朝向频数&#x27;</span>],</span><br><span class="line">       labels = r_cx.index,</span><br><span class="line">       autopct= <span class="string">&#x27;%.2f%%&#x27;</span>,</span><br><span class="line">       shadow = <span class="literal">True</span>)</span><br><span class="line">plt.axis(<span class="string">&#x27;equal&#x27;</span>)</span><br><span class="line">plt.rc(<span class="string">&#x27;font&#x27;</span>,family = <span class="string">&#x27;simhei&#x27;</span>,size = <span class="number">15</span>)		<span class="comment"># 标签显示</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tezhengfx-1/fbfx-6.png" alt="" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/tezhengfx-1/fbfx-7.png" alt="" /></p>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<p>以上是数据特征分析中最基础也是最常用的分布分析方法，用于研究数据的分布特征和分布类型，有错误之处，请指正，感谢阅读～</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    如何通过对比得出数据差异？以及什么是二八定律
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">数据分析中的度量和维度</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>一眼就get到数据分布情况的图表？ | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="Python,可视化" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="摘要 数据分布可视化图表绘制，包括散点图、蜂窝图、箱型图、小提琴图、LV图表的一些实例～">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一眼就get到数据分布情况的图表？">
+<meta property="og:url" content="http://example.com/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="摘要 数据分布可视化图表绘制，包括散点图、蜂窝图、箱型图、小提琴图、LV图表的一些实例～">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_2_2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_3_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_4_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_5_2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_6_2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_7_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_8_3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_9_2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_10_2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_11_2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_14_2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_15_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_16_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_17_2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_18_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/2_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/3_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/4_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/5_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/6_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/7_1.png">
+<meta property="article:published_time" content="2021-08-22T12:41:02.000Z">
+<meta property="article:modified_time" content="2023-02-15T09:25:49.821Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="Python,可视化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_2_2.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file active"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-分析基础认知/分析框架/可视化 - 数据分布图表part2" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/">分析基础</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/">分析框架</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Python-%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="tag">Python,可视化</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">
+            <time datetime="2021-08-22T12:41:02.000Z" itemprop="datePublished">2021-08-22</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/分析基础认知/分析框架/可视化 - 数据分布图表part2.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/分析基础认知/分析框架/可视化 - 数据分布图表part2.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/分析基础认知/分析框架/可视化 - 数据分布图表part2.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            一眼就get到数据分布情况的图表？
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="toc-number">2.</span> <span class="toc-text"> 散点图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97"><span class="toc-number">2.1.</span> <span class="toc-text"> 导入模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%A3%E7%82%B9%E5%9B%BE-%E5%88%86%E5%B8%83%E5%9B%BE"><span class="toc-number">2.2.</span> <span class="toc-text"> 散点图 + 分布图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E8%BE%B9%E5%BD%A2%E5%9B%BE-%E8%9C%82%E7%AA%9D%E5%9B%BE"><span class="toc-number">2.3.</span> <span class="toc-text"> 六边形图 &#x2F; 蜂窝图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%86%E5%BA%A6%E5%9B%BE-%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="toc-number">2.4.</span> <span class="toc-text"> 密度图 + 散点图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="toc-number">2.5.</span> <span class="toc-text"> 综合散点图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%86%E5%88%86%E7%BB%98%E5%88%B6-%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="toc-number">2.6.</span> <span class="toc-text"> 拆分绘制 - 散点图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%86%E5%88%86%E7%BB%98%E5%88%B6-%E5%AF%86%E5%BA%A6%E5%9B%BE"><span class="toc-number">2.7.</span> <span class="toc-text"> 拆分绘制 - 密度图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="toc-number">2.8.</span> <span class="toc-text"> 矩阵散点图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E5%AF%B9%E6%AF%94"><span class="toc-number">2.8.1.</span> <span class="toc-text"> 局部变量对比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%B1%BB%E6%98%BE%E7%A4%BA"><span class="toc-number">2.8.2.</span> <span class="toc-text"> 多类显示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%86%E5%88%86%E7%BB%98%E5%88%B6-%E6%95%A3%E7%82%B9%E5%9B%BE2"><span class="toc-number">2.9.</span> <span class="toc-text"> 拆分绘制 - 散点图2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="toc-number">2.10.</span> <span class="toc-text"> 分类散点图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%98%E5%88%B6%E5%88%86%E7%B1%BB%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="toc-number">2.10.1.</span> <span class="toc-text"> 绘制分类散点图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E5%88%86%E7%B1%BB"><span class="toc-number">2.10.2.</span> <span class="toc-text"> 二次分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E6%8B%86%E5%88%86"><span class="toc-number">2.10.3.</span> <span class="toc-text"> 二次拆分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E7%AD%9B%E9%80%89"><span class="toc-number">2.10.4.</span> <span class="toc-text"> 二次筛选</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B0%87%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="toc-number">2.11.</span> <span class="toc-text"> 分簇散点图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%B1%E5%9E%8B%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text"> 箱型图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E6%AD%A5%E7%BB%98%E5%88%B6"><span class="toc-number">3.1.</span> <span class="toc-text"> 初步绘制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E5%88%86%E7%B1%BB-2"><span class="toc-number">3.2.</span> <span class="toc-text"> 二次分类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E6%8F%90%E7%90%B4%E5%9B%BE"><span class="toc-number">4.</span> <span class="toc-text"> 小提琴图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E6%AD%A5%E7%BB%98%E5%88%B6-2"><span class="toc-number">4.1.</span> <span class="toc-text"> 初步绘制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E5%88%86%E7%B1%BB-3"><span class="toc-number">4.2.</span> <span class="toc-text"> 二次分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B7%E5%90%88%E5%9B%BE%E8%A1%A8"><span class="toc-number">4.3.</span> <span class="toc-text"> 混合图表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lv%E5%9B%BE%E8%A1%A8"><span class="toc-number">5.</span> <span class="toc-text"> LV图表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">6.</span> <span class="toc-text"> 写在最后</span></a></li></ol>
+                </div>
+            
+        
+        
+            <blockquote>
+<p>摘要<br />
+数据分布可视化图表绘制，包括散点图、蜂窝图、箱型图、小提琴图、LV图表的一些实例～</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>上篇文章介绍了数据分布情况的可视化的四种图表 (直方图、密度图、柱状图、折线图)的 展示方法，下面将介绍另外几种直观显示数据分布情况的可视化图表</p>
+<h2 id="散点图"><a class="markdownIt-Anchor" href="#散点图"></a> 散点图</h2>
+<blockquote>
+<p>也称为「点图」、「散布图」或「X-Y 点图」。</p>
+<p>所谓的散点图 (Scatterplot) 就是在笛卡尔座标上放置一系列的数据点，用来显示两个变量的数值（每个轴上显示一个变量），并检测两个变量之间的关系或相关性是否存在。</p>
+<p>可以很直观的观察到数据的分布情况</p>
+</blockquote>
+<h3 id="导入模块"><a class="markdownIt-Anchor" href="#导入模块"></a> 导入模块</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 警告处理</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">&#x27;ignore&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="散点图-分布图"><a class="markdownIt-Anchor" href="#散点图-分布图"></a> 散点图 + 分布图</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1、综合散点图 - jointplot()</span></span><br><span class="line"></span><br><span class="line">rs = np.random.RandomState(<span class="number">2</span>)</span><br><span class="line">df = pd.DataFrame(rs.randn(<span class="number">200</span>,<span class="number">2</span>),columns = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>])</span><br><span class="line"></span><br><span class="line">sns.jointplot(x = df[<span class="string">&#x27;a&#x27;</span>],y = df[<span class="string">&#x27;b&#x27;</span>],</span><br><span class="line">             data = df,</span><br><span class="line">             color = <span class="string">&#x27;k&#x27;</span>,</span><br><span class="line">             s = <span class="number">50</span>,edgecolor = <span class="string">&#x27;w&#x27;</span>,linewidth = <span class="number">1</span>,</span><br><span class="line"></span><br><span class="line">             <span class="comment"># 类型有&#x27;reg&#x27;,&#x27;resid&#x27;,&#x27;kde&#x27;,&#x27;hex&#x27;,&#x27;scatter&#x27;</span></span><br><span class="line">             kind = <span class="string">&#x27;scatter&#x27;</span>,</span><br><span class="line">             space = <span class="number">0.3</span>,</span><br><span class="line">             size = <span class="number">8</span>,</span><br><span class="line">             ratio = <span class="number">5</span>,</span><br><span class="line"></span><br><span class="line">             <span class="comment"># 类型为kde时不能设置marginal_kws</span></span><br><span class="line">             marginal_kws = <span class="built_in">dict</span>(bins = <span class="number">15</span>,rug = <span class="literal">True</span>)</span><br><span class="line">             )</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.JointGrid at 0x5759510&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_2_2.png" alt="" /></p>
+<h3 id="六边形图-蜂窝图"><a class="markdownIt-Anchor" href="#六边形图-蜂窝图"></a> 六边形图 / 蜂窝图</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 构建数据</span></span><br><span class="line"></span><br><span class="line">df = pd.DataFrame(rs.randn(<span class="number">500</span>,<span class="number">2</span>),columns = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sns.axes_style(<span class="string">&#x27;white&#x27;</span>):</span><br><span class="line">    sns.jointplot(x = df[<span class="string">&#x27;a&#x27;</span>],y = df[<span class="string">&#x27;b&#x27;</span>],kind = <span class="string">&#x27;hex&#x27;</span>,</span><br><span class="line">                 color = <span class="string">&#x27;k&#x27;</span>,</span><br><span class="line">                 marginal_kws = <span class="built_in">dict</span>(bins = <span class="number">20</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_3_1.png" alt="" /></p>
+<h3 id="密度图-散点图"><a class="markdownIt-Anchor" href="#密度图-散点图"></a> 密度图 + 散点图</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 密度图</span></span><br><span class="line"></span><br><span class="line">rs = np.random.RandomState(<span class="number">15</span>)</span><br><span class="line">df = pd.DataFrame(rs.randn(<span class="number">300</span>,<span class="number">2</span>),columns = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>])</span><br><span class="line"></span><br><span class="line">g = sns.jointplot(x = df[<span class="string">&#x27;a&#x27;</span>],y = df[<span class="string">&#x27;b&#x27;</span>],data = df,</span><br><span class="line">                 kind = <span class="string">&#x27;kde&#x27;</span>, color = <span class="string">&#x27;k&#x27;</span>,</span><br><span class="line">                 shade_lowest = <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">g.plot_joint(plt.scatter,c = <span class="string">&#x27;w&#x27;</span>, s = <span class="number">30</span>,linewidth = <span class="number">1</span>,marker = <span class="string">&#x27;+&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.JointGrid at 0x1431ec90&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_4_1.png" alt="" /></p>
+<h3 id="综合散点图"><a class="markdownIt-Anchor" href="#综合散点图"></a> 综合散点图</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 综合散点图 - JointGrid()</span></span><br><span class="line"><span class="comment"># 可拆分绘制的散点图  plot_joint() / ax_marg_x.hist() / ax_marg_y.hist()</span></span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">&#x27;white&#x27;</span>)</span><br><span class="line"></span><br><span class="line">tips = sns.load_dataset(<span class="string">&#x27;tips&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;tips.head()&#x27;</span>)</span><br><span class="line"></span><br><span class="line">g = sns.JointGrid(x = <span class="string">&#x27;total_bill&#x27;</span>,y = <span class="string">&#x27;tip&#x27;</span>,data = tips)</span><br><span class="line"></span><br><span class="line">g.plot_joint(plt.scatter,color = <span class="string">&#x27;m&#x27;</span>,edgecolor = <span class="string">&#x27;white&#x27;</span>)</span><br><span class="line">g.ax_marg_x.hist(tips[<span class="string">&#x27;total_bill&#x27;</span>],color = <span class="string">&#x27;b&#x27;</span>,alpha = <span class="number">0.6</span>,</span><br><span class="line">                bins = np.arange(<span class="number">0</span>,<span class="number">60</span>,<span class="number">3</span>))</span><br><span class="line">g.ax_marg_y.hist(tips[<span class="string">&#x27;tip&#x27;</span>],color = <span class="string">&#x27;r&#x27;</span>,alpha = <span class="number">0.6</span>,</span><br><span class="line">                 orientation = <span class="string">&#x27;horizontal&#x27;</span>,bins = np.arange(<span class="number">0</span>,<span class="number">12</span>,<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> stats</span><br><span class="line">g.annotate(stats.pearsonr)</span><br><span class="line"></span><br><span class="line">plt.grid(linestyle = <span class="string">&#x27;--&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_5_2.png" alt="" /></p>
+<h3 id="拆分绘制-散点图"><a class="markdownIt-Anchor" href="#拆分绘制-散点图"></a> 拆分绘制 - 散点图</h3>
+<blockquote>
+<p>分别绘制散点图和直方图</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可拆分绘制的散点图</span></span><br><span class="line"><span class="comment"># plot_joint() / plot_marginals()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 直方图</span></span><br><span class="line"></span><br><span class="line">g = sns.JointGrid(x = <span class="string">&#x27;total_bill&#x27;</span> , y = <span class="string">&#x27;tip&#x27;</span> , data = tips)</span><br><span class="line"></span><br><span class="line">g = g.plot_joint(plt.scatter,color = <span class="string">&#x27;g&#x27;</span>,s = <span class="number">40</span>,edgecolor = <span class="string">&#x27;white&#x27;</span>)</span><br><span class="line">plt.grid(linestyle = <span class="string">&#x27;--&#x27;</span>)</span><br><span class="line"></span><br><span class="line">g.plot_marginals(sns.distplot,kde = <span class="literal">True</span>,color = <span class="string">&#x27;g&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.JointGrid at 0x154c0690&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_6_2.png" alt="" /></p>
+<h3 id="拆分绘制-密度图"><a class="markdownIt-Anchor" href="#拆分绘制-密度图"></a> 拆分绘制 - 密度图</h3>
+<blockquote>
+<p>分别绘制密度图和面积图</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可拆分绘制的散点图</span></span><br><span class="line"><span class="comment"># plot_joint() / plot_marginals()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 密度图</span></span><br><span class="line"></span><br><span class="line">g = sns.JointGrid(x = <span class="string">&#x27;total_bill&#x27;</span> , y = <span class="string">&#x27;tip&#x27;</span> , data = tips)</span><br><span class="line"></span><br><span class="line">g = g.plot_joint(sns.kdeplot,cmap = <span class="string">&#x27;Reds_r&#x27;</span>)</span><br><span class="line">plt.grid(linestyle = <span class="string">&#x27;--&#x27;</span>)</span><br><span class="line"></span><br><span class="line">g.plot_marginals(sns.kdeplot,shade = <span class="literal">True</span>,color = <span class="string">&#x27;r&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.JointGrid at 0x154b13b0&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_7_1.png" alt="" /></p>
+<h3 id="矩阵散点图"><a class="markdownIt-Anchor" href="#矩阵散点图"></a> 矩阵散点图</h3>
+<blockquote>
+<p>散点图矩阵是组织成网格（矩阵）形式的散点图集合。每个散点图显示一对变量之间的关系。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 矩阵散点图 - pairplot()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义风格</span></span><br><span class="line">sns.set_style(<span class="string">&#x27;white&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 引入数据</span></span><br><span class="line"></span><br><span class="line">iris = sns.load_dataset(<span class="string">&#x27;iris&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(iris.head())</span><br><span class="line"></span><br><span class="line">sns.pairplot(iris,</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 散点图 / 回归分布图(&#x27;scatter&#x27;,&#x27;reg&#x27;)</span></span><br><span class="line">            kind = <span class="string">&#x27;scatter&#x27;</span>, </span><br><span class="line"></span><br><span class="line">            <span class="comment"># 直方图 / 密度图&#x27;hist&#x27;,&#x27;kde&#x27;</span></span><br><span class="line">            diag_kind = <span class="string">&#x27;hist&#x27;</span>, </span><br><span class="line"></span><br><span class="line">            <span class="comment"># 按照某一字段进行分类</span></span><br><span class="line">            hue = <span class="string">&#x27;species&#x27;</span>,</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 设置调色板</span></span><br><span class="line">            palette = <span class="string">&#x27;husl&#x27;</span>,  </span><br><span class="line"></span><br><span class="line">            <span class="comment"># 设置不同系列的点样式(参考分类个数)</span></span><br><span class="line">            markers = [<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;s&#x27;</span>,<span class="string">&#x27;D&#x27;</span>],</span><br><span class="line">            size = <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>   sepal_length  sepal_width  petal_length  petal_width species
+0           5.1          3.5           1.4          0.2  setosa
+1           4.9          3.0           1.4          0.2  setosa
+2           4.7          3.2           1.3          0.2  setosa
+3           4.6          3.1           1.5          0.2  setosa
+4           5.0          3.6           1.4          0.2  setosa
+
+&lt;seaborn.axisgrid.PairGrid at 0x15511310&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_8_3.png" alt="" /></p>
+<h4 id="局部变量对比"><a class="markdownIt-Anchor" href="#局部变量对比"></a> 局部变量对比</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只提取局部变量进行对比</span></span><br><span class="line"></span><br><span class="line">sns.pairplot(iris,<span class="built_in">vars</span> = [<span class="string">&#x27;sepal_width&#x27;</span>,<span class="string">&#x27;sepal_length&#x27;</span>],</span><br><span class="line">            kind = <span class="string">&#x27;reg&#x27;</span>,diag_kind = <span class="string">&#x27;kde&#x27;</span>,</span><br><span class="line">            hue = <span class="string">&#x27;species&#x27;</span>,palette = <span class="string">&#x27;husl&#x27;</span>,size = <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.PairGrid at 0x1d94b510&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_9_2.png" alt="" /></p>
+<h4 id="多类显示"><a class="markdownIt-Anchor" href="#多类显示"></a> 多类显示</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 其他参数设置</span></span><br><span class="line"></span><br><span class="line">sns.pairplot(iris , diag_kind = <span class="string">&#x27;kde&#x27;</span>,markers = <span class="string">&#x27;+&#x27;</span>,</span><br><span class="line">            plot_kws = <span class="built_in">dict</span>(s = <span class="number">50</span>,edgecolor = <span class="string">&#x27;b&#x27;</span>,linewidth = <span class="number">1</span>),</span><br><span class="line">            diag_kws = <span class="built_in">dict</span>(shade = <span class="literal">True</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.PairGrid at 0x14feffb0&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_10_2.png" alt="" /></p>
+<h3 id="拆分绘制-散点图2"><a class="markdownIt-Anchor" href="#拆分绘制-散点图2"></a> 拆分绘制 - 散点图2</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可拆分绘制的散点图 - PairGrid()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># map_diag() / map_offdiag()</span></span><br><span class="line"></span><br><span class="line">g = sns.PairGrid(iris,hue = <span class="string">&#x27;species&#x27;</span>,palette = <span class="string">&#x27;hls&#x27;</span>,</span><br><span class="line">                <span class="built_in">vars</span> = [<span class="string">&#x27;sepal_length&#x27;</span>,<span class="string">&#x27;sepal_width&#x27;</span>,<span class="string">&#x27;petal_length&#x27;</span>,<span class="string">&#x27;petal_width&#x27;</span>],</span><br><span class="line">                size = <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个绘图表格区域,设置好x,y对应的数据,按照species分类</span></span><br><span class="line"></span><br><span class="line">g.map_diag(plt.hist,</span><br><span class="line">          histtype = <span class="string">&#x27;barstacked&#x27;</span>,linewidth = <span class="number">1</span>,edgecolor = <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对角线图表,plt.hist / sns.kdeplot</span></span><br><span class="line">g.map_offdiag(plt.scatter,edgecolor = <span class="string">&#x27;w&#x27;</span>,s = <span class="number">40</span>,linewidth = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 其他图表</span></span><br><span class="line"></span><br><span class="line">g.add_legend()</span><br><span class="line"><span class="comment"># 添加图例</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.PairGrid at 0x21652e90&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_11_2.png" alt="" /></p>
+<h3 id="分类散点图"><a class="markdownIt-Anchor" href="#分类散点图"></a> 分类散点图</h3>
+<h4 id="绘制分类散点图"><a class="markdownIt-Anchor" href="#绘制分类散点图"></a> 绘制分类散点图</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># stripplot() - 按照不同类别对样本数据进行分布散点图绘制</span></span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">&#x27;whitegrid&#x27;</span>)</span><br><span class="line">sns.set_context(<span class="string">&#x27;paper&#x27;</span>)</span><br><span class="line"></span><br><span class="line">tips = sns.load_dataset(<span class="string">&#x27;tips&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(tips.head())</span><br><span class="line"></span><br><span class="line">sns.stripplot(x = <span class="string">&#x27;day&#x27;</span>,</span><br><span class="line"></span><br><span class="line">             <span class="comment"># 设置分组统计字段</span></span><br><span class="line">             y = <span class="string">&#x27;total_bill&#x27;</span>, </span><br><span class="line"></span><br><span class="line">             <span class="comment"># 数据分布统计字段</span></span><br><span class="line">             data = tips,</span><br><span class="line">             jitter = <span class="literal">True</span>,   </span><br><span class="line"></span><br><span class="line">             <span class="comment"># 当点数据重合较多时,用该参数调整,可以设置间距如：jitter = 0.1</span></span><br><span class="line">             size = <span class="number">5</span>,edgecolor = <span class="string">&#x27;w&#x27;</span>,linewidth = <span class="number">1</span>,marker = <span class="string">&#x27;o&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>   total_bill   tip     sex smoker  day    time  size
+0       16.99  1.01  Female     No  Sun  Dinner     2
+1       10.34  1.66    Male     No  Sun  Dinner     3
+2       21.01  3.50    Male     No  Sun  Dinner     3
+3       23.68  3.31    Male     No  Sun  Dinner     2
+4       24.59  3.61  Female     No  Sun  Dinner     4
+
+&lt;matplotlib.axes._subplots.AxesSubplot at 0xc12130&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_14_2.png" alt="" /></p>
+<h4 id="二次分类"><a class="markdownIt-Anchor" href="#二次分类"></a> 二次分类</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过hue参数再分类</span></span><br><span class="line"></span><br><span class="line">sns.stripplot(x = <span class="string">&#x27;sex&#x27;</span>,y = <span class="string">&#x27;total_bill&#x27;</span>,hue = <span class="string">&#x27;day&#x27;</span>,</span><br><span class="line">             data = tips,jitter = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xf54fed0&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_15_1.png" alt="" /></p>
+<h4 id="二次拆分"><a class="markdownIt-Anchor" href="#二次拆分"></a> 二次拆分</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 二次拆分</span></span><br><span class="line"></span><br><span class="line">sns.stripplot(x = <span class="string">&#x27;sex&#x27;</span>,y = <span class="string">&#x27;total_bill&#x27;</span>,hue = <span class="string">&#x27;day&#x27;</span>,</span><br><span class="line">             data = tips,jitter = <span class="literal">True</span>,</span><br><span class="line"></span><br><span class="line">             <span class="comment"># 设置调色盘</span></span><br><span class="line">             palette = <span class="string">&#x27;Set2&#x27;</span>, </span><br><span class="line"></span><br><span class="line">             <span class="comment"># 是否拆分</span></span><br><span class="line">             dodge = <span class="literal">True</span></span><br><span class="line">             )</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xf5524d0&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_16_1.png" alt="" /></p>
+<h4 id="二次筛选"><a class="markdownIt-Anchor" href="#二次筛选"></a> 二次筛选</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 筛选分类类别</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(tips[<span class="string">&#x27;day&#x27;</span>].value_counts())</span><br><span class="line"></span><br><span class="line">sns.stripplot(x = <span class="string">&#x27;total_bill&#x27;</span>,y = <span class="string">&#x27;day&#x27;</span>,data = tips,jitter = <span class="literal">True</span>,</span><br><span class="line">             order = [<span class="string">&#x27;Sat&#x27;</span>,<span class="string">&#x27;Sun&#x27;</span>])</span><br><span class="line"><span class="comment"># order → 筛选类别</span></span><br></pre></td></tr></table></figure>
+<pre><code>Sat     87
+Sun     76
+Thur    62
+Fri     19
+Name: day, dtype: int64
+
+&lt;matplotlib.axes._subplots.AxesSubplot at 0xb840b0&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_17_2.png" alt="" /></p>
+<h3 id="分簇散点图"><a class="markdownIt-Anchor" href="#分簇散点图"></a> 分簇散点图</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># swarmplot() - 分簇散点图</span></span><br><span class="line"></span><br><span class="line">sns.swarmplot(x = <span class="string">&#x27;day&#x27;</span>,y = <span class="string">&#x27;total_bill&#x27;</span>,data = tips,</span><br><span class="line">             size = <span class="number">5</span>,edgecolor = <span class="string">&#x27;w&#x27;</span>,linewidth = <span class="number">1</span>,marker = <span class="string">&#x27;o&#x27;</span>,</span><br><span class="line">             palette = <span class="string">&#x27;Reds&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xa53c70&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/output_18_1.png" alt="" /></p>
+<h2 id="箱型图"><a class="markdownIt-Anchor" href="#箱型图"></a> 箱型图</h2>
+<blockquote>
+<p>boxplot ：又称为盒须图、盒式图或箱线图，是一种用作显示一组数据分散情况资料的统计图。因形状如箱子而得名</p>
+</blockquote>
+<h3 id="初步绘制"><a class="markdownIt-Anchor" href="#初步绘制"></a> 初步绘制</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义风格</span></span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">&#x27;whitegrid&#x27;</span>)</span><br><span class="line">sns.set_context(<span class="string">&#x27;paper&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 引入数据</span></span><br><span class="line"></span><br><span class="line">tips = sns.load_dataset(<span class="string">&#x27;tips&#x27;</span>)</span><br><span class="line"></span><br><span class="line">sns.boxplot(x = <span class="string">&#x27;day&#x27;</span>,y = <span class="string">&#x27;total_bill&#x27;</span>,data = tips,</span><br><span class="line">           linewidth = <span class="number">2</span>,</span><br><span class="line">           width = <span class="number">0.5</span>,</span><br><span class="line"></span><br><span class="line">           <span class="comment"># 异常点大小</span></span><br><span class="line">           fliersize = <span class="number">3</span>, </span><br><span class="line"></span><br><span class="line">           <span class="comment"># 调色板</span></span><br><span class="line">           palette = <span class="string">&#x27;hls&#x27;</span>,</span><br><span class="line"></span><br><span class="line">           <span class="comment"># 设置IQR</span></span><br><span class="line">           whis = <span class="number">1.5</span>, </span><br><span class="line"></span><br><span class="line">           <span class="comment"># 是否以中值做凹槽</span></span><br><span class="line">           notch = <span class="literal">False</span>,</span><br><span class="line">           order = [<span class="string">&#x27;Thur&#x27;</span>,<span class="string">&#x27;Fri&#x27;</span>,<span class="string">&#x27;Sat&#x27;</span>,<span class="string">&#x27;Sun&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># sns.swarmplot(x = &#x27;day&#x27;,y = &#x27;total_bill&#x27;,data = tips,color = &#x27;k&#x27;,size = 3,alpha = 0.7)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;matplotlib.axes._subplots.AxesSubplot at 0x614e2b0&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/2_1.png" alt="" /></p>
+<h3 id="二次分类-2"><a class="markdownIt-Anchor" href="#二次分类-2"></a> 二次分类</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 二次分类</span></span><br><span class="line"></span><br><span class="line">sns.boxplot(x = <span class="string">&#x27;day&#x27;</span>,y = <span class="string">&#x27;total_bill&#x27;</span>,data = tips,hue = <span class="string">&#x27;sex&#x27;</span>,palette = <span class="string">&#x27;Reds&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># sns.swarmplot(x = &#x27;day&#x27;,y = &#x27;total_bill&#x27;,data = tips,color = &#x27;k&#x27;,size = 3,alpha = 0.7)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;matplotlib.axes._subplots.AxesSubplot at 0x62316f0&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/3_1.png" alt="" /></p>
+<h2 id="小提琴图"><a class="markdownIt-Anchor" href="#小提琴图"></a> 小提琴图</h2>
+<blockquote>
+<p>小提琴图其实是箱线图与核密度图的结合，通过小提琴图能更容易看出哪些位置的密度较高，即数据分布的区域</p>
+</blockquote>
+<h3 id="初步绘制-2"><a class="markdownIt-Anchor" href="#初步绘制-2"></a> 初步绘制</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 小提琴图 - violinplot()</span></span><br><span class="line"></span><br><span class="line">sns.violinplot(x = <span class="string">&#x27;day&#x27;</span>,y = <span class="string">&#x27;total_bill&#x27;</span>,data = tips,</span><br><span class="line"></span><br><span class="line">              <span class="comment"># 线宽</span></span><br><span class="line">              linewidth = <span class="number">2</span>, </span><br><span class="line"></span><br><span class="line">              <span class="comment"># 箱之间的间隔比例</span></span><br><span class="line">              width = <span class="number">0.8</span>, </span><br><span class="line"></span><br><span class="line">              <span class="comment"># 调色盘</span></span><br><span class="line">              palette = <span class="string">&#x27;hls&#x27;</span>, </span><br><span class="line">              order = [<span class="string">&#x27;Thur&#x27;</span>,<span class="string">&#x27;Fri&#x27;</span>,<span class="string">&#x27;Sat&#x27;</span>,<span class="string">&#x27;Sun&#x27;</span>],</span><br><span class="line"></span><br><span class="line">              <span class="comment"># 小提琴图的宽度：area-面积相同,count-样本数量决定宽度,width-宽度一样</span></span><br><span class="line">              scale = <span class="string">&#x27;area&#x27;</span>,</span><br><span class="line"></span><br><span class="line">              <span class="comment"># 设置小提琴图边线的平滑度,值越大越平滑</span></span><br><span class="line">              gridsize = <span class="number">50</span>,</span><br><span class="line"></span><br><span class="line">              <span class="comment"># 设置内部显示类型：&#x27;box&#x27; &#x27;quartile&#x27; &#x27;point&#x27; &#x27;stick&#x27; None</span></span><br><span class="line">              inner = <span class="string">&#x27;box&#x27;</span>,              </span><br><span class="line">              <span class="comment"># bw = 0.8</span></span><br><span class="line">              )</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;matplotlib.axes._subplots.AxesSubplot at 0x10c7eab0&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/4_1.png" alt="" /></p>
+<h3 id="二次分类-3"><a class="markdownIt-Anchor" href="#二次分类-3"></a> 二次分类</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 二次分类</span></span><br><span class="line"></span><br><span class="line">sns.violinplot(x = <span class="string">&#x27;day&#x27;</span>,y = <span class="string">&#x27;total_bill&#x27;</span>,data = tips,</span><br><span class="line">              hue = <span class="string">&#x27;smoker&#x27;</span>,palette = <span class="string">&#x27;muted&#x27;</span>,</span><br><span class="line"></span><br><span class="line">              <span class="comment"># 设置是否拆分小提琴图</span></span><br><span class="line">              split = <span class="literal">True</span>, </span><br><span class="line">              inner = <span class="string">&#x27;box&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;matplotlib.axes._subplots.AxesSubplot at 0x110572d0&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/5_1.png" alt="" /></p>
+<h3 id="混合图表"><a class="markdownIt-Anchor" href="#混合图表"></a> 混合图表</h3>
+<blockquote>
+<p>小提琴图结合散点图</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 小提琴图 - 结合散点图</span></span><br><span class="line"></span><br><span class="line">sns.violinplot(x = <span class="string">&#x27;day&#x27;</span>,y = <span class="string">&#x27;total_bill&#x27;</span>,data = tips,palette = <span class="string">&#x27;hls&#x27;</span>,inner = <span class="literal">None</span>)</span><br><span class="line">sns.swarmplot(x = <span class="string">&#x27;day&#x27;</span>,y = <span class="string">&#x27;total_bill&#x27;</span>,data = tips,color = <span class="string">&#x27;w&#x27;</span>,alpha = <span class="number">0.5</span>)</span><br><span class="line"><span class="comment"># 插入散点图</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;matplotlib.axes._subplots.AxesSubplot at 0x11224ed0&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/6_1.png" alt="" /></p>
+<h2 id="lv图表"><a class="markdownIt-Anchor" href="#lv图表"></a> LV图表</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># lvplot() - lv图表</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">15</span>,<span class="number">7</span>))</span><br><span class="line">sns.lvplot(x = <span class="string">&#x27;day&#x27;</span>,y = <span class="string">&#x27;total_bill&#x27;</span>,data = tips,palette = <span class="string">&#x27;mako&#x27;</span>,</span><br><span class="line">          width = <span class="number">0.8</span>,</span><br><span class="line">          hue = <span class="string">&#x27;smoker&#x27;</span>,</span><br><span class="line">          linewidth = <span class="number">12</span>,</span><br><span class="line"></span><br><span class="line">          <span class="comment"># 设置框的大小 → &#x27;linear&#x27;,&#x27;exonential&#x27;,&#x27;area&#x27;</span></span><br><span class="line">          scale = <span class="string">&#x27;area&#x27;</span>,</span><br><span class="line"></span><br><span class="line">          <span class="comment"># 设置框的数量 → &#x27;proportion&#x27;,&#x27;tukey&#x27;,&#x27;trustworthy&#x27;</span></span><br><span class="line">          k_depth = <span class="string">&#x27;proportion&#x27;</span>,</span><br><span class="line">          )</span><br><span class="line"></span><br><span class="line">sns.swarmplot(x = <span class="string">&#x27;day&#x27;</span>,y = <span class="string">&#x27;total_bill&#x27;</span>,data = tips,color = <span class="string">&#x27;k&#x27;</span>,size = <span class="number">6</span>,alpha = <span class="number">0.8</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;matplotlib.axes._subplots.AxesSubplot at 0x11263f30&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/seaborn-2-2/7_1.png" alt="" /></p>
+<h2 id="写在最后"><a class="markdownIt-Anchor" href="#写在最后"></a> 写在最后</h2>
+<p>这两篇博文列举了对数据分布情况的基础可视化图表，当然只是很基础的图表展示，记录下来以便随时翻阅，查漏补缺，还是那句话，任何图表可视化重点是数据结构与其逻辑，真正理解了数据才能更好的选择图表去展示，感谢阅读～</p>
+<p>本文版权归作者所有，欢迎转载，转载请注明出处和链接来源。</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    数据分析中的数据清洗流程
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Seaborn - 基础风格展示 &amp; 调色盘</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

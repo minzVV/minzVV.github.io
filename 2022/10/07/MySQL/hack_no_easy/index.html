@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>HackerRank中SQL练习非简单部分 | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="MySQL" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="NO Easy  The PADS  题目 Generate the following two result sets:   Query an alphabetically ordered list of all names in OCCUPATIONS, immediately followed by the first letter of each profession as a pare">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackerRank中SQL练习非简单部分">
+<meta property="og:url" content="http://example.com/2022/10/07/MySQL/hack_no_easy/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="NO Easy  The PADS  题目 Generate the following two result sets:   Query an alphabetically ordered list of all names in OCCUPATIONS, immediately followed by the first letter of each profession as a pare">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/the_pads.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Station.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Tree_Nodes.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/1449345840-5f0a551030-Station.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Report_1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Report_2.png">
+<meta property="article:published_time" content="2022-10-07T14:33:36.000Z">
+<meta property="article:modified_time" content="2023-02-15T03:13:41.911Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/the_pads.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file active"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-MySQL/hack_no_easy" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/MySQL/">MySQL</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/MySQL/%E7%BB%83%E4%B9%A0%E9%A2%98%E9%9B%86/">练习题集</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/MySQL/" rel="tag">MySQL</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2022/10/07/MySQL/hack_no_easy/">
+            <time datetime="2022-10-07T14:33:36.000Z" itemprop="datePublished">2022-10-07</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/MySQL/hack_no_easy.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/MySQL/hack_no_easy.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/MySQL/hack_no_easy.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            HackerRank中SQL练习非简单部分
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#no-easy"><span class="toc-number">1.</span> <span class="toc-text"> NO Easy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#the-pads"><span class="toc-number">1.1.</span> <span class="toc-text"> The PADS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">1.1.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98"><span class="toc-number">1.1.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weather-observation-station-18"><span class="toc-number">1.2.</span> <span class="toc-text"> Weather Observation Station 18</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-2"><span class="toc-number">1.2.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-2"><span class="toc-number">1.2.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#binary-tree-nodes"><span class="toc-number">1.3.</span> <span class="toc-text"> Binary Tree Nodes</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-3"><span class="toc-number">1.3.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-3"><span class="toc-number">1.3.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new-companies"><span class="toc-number">1.4.</span> <span class="toc-text"> New Companies</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-4"><span class="toc-number">1.4.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-4"><span class="toc-number">1.4.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weather-observation-station-20"><span class="toc-number">1.5.</span> <span class="toc-text"> *Weather Observation Station 20</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-5"><span class="toc-number">1.5.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-5"><span class="toc-number">1.5.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#the-report"><span class="toc-number">1.6.</span> <span class="toc-text"> The Report</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-6"><span class="toc-number">1.6.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-6"><span class="toc-number">1.6.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#top-competitors"><span class="toc-number">1.7.</span> <span class="toc-text"> Top Competitors</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-7"><span class="toc-number">1.7.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-7"><span class="toc-number">1.7.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ollivanders-inventory"><span class="toc-number">1.8.</span> <span class="toc-text"> Ollivander’s Inventory</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-8"><span class="toc-number">1.8.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-8"><span class="toc-number">1.8.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#challenges"><span class="toc-number">1.9.</span> <span class="toc-text"> Challenges</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-9"><span class="toc-number">1.9.1.</span> <span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98-9"><span class="toc-number">1.9.2.</span> <span class="toc-text"> 解题</span></a></li></ol></li></ol></li></ol>
+                </div>
+            
+        
+        
+            <h2 id="no-easy"><a class="markdownIt-Anchor" href="#no-easy"></a> NO Easy</h2>
+<h3 id="the-pads"><a class="markdownIt-Anchor" href="#the-pads"></a> The PADS</h3>
+<h4 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h4>
+<p>Generate the following two result sets:</p>
+<ol>
+<li>
+<p>Query an <em>alphabetically ordered</em> list of all names in <strong>OCCUPATIONS</strong>, immediately followed by the first letter of each profession as a parenthetical (i.e.: enclosed in parentheses). For example: <code>AnActorName(A)</code>, <code>ADoctorName(D)</code>, <code>AProfessorName(P)</code>, and <code>ASingerName(S)</code>.</p>
+</li>
+<li>
+<p>Query the number of ocurrences of each occupation in <strong>OCCUPATIONS</strong>. Sort the occurrences in <em>ascending order</em>, and output them in the following format:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">There are a total of [occupation_count] [occupation]s.</span><br></pre></td></tr></table></figure>
+<p>where <code>[occupation_count]</code> is the number of occurrences of an occupation in <strong>OCCUPATIONS</strong> and <code>[occupation]</code> is the <em>lowercase</em> occupation name. If more than one <em>Occupation</em> has the same <code>[occupation_count]</code>, they should be ordered alphabetically.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/the_pads.png" alt="the_pads" /></p>
+</li>
+</ol>
+<h4 id="解题"><a class="markdownIt-Anchor" href="#解题"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- in OCCUPATIONS</span></span><br><span class="line"><span class="comment">-- all names </span></span><br><span class="line"><span class="comment">-- Query an alphabetically ordered list of </span></span><br><span class="line"><span class="comment">-- immediately followed by the first letter of each profession as a parenthetical (i.e.: enclosed in parentheses). </span></span><br><span class="line"><span class="comment">-- For example: AnActorName(A), ADoctorName(D), AProfessorName(P), and ASingerName(S).</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> CONCAT(Name,<span class="string">&#x27;(&#x27;</span>,<span class="keyword">LEFT</span>(Occupation,<span class="number">1</span>),<span class="string">&#x27;)&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> OCCUPATIONS</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> Name <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Query the number of ocurrences of each occupation in OCCUPATIONS. </span></span><br><span class="line"><span class="comment">-- output format: There are a total of [occupation_count] [occupation]s.</span></span><br><span class="line"><span class="comment">-- Sort the occurrences in ascending order</span></span><br><span class="line"><span class="comment">-- where [occupation_count] is the number of occurrences of an occupation in OCCUPATIONS </span></span><br><span class="line"><span class="comment">-- [occupation] is the lowercase occupation name. </span></span><br><span class="line"><span class="comment">-- If more than one Occupation has the same [occupation_count], they should be ordered alphabetically.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> CONCAT(<span class="string">&#x27;There are a total of &#x27;</span>,<span class="built_in">COUNT</span>(Occupation),<span class="string">&#x27; &#x27;</span>,<span class="built_in">LOWER</span>(Occupation),<span class="string">&#x27;s.&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> OCCUPATIONS</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Occupation</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="built_in">COUNT</span>(Occupation) <span class="keyword">ASC</span>,Occupation <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：字符串拼接 &amp; 分组 + 聚合 + 字符串拼接</li>
+<li><strong>注意点：不要使用 UNION / UNION ALL ，因为排序，不要问我为什么知道</strong></li>
+</ul>
+<h3 id="weather-observation-station-18"><a class="markdownIt-Anchor" href="#weather-observation-station-18"></a> Weather Observation Station 18</h3>
+<h4 id="题目-2"><a class="markdownIt-Anchor" href="#题目-2"></a> 题目</h4>
+<p>Consider P1(a,b) and P2(c,d) to be two points on a <em>2D</em> plane.</p>
+<ul>
+<li>a happens to equal the minimum value in <em>Northern Latitude</em> (<em>LAT_N</em> in <strong>STATION</strong>).</li>
+<li>b happens to equal the minimum value in <em>Western Longitude</em> (<em>LONG_W</em> in <strong>STATION</strong>).</li>
+<li>c happens to equal the maximum value in <em>Northern Latitude</em> (<em>LAT_N</em> in <strong>STATION</strong>).</li>
+<li>d happens to equal the maximum value in <em>Western Longitude</em> (<em>LONG_W</em> in <strong>STATION</strong>).</li>
+</ul>
+<p>Query the <a target="_blank" rel="noopener" href="https://xlinux.nist.gov/dads/HTML/manhattanDistance.html">Manhattan Distance</a> between points P1 and P2 and round it to a scale of decimal places.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Station.jpg" alt="Station" /></p>
+<h4 id="解题-2"><a class="markdownIt-Anchor" href="#解题-2"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Query the Manhattan Distance between points P1 and P2</span></span><br><span class="line"><span class="comment">-- round it to a scale of  decimal places.</span></span><br><span class="line"><span class="comment">-- P1(a,b) and P2(c,d)</span></span><br><span class="line"><span class="comment">-- a : the minimum value in Northern Latitude (LAT_N in STATION).</span></span><br><span class="line"><span class="comment">-- b : the minimum value in Western Longitude (LONG_W in STATION).</span></span><br><span class="line"><span class="comment">-- c : the maximum value in Northern Latitude (LAT_N in STATION).</span></span><br><span class="line"><span class="comment">-- d : the maximum value in Western Longitude (LONG_W in STATION).</span></span><br><span class="line"><span class="comment">-- P1 - P2 Manhattan Distance: |a-c|+|b-d|</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> ROUND(<span class="built_in">ABS</span>(<span class="built_in">MIN</span>(LAT_N)<span class="operator">-</span><span class="built_in">MAX</span>(LAT_N)) <span class="operator">+</span> <span class="built_in">ABS</span>(<span class="built_in">MIN</span>(LONG_W)<span class="operator">-</span><span class="built_in">MAX</span>(LONG_W)),<span class="number">4</span>) <span class="keyword">AS</span> M_D</span><br><span class="line"><span class="keyword">FROM</span> STATION;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：ABS 函数 + ROUND 函数
+<ul>
+<li><a target="_blank" rel="noopener" href="https://xlinux.nist.gov/dads/HTML/manhattanDistance.html">Manhattan Distance</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="binary-tree-nodes"><a class="markdownIt-Anchor" href="#binary-tree-nodes"></a> Binary Tree Nodes</h3>
+<h4 id="题目-3"><a class="markdownIt-Anchor" href="#题目-3"></a> 题目</h4>
+<p>You are given a table, <em>BST</em>, containing two columns: <em>N</em> and <em>P,</em> where <em>N</em> represents the value of a node in <em>Binary Tree</em>, and <em>P</em> is the parent of <em>N</em>.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Tree_Nodes.png" alt="Tree_Nodes" /></p>
+<p>Write a query to find the node type of <em>Binary Tree</em> ordered by the value of the node. Output one of the following for each node:</p>
+<ul>
+<li><em>Root</em>: If node is root node.</li>
+<li><em>Leaf</em>: If node is leaf node.</li>
+<li><em>Inner</em>: If node is neither root nor leaf node.</li>
+</ul>
+<h4 id="解题-3"><a class="markdownIt-Anchor" href="#解题-3"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- where N represents the value of a node in Binary Tree, and P is the parent of N.</span></span><br><span class="line"><span class="comment">-- Root: If node is root node.</span></span><br><span class="line"><span class="comment">-- Leaf: If node is leaf node.</span></span><br><span class="line"><span class="comment">-- Inner: If node is neither root nor leaf node.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CASE</span> </span><br><span class="line">            <span class="keyword">WHEN</span> P <span class="keyword">IS</span> <span class="keyword">NULL</span> <span class="keyword">THEN</span> CONCAT(N,<span class="string">&#x27; Root&#x27;</span>)</span><br><span class="line">            <span class="keyword">WHEN</span> N <span class="keyword">IN</span> (<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> P <span class="keyword">FROM</span> BST) <span class="keyword">THEN</span> CONCAT(N,<span class="string">&#x27; Inner&#x27;</span>)</span><br><span class="line">            <span class="keyword">ELSE</span> CONCAT(N,<span class="string">&#x27; Leaf&#x27;</span>)</span><br><span class="line">        <span class="keyword">END</span></span><br><span class="line"><span class="keyword">FROM</span> BST</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> N;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> N,</span><br><span class="line">        <span class="keyword">CASE</span></span><br><span class="line">            <span class="keyword">WHEN</span> P <span class="keyword">IS</span> <span class="keyword">NULL</span> <span class="keyword">THEN</span> <span class="string">&#x27;Root&#x27;</span></span><br><span class="line">            <span class="keyword">WHEN</span> N <span class="keyword">IN</span> (<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> P <span class="keyword">FROM</span> BST) <span class="keyword">THEN</span> <span class="string">&#x27;Inner&#x27;</span></span><br><span class="line">            <span class="keyword">ELSE</span> <span class="string">&#x27;Leaf&#x27;</span></span><br><span class="line">        <span class="keyword">END</span></span><br><span class="line"><span class="keyword">FROM</span> BST</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：CASE WHEN + 逻辑判断
+<ul>
+<li>Root 节点：没有父节点</li>
+<li>Inner 节点：既有父节点也有子节点</li>
+<li>Leaf 节点：ELSE / 没有子节点的</li>
+<li>CONCAT 基于题目要求 OUTPUT 一列还是两列</li>
+</ul>
+</li>
+</ul>
+<h3 id="new-companies"><a class="markdownIt-Anchor" href="#new-companies"></a> New Companies</h3>
+<h4 id="题目-4"><a class="markdownIt-Anchor" href="#题目-4"></a> 题目</h4>
+<p>Amber’s conglomerate corporation just acquired some new companies. Each of the companies follows this hierarchy：Founder -&gt; Lead Manager -&gt; Senior Manager -&gt; Manager -&gt; Employee</p>
+<p>Given the table schemas below, write a query to print the <em>company_code</em>, <em>founder</em> name, total number of <em>lead</em> managers, total number of <em>senior</em> managers, total number of <em>managers</em>, and total number of <em>employees</em>. Order your output by ascending <em>company_code</em>.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>The tables may contain duplicate records.</li>
+<li>The <em>company_code</em> is string, so the sorting should not be <strong>numeric</strong>. For example, if the <em>company_codes</em> are <em>C_1</em>, <em>C_2</em>, and <em>C_10</em>, then the ascending <em>company_codes</em> will be <em>C_1</em>, <em>C_10</em>, and <em>C_2</em>.</li>
+</ul>
+<h4 id="解题-4"><a class="markdownIt-Anchor" href="#解题-4"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Founder -&gt; Lead Manager -&gt; Senior Manager -&gt; Manager -&gt; Employee</span></span><br><span class="line"><span class="comment">-- write a query to print the company_code, founder name, </span></span><br><span class="line"><span class="comment">-- total number of lead managers, </span></span><br><span class="line"><span class="comment">-- total number of senior managers,</span></span><br><span class="line"><span class="comment">-- total number of managers, </span></span><br><span class="line"><span class="comment">-- total number of employees. </span></span><br><span class="line"><span class="comment">-- Order by ascending company_code.</span></span><br><span class="line"><span class="comment">-- The tables may contain duplicate records.</span></span><br><span class="line"><span class="comment">-- The company_code is string, so the sorting should not be numeric. </span></span><br><span class="line"><span class="comment">-- For example, if the company_codes are C_1, C_2, and C_10, then the ascending company_codes will be C_1, C_10, and C_2.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> c.company_code,c.founder,</span><br><span class="line">    <span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> l.lead_manager_code),</span><br><span class="line">    <span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> s.senior_manager_code),</span><br><span class="line">    <span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> m.manager_code),</span><br><span class="line">    <span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> e.employee_code)</span><br><span class="line"><span class="keyword">FROM</span> Company c ,Lead_Manager l ,Senior_Manager s ,Manager m ,Employee e</span><br><span class="line"><span class="keyword">WHERE</span> c.company_code <span class="operator">=</span> l.company_code </span><br><span class="line">    <span class="keyword">AND</span> l.lead_manager_code <span class="operator">=</span> s.lead_manager_code</span><br><span class="line">    <span class="keyword">AND</span> s.senior_manager_code <span class="operator">=</span> m.senior_manager_code</span><br><span class="line">    <span class="keyword">AND</span> m.manager_code <span class="operator">=</span> e.manager_code</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="number">1</span>,<span class="number">2</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：多表联结 + 逻辑</li>
+<li>问题一：为什么要五张表都联结，而不是直接Company联结Employee？
+<ul>
+<li>如果存在 Lead_Manager手下没有Senior_Manager，或者Senior_Manager没有Manager，所以还是对数据的准确性的判断，当然如果能确保每一级都存在下一级的数据，且保证数据收录在表中是可以尝试两表</li>
+</ul>
+</li>
+<li>拓展：排序
+<ul>
+<li>题中表明排序字段为字符串，所以排序顺序为<em>C_1</em>, <em>C_10</em>, and <em>C_2</em>，如果需要<em>C_1</em>, <em>C_2</em>, and <em>C_10</em> ，思路为：截取 <em>C_</em> 右边的字符，并转换为数字类型，再排序</li>
+</ul>
+</li>
+</ul>
+<h3 id="weather-observation-station-20"><a class="markdownIt-Anchor" href="#weather-observation-station-20"></a> *Weather Observation Station 20</h3>
+<h4 id="题目-5"><a class="markdownIt-Anchor" href="#题目-5"></a> 题目</h4>
+<p>A <em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Median">median</a></em> is defined as a number separating the higher half of a data set from the lower half. Query the <em>median</em> of the <em>Northern Latitudes</em> (<em>LAT_N</em>) from <strong>STATION</strong> and round your answer to decimal places.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/1449345840-5f0a551030-Station.jpg" alt="1449345840-5f0a551030-Station" /></p>
+<h4 id="解题-5"><a class="markdownIt-Anchor" href="#解题-5"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- from STATION</span></span><br><span class="line"><span class="comment">-- Query the median of the Northern Latitudes (LAT_N) </span></span><br><span class="line"><span class="comment">-- round your answer to 4 decimal places.</span></span><br><span class="line"><span class="comment">-- A median is defined as a number separating the higher half of a data set from the lower half.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> ROUND(s.LAT_N,<span class="number">4</span>) median</span><br><span class="line"><span class="keyword">FROM</span> STATION s</span><br><span class="line"><span class="keyword">WHERE</span> (<span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(LAT_N) <span class="keyword">FROM</span> STATION <span class="keyword">WHERE</span> LAT_N <span class="operator">&lt;</span> s.LAT_N) <span class="operator">=</span> (<span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(LAT_N) <span class="keyword">FROM</span> STATION <span class="keyword">WHERE</span> LAT_N <span class="operator">&gt;</span> s.LAT_N);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> ROUND(s.LAT_N,<span class="number">4</span>)  </span><br><span class="line"><span class="keyword">FROM</span> STATION s </span><br><span class="line"><span class="keyword">WHERE</span> (<span class="keyword">SELECT</span> ROUND(<span class="built_in">COUNT</span>(s.ID)<span class="operator">/</span><span class="number">2</span>)<span class="number">-1</span> <span class="keyword">FROM</span> STATION) <span class="operator">=</span> (<span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(s1.ID) <span class="keyword">FROM</span> STATION s1 <span class="keyword">WHERE</span> s1.LAT_N <span class="operator">&gt;</span> s.LAT_N);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：中位数概念 &amp; 子查询 + ROUND + COUNT
+<ul>
+<li>Oracle 有 MEDIAN 函数</li>
+<li>中位数概念：指将数据按大小顺序排列起来，形成一个数列，居于数列中间位置的那个数据
+<ul>
+<li>数据行数为奇数：排序后，该列位于(行数+1)/2</li>
+<li>数据行数为偶数：排序后，行数/2和行数/2+1两数的平均值</li>
+</ul>
+</li>
+<li>中位数概念：按顺序排列的一组数据中居于中间位置的数，代表一个样本、种群或概率分布中的一个数值，其可将数值集合划分为相等的上下两部分</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-report"><a class="markdownIt-Anchor" href="#the-report"></a> The Report</h3>
+<h4 id="题目-6"><a class="markdownIt-Anchor" href="#题目-6"></a> 题目</h4>
+<p><em>Ketty</em> gives <em>Eve</em> a task to generate a report containing three columns: <em>Name</em>, <em>Grade</em> and <em>Mark</em>. <em>Ketty</em> doesn’t want the NAMES of those students who received a grade lower than <em>8</em>. The report must be in descending order by grade – i.e. higher grades are entered first. If there is more than one student with the same grade (8-10) assigned to them, order those particular students by their name alphabetically. Finally, if the grade is lower than 8, use “NULL” as their name and list them by their grades in descending order. If there is more than one student with the same grade (1-7) assigned to them, order those particular students by their marks in ascending order.</p>
+<p>Write a query to help Eve.</p>
+<p>Students:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Report_1.png" alt="Report_1" /></p>
+<p>Grades:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/HackerRank_SQL/Report_2.png" alt="Report_2" /></p>
+<h4 id="解题-6"><a class="markdownIt-Anchor" href="#解题-6"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- report containing three columns: Name, Grade and Mark</span></span><br><span class="line"><span class="comment">-- doesn&#x27;t want the NAMES of those students who received a grade lower than 8</span></span><br><span class="line"><span class="comment">-- the grade is lower than 8, use &quot;NULL&quot; as their name and list them by their grades in descending order</span></span><br><span class="line"><span class="comment">-- descending order by grade DESC</span></span><br><span class="line"><span class="comment">-- same grade order by their name</span></span><br><span class="line"><span class="comment">-- more than one student with the same grade (1-7),order by marks</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> IF(Grade <span class="operator">&lt;</span> <span class="number">8</span> ,<span class="keyword">NULL</span>,Name) ,Grade,Marks</span><br><span class="line"><span class="keyword">FROM</span> Students <span class="keyword">JOIN</span> Grades</span><br><span class="line"><span class="keyword">WHERE</span> Marks <span class="keyword">BETWEEN</span> Min_Mark <span class="keyword">AND</span> Max_Mark</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">2</span> <span class="keyword">DESC</span> , <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：IF 函数 &amp; 表联结 + 排序逻辑
+<ul>
+<li>判断 grade &lt; 8 ，可以使用 CASE WHEN</li>
+</ul>
+</li>
+</ul>
+<h3 id="top-competitors"><a class="markdownIt-Anchor" href="#top-competitors"></a> Top Competitors</h3>
+<h4 id="题目-7"><a class="markdownIt-Anchor" href="#题目-7"></a> 题目</h4>
+<p>Julia just finished conducting a coding contest, and she needs your help assembling the leaderboard! Write a query to print the respective <em>hacker_id</em> and <em>name</em> of hackers who achieved full scores for <em>more than one</em> challenge. Order your output in descending order by the total number of challenges in which the hacker earned a full score. If more than one hacker received full scores in same number of challenges, then sort them by ascending <em>hacker_id</em>.</p>
+<h4 id="解题-7"><a class="markdownIt-Anchor" href="#解题-7"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- print the respective hacker_id and name of hackers </span></span><br><span class="line"><span class="comment">-- who achieved full scores for more than one challenge. </span></span><br><span class="line"><span class="comment">-- order by the total number of challenges in which the hacker earned a full score. </span></span><br><span class="line"><span class="comment">-- more than one hacker received full scores in same number of challenges, then sort by ascending hacker_id.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> s.hacker_id , h.name</span><br><span class="line"><span class="keyword">FROM</span> Hackers <span class="keyword">AS</span> h <span class="keyword">JOIN</span> Submissions <span class="keyword">AS</span> s <span class="keyword">ON</span> h.hacker_id <span class="operator">=</span> s.hacker_id </span><br><span class="line"><span class="keyword">JOIN</span> Challenges <span class="keyword">AS</span> c <span class="keyword">ON</span> s.challenge_id <span class="operator">=</span> c.challenge_id </span><br><span class="line"><span class="keyword">JOIN</span> Difficulty <span class="keyword">AS</span> d <span class="keyword">ON</span> c.difficulty_level <span class="operator">=</span> d.difficulty_level</span><br><span class="line"><span class="keyword">WHERE</span> s.score <span class="operator">=</span> d.score <span class="keyword">AND</span> c.difficulty_level <span class="operator">=</span> d.difficulty_level</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> s.hacker_id,h.name</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(s.challenge_id) <span class="operator">&gt;</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="built_in">COUNT</span>(s.challenge_id) <span class="keyword">DESC</span>, <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>考察点：表联结 &amp; 分组聚合
+<ul>
+<li>多注意题目限制：who achieved full scores for <em><strong>more than one</strong></em> challenge</li>
+</ul>
+</li>
+</ul>
+<h3 id="ollivanders-inventory"><a class="markdownIt-Anchor" href="#ollivanders-inventory"></a> Ollivander’s Inventory</h3>
+<h4 id="题目-8"><a class="markdownIt-Anchor" href="#题目-8"></a> 题目</h4>
+<p>Harry Potter and his friends are at Ollivander’s with Ron, finally replacing Charlie’s old broken wand.</p>
+<p>Hermione decides the best way to choose is by determining the minimum number of gold galleons needed to buy each <em>non-evil</em> wand of high power and age. Write a query to print the <em>id</em>, <em>age</em>, <em>coins_needed</em>, and <em>power</em> of the wands that Ron’s interested in, sorted in order of descending <em>power</em>. If more than one wand has same power, sort the result in order of descending <em>age</em>.</p>
+<h4 id="解题-8"><a class="markdownIt-Anchor" href="#解题-8"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- choose is by determining the minimum number of gold galleons </span></span><br><span class="line"><span class="comment">-- needed to buy each non-evil wand of high power and age.</span></span><br><span class="line"><span class="comment">-- print the id, age, coins_needed, and power of the wands</span></span><br><span class="line"><span class="comment">-- sorted in order of descending power. </span></span><br><span class="line"><span class="comment">-- more than one wand has same power, sort by descending age.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> w.id , p.age , t.coins_needed , t.power </span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">(<span class="keyword">SELECT</span> code , power , <span class="built_in">MIN</span>(coins_needed) <span class="keyword">AS</span> coins_needed <span class="keyword">FROM</span> Wands <span class="keyword">GROUP</span> <span class="keyword">BY</span> code , power) <span class="keyword">AS</span> t</span><br><span class="line"><span class="keyword">JOIN</span> Wands <span class="keyword">AS</span> w <span class="keyword">ON</span> t.code <span class="operator">=</span> w.code <span class="keyword">AND</span> t.power <span class="operator">=</span> w.power <span class="keyword">AND</span> t.coins_needed <span class="operator">=</span> w.coins_needed</span><br><span class="line"><span class="keyword">JOIN</span> Wands_Property <span class="keyword">AS</span> p <span class="keyword">ON</span> w.code <span class="operator">=</span> p.code</span><br><span class="line"><span class="keyword">WHERE</span> p.is_evil <span class="operator">=</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">4</span> <span class="keyword">DESC</span> , <span class="number">2</span> <span class="keyword">DESC</span> ;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>考察点：GROUP BY &amp; 多表联结</p>
+<ul>
+<li>
+<p>重点还是读题</p>
+<blockquote>
+<p>Hermione decides the best way to choose is by determining the minimum number of gold galleons needed to buy each <em>non-evil</em> wand of high power and age.</p>
+<p>表达的意思是：以年龄和威力进行分组，找到最少购买金币，且邪恶值为0</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="challenges"><a class="markdownIt-Anchor" href="#challenges"></a> Challenges</h3>
+<h4 id="题目-9"><a class="markdownIt-Anchor" href="#题目-9"></a> 题目</h4>
+<p>Julia asked her students to create some coding challenges. Write a query to print the <em>hacker_id</em>, <em>name</em>, and the total number of challenges created by each student. Sort your results by the total number of challenges in descending order. If more than one student created the same number of challenges, then sort the result by <em>hacker_id</em>. If more than one student created the same number of challenges and the count is less than the maximum number of challenges created, then exclude those students from the result.</p>
+<h4 id="解题-9"><a class="markdownIt-Anchor" href="#解题-9"></a> 解题</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- print the hacker_id, name, and the total number of challenges created by each student. </span></span><br><span class="line"><span class="comment">-- Sort by the total number of challenges in descending order. </span></span><br><span class="line"><span class="comment">-- If more than one student created the same number of challenges, then sort by hacker_id. </span></span><br><span class="line"><span class="comment">-- If more than one student created the same number of challenges and the count is less than the maximum number of challenges created, then exclude those students from the result.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> c.hacker_id , h.name , <span class="built_in">COUNT</span>(c.challenge_id) <span class="keyword">AS</span> challenges_created</span><br><span class="line"><span class="keyword">FROM</span> Challenges <span class="keyword">AS</span> c <span class="keyword">JOIN</span> Hackers <span class="keyword">AS</span> h <span class="keyword">ON</span> c.hacker_id <span class="operator">=</span> h.hacker_id</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="number">1</span> , <span class="number">2</span></span><br><span class="line"><span class="keyword">HAVING</span> challenges_created <span class="operator">=</span> (<span class="keyword">SELECT</span> <span class="built_in">MAX</span>(t.c_challenges) <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> hacker_id ,<span class="built_in">COUNT</span>(challenge_id) <span class="keyword">AS</span> c_challenges <span class="keyword">FROM</span> Challenges <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="number">1</span>) <span class="keyword">AS</span> t) <span class="keyword">OR</span> challenges_created <span class="keyword">IN</span> (<span class="keyword">SELECT</span> t1.cnt <span class="keyword">FROM</span></span><br><span class="line">(<span class="keyword">SELECT</span> hacker_id , <span class="built_in">COUNT</span>(challenge_id) <span class="keyword">AS</span> cnt</span><br><span class="line"><span class="keyword">FROM</span> Challenges <span class="keyword">GROUP</span> <span class="keyword">BY</span> hacker_id) t1 </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> t1.cnt</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(t1.cnt) <span class="operator">=</span> <span class="number">1</span>)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">3</span> <span class="keyword">DESC</span> , <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>考察点：HAVING &amp; 子查询</p>
+<ul>
+<li>
+<p>逻辑分解</p>
+<blockquote>
+<p>If more than one student created the same number of challenges and the count is less than the maximum number of challenges created, then exclude those students from the result.</p>
+<p>原义为：如果多个学生创建了相同数量的挑战并且计数小于创建的最大挑战数，则将这些学生排除在结果之外。</p>
+<p>等同于：创建的最大挑战数的所有学生id + 创建挑战数的数量为 1 的学生 id</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2022/11/07/MySQL/hacker/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    HackerRank中SQL练习_简单
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">MySQL练习 - 基础篇(持续更新ing)</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>python数据类型 - 列表与字典 | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="Python,数据类型" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="摘要 python数据类型之列表(List)&amp;字典(Dictionary),基础特性以及常用场景～">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python数据类型 - 列表与字典">
+<meta property="og:url" content="http://example.com/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="摘要 python数据类型之列表(List)&amp;字典(Dictionary),基础特性以及常用场景～">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-08T12:41:02.000Z">
+<meta property="article:modified_time" content="2023-02-15T09:29:45.620Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="Python,数据类型">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file active"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Python/基础函数/python数据类型 - 列表与字典" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Python/">Python</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/">基础函数</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Python-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">Python,数据类型</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">
+            <time datetime="2021-08-08T12:41:02.000Z" itemprop="datePublished">2021-08-08</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/Python/基础函数/python数据类型 - 列表与字典.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/Python/基础函数/python数据类型 - 列表与字典.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/Python/基础函数/python数据类型 - 列表与字典.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            python数据类型 - 列表与字典
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-number">1.</span> <span class="toc-text"> 写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E8%A1%A8list"><span class="toc-number">2.</span> <span class="toc-text"> 列表(List)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7"><span class="toc-number">2.1.</span> <span class="toc-text"> 列表的高级特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-number">2.1.1.</span> <span class="toc-text"> 索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E7%89%87"><span class="toc-number">2.1.2.</span> <span class="toc-text"> 切片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#in-%E6%93%8D%E4%BD%9C"><span class="toc-number">2.1.3.</span> <span class="toc-text"> in 操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text"> 常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#append"><span class="toc-number">2.2.1.</span> <span class="toc-text"> append</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#extend"><span class="toc-number">2.2.2.</span> <span class="toc-text"> extend</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#insert"><span class="toc-number">2.2.3.</span> <span class="toc-text"> insert</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#copy"><span class="toc-number">2.2.4.</span> <span class="toc-text"> copy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8-%E5%88%A0%E9%99%A4"><span class="toc-number">2.2.5.</span> <span class="toc-text"> 列表 - 删除</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.6.</span> <span class="toc-text"> 内置方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E5%85%B8dictionary"><span class="toc-number">3.</span> <span class="toc-text"> 字典(Dictionary)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E7%9F%A5"><span class="toc-number">3.1.</span> <span class="toc-text"> 必知</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E4%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text"> 必会</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E9%94%AE"><span class="toc-number">3.2.1.</span> <span class="toc-text"> 获取键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%80%BC"><span class="toc-number">3.2.2.</span> <span class="toc-text"> 获取值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E9%94%AE%E4%B8%8E%E5%80%BC"><span class="toc-number">3.2.3.</span> <span class="toc-text"> 获取键与值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#get%E6%96%B9%E6%B3%95"><span class="toc-number">3.2.4.</span> <span class="toc-text"> get方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E5%85%B8-%E6%9B%B4%E6%96%B0"><span class="toc-number">3.2.5.</span> <span class="toc-text"> 字典 - 更新</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#in%E6%93%8D%E4%BD%9C"><span class="toc-number">3.2.6.</span> <span class="toc-text"> in操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E6%96%B9%E6%B3%95-2"><span class="toc-number">3.2.7.</span> <span class="toc-text"> 内置方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%90%8E%E9%9D%A2"><span class="toc-number">4.</span> <span class="toc-text"> 写在后面</span></a></li></ol>
+                </div>
+            
+        
+        
+            <blockquote>
+<p>摘要<br />
+python数据类型之列表(List)&amp;字典(Dictionary),基础特性以及常用场景～</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="写在前面"><a class="markdownIt-Anchor" href="#写在前面"></a> 写在前面</h2>
+<p>上篇博文介绍了python中最基本的数据类型之一字符串，接下来介绍另外两个最常用的python数据类型：列表与字典，包括其特性与一些必须会的操作函数。在数据分析过程中，这两种数据结构也是用的比较多的，所以掌握这两种基础数据类型的操作是必不可少的～</p>
+<h2 id="列表list"><a class="markdownIt-Anchor" href="#列表list"></a> 列表(List)</h2>
+<blockquote>
+<ul>
+<li>列表的表示： []</li>
+<li>列表的元素类型：可以是任意数据类型的python对象类型，包括数字、字符串、列表、布尔值…</li>
+<li>列表内的元素以<strong>逗号</strong>为分割，逗号与逗号之间即是一个整体</li>
+<li>列表是一种<strong>有序</strong>的集合，可以随时添加和删除其中的元素</li>
+<li>列表的索引从<strong>0</strong>开始</li>
+</ul>
+</blockquote>
+<h3 id="列表的高级特性"><a class="markdownIt-Anchor" href="#列表的高级特性"></a> 列表的高级特性</h3>
+<h4 id="索引"><a class="markdownIt-Anchor" href="#索引"></a> <strong>索引</strong></h4>
+<blockquote>
+<p>列表的索引是从0开始的</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 索引取值</span></span><br><span class="line"></span><br><span class="line">li = [<span class="number">1</span>,<span class="number">23</span>,<span class="number">8</span>,<span class="string">&#x27;giu&#x27;</span>,[<span class="string">&#x27;时代&#x27;</span>,<span class="string">&#x27;shkj&#x27;</span>,<span class="number">1737</span>],<span class="literal">True</span>]</span><br><span class="line"><span class="built_in">print</span>(li[<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">giu</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以根据索引对列表的元素进行修改与删除</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 根据索引进行列表内元素修改</span></span><br><span class="line"></span><br><span class="line">li[<span class="number">2</span>] = <span class="number">20</span></span><br><span class="line"><span class="built_in">print</span>(li)</span><br><span class="line"></span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>, <span class="number">23</span>, <span class="number">20</span>, <span class="string">&#x27;giu&#x27;</span>, [<span class="string">&#x27;时代&#x27;</span>, <span class="string">&#x27;shkj&#x27;</span>, <span class="number">1737</span>], <span class="literal">True</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据索引列表内元素删除</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span> li[<span class="number">1</span>]</span><br><span class="line"><span class="built_in">print</span>(li)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>, <span class="number">20</span>, <span class="string">&#x27;giu&#x27;</span>, [<span class="string">&#x27;时代&#x27;</span>, <span class="string">&#x27;shkj&#x27;</span>, <span class="number">1737</span>], <span class="literal">True</span>]</span><br></pre></td></tr></table></figure>
+<br>
+<h4 id="切片"><a class="markdownIt-Anchor" href="#切片"></a> <strong>切片</strong></h4>
+<blockquote>
+<p>切片的<strong>输出</strong>结果也是<strong>list</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切片取值</span></span><br><span class="line"></span><br><span class="line">li = [<span class="number">1</span>,<span class="number">23</span>,<span class="number">8</span>,<span class="string">&#x27;giu&#x27;</span>,[<span class="string">&#x27;时代&#x27;</span>,<span class="string">&#x27;shkj&#x27;</span>,<span class="number">1737</span>],<span class="literal">True</span>]</span><br><span class="line"><span class="built_in">print</span>(li[<span class="number">2</span>:<span class="number">5</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">[<span class="number">8</span>, <span class="string">&#x27;giu&#x27;</span>, [<span class="string">&#x27;时代&#x27;</span>, <span class="string">&#x27;shkj&#x27;</span>, <span class="number">1737</span>]]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用切片对列表的多个元素进行修改与删除</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 根据切片进行列表内元素修改</span></span><br><span class="line"></span><br><span class="line">li[<span class="number">1</span>:<span class="number">3</span>] = [<span class="number">11</span>,<span class="number">32</span>]</span><br><span class="line"><span class="built_in">print</span>(li)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>, <span class="number">11</span>, <span class="number">32</span>, <span class="string">&#x27;giu&#x27;</span>, [<span class="string">&#x27;时代&#x27;</span>, <span class="string">&#x27;shkj&#x27;</span>, <span class="number">1737</span>], <span class="literal">True</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据切片列表内元素删除</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span> li[<span class="number">2</span>:<span class="number">5</span>]</span><br><span class="line"><span class="built_in">print</span>(li)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>, <span class="number">23</span>, <span class="literal">True</span>]</span><br></pre></td></tr></table></figure>
+<br>
+<h4 id="in-操作"><a class="markdownIt-Anchor" href="#in-操作"></a> <strong>in 操作</strong></h4>
+<blockquote>
+<p>需要注意的是：列表内的元素以逗号为分割，即是一个整体，当元素是一个列表时，列表内的元素<strong>不能单独</strong>被in操作识别</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># in 操作</span></span><br><span class="line"></span><br><span class="line">li = [<span class="number">12</span>,<span class="string">&#x27;wudu&#x27;</span>,[<span class="number">83</span>,<span class="string">&#x27;wudi&#x27;</span>,<span class="number">8</span>]]</span><br><span class="line">v = <span class="number">11</span> <span class="keyword">in</span> li</span><br><span class="line"><span class="built_in">print</span>(v)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"></span><br><span class="line">li = [<span class="number">12</span>,<span class="string">&#x27;wudu&#x27;</span>,[<span class="number">83</span>,<span class="string">&#x27;wudi&#x27;</span>,<span class="number">8</span>]]</span><br><span class="line">v = <span class="string">&#x27;wudi&#x27;</span> <span class="keyword">in</span> li</span><br><span class="line"><span class="built_in">print</span>(v)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<br>
+<h3 id="常用方法"><a class="markdownIt-Anchor" href="#常用方法"></a> 常用方法</h3>
+<h4 id="append"><a class="markdownIt-Anchor" href="#append"></a> <strong>append</strong></h4>
+<blockquote>
+<p>append : <strong>追加</strong>，在原来的列表最后追加输入的参数(输入参数将作为<strong>一个整体</strong>追加)</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># append </span></span><br><span class="line"></span><br><span class="line">li = [<span class="string">&#x27;qwe&#x27;</span>,<span class="string">&#x27;hsdj&#x27;</span>,<span class="string">&#x27;sad&#x27;</span>,<span class="string">&#x27;aw&#x27;</span>,<span class="string">&#x27;12&#x27;</span>,<span class="number">12</span>]</span><br><span class="line">v = li.append(<span class="string">&#x27;无敌&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(li)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">[<span class="string">&#x27;qwe&#x27;</span>, <span class="string">&#x27;hsdj&#x27;</span>, <span class="string">&#x27;sad&#x27;</span>, <span class="string">&#x27;aw&#x27;</span>, <span class="string">&#x27;12&#x27;</span>, <span class="number">12</span>, <span class="string">&#x27;无敌&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<br>
+<h4 id="extend"><a class="markdownIt-Anchor" href="#extend"></a> <strong>extend</strong></h4>
+<blockquote>
+<p><strong>扩展</strong>原列表，与append 的不同之处在于：append输入的参数作为<strong>整体</strong>追加到列表末尾，而extend输入的参数<strong>内部for循环</strong>，<strong>逐个</strong>加入列表</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">li = [<span class="string">&#x27;qwe&#x27;</span>,<span class="string">&#x27;hsdj&#x27;</span>,<span class="string">&#x27;aw&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">33</span>,<span class="string">&#x27;sdh&#x27;</span>]:</span><br><span class="line">     li.append(i)</span><br><span class="line"><span class="built_in">print</span>(li)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">[<span class="string">&#x27;qwe&#x27;</span>, <span class="string">&#x27;hsdj&#x27;</span>, <span class="string">&#x27;aw&#x27;</span>, <span class="number">33</span>, <span class="string">&#x27;sdh&#x27;</span>]</span><br><span class="line"></span><br><span class="line">li.extend(<span class="string">&#x27;nbeu&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(li)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">[<span class="string">&#x27;qwe&#x27;</span>, <span class="string">&#x27;hsdj&#x27;</span>, <span class="string">&#x27;aw&#x27;</span>, <span class="number">33</span>, <span class="string">&#x27;sdh&#x27;</span>, <span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;u&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<br>
+<h4 id="insert"><a class="markdownIt-Anchor" href="#insert"></a> <strong>insert</strong></h4>
+<blockquote>
+<p><strong>插入</strong>，在指定索引位置插入，第一个参数为索引位置，第二个参数为插入的值</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">li = [<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>,<span class="number">23</span>,<span class="number">32</span>]</span><br><span class="line">li.insert(<span class="number">2</span>,<span class="number">668</span>)</span><br><span class="line"><span class="built_in">print</span>(li)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">[<span class="number">11</span>, <span class="number">22</span>, <span class="number">668</span>, <span class="number">33</span>, <span class="number">23</span>, <span class="number">32</span>]</span><br></pre></td></tr></table></figure>
+<br>
+<h4 id="copy"><a class="markdownIt-Anchor" href="#copy"></a> <strong>copy</strong></h4>
+<blockquote>
+<p>列表拷贝(复制)，属于<strong>浅拷贝</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># copy</span></span><br><span class="line"></span><br><span class="line">li = [<span class="string">&#x27;qwe&#x27;</span>,<span class="string">&#x27;hsdj&#x27;</span>,<span class="string">&#x27;sad&#x27;</span>,<span class="string">&#x27;aw&#x27;</span>,<span class="string">&#x27;12&#x27;</span>,<span class="number">12</span>]</span><br><span class="line">v = li.copy()</span><br><span class="line"><span class="built_in">print</span>(v)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">[<span class="string">&#x27;qwe&#x27;</span>, <span class="string">&#x27;hsdj&#x27;</span>, <span class="string">&#x27;sad&#x27;</span>, <span class="string">&#x27;aw&#x27;</span>, <span class="string">&#x27;12&#x27;</span>, <span class="number">12</span>]</span><br></pre></td></tr></table></figure>
+<br>
+<h4 id="列表-删除"><a class="markdownIt-Anchor" href="#列表-删除"></a> 列表 - <strong>删除</strong></h4>
+<blockquote>
+<p>除了上面介绍的根据索引和切片对列表元素进行删除以外，还有以下三种方法：</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pop</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除，默认状况下删除列表最后一个值，输入的参数为需要删除的索引位置</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">li = [<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>,<span class="number">23</span>,<span class="number">32</span>]</span><br><span class="line">v = li.pop(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(li)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 特点是，能获取到所删除的值</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(v)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">[<span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>, <span class="number">32</span>]</span><br><span class="line"><span class="number">23</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># remove</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除列表中的指定的值，左边优先</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">li = [<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>,<span class="number">23</span>,<span class="number">32</span>]</span><br><span class="line">li.remove(<span class="number">22</span>)</span><br><span class="line"><span class="built_in">print</span>(li)</span><br><span class="line"></span><br><span class="line"><span class="comment"># clear</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清空列表</span></span><br><span class="line"></span><br><span class="line">li = [<span class="string">&#x27;qwe&#x27;</span>,<span class="string">&#x27;hsdj&#x27;</span>,<span class="string">&#x27;sad&#x27;</span>,<span class="string">&#x27;aw&#x27;</span>,<span class="string">&#x27;12&#x27;</span>,<span class="number">12</span>]</span><br><span class="line">li.clear()</span><br><span class="line"><span class="built_in">print</span>(li)</span><br></pre></td></tr></table></figure>
+<br>
+<h4 id="内置方法"><a class="markdownIt-Anchor" href="#内置方法"></a> <strong>内置方法</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># count</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算列表内元素出现的个数</span></span><br><span class="line"></span><br><span class="line">li = [<span class="string">&#x27;qwe&#x27;</span>,<span class="number">12</span>,<span class="string">&#x27;hsdj&#x27;</span>,<span class="string">&#x27;aw&#x27;</span>,<span class="string">&#x27;aw&#x27;</span>,<span class="string">&#x27;12&#x27;</span>,<span class="number">12</span>]</span><br><span class="line">v = li.count(<span class="number">12</span>)</span><br><span class="line"><span class="built_in">print</span>(v)</span><br><span class="line"></span><br><span class="line"><span class="comment"># index</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据值获取当前值的索引位置，由左往右，后置位参数为开始寻找的区间</span></span><br><span class="line"></span><br><span class="line">li = [<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>,<span class="number">23</span>,<span class="number">32</span>,<span class="number">11</span>,<span class="number">13</span>,<span class="number">12</span>]</span><br><span class="line">v = li.index(<span class="number">11</span>)</span><br><span class="line">v1 = li.index(<span class="number">11</span>,<span class="number">1</span>,<span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(v,v1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># reverse</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将当前列表进行反转</span></span><br><span class="line"></span><br><span class="line">li = [<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>,<span class="number">23</span>,<span class="number">32</span>]</span><br><span class="line">li.reverse()</span><br><span class="line"><span class="built_in">print</span>(li)</span><br><span class="line"></span><br><span class="line"><span class="comment"># sort</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从小到大排序，reverse=True为从大到小排序</span></span><br><span class="line"></span><br><span class="line">li = [<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>,<span class="number">23</span>,<span class="number">32</span>]</span><br><span class="line">li.sort(reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(li)</span><br></pre></td></tr></table></figure>
+<br>
+<h2 id="字典dictionary"><a class="markdownIt-Anchor" href="#字典dictionary"></a> 字典(Dictionary)</h2>
+<h3 id="必知"><a class="markdownIt-Anchor" href="#必知"></a> <strong>必知</strong></h3>
+<blockquote>
+<ul>
+<li>字典的表示：{}</li>
+<li>由<strong>键值对</strong>组成，以逗号分割，且是<strong>无序</strong>的，具有极快的<strong>查找速度</strong></li>
+<li>列表、字典不能作为字典的key，字典的value可以是任何类型值</li>
+<li>字典是一种<strong>可变容器</strong>模型，且可存储任意类型对象，如字符串、数字、元组等其他容器模型</li>
+<li>字典中键是唯一的，如果重复最后的一个键值对会<strong>替换</strong>前面的，值不需要唯一</li>
+</ul>
+</blockquote>
+<br>
+<h3 id="必会"><a class="markdownIt-Anchor" href="#必会"></a> <strong>必会</strong></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建字典</span></span><br><span class="line"></span><br><span class="line">info = &#123;</span><br><span class="line">     <span class="number">1</span>:<span class="string">&#x27;sad&#x27;</span>,</span><br><span class="line">     <span class="string">&#x27;k1&#x27;</span>: [<span class="string">&#x27;sad&#x27;</span>,<span class="number">12</span>,[<span class="string">&#x27;sd&#x27;</span>,<span class="string">&#x27;dw&#x27;</span>]],</span><br><span class="line">     (<span class="number">1</span>,<span class="number">22</span>):<span class="string">&#x27;123&#x27;</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<br>
+<h4 id="获取键"><a class="markdownIt-Anchor" href="#获取键"></a> <strong>获取键</strong></h4>
+<blockquote>
+<p>获取字典中键值对的<strong>键</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> info.keys():</span><br><span class="line">     <span class="built_in">print</span>(item)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span></span><br><span class="line">k1</span><br><span class="line">(<span class="number">1</span>, <span class="number">22</span>)</span><br></pre></td></tr></table></figure>
+<br>
+<h4 id="获取值"><a class="markdownIt-Anchor" href="#获取值"></a> <strong>获取值</strong></h4>
+<blockquote>
+<p>获取字典中键值对的<strong>值</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> info.values():</span><br><span class="line">     <span class="built_in">print</span>(item)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">sad</span><br><span class="line">[<span class="string">&#x27;sad&#x27;</span>, <span class="number">12</span>, [<span class="string">&#x27;sd&#x27;</span>, <span class="string">&#x27;dw&#x27;</span>]]</span><br><span class="line"><span class="number">123</span></span><br></pre></td></tr></table></figure>
+<br>
+<h4 id="获取键与值"><a class="markdownIt-Anchor" href="#获取键与值"></a> <strong>获取键与值</strong></h4>
+<blockquote>
+<p>同时获取键值对的<strong>键与值</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> info.items():</span><br><span class="line">     <span class="built_in">print</span>(k,v)</span><br><span class="line">        </span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span> sad</span><br><span class="line">k1 [<span class="string">&#x27;sad&#x27;</span>, <span class="number">12</span>, [<span class="string">&#x27;sd&#x27;</span>, <span class="string">&#x27;dw&#x27;</span>]]</span><br><span class="line">(<span class="number">1</span>, <span class="number">22</span>) <span class="number">123</span></span><br></pre></td></tr></table></figure>
+<br>
+<h4 id="get方法"><a class="markdownIt-Anchor" href="#get方法"></a> <strong>get方法</strong></h4>
+<blockquote>
+<p>根据传入的键获得值，后置位参数为：如果键不存在时的<strong>返回值</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">v = info.get(<span class="string">&#x27;k&#x27;</span>,<span class="number">111</span>)</span><br><span class="line"><span class="built_in">print</span>(v)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line"><span class="number">111</span></span><br></pre></td></tr></table></figure>
+<br>
+<h4 id="字典-更新"><a class="markdownIt-Anchor" href="#字典-更新"></a> 字典 - <strong>更新</strong></h4>
+<blockquote>
+<p>update ：<strong>更新</strong>字典内的键值对的两种方法</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 字典形式传入</span></span><br><span class="line"></span><br><span class="line">info.update(&#123;<span class="string">&#x27;k1&#x27;</span>:<span class="string">&#x27;1111&#x27;</span>,<span class="string">&#x27;k3&#x27;</span>:<span class="string">&#x27;v3&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 赋值形式传入</span></span><br><span class="line"></span><br><span class="line">info.update(k1=<span class="number">112</span>,k5=<span class="string">&#x27;d&#x27;</span>,k6=<span class="number">668</span>)</span><br><span class="line"><span class="built_in">print</span>(dic)</span><br></pre></td></tr></table></figure>
+<br>
+<h4 id="in操作"><a class="markdownIt-Anchor" href="#in操作"></a> <strong>in操作</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> dic = &#123;</span><br><span class="line">     <span class="string">&#x27;k1&#x27;</span>:<span class="string">&#x27;v1&#x27;</span>,</span><br><span class="line">     <span class="string">&#x27;k2&#x27;</span>:<span class="string">&#x27;v2&#x27;</span></span><br><span class="line"> &#125;</span><br><span class="line"> v = <span class="string">&#x27;k1&#x27;</span> <span class="keyword">in</span> dic</span><br><span class="line"> v1 = <span class="string">&#x27;v1&#x27;</span> <span class="keyword">in</span> dic.values()</span><br><span class="line"> <span class="built_in">print</span>(v,v1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line"><span class="literal">True</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<br>
+<h4 id="内置方法-2"><a class="markdownIt-Anchor" href="#内置方法-2"></a> <strong>内置方法</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .pop</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除指定键的值，后置位参数为，如果指定键不存在的返回值</span></span><br><span class="line"></span><br><span class="line">v = dic.pop(<span class="string">&#x27;k111&#x27;</span>,<span class="string">&#x27;不存在&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(dic,v)</span><br><span class="line"></span><br><span class="line"><span class="comment"># .popitem</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机删除一个键值对，并获得该键值对，支持将键值对分别赋值给键和值</span></span><br><span class="line"></span><br><span class="line">k,v = dic.popitem()</span><br><span class="line"><span class="built_in">print</span>(dic,k,v)</span><br><span class="line"></span><br><span class="line"><span class="comment"># .setdefault</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据传入的key设置值，若key已存在，不进行设置，并获取当前已存在的key的值</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 若key不存在，插入键值对，后置位参数默认为none，并获取当前生成的键值对的key的值</span></span><br><span class="line"></span><br><span class="line">dic.setdefault(<span class="string">&#x27;k3&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(dic)</span><br><span class="line"></span><br><span class="line"><span class="comment"># .clear    删除字典</span></span><br><span class="line"></span><br><span class="line">dic.clear()</span><br><span class="line"><span class="built_in">print</span>(dic)</span><br><span class="line"></span><br><span class="line"><span class="comment"># .copy    复制字典</span></span><br><span class="line"></span><br><span class="line">v = dic.copy()</span><br><span class="line"><span class="built_in">print</span>(v)</span><br><span class="line"></span><br><span class="line"><span class="comment"># .fromkeys    根据传入的序列，创建字典，并指定统一的值</span></span><br><span class="line"></span><br><span class="line">v = <span class="built_in">dict</span>.fromkeys([<span class="string">&#x27;sadj&#x27;</span>,<span class="number">123</span>,<span class="string">&#x27;999&#x27;</span>],<span class="number">333</span>)</span><br><span class="line"><span class="built_in">print</span>(v)</span><br><span class="line"></span><br><span class="line"><span class="comment"># dict.setdefault(key, default=None)    </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 和get()类似, 但如果键不已经存在于字典中，将会添加键并将值设为default</span></span><br></pre></td></tr></table></figure>
+<br>
+<h2 id="写在后面"><a class="markdownIt-Anchor" href="#写在后面"></a> 写在后面</h2>
+<p>本篇博客为学习数据分析时，学习python基本使用的笔记整理，很是浅显，不过学习是一件值得开心的事，不论所学是深或浅，千里之行始于足下嘛，只要在走，就不怕远～</p>
+<p>本文版权归作者所有，欢迎转载，转载请注明出处和链接来源。</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Matplotlib - 常用图表 &amp; python表格样式
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">python数据类型 - 字符串</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

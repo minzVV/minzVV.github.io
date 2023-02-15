@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>一条MySQL语句的执行详析 | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="MySQL" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="摘要 从常用的MySQL关键字到MySQL语句的书写，再到MySQL语句的执行，一步步深入学习MySQL～">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一条MySQL语句的执行详析">
+<meta property="og:url" content="http://example.com/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="摘要 从常用的MySQL关键字到MySQL语句的书写，再到MySQL语句的执行，一步步深入学习MySQL～">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/sql-join.png">
+<meta property="article:published_time" content="2021-07-11T12:41:02.000Z">
+<meta property="article:modified_time" content="2023-02-14T12:49:29.101Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/sql-join.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-MySQL/mysql关键字以及语句执行顺序" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/MySQL/">MySQL</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/MySQL/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/">基础学习</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/MySQL/" rel="tag">MySQL</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">
+            <time datetime="2021-07-11T12:41:02.000Z" itemprop="datePublished">2021-07-11</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/MySQL/mysql关键字以及语句执行顺序.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/MySQL/mysql关键字以及语句执行顺序.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/MySQL/mysql关键字以及语句执行顺序.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            一条MySQL语句的执行详析
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql%E5%B8%B8%E7%94%A8%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">1.</span> <span class="toc-text"> MySQL常用的关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql%E4%B9%A6%E5%86%99%E9%A1%BA%E5%BA%8F"><span class="toc-number">2.</span> <span class="toc-text"> MySQL书写顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="toc-number">3.</span> <span class="toc-text"> MySQL执行顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql%E5%85%B3%E9%94%AE%E8%AF%8D%E5%90%AB%E4%B9%89"><span class="toc-number">4.</span> <span class="toc-text"> mysql关键词含义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E5%89%96%E6%9E%90"><span class="toc-number">5.</span> <span class="toc-text"> 实例剖析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE"><span class="toc-number">5.1.</span> <span class="toc-text"> 创建数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E6%99%AF%E6%A8%A1%E6%8B%9F"><span class="toc-number">5.2.</span> <span class="toc-text"> 情景模拟</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">5.3.</span> <span class="toc-text"> 执行过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text"> 总结</span></a></li></ol>
+                </div>
+            
+        
+        
+            <blockquote>
+<p>摘要<br />
+从常用的MySQL关键字到MySQL语句的书写，再到MySQL语句的执行，一步步深入学习MySQL～</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="mysql常用的关键字"><a class="markdownIt-Anchor" href="#mysql常用的关键字"></a> MySQL常用的关键字</h3>
+</br>
+<p><strong>必选字段</strong>：SELECT、FROM</p>
+<p><strong>可选字段</strong>：DISTINCT、JOIN、ON、WHERE、GROUP BY、HAVING、ORDER BY、LIMIT</p>
+<p><strong>聚合函数</strong>：COUNT(计数)、SUM(求和)、max(最大值)、min(最小值)、avg(平均值)、group_concat(字符串连接)</p>
+</br>
+<blockquote>
+<p>#COUNT(1) &amp; COUNT(COLUMN)区别</p>
+<p>当数据集中不包含NULL值时，两者表现一致；当出现NULL值时，COUNT(COLUMN)不将NULL值所在行计入总数，相当于进行非NULL值计数。</p>
+<p>#实例</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DATABASE cnt_exp CHARSET utf8mb4;</span><br><span class="line">USE cnt_exp;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> stu(</span><br><span class="line">    id <span class="type">int</span>,</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">10</span>),</span><br><span class="line">    classid <span class="type">int</span>);</span><br><span class="line">    </span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">into</span> stu <span class="keyword">values</span> </span><br><span class="line">(<span class="number">1</span>,<span class="string">&#x27;A&#x27;</span>,<span class="number">1</span>),(<span class="number">2</span>,<span class="string">&#x27;B&#x27;</span>,<span class="number">1</span>),(<span class="number">3</span>,<span class="string">&#x27;C&#x27;</span>,<span class="number">2</span>),(<span class="number">4</span>,<span class="string">&#x27;D&#x27;</span>,<span class="number">2</span>),(<span class="number">5</span>,<span class="string">&#x27;A&#x27;</span>,<span class="number">1</span>),(<span class="number">6</span>,<span class="string">&#x27;F&#x27;</span>,<span class="number">1</span>),(<span class="number">7</span>,<span class="keyword">NULL</span>,<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> stu;</span><br><span class="line"><span class="operator">+</span><span class="comment">------+------+---------+</span></span><br><span class="line"><span class="operator">|</span> id   <span class="operator">|</span> name <span class="operator">|</span> classid <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+------+---------+</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">1</span> <span class="operator">|</span> A    <span class="operator">|</span>       <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">2</span> <span class="operator">|</span> B    <span class="operator">|</span>       <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">3</span> <span class="operator">|</span> C    <span class="operator">|</span>       <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">4</span> <span class="operator">|</span> D    <span class="operator">|</span>       <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">5</span> <span class="operator">|</span> A    <span class="operator">|</span>       <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">6</span> <span class="operator">|</span> F    <span class="operator">|</span>       <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">7</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span>       <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+------+---------+</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="number">1</span>),classid <span class="keyword">FROM</span> stu <span class="keyword">GROUP</span> <span class="keyword">BY</span> classid;</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="built_in">count</span>(<span class="number">1</span>) <span class="operator">|</span> classid <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+---------+</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">4</span> <span class="operator">|</span>       <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">3</span> <span class="operator">|</span>       <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+---------+</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(name),classid <span class="keyword">FROM</span> stu <span class="keyword">GROUP</span> <span class="keyword">BY</span> classid;</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="built_in">count</span>(name) <span class="operator">|</span> classid <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span>           <span class="number">4</span> <span class="operator">|</span>       <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>           <span class="number">2</span> <span class="operator">|</span>       <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> name),classid <span class="keyword">FROM</span> stu <span class="keyword">GROUP</span> <span class="keyword">BY</span> classid;</span><br><span class="line"><span class="operator">+</span><span class="comment">----------------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> name) <span class="operator">|</span> classid <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------------------+---------+</span></span><br><span class="line"><span class="operator">|</span>                    <span class="number">3</span> <span class="operator">|</span>       <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>                    <span class="number">2</span> <span class="operator">|</span>       <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------------------+---------+</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+</br>
+<h3 id="mysql书写顺序"><a class="markdownIt-Anchor" href="#mysql书写顺序"></a> <strong>MySQL书写顺序</strong></h3>
+<p>常见的MySQL语句</p>
+<p>SELECT -&gt; DISTINCT -&gt; FROM -&gt; JOIN -&gt; ON -&gt; WHERE -&gt; GROUP BY -&gt; HAVING -&gt; ORDER BY -&gt; LIMIT</p>
+</br>
+<h3 id="mysql执行顺序"><a class="markdownIt-Anchor" href="#mysql执行顺序"></a> MySQL执行顺序</h3>
+<blockquote>
+<p>–查询组合字段</p>
+<p>(8) SELECT (9) DISTINCT &lt;select_list&gt;</p>
+<p>(1) FROM <left-table></p>
+<p>(3) &lt;join_type&gt; JOIN &lt;right_table&gt;</p>
+<p>(2) ON &lt;join_condition&gt;</p>
+<p>(4) WHERE &lt;where_condition&gt;</p>
+<p>(5) GROUP BY &lt;group_by_list&gt;</p>
+<p>(6) WITH {CUBE|ROLLUP}</p>
+<p>(7) HAVING&lt;having_condition&gt;</p>
+<p>(10) ORDER BY &lt;order_by_list&gt;</p>
+<p>(11) LIMIT &lt;limit_number&gt;</p>
+</blockquote>
+</br>
+<h3 id="mysql关键词含义"><a class="markdownIt-Anchor" href="#mysql关键词含义"></a> <strong>mysql关键词含义</strong></h3>
+<ul>
+<li>FROM：对FROM子句中的左表&lt;left_table&gt;和右表&lt;right_table&gt;执行笛卡尔乘积，产生虚拟表 VT1</li>
+<li>ON：对虚拟表VT1根据&lt;join_condition&gt;进行ON筛选，符合的行插入虚拟表VT2</li>
+<li>JOIN：如果指定了OUTER JOIN (如LEFT OUTER JOIN、RIGHT OUTER JOIN)，那么保留表中未匹配的行作为外部行添加到虚拟表VT2中，产生虚拟表VT3。如果FROM子句中包含两个以上表，则对上一个连接生产的结果表VT3和下一个表进行重复执行(步骤1～步骤3），直到连接完所有的表</li>
+<li>WHERE：对虚拟表VT3根据&lt;where_condition&gt;进行WHERE过滤，符合的行插入虚拟表VT4</li>
+<li>GROUP BY：根据GROUP BY子句中的列，对虚拟表VT4中的数据进行分组操作，产生VT5</li>
+<li>CUBE|ROLLUP：对虚拟表VT5进行CUBE|ROLLUP操作，产生虚拟表VT6</li>
+<li>HAVING：对虚拟表VT6根据&lt;having_condition&gt;进行HAVING筛选，符合的行插入虚拟表VT7</li>
+<li>SELECT：根据SELECT选择指定的列，结果插入虚拟表VT8中</li>
+<li>DISTINCT：去除重复数据，结果插入虚拟表VT9</li>
+<li>ORDER BY：将虚拟表VT9按照&lt;order_by_list&gt;进行排序操作，产生虚拟表VT10</li>
+<li>LIMIT：根据&lt;limit_number&gt;取出指定行的数据，产生虚拟表VT11，并返回给查询用户</li>
+</ul>
+</br>
+<h3 id="实例剖析"><a class="markdownIt-Anchor" href="#实例剖析"></a> <strong>实例剖析</strong></h3>
+<h4 id="创建数据"><a class="markdownIt-Anchor" href="#创建数据"></a> 创建数据</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> customers(</span><br><span class="line">    c_id <span class="type">VARCHAR</span>(<span class="number">10</span>),</span><br><span class="line">    city <span class="type">VARCHAR</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY(c_id));</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> customers <span class="keyword">VALUES</span> </span><br><span class="line">(<span class="string">&#x27;163&#x27;</span>,<span class="string">&#x27;HangZhou&#x27;</span>),(<span class="string">&#x27;9you&#x27;</span>,<span class="string">&#x27;ShangHai&#x27;</span>),(<span class="string">&#x27;baidu&#x27;</span>,<span class="string">&#x27;HangZhou&#x27;</span>),(<span class="string">&#x27;TX&#x27;</span>,<span class="string">&#x27;HangZhou&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> customers;</span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+</span></span><br><span class="line"><span class="operator">|</span> c_id  <span class="operator">|</span> city     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">163</span>   <span class="operator">|</span> HangZhou <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">9</span>you  <span class="operator">|</span> ShangHai <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> baidu <span class="operator">|</span> HangZhou <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> TX    <span class="operator">|</span> HangZhou <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> orders(</span><br><span class="line">    order_id <span class="type">INT</span> AUTO_INCREMENT,</span><br><span class="line">    c_id <span class="type">VARCHAR</span>(<span class="number">10</span>),</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY(order_id));</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> orders <span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">1</span>,<span class="string">&#x27;163&#x27;</span>),(<span class="number">2</span>,<span class="string">&#x27;163&#x27;</span>),(<span class="number">3</span>,<span class="string">&#x27;9you&#x27;</span>),(<span class="number">4</span>,<span class="string">&#x27;9you&#x27;</span>),(<span class="number">5</span>,<span class="string">&#x27;9you&#x27;</span>),(<span class="number">6</span>,<span class="string">&#x27;TX&#x27;</span>),(<span class="number">7</span>,<span class="keyword">NULL</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> orders;</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+------+</span></span><br><span class="line"><span class="operator">|</span> order_id <span class="operator">|</span> c_id <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+------+</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">3</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">4</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">5</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">6</span> <span class="operator">|</span> TX   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>        <span class="number">7</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<h4 id="情景模拟"><a class="markdownIt-Anchor" href="#情景模拟"></a> 情景模拟</h4>
+<ul>
+<li>
+<p>题目：查询来自杭州且订单数少于2的客户，并且查询出他们的订单数量，查询结果按订单数从小到大排序</p>
+</li>
+<li>
+<p>解答</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customers.c_id,<span class="built_in">COUNT</span>(order_id) <span class="keyword">AS</span> total_orders</span><br><span class="line"><span class="keyword">FROM</span> customers </span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> orders </span><br><span class="line"><span class="keyword">ON</span> customers.c_id <span class="operator">=</span> orders.c_id</span><br><span class="line"><span class="keyword">WHERE</span> city<span class="operator">=</span><span class="string">&#x27;HangZhou&#x27;</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customers.c_id</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(orders.order_id)<span class="operator">&lt;</span><span class="number">2</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> total_orders <span class="keyword">DESC</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+--------------+</span></span><br><span class="line"><span class="operator">|</span> c_id  <span class="operator">|</span> total_orders <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+--------------+</span></span><br><span class="line"><span class="operator">|</span> TX    <span class="operator">|</span>            <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> baidu <span class="operator">|</span>            <span class="number">0</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+--------------+</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</br>
+<h4 id="执行过程"><a class="markdownIt-Anchor" href="#执行过程"></a> <strong>执行过程</strong></h4>
+<p><strong>(1) 执行FROM子句</strong></p>
+<p>即对FROM子句前后两张表进行笛卡尔乘积操作，也称作交叉连接，生成虚拟表VT1。如果FROM子句前表有a行数据，后表有b行数据，则虚拟表VT1中将包行a*b行数据。</p>
+<blockquote>
+<p>FROM customers  JOIN orders</p>
+</blockquote>
+<p>虚拟表VT1</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> customers <span class="keyword">JOIN</span> orders;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+----------+------+</span></span><br><span class="line"><span class="operator">|</span> c_id  <span class="operator">|</span> city     <span class="operator">|</span> order_id <span class="operator">|</span> c_id <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+----------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">163</span>   <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">9</span>you  <span class="operator">|</span> ShangHai <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> baidu <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> TX    <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">163</span>   <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">9</span>you  <span class="operator">|</span> ShangHai <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> baidu <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> TX    <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">163</span>   <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">3</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">9</span>you  <span class="operator">|</span> ShangHai <span class="operator">|</span>        <span class="number">3</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> baidu <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">3</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> TX    <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">3</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">163</span>   <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">4</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">9</span>you  <span class="operator">|</span> ShangHai <span class="operator">|</span>        <span class="number">4</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> baidu <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">4</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> TX    <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">4</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">163</span>   <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">5</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">9</span>you  <span class="operator">|</span> ShangHai <span class="operator">|</span>        <span class="number">5</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> baidu <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">5</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> TX    <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">5</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">163</span>   <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">6</span> <span class="operator">|</span> TX   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">9</span>you  <span class="operator">|</span> ShangHai <span class="operator">|</span>        <span class="number">6</span> <span class="operator">|</span> TX   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> baidu <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">6</span> <span class="operator">|</span> TX   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> TX    <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">6</span> <span class="operator">|</span> TX   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">163</span>   <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">7</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">9</span>you  <span class="operator">|</span> ShangHai <span class="operator">|</span>        <span class="number">7</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> baidu <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">7</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> TX    <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">7</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+----------+------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<p><strong>(2) 应用ON过滤</strong></p>
+<p>根据(1)中生成的虚拟表VT1，过滤条件为：</p>
+<blockquote>
+<p>ON customers.c_id = orders.c_id</p>
+</blockquote>
+<p>在产生虚拟表VT2时，会额外增加一个列来表示ON过滤条件的返回值，返回值有TRUE、FALSE、UNKNOWN。再取出比较值为TRUE的数据行，产生虚拟表VT2</p>
+<p>虚拟表VT2</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> customers <span class="keyword">JOIN</span> orders <span class="keyword">ON</span> customers.c_id <span class="operator">=</span> orders.c_id;</span><br><span class="line"><span class="operator">+</span><span class="comment">------+----------+----------+------+</span></span><br><span class="line"><span class="operator">|</span> c_id <span class="operator">|</span> city     <span class="operator">|</span> order_id <span class="operator">|</span> c_id <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+----------+----------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span> ShangHai <span class="operator">|</span>        <span class="number">3</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span> ShangHai <span class="operator">|</span>        <span class="number">4</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span> ShangHai <span class="operator">|</span>        <span class="number">5</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> TX   <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">6</span> <span class="operator">|</span> TX   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+----------+----------+------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<p><strong>(3) 添加外部行</strong></p>
+<p>这一步只有在连接类型为OUTER JOIN时才发生，即LEFT OUTER JOIN、RIGHT OUTER JOIN、FULL OUTER JOIN。LEFT OUTER JOIN把左表记为保留表(即保留左表全部数据行)，RIGHT OUTER JOIN把右表记为保留表，而FULL OUTER JION把左右表都记为保留表。具体可以参考下面图SQL_JOINS(图片来源网络，侵删)</p>
+<p>图SQL_JOINS</p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/sql-join.png" alt="" /></p>
+</br>
+<p>添加外部行执行内容就是在虚拟表VT2的基础上添加保留表中被过滤条件过滤掉的数据，非保留表中的数据则被赋予NULL值，最后生成虚拟表VT3</p>
+<p>虚拟表VT3</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> customers <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> orders <span class="keyword">on</span> customers.c_id <span class="operator">=</span> orders.c_id;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+----------+------+</span></span><br><span class="line"><span class="operator">|</span> c_id  <span class="operator">|</span> city     <span class="operator">|</span> order_id <span class="operator">|</span> c_id <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+----------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">163</span>   <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">163</span>   <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">9</span>you  <span class="operator">|</span> ShangHai <span class="operator">|</span>        <span class="number">3</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">9</span>you  <span class="operator">|</span> ShangHai <span class="operator">|</span>        <span class="number">4</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">9</span>you  <span class="operator">|</span> ShangHai <span class="operator">|</span>        <span class="number">5</span> <span class="operator">|</span> <span class="number">9</span>you <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> TX    <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">6</span> <span class="operator">|</span> TX   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> baidu <span class="operator">|</span> HangZhou <span class="operator">|</span>     <span class="keyword">NULL</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+----------+------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<p>(4) <strong>应用WHERE过滤</strong></p>
+<p>根据(3)生成的虚拟表VT3进行WHERE条件的过滤，符合&lt;where_condition&gt;的数据行输出生成虚拟表VT4。过滤条件为：</p>
+<blockquote>
+<p>WHERE customers.city = ‘HangZhou’</p>
+</blockquote>
+<p>虚拟表VT4</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> customers <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> orders <span class="keyword">on</span> customers.c_id <span class="operator">=</span> orders.c_id</span><br><span class="line"><span class="keyword">WHERE</span> customers.city <span class="operator">=</span> <span class="string">&#x27;HangZhou&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+----------+------+</span></span><br><span class="line"><span class="operator">|</span> c_id  <span class="operator">|</span> city     <span class="operator">|</span> order_id <span class="operator">|</span> c_id <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+----------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">163</span>   <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">163</span>   <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> TX    <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">6</span> <span class="operator">|</span> TX   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> baidu <span class="operator">|</span> HangZhou <span class="operator">|</span>     <span class="keyword">NULL</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+----------+------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<blockquote>
+<p>tips：在应用WHERE过滤时，需要严格注意之前未使用过的过滤项，例如以下两种情况</p>
+<ul>
+<li>未进行数据分组，不能在当前的WHERE过滤中使用&lt;where_condition&gt; = MIN(col) 这种聚合函数式的过滤</li>
+<li>如果别名出现在SELECT中，则在当前WHERE过滤中不能使用该别名；原因是语句的执行顺序</li>
+</ul>
+</blockquote>
+</br>
+<p>(5) <strong>分组</strong></p>
+<p>根据指定的&lt;group_by_list&gt;对(4)中生成的虚拟表进行分组，并生成虚拟表VT5；分组条件为：</p>
+<blockquote>
+<p>GROUP BY customers.c_id;</p>
+</blockquote>
+<p>虚拟表VT5</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> customers <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> orders <span class="keyword">on</span> customers.c_id <span class="operator">=</span> orders.c_id </span><br><span class="line"><span class="keyword">WHERE</span> customers.city <span class="operator">=</span> <span class="string">&#x27;HangZhou&#x27;</span> </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customers.c_id;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+----------+------+</span></span><br><span class="line"><span class="operator">|</span> c_id  <span class="operator">|</span> city     <span class="operator">|</span> order_id <span class="operator">|</span> c_id <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+----------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">163</span>   <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span> <span class="number">163</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> baidu <span class="operator">|</span> HangZhou <span class="operator">|</span>     <span class="keyword">NULL</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> TX    <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">6</span> <span class="operator">|</span> TX   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+----------+------+</span></span><br><span class="line">#实际环境中有 &quot;this is incompatible with sql_mode=only_full_group_by&quot;,因为加入没有后续的过滤条件</span><br></pre></td></tr></table></figure>
+</br>
+<p>(6) 并未应用ROLLUP或CUBE，跳过</p>
+<p>(7) <strong>应用HAVING过滤</strong></p>
+<p>根据(5)生成的虚拟表VT5进行HAVING条件过滤，符合&lt;having_condition&gt;的数据行输出生成虚拟表VT6，过滤条件为：</p>
+<blockquote>
+<p>HAVING count(orders.order_id &lt; 2)</p>
+</blockquote>
+<p>虚拟表VT6</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> customers <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> orders <span class="keyword">on</span> customers.c_id <span class="operator">=</span> orders.c_id </span><br><span class="line"><span class="keyword">WHERE</span> customers.city <span class="operator">=</span> <span class="string">&#x27;HangZhou&#x27;</span> </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customers.c_id</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(orders.order_id) <span class="operator">&lt;</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+----------+------+</span></span><br><span class="line"><span class="operator">|</span> c_id  <span class="operator">|</span> city     <span class="operator">|</span> order_id <span class="operator">|</span> c_id <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+----------+------+</span></span><br><span class="line"><span class="operator">|</span> baidu <span class="operator">|</span> HangZhou <span class="operator">|</span>     <span class="keyword">NULL</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> TX    <span class="operator">|</span> HangZhou <span class="operator">|</span>        <span class="number">6</span> <span class="operator">|</span> TX   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+----------+----------+------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<p>(8) <strong>筛选 - SELECT列表</strong></p>
+<p>将SELECT子句中的列从(7)生成的虚拟表VT6中筛选出来，生成虚拟表VT7，筛选条件为：</p>
+<blockquote>
+<p>SELECT customers.c_id,COUNT(order_id) AS total_orders</p>
+</blockquote>
+<p>虚拟表VT7</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customers.c_id,<span class="built_in">COUNT</span>(order_id) <span class="keyword">AS</span> total_orders</span><br><span class="line"><span class="keyword">FROM</span> customers <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> orders <span class="keyword">on</span> customers.c_id <span class="operator">=</span> orders.c_id </span><br><span class="line"><span class="keyword">WHERE</span> customers.city <span class="operator">=</span> <span class="string">&#x27;HangZhou&#x27;</span> </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customers.c_id</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(orders.order_id) <span class="operator">&lt;</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+--------------+</span></span><br><span class="line"><span class="operator">|</span> c_id  <span class="operator">|</span> total_orders <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+--------------+</span></span><br><span class="line"><span class="operator">|</span> baidu <span class="operator">|</span>            <span class="number">0</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> TX    <span class="operator">|</span>            <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+--------------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<p>(9) 去重 - DISTINCT ，本实例未应用，跳过</p>
+<p>(10) <strong>排序 - ORDER BY</strong></p>
+<p>根据指定的&lt;order_by_list&gt;对(8)中生成的虚拟表VT7进行排列顺序，返回新的虚拟表VT8，排序条件为：</p>
+<blockquote>
+<p>ORDER BY total_orders</p>
+</blockquote>
+<p>虚拟表VT8</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customers.c_id,<span class="built_in">COUNT</span>(order_id) <span class="keyword">AS</span> total_orders </span><br><span class="line"><span class="keyword">FROM</span> customers <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> orders <span class="keyword">on</span> customers.c_id <span class="operator">=</span> orders.c_id </span><br><span class="line"><span class="keyword">WHERE</span> customers.city <span class="operator">=</span> <span class="string">&#x27;HangZhou&#x27;</span>  </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customers.c_id </span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(orders.order_id) <span class="operator">&lt;</span> <span class="number">2</span> </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> total_orders <span class="keyword">DESC</span>;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+--------------+</span></span><br><span class="line"><span class="operator">|</span> c_id  <span class="operator">|</span> total_orders <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+--------------+</span></span><br><span class="line"><span class="operator">|</span> TX    <span class="operator">|</span>            <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> baidu <span class="operator">|</span>            <span class="number">0</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+--------------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<p>(11) 选取数据 - LIMIT</p>
+<blockquote>
+<p>tips：一般来说LIMIT和ORDER BY一起使用，因为没有ORDER BY的返回结果一般都是无序的</p>
+</blockquote>
+<p>本次实例没有应用，跳过～</p>
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> <strong>总结</strong></h3>
+<p>以上是在学习MySQL的书写以及执行顺序记录的学习笔记，并通过实例进行各个执行步骤的拆解，可以更详细的了解一条MySQL语句的执行顺序以及每个步骤产生的结果。以上学习资源均来自网络，如有侵权，告知删除，感谢阅读～</p>
+</br>
+<p><strong>参考文章</strong>:</p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/">掘金</a><br />
+<a target="_blank" rel="noopener" href="https://www.runoob.com/">菜鸟教程</a><br />
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/">CSDN</a></p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    MySQL数据库 - 初步认识
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">剖析天猫双十一的美妆产品销售数据</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

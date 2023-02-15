@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>泰坦尼克号幸存者分析 | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="DA Project" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="摘要 通过泰坦尼可号幸存者数据，分析幸存者的特征，从而…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="泰坦尼克号幸存者分析">
+<meta property="og:url" content="http://example.com/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="摘要 通过泰坦尼可号幸存者数据，分析幸存者的特征，从而…">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-4.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-5.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-6.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-7.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-8.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-9.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-10.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-11.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-12.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-13.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-14.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-15.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-16.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-17.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-18.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-19.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-20.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-21.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-22.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-23.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-24.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-25.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-26.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-27.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-28.png">
+<meta property="article:published_time" content="2021-03-19T12:41:02.000Z">
+<meta property="article:modified_time" content="2023-02-15T02:19:11.599Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="DA Project">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-1.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file active"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-数据分析案例/泰坦尼克生存分析" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">数据案例分析</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/DA-Project/" rel="tag">DA Project</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">
+            <time datetime="2021-03-19T12:41:02.000Z" itemprop="datePublished">2021-03-19</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/数据分析案例/泰坦尼克生存分析.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/数据分析案例/泰坦尼克生存分析.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/数据分析案例/泰坦尼克生存分析.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            泰坦尼克号幸存者分析
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text"> 项目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E6%B4%BB%E6%AF%94%E4%BE%8B%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text"> 存活比例分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B4%E9%BE%84%E5%88%86%E6%9E%90"><span class="toc-number">2.1.</span> <span class="toc-text"> 年龄分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E5%88%AB%E5%88%86%E6%9E%90"><span class="toc-number">2.2.</span> <span class="toc-text"> 性别分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B4%E9%BE%84%E5%88%86%E6%9E%90-%E8%80%81%E4%BA%BA%E4%B8%8E%E5%B0%8F%E5%AD%A9"><span class="toc-number">2.3.</span> <span class="toc-text"> 年龄分析 - 老人与小孩</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A2%E7%B4%A2%E4%BA%B2%E4%BA%BA%E7%9A%84%E4%BA%BA%E6%95%B0%E4%B8%8E%E5%AD%98%E6%B4%BB"><span class="toc-number">3.</span> <span class="toc-text"> 探索亲人的人数与存活</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A5%A8%E4%BB%B7%E5%88%86%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text"> 票价分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BB%E8%88%B9%E6%B8%AF%E5%8F%A3%E5%88%86%E6%9E%90"><span class="toc-number">5.</span> <span class="toc-text"> 登船港口分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text"> 数据处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%A1%AB%E5%85%85"><span class="toc-number">6.1.</span> <span class="toc-text"> 缺失值填充</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B"><span class="toc-number">7.</span> <span class="toc-text"> 特征工程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E5%BE%811-title"><span class="toc-number">7.1.</span> <span class="toc-text"> 特征1 - Title</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E5%BE%812-familysize"><span class="toc-number">7.2.</span> <span class="toc-text"> 特征2 - FamilySize</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E5%BE%813-deck"><span class="toc-number">7.3.</span> <span class="toc-text"> 特征3 - Deck</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E5%BE%814-ticketcount"><span class="toc-number">7.4.</span> <span class="toc-text"> 特征4 - TicketCount</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E5%BE%815-ticketgroup"><span class="toc-number">7.5.</span> <span class="toc-text"> 特征5 - TicketGroup</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">8.</span> <span class="toc-text"> 写在最后</span></a></li></ol>
+                </div>
+            
+        
+        
+            <blockquote>
+<p>摘要<br />
+通过泰坦尼可号幸存者数据，分析幸存者的特征，从而…</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="项目描述"><a class="markdownIt-Anchor" href="#项目描述"></a> 项目描述</h3>
+<p><strong>项目名称</strong>：泰坦尼克号生存分析</p>
+<p><strong>数据来源</strong>：Kaggle数据集 → 共有1309名乘客数据，其中891是已知存活情况（train.csv），剩下418则是需要进行分析预测的（test.csv）</p>
+<p><strong>字段意义</strong>：</p>
+<blockquote>
+<p>PassengerId    :    乘客编号</p>
+<p>Survived：是否存活（1：存活；0：死亡）</p>
+<p>Pclass：客舱等级</p>
+<p>Name：乘客姓名</p>
+<p>Sex：乘客性别</p>
+<p>Age：乘客年龄</p>
+<p>SibSp：同乘的兄弟姐妹/配偶人数</p>
+<p>Parch：同乘的父母/小孩人数</p>
+<p>Ticket：船票编号</p>
+<p>Fare：船票价格</p>
+<p>Cabin：客舱号</p>
+<p>Embarked：登船港口</p>
+</blockquote>
+<p><strong>项目目的</strong>：通过已知的获救数据，预测乘客的生存情况</p>
+<p><strong>环境解释</strong>：基于jupyter notebook，可视化工具包：seaborn、matplotlib</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line">matplotlib.style.use(<span class="string">&#x27;ggplot&#x27;</span>)</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">sns.<span class="built_in">set</span>(context=<span class="string">&#x27;notebook&#x27;</span>,style=<span class="string">&#x27;white&#x27;</span>,palette=<span class="string">&#x27;muted&#x27;</span>)</span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">&#x27;ignore&#x27;</span>)</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.chdir(<span class="string">r&#x27;/Users/nanb/Documents/数据存放&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据导入</span></span><br><span class="line"></span><br><span class="line">train = pd.read_csv(<span class="string">&#x27;train.csv&#x27;</span>)</span><br><span class="line">test = pd.read_csv(<span class="string">&#x27;test.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据查看</span></span><br><span class="line"></span><br><span class="line">train.head()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-1.png" alt="" /></p>
+</br>
+<h3 id="存活比例分析"><a class="markdownIt-Anchor" href="#存活比例分析"></a> <strong>存活比例分析</strong></h3>
+<blockquote>
+<p>整体来看，存活比例是怎样</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 饼图 -- 数据类别少使用饼图更为直观</span></span><br><span class="line"></span><br><span class="line">sns.<span class="built_in">set</span>()</span><br><span class="line">sns.set_style(<span class="string">&#x27;ticks&#x27;</span>)</span><br><span class="line">plt.axis(<span class="string">&#x27;equal&#x27;</span>)</span><br><span class="line">train[<span class="string">&#x27;Survived&#x27;</span>].value_counts().plot.pie(radius=<span class="number">1.5</span>,</span><br><span class="line">                                          explode=[<span class="number">0.1</span>,<span class="number">0</span>],</span><br><span class="line">                                          autopct = <span class="string">&#x27;%1.2f%%&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a25a0cef0&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-2.png" alt="" /></p>
+<p><strong>图表解析</strong>：存活比例仅为38.38%</p>
+</br>
+<h4 id="年龄分析"><a class="markdownIt-Anchor" href="#年龄分析"></a> <strong>年龄分析</strong></h4>
+<blockquote>
+<p>结合年龄数据，分析幸存下来的人有什么特点</p>
+</blockquote>
+<p>问题2：结合性别和年龄，分析幸存下来的人有什么特点</p>
+<p>1、年龄数据的分布情况<br />
+2、男性和女性的存活情况<br />
+3、老人和小孩的存活情况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 年龄分布</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">sum</span>(train[<span class="string">&#x27;Age&#x27;</span>].isnull())</span><br><span class="line"><span class="comment"># 去除缺失值</span></span><br><span class="line"></span><br><span class="line">train_age = train[train[<span class="string">&#x27;Age&#x27;</span>].notnull()]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 画布</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">12</span>,<span class="number">6</span>))</span><br><span class="line">plt.subplot(<span class="number">121</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制直方图</span></span><br><span class="line"></span><br><span class="line">train_age[<span class="string">&#x27;Age&#x27;</span>].hist(bins = <span class="number">70</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Age&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Num&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制箱型图</span></span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">122</span>)</span><br><span class="line">train_age.boxplot(column = <span class="string">&#x27;Age&#x27;</span>,showfliers = <span class="literal">False</span>)</span><br><span class="line">train_age[<span class="string">&#x27;Age&#x27;</span>].describe()</span><br><span class="line"></span><br><span class="line"><span class="comment"># a = train_age[&#x27;Age&#x27;].describe()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(&#x27;总体年龄分布：去掉缺失值后样本值共：%.f条，平均年龄为：%.2f，标准差为：%.f，最小年龄为：%.2f，最大年龄为：%.f&#x27; % (a[&#x27;count&#x27;],a[&#x27;mean&#x27;],a[&#x27;std&#x27;],a[&#x27;min&#x27;],a[&#x27;max&#x27;]))</span></span><br></pre></td></tr></table></figure>
+<pre><code>count    714.000000
+mean      29.699118
+std       14.526497
+min        0.420000
+25%       20.125000
+50%       28.000000
+75%       38.000000
+max       80.000000
+Name: Age, dtype: float64
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-3.png" alt="" /></p>
+<p><strong>图表解析</strong>：</p>
+<p>总体年龄分布：去掉缺失值后样本值共：714条，平均年龄为：29.70，标准差为：15，最小年龄为：0.42，最大年龄为：80</p>
+</br>
+<h4 id="性别分析"><a class="markdownIt-Anchor" href="#性别分析"></a> <strong>性别分析</strong></h4>
+<blockquote>
+<p>分析男性和女性的存活情况</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 男性和女性存活情况</span></span><br><span class="line"></span><br><span class="line">train[[<span class="string">&#x27;Sex&#x27;</span>,<span class="string">&#x27;Survived&#x27;</span>]].groupby([<span class="string">&#x27;Sex&#x27;</span>]).mean().plot.bar(figsize = (<span class="number">12</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line">survived_sex = train[train[<span class="string">&#x27;Survived&#x27;</span>] == <span class="number">1</span>][<span class="string">&#x27;Sex&#x27;</span>].value_counts()</span><br><span class="line">dead_sex = train[train[<span class="string">&#x27;Survived&#x27;</span>] == <span class="number">0</span>][<span class="string">&#x27;Sex&#x27;</span>].value_counts()</span><br><span class="line">df = pd.DataFrame([survived_sex,dead_sex])</span><br><span class="line">df.index = [<span class="string">&#x27;Survived&#x27;</span>,<span class="string">&#x27;Dead&#x27;</span>]</span><br><span class="line">df.plot(kind = <span class="string">&#x27;bar&#x27;</span>,stacked = <span class="literal">True</span>,figsize = (<span class="number">12</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># survive_sex = train.groupby([&#x27;Sex&#x27;,&#x27;Survived&#x27;])[&#x27;Survived&#x27;].count()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(&#x27;女性存活率为%.2f%%，男性存活率为%.2f%%&#x27; % (survive_sex.loc[&#x27;female&#x27;,1].sum()/survive_sex.loc[&#x27;female&#x27;].sum().sum()*100,survive_sex.loc[&#x27;male&#x27;,1].sum()/survive_sex.loc[&#x27;male&#x27;].sum().sum()*100))</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a2620ee10&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-4.png" alt="" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-5.png" alt="" /></p>
+<p><strong>图表解析</strong>：不难看出，无论是总体上，还是在幸存者中的女性占比都远大于男性。<br />
+可得出女性幸存率是远大于男性</p>
+</br>
+<h4 id="年龄分析-老人与小孩"><a class="markdownIt-Anchor" href="#年龄分析-老人与小孩"></a> <strong>年龄分析 - 老人与小孩</strong></h4>
+<blockquote>
+<p>结合年龄数据，分析存活者中老人与小孩的占比</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 年龄与存活的关系  -- 老人与小孩的存活率</span></span><br><span class="line"></span><br><span class="line">fig,ax = plt.subplots(<span class="number">1</span>,<span class="number">2</span>,figsize = (<span class="number">12</span>,<span class="number">8</span>))</span><br><span class="line"></span><br><span class="line">sns.violinplot(<span class="string">&#x27;Pclass&#x27;</span>,<span class="string">&#x27;Age&#x27;</span>,hue = <span class="string">&#x27;Survived&#x27;</span>,data = train,</span><br><span class="line">              split = <span class="literal">True</span>,ax = ax[<span class="number">0</span>])</span><br><span class="line">ax[<span class="number">0</span>].set_title(<span class="string">&#x27;Pclass and Age vs Survived&#x27;</span>)</span><br><span class="line">ax[<span class="number">0</span>].set_yticks(<span class="built_in">range</span>(<span class="number">0</span>,<span class="number">110</span>,<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">sns.violinplot(<span class="string">&#x27;Sex&#x27;</span>,<span class="string">&#x27;Age&#x27;</span>,hue = <span class="string">&#x27;Survived&#x27;</span>,data = train,</span><br><span class="line">              split = <span class="literal">True</span>,ax = ax[<span class="number">1</span>])</span><br><span class="line">ax[<span class="number">1</span>].set_title(<span class="string">&#x27;Sex and Age vs Survived&#x27;</span>)</span><br><span class="line">ax[<span class="number">1</span>].set_yticks(<span class="built_in">range</span>(<span class="number">0</span>,<span class="number">110</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>[&lt;matplotlib.axis.YTick at 0x1a2617af60&gt;,
+ &lt;matplotlib.axis.YTick at 0x1a25fb6d68&gt;,
+ &lt;matplotlib.axis.YTick at 0x1a252fcc88&gt;,
+ &lt;matplotlib.axis.YTick at 0x1a25b9c6d8&gt;,
+ &lt;matplotlib.axis.YTick at 0x1a25b9cbe0&gt;,
+ &lt;matplotlib.axis.YTick at 0x1a25b9c160&gt;,
+ &lt;matplotlib.axis.YTick at 0x1a25bc65c0&gt;,
+ &lt;matplotlib.axis.YTick at 0x1a25bc6c18&gt;,
+ &lt;matplotlib.axis.YTick at 0x1a25fd8e10&gt;,
+ &lt;matplotlib.axis.YTick at 0x1a25bc6668&gt;,
+ &lt;matplotlib.axis.YTick at 0x1a25b9c588&gt;]
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-6.png" alt="" /></p>
+<p><strong>图表解析</strong>：</p>
+<p>从小提琴图中可以看出：</p>
+<p>1、在按照不同船舱等级划分时：船舱等级越高，存活者的年龄越大；而在船舱等级1中存活年龄集中在20-40岁，在船舱等级2和船舱等级3中有较多的低龄乘客存活</p>
+<p>2、在按照性别划分时：男性和女性存活者的年龄多数分布在20-40岁，且均有较多的低龄乘客存活，其中女性存活远多余男性</p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 老人与小孩的存活情况</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">18</span>,<span class="number">6</span>))</span><br><span class="line">train_age[<span class="string">&#x27;Age_int&#x27;</span>] = train_age[<span class="string">&#x27;Age&#x27;</span>].astype(<span class="built_in">int</span>)</span><br><span class="line">average_age = train_age[[<span class="string">&#x27;Age_int&#x27;</span>,<span class="string">&#x27;Survived&#x27;</span>]].groupby([<span class="string">&#x27;Age_int&#x27;</span>],as_index = <span class="literal">False</span>).mean()</span><br><span class="line">sns.barplot(x = <span class="string">&#x27;Age_int&#x27;</span>,y = <span class="string">&#x27;Survived&#x27;</span>,data = average_age,</span><br><span class="line">            palette = <span class="string">&#x27;BuPu&#x27;</span>)</span><br><span class="line">plt.grid(linestyle = <span class="string">&#x27;--&#x27;</span>,alpha = <span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-7.png" alt="" /></p>
+<p><strong>图表解析</strong>：灾难中，老人和小孩的存活几率较高</p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize = (<span class="number">12</span>,<span class="number">6</span>))</span><br><span class="line">plt.hist([train[train[<span class="string">&#x27;Survived&#x27;</span>] == <span class="number">1</span>][<span class="string">&#x27;Age&#x27;</span>],train[train[<span class="string">&#x27;Survived&#x27;</span>] == <span class="number">0</span>][<span class="string">&#x27;Age&#x27;</span>]],</span><br><span class="line">        stacked = <span class="literal">True</span>,</span><br><span class="line">        color = [<span class="string">&#x27;g&#x27;</span>,<span class="string">&#x27;r&#x27;</span>],</span><br><span class="line">        bins = <span class="number">30</span>,</span><br><span class="line">        label = [<span class="string">&#x27;Survived&#x27;</span>,<span class="string">&#x27;Dead&#x27;</span>])</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Age&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Number of passengers&#x27;</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.legend.Legend at 0x1a26a845f8&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-8.png" alt="" /></p>
+<p><strong>图表解析</strong>：大概在十二岁以下的小孩与近80岁的老人存活率相对高很多</p>
+</br>
+<h3 id="探索亲人的人数与存活"><a class="markdownIt-Anchor" href="#探索亲人的人数与存活"></a> <strong>探索亲人的人数与存活</strong></h3>
+<blockquote>
+<p>结合SibSp、Parch字段，探索亲人的人数与存活的关系</p>
+<p>1、有无兄弟姐妹/父母子女与是否存活之间的关系</p>
+<p>2、亲戚人数和存活与否之间的关系</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 有无兄弟姐妹/父母子女与是否存活之间的关系</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 筛选出有无兄弟姐妹的数据</span></span><br><span class="line"></span><br><span class="line">sibsp_df = train[train[<span class="string">&#x27;SibSp&#x27;</span>] != <span class="number">0</span>]</span><br><span class="line">no_sibsp_df = train[train[<span class="string">&#x27;SibSp&#x27;</span>] == <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 筛选出有无父母子女的数据</span></span><br><span class="line"></span><br><span class="line">parch_df = train[train[<span class="string">&#x27;Parch&#x27;</span>] != <span class="number">0</span>]</span><br><span class="line">no_parch_df = train[train[<span class="string">&#x27;Parch&#x27;</span>] == <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制饼图</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">15</span>,<span class="number">6</span>))</span><br><span class="line">plt.subplot(<span class="number">141</span>)</span><br><span class="line">plt.axis(<span class="string">&#x27;equal&#x27;</span>)</span><br><span class="line">sibsp_df[<span class="string">&#x27;Survived&#x27;</span>].value_counts().plot.pie(labels = [<span class="string">&#x27;No Survived&#x27;</span>,<span class="string">&#x27;Survived&#x27;</span>],</span><br><span class="line">                                            autopct = <span class="string">&#x27;%1.1f%%&#x27;</span>,</span><br><span class="line">                                            explode=[<span class="number">0.1</span>,<span class="number">0</span>])</span><br><span class="line">plt.xlabel(<span class="string">&#x27;sibsp&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">142</span>)</span><br><span class="line">plt.axis(<span class="string">&#x27;equal&#x27;</span>)</span><br><span class="line">no_sibsp_df[<span class="string">&#x27;Survived&#x27;</span>].value_counts().plot.pie(labels = [<span class="string">&#x27;No Survived&#x27;</span>,<span class="string">&#x27;Survived&#x27;</span>],</span><br><span class="line">                                            autopct = <span class="string">&#x27;%1.1f%%&#x27;</span>,</span><br><span class="line">                                            explode=[<span class="number">0.1</span>,<span class="number">0</span>])</span><br><span class="line">plt.xlabel(<span class="string">&#x27;no_sibsp&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">143</span>)</span><br><span class="line">plt.axis(<span class="string">&#x27;equal&#x27;</span>)</span><br><span class="line">parch_df[<span class="string">&#x27;Survived&#x27;</span>].value_counts().plot.pie(labels = [<span class="string">&#x27;No Survived&#x27;</span>,<span class="string">&#x27;Survived&#x27;</span>],</span><br><span class="line">                                            autopct = <span class="string">&#x27;%1.1f%%&#x27;</span>,</span><br><span class="line">                                            explode=[<span class="number">0.1</span>,<span class="number">0</span>])</span><br><span class="line">plt.xlabel(<span class="string">&#x27;parch&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">144</span>)</span><br><span class="line">plt.axis(<span class="string">&#x27;equal&#x27;</span>)</span><br><span class="line">no_parch_df[<span class="string">&#x27;Survived&#x27;</span>].value_counts().plot.pie(labels = [<span class="string">&#x27;No Survived&#x27;</span>,<span class="string">&#x27;Survived&#x27;</span>],</span><br><span class="line">                                            autopct = <span class="string">&#x27;%1.1f%%&#x27;</span>,</span><br><span class="line">                                            explode=[<span class="number">0.1</span>,<span class="number">0</span>])</span><br><span class="line">plt.xlabel(<span class="string">&#x27;no_parch&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-9.png" alt="" /></p>
+<p><strong>图表解析</strong>：相比较而言，有兄弟姐妹的乘客存活率会比无兄弟姐妹高；而有父母子女的乘客存活率也会比无父母子女的乘客存活率高</p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 亲戚人数和存活与否之间的关系</span></span><br><span class="line"></span><br><span class="line">fig,ax = plt.subplots(<span class="number">1</span>,<span class="number">2</span>,figsize = (<span class="number">15</span>,<span class="number">4</span>))</span><br><span class="line">train[[<span class="string">&#x27;Parch&#x27;</span>,<span class="string">&#x27;Survived&#x27;</span>]].groupby([<span class="string">&#x27;Parch&#x27;</span>]).mean().plot.bar(ax = ax[<span class="number">0</span>])</span><br><span class="line">ax[<span class="number">0</span>].set_title(<span class="string">&#x27;Parch and Survived&#x27;</span>)</span><br><span class="line">train[[<span class="string">&#x27;SibSp&#x27;</span>,<span class="string">&#x27;Survived&#x27;</span>]].groupby([<span class="string">&#x27;SibSp&#x27;</span>]).mean().plot.bar(ax = ax[<span class="number">1</span>])</span><br><span class="line">ax[<span class="number">1</span>].set_title(<span class="string">&#x27;SibSp and Survived&#x27;</span>)</span><br><span class="line"></span><br><span class="line">train[<span class="string">&#x27;FamilyNum&#x27;</span>] = train[<span class="string">&#x27;Parch&#x27;</span>] + train[<span class="string">&#x27;SibSp&#x27;</span>] + <span class="number">1</span></span><br><span class="line">train[[<span class="string">&#x27;FamilyNum&#x27;</span>,<span class="string">&#x27;Survived&#x27;</span>]].groupby([<span class="string">&#x27;FamilyNum&#x27;</span>]).mean().plot.bar(figsize = (<span class="number">15</span>,<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a27223908&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-10.png" alt="" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-11.png" alt="" /></p>
+<p><strong>图表解析</strong>：如果乘客为独自一人，其存活率并不高；而如果亲友过多，其存活率会更低</p>
+</br>
+<h3 id="票价分析"><a class="markdownIt-Anchor" href="#票价分析"></a> <strong>票价分析</strong></h3>
+<blockquote>
+<p>结合Fare字段，探究票价与是否存活有无关系</p>
+<p>1、研究票价分布与是否存活之间的联系</p>
+<p>2、研究生还者与未生还者的票价情况</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 票价分布</span></span><br><span class="line"></span><br><span class="line">fareplot = sns.distplot(train[<span class="string">&#x27;Fare&#x27;</span>],label = <span class="string">&#x27;skewness:%.2f&#x27;</span>% (train[<span class="string">&#x27;Fare&#x27;</span>].skew()))</span><br><span class="line">fareplot.legend()</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.legend.Legend at 0x1a272af7f0&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-12.png" alt="" /></p>
+<p><strong>图表解析</strong>：可以看出，票价在0-40区间数量最多</p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 船舱等级与票价</span></span><br><span class="line"></span><br><span class="line">sns.barplot(data = train,x = <span class="string">&#x27;Pclass&#x27;</span>,y = <span class="string">&#x27;Fare&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a276fc438&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-13.png" alt="" /></p>
+<p><strong>图表解析</strong>：很明显：船舱等级最高为1（票价也最高），依次后排</p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 票价与生存1</span></span><br><span class="line"></span><br><span class="line">fare_survived = sns.FacetGrid(train,hue = <span class="string">&#x27;Survived&#x27;</span>,aspect = <span class="number">3</span>)</span><br><span class="line">fare_survived.<span class="built_in">map</span>(sns.kdeplot,<span class="string">&#x27;Fare&#x27;</span>,shade = <span class="literal">True</span>)</span><br><span class="line">fare_survived.<span class="built_in">set</span>(xlim = (<span class="number">0</span>,<span class="number">150</span>))</span><br><span class="line">fare_survived.add_legend()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 柱状图</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># figure = plt.figure(figsize = (15,6))</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># plt.hist([fare_survived,fare_not_survived],stacked = True,</span></span><br><span class="line"><span class="comment">#         color = [&#x27;g&#x27;,&#x27;r&#x27;],bins = 30,</span></span><br><span class="line"><span class="comment">#         label = [&#x27;Survived&#x27;,&#x27;Dead&#x27;])</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># plt.xlabel(&#x27;Fare&#x27;)</span></span><br><span class="line"><span class="comment"># plt.ylabel(&#x27;Survived&#x27;)</span></span><br><span class="line"><span class="comment"># plt.legend()</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a27758a90&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-14.png" alt="" /></p>
+<p><strong>图表解析</strong>：当票价低于18左右时，该部分乘客的生存率较低；而随着票价越高生存率一般较高</p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 票价与生存2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 基于票价，筛选是否存活的数据</span></span><br><span class="line"></span><br><span class="line">fare_not_survived = train[<span class="string">&#x27;Fare&#x27;</span>][train[<span class="string">&#x27;Survived&#x27;</span>] == <span class="number">0</span>]</span><br><span class="line">fare_survived = train[<span class="string">&#x27;Fare&#x27;</span>][train[<span class="string">&#x27;Survived&#x27;</span>] == <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">avg_fare = pd.DataFrame([fare_not_survived.mean(),fare_survived.mean()])</span><br><span class="line">std_fare = pd.DataFrame([fare_not_survived.std(),fare_survived.std()])</span><br><span class="line">avg_fare.plot(yerr = std_fare,kind = <span class="string">&#x27;bar&#x27;</span>,legend = <span class="literal">False</span>,</span><br><span class="line">             figsize = (<span class="number">15</span>,<span class="number">4</span>),grid = <span class="literal">True</span>)</span><br><span class="line">plt.xticks(rotation = <span class="number">360</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>(array([0, 1]), &lt;a list of 2 Text xticklabel objects&gt;)
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-15.png" alt="" /></p>
+<p><strong>图表解析</strong>：生还者的平均票价要大于未生还者的平均票价</p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不同船舱等级的平均票价</span></span><br><span class="line"></span><br><span class="line">ax = plt.subplot()</span><br><span class="line">ax.set_ylabel(<span class="string">&#x27;Average Fare&#x27;</span>)</span><br><span class="line">train.groupby(<span class="string">&#x27;Pclass&#x27;</span>).mean()[<span class="string">&#x27;Fare&#x27;</span>].plot(kind = <span class="string">&#x27;bar&#x27;</span>,</span><br><span class="line">                                            figsize = (<span class="number">15</span>,<span class="number">6</span>),</span><br><span class="line">                                            ax = ax)</span><br><span class="line">plt.xticks(rotation = <span class="number">360</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>(array([0, 1, 2]), &lt;a list of 3 Text xticklabel objects&gt;)
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-16.png" alt="" /></p>
+<p><strong>图表解析</strong>：船舱等级高，船票均价自然高</p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 票价、年龄和生存与否</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">15</span>,<span class="number">8</span>))</span><br><span class="line">ax = plt.subplot()</span><br><span class="line">ax.scatter(train[train[<span class="string">&#x27;Survived&#x27;</span>] == <span class="number">1</span>][<span class="string">&#x27;Age&#x27;</span>],train[train[<span class="string">&#x27;Survived&#x27;</span>] == <span class="number">1</span>][<span class="string">&#x27;Fare&#x27;</span>],c = <span class="string">&#x27;green&#x27;</span>,s = <span class="number">40</span>)</span><br><span class="line">ax.scatter(train[train[<span class="string">&#x27;Survived&#x27;</span>] == <span class="number">0</span>][<span class="string">&#x27;Age&#x27;</span>],train[train[<span class="string">&#x27;Survived&#x27;</span>] == <span class="number">0</span>][<span class="string">&#x27;Fare&#x27;</span>],c = <span class="string">&#x27;red&#x27;</span>,s = <span class="number">40</span>)</span><br><span class="line">ax.set_xlabel(<span class="string">&#x27;Age&#x27;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&#x27;Fare&#x27;</span>)</span><br><span class="line">ax.legend((<span class="string">&#x27;survived&#x27;</span>,<span class="string">&#x27;dead&#x27;</span>),scatterpoints = <span class="number">1</span>,</span><br><span class="line">         loc = <span class="string">&#x27;upper right&#x27;</span>,fontsize = <span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.legend.Legend at 0x1a27f58e10&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-17.png" alt="" /></p>
+<p><strong>图表解析</strong>：基本与上面的分析相吻合，票价高的存活率高，且老人和小孩的生存率也相对而言较高</p>
+</br>
+<h3 id="登船港口分析"><a class="markdownIt-Anchor" href="#登船港口分析"></a> <strong>登船港口分析</strong></h3>
+<blockquote>
+<p>结合Embarked字段，分析登船港口与是否存活之间的关系</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 登船港口与是否存活</span></span><br><span class="line"></span><br><span class="line">survived_embark = train[train[<span class="string">&#x27;Survived&#x27;</span>] == <span class="number">1</span>][<span class="string">&#x27;Embarked&#x27;</span>].value_counts()</span><br><span class="line">dead_embark = train[train[<span class="string">&#x27;Survived&#x27;</span>] == <span class="number">0</span>][<span class="string">&#x27;Embarked&#x27;</span>].value_counts()</span><br><span class="line"></span><br><span class="line">df_embark = pd.DataFrame([survived_embark,dead_embark],</span><br><span class="line">                        index = [<span class="string">&#x27;Survived&#x27;</span>,<span class="string">&#x27;Dead&#x27;</span>])</span><br><span class="line">df_embark.plot(kind = <span class="string">&#x27;bar&#x27;</span>,stacked = <span class="literal">True</span>,figsize = (<span class="number">15</span>,<span class="number">7</span>))</span><br><span class="line">plt.xticks(rotation = <span class="number">360</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>(array([0, 1]), &lt;a list of 2 Text xticklabel objects&gt;)
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-18.png" alt="" /></p>
+<p><strong>图表解析</strong>：S港口登船的乘客基数最大，而在C港口登船的乘客的存活率相对而言高于另外两个港口</p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不同港口登船的存活情况</span></span><br><span class="line"></span><br><span class="line">sns.barplot(data = train,x = <span class="string">&#x27;Embarked&#x27;</span>,y = <span class="string">&#x27;Survived&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Embarked为S的乘客,其生存率为%.2f&#x27;</span> % train[<span class="string">&#x27;Survived&#x27;</span>][train[<span class="string">&#x27;Embarked&#x27;</span>] == <span class="string">&#x27;S&#x27;</span>].value_counts(normalize = <span class="literal">True</span>)[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Embarked为C的乘客,其生存率为%.2f&#x27;</span> % train[<span class="string">&#x27;Survived&#x27;</span>][train[<span class="string">&#x27;Embarked&#x27;</span>] == <span class="string">&#x27;C&#x27;</span>].value_counts(normalize = <span class="literal">True</span>)[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Embarked为Q的乘客,其生存率为%.2f&#x27;</span> % train[<span class="string">&#x27;Survived&#x27;</span>][train[<span class="string">&#x27;Embarked&#x27;</span>] == <span class="string">&#x27;Q&#x27;</span>].value_counts(normalize = <span class="literal">True</span>)[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>Embarked为S的乘客,其生存率为0.34
+Embarked为C的乘客,其生存率为0.55
+Embarked为Q的乘客,其生存率为0.39
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-19.png" alt="" /></p>
+<p><strong>图表解析</strong>：登船港口为C的乘客存活率较高，探究是否与船舱等级比例有关联</p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看不同登船地点乘客的各舱位的乘客数量对比分析</span></span><br><span class="line"></span><br><span class="line">sns.factorplot(<span class="string">&#x27;Pclass&#x27;</span>,col = <span class="string">&#x27;Embarked&#x27;</span>,data = train,</span><br><span class="line">              kind = <span class="string">&#x27;count&#x27;</span>,size = <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a2821d908&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-20.png" alt="" /></p>
+<p><strong>图表解析</strong>：登船港口为C的乘客其头等舱所占的比例相对较高</p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看船舱等级与存活率的情况</span></span><br><span class="line"></span><br><span class="line">sns.barplot(data = train,x = <span class="string">&#x27;Pclass&#x27;</span>,y = <span class="string">&#x27;Survived&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a28789438&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-21.png" alt="" /></p>
+<p><strong>图表解析</strong>：登船港口为C的乘客其存活率较高的原因是为其是头等舱乘客占比较大，而头等舱乘客存活率也比较高</p>
+</br>
+<h3 id="数据处理"><a class="markdownIt-Anchor" href="#数据处理"></a> <strong>数据处理</strong></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据合并</span></span><br><span class="line"></span><br><span class="line">data = train.append(test,ignore_index = <span class="literal">True</span>)</span><br><span class="line">data.describe()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-22.png" alt="" /></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看数据缺失情况</span></span><br><span class="line"></span><br><span class="line">data.apply(<span class="keyword">lambda</span> x:<span class="built_in">sum</span>(x.isnull()))</span><br></pre></td></tr></table></figure>
+<pre><code>Age             263
+Cabin          1014
+Embarked          2
+FamilyNum       418
+Fare              1
+Name              0
+Parch             0
+PassengerId       0
+Pclass            0
+Sex               0
+SibSp             0
+Survived        418
+Ticket            0
+dtype: int64
+</code></pre>
+</br>
+<h4 id="缺失值填充"><a class="markdownIt-Anchor" href="#缺失值填充"></a> <strong>缺失值填充</strong></h4>
+<blockquote>
+<p>Cabin、Age、Embarked、Fare有缺失值</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Cabin缺失值填充,考虑先用U(unknow)来填充</span></span><br><span class="line"></span><br><span class="line">data[<span class="string">&#x27;Cabin&#x27;</span>] = data[<span class="string">&#x27;Cabin&#x27;</span>].fillna(<span class="string">&#x27;U&#x27;</span>)</span><br><span class="line"><span class="comment"># data[&#x27;Cabin&#x27;].value_counts()</span></span><br></pre></td></tr></table></figure>
+<pre><code>U                  1014
+C23 C25 C27           6
+G6                    5
+B57 B59 B63 B66       5
+
+                   ... 
+B73                   1
+A10                   1
+A16                   1
+Name: Cabin, Length: 187, dtype: int64
+</code></pre>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Embarked缺失值填充：缺失数据只有两条，可以考虑根据Embarked数据分布来填充</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># data[data[&#x27;Embarked&#x27;].isnull()]</span></span><br><span class="line"></span><br><span class="line">data[<span class="string">&#x27;Embarked&#x27;</span>] = data[<span class="string">&#x27;Embarked&#x27;</span>].fillna(<span class="string">&#x27;S&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Fare缺失值填充：缺失数据仅一条，观察该数据情况</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 考虑用等同舱位、等同登船港口、舱位未知的乘客的平均票价填充</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># data[data[&#x27;Fare&#x27;].isnull()]</span></span><br><span class="line"></span><br><span class="line">data[<span class="string">&#x27;Fare&#x27;</span>] = data[<span class="string">&#x27;Fare&#x27;</span>].fillna(data[(data[<span class="string">&#x27;Pclass&#x27;</span>] == <span class="number">3</span>)&amp;(data[<span class="string">&#x27;Embarked&#x27;</span>] == <span class="string">&#x27;C&#x27;</span>)&amp;(data[<span class="string">&#x27;Cabin&#x27;</span>] == <span class="string">&#x27;U&#x27;</span>)][<span class="string">&#x27;Fare&#x27;</span>].mean())</span><br></pre></td></tr></table></figure>
+</br>
+<h3 id="特征工程"><a class="markdownIt-Anchor" href="#特征工程"></a> 特征工程</h3>
+<h4 id="特征1-title"><a class="markdownIt-Anchor" href="#特征1-title"></a> <strong>特征1 - Title</strong></h4>
+<blockquote>
+<p>乘客姓名中包含头衔信息，而不同的头衔也在一定程度上反映了乘客的身份，不同身份的乘客其存活率可能有差异，因此可以根据姓名信息提取Title特征，进行分析</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&#x27;Title&#x27;</span>] = data[<span class="string">&#x27;Name&#x27;</span>].<span class="built_in">map</span>(<span class="keyword">lambda</span> x:x.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>].strip())</span><br><span class="line">data[<span class="string">&#x27;Title&#x27;</span>].value_counts()</span><br></pre></td></tr></table></figure>
+<pre><code>Mr              757
+Miss            260
+Mrs             197
+Master           61
+Rev               8
+Dr                8
+Col               4
+Mlle              2
+Major             2
+Ms                2
+the Countess      1
+Dona              1
+Mme               1
+Don               1
+Capt              1
+Lady              1
+Sir               1
+Jonkheer          1
+Name: Title, dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进一步处理分类，将相近的Title信息整合为一个类别</span></span><br><span class="line"></span><br><span class="line">TitleDict = &#123;&#125;</span><br><span class="line">TitleDict[<span class="string">&#x27;Mr&#x27;</span>]=<span class="string">&#x27;Mr&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Mlle&#x27;</span>]=<span class="string">&#x27;Miss&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Miss&#x27;</span>]=<span class="string">&#x27;Miss&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Master&#x27;</span>]=<span class="string">&#x27;Master&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Jonkheer&#x27;</span>]=<span class="string">&#x27;Master&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Mme&#x27;</span>]=<span class="string">&#x27;Mrs&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Ms&#x27;</span>]=<span class="string">&#x27;Mrs&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Mrs&#x27;</span>]=<span class="string">&#x27;Mrs&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Don&#x27;</span>]=<span class="string">&#x27;Royalty&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Sir&#x27;</span>]=<span class="string">&#x27;Royalty&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;the Countess&#x27;</span>]=<span class="string">&#x27;Royalty&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Dona&#x27;</span>]=<span class="string">&#x27;Royalty&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Lady&#x27;</span>]=<span class="string">&#x27;Royalty&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Capt&#x27;</span>]=<span class="string">&#x27;Officer&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Col&#x27;</span>]=<span class="string">&#x27;Officer&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Major&#x27;</span>]=<span class="string">&#x27;Officer&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Dr&#x27;</span>]=<span class="string">&#x27;Officer&#x27;</span></span><br><span class="line">TitleDict[<span class="string">&#x27;Rev&#x27;</span>]=<span class="string">&#x27;Officer&#x27;</span></span><br><span class="line"></span><br><span class="line">data[<span class="string">&#x27;Title&#x27;</span>] = data[<span class="string">&#x27;Title&#x27;</span>].<span class="built_in">map</span>(TitleDict)</span><br><span class="line">data[<span class="string">&#x27;Title&#x27;</span>].value_counts()</span><br></pre></td></tr></table></figure>
+<pre><code>Mr         757
+Miss       262
+Mrs        200
+Master      62
+Officer     23
+Royalty      5
+Name: Title, dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新特征Title分布情况</span></span><br><span class="line"></span><br><span class="line">sns.barplot(data = data,x = <span class="string">&#x27;Title&#x27;</span>,y = <span class="string">&#x27;Survived&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a2894ce10&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-23.png" alt="" /></p>
+<p><strong>图表解析</strong>：头衔为’Mr’和’Officer’的乘客，存活率明显低于其他几类</p>
+</br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 乘客家人人数与是否存活</span></span><br><span class="line"></span><br><span class="line">data[<span class="string">&#x27;FamilyNum&#x27;</span>] = data[<span class="string">&#x27;SibSp&#x27;</span>] + data[<span class="string">&#x27;Parch&#x27;</span>] + <span class="number">1</span></span><br><span class="line">sns.barplot(data = data,x = <span class="string">&#x27;FamilyNum&#x27;</span>,y = <span class="string">&#x27;Survived&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a28a4b240&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-24.png" alt="" /></p>
+</br>
+<h4 id="特征2-familysize"><a class="markdownIt-Anchor" href="#特征2-familysize"></a> <strong>特征2 - FamilySize</strong></h4>
+<blockquote>
+<p>根据家庭人数生成FamilySize(家庭规模)类别，有小、中、大三类</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成新特征</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">familysize</span>(<span class="params">FamilyNum</span>):</span><br><span class="line">    <span class="keyword">if</span> FamilyNum == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">elif</span> (FamilyNum &gt;= <span class="number">2</span>)&amp;(FamilyNum &lt;= <span class="number">4</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">data[<span class="string">&#x27;FamilySize&#x27;</span>] = data[<span class="string">&#x27;FamilyNum&#x27;</span>].<span class="built_in">map</span>(familysize)</span><br><span class="line">data[<span class="string">&#x27;FamilySize&#x27;</span>].value_counts()</span><br></pre></td></tr></table></figure>
+<pre><code>0    790
+1    437
+2     82
+Name: FamilySize, dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.barplot(data = data,x = <span class="string">&#x27;FamilySize&#x27;</span>,y = <span class="string">&#x27;Survived&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a28b57940&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-25.png" alt="" /></p>
+<p><strong>图表解析</strong>：当家庭规模适中时，乘客的生存率更高。</p>
+</br>
+<h4 id="特征3-deck"><a class="markdownIt-Anchor" href="#特征3-deck"></a> <strong>特征3 - Deck</strong></h4>
+<blockquote>
+<p>Cabin字段的首字母代表客舱的类型，也反映不同乘客群体的特点，可能也与乘客的生存率相关。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成新特征Deck</span></span><br><span class="line"></span><br><span class="line">data[<span class="string">&#x27;Deck&#x27;</span>] = data[<span class="string">&#x27;Cabin&#x27;</span>].<span class="built_in">map</span>(<span class="keyword">lambda</span> x:x[<span class="number">0</span>])</span><br><span class="line">sns.barplot(data = data,x = <span class="string">&#x27;Deck&#x27;</span>,y = <span class="string">&#x27;Survived&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a28afe748&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-26.png" alt="" /></p>
+<p><strong>图表解析</strong>：明显看出，客舱类型为B、D、E的乘客的存活率较高；客舱类型为U、T时，存活率低</p>
+</br>
+<h4 id="特征4-ticketcount"><a class="markdownIt-Anchor" href="#特征4-ticketcount"></a> <strong>特征4 - TicketCount</strong></h4>
+<blockquote>
+<p>同一票号的乘客数量有所不同，可能与乘客的生存率也有关系，生成新特征TicketCount</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&#x27;Ticket&#x27;</span>].value_counts()</span><br><span class="line"><span class="comment">#可以看出同一票号的乘客数量有所不同，可能与乘客的生存率也有关系</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成新特征TicketCount</span></span><br><span class="line"></span><br><span class="line">TicketCountdict = &#123;&#125;</span><br><span class="line">TicketCountdict = data[<span class="string">&#x27;Ticket&#x27;</span>].value_counts()</span><br><span class="line">TicketCountdict.head()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 并入数据集</span></span><br><span class="line"></span><br><span class="line">data[<span class="string">&#x27;TicketCount&#x27;</span>] = data[<span class="string">&#x27;Ticket&#x27;</span>].<span class="built_in">map</span>(TicketCountdict)</span><br><span class="line"></span><br><span class="line">sns.barplot(data = data,x = <span class="string">&#x27;TicketCount&#x27;</span>,y = <span class="string">&#x27;Survived&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a28cf7940&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-27.png" alt="" /></p>
+<p><strong>图表解析</strong>：当TicketCount大小适中时，乘客的存活率较高</p>
+</br>
+<h4 id="特征5-ticketgroup"><a class="markdownIt-Anchor" href="#特征5-ticketgroup"></a> <strong>特征5 - TicketGroup</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 根据TicketCount大小，生成新特征TicketGroup，分为三类</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">TicketGroup</span>(<span class="params">num</span>):</span><br><span class="line">    <span class="keyword">if</span> (num &gt;= <span class="number">2</span>)&amp;(num &lt;= <span class="number">4</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">elif</span> (num == <span class="number">1</span>)|((num &gt;=<span class="number">5</span>)&amp;(num &lt;= <span class="number">8</span>)):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">    </span><br><span class="line">data[<span class="string">&#x27;TicketGroup&#x27;</span>] = data[<span class="string">&#x27;TicketCount&#x27;</span>].<span class="built_in">map</span>(TicketGroup)</span><br><span class="line">sns.barplot(data = data,x = <span class="string">&#x27;TicketGroup&#x27;</span>,y = <span class="string">&#x27;Survived&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a2586a940&gt;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/minzvv/blogimg/titanic/titanic-28.png" alt="" /></p>
+<p><strong>图表解析</strong>：与上面分析结果基本一致，TicketGroup较小，也就是TicketCount大概在1-4之间时，存活率最高</p>
+</br>
+<p>未完待续～</p>
+<h3 id="写在最后"><a class="markdownIt-Anchor" href="#写在最后"></a> 写在最后</h3>
+<p>以上是对泰坦尼克生存预测案例的一部分分析，剩余部分为Age的缺失值处理，以及预测模型的构建，也就是算法部分，目前对算法的了解尚浅，能力不足以处理，待补充。对以上分析有疑义，欢迎指正，感谢阅读～</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    某壳网房屋租赁信息抓取与浅析
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">对比分析案例：IMDB电影数据分析及可视化</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

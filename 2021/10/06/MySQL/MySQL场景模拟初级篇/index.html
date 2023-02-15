@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>MySQL练习 - 场景模拟初级篇(持续更新) | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="MySQL,练习题" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="摘要 MySQL练习题，基于不同的场景模拟进一步加强MySQl知识点练习～">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL练习 - 场景模拟初级篇(持续更新)">
+<meta property="og:url" content="http://example.com/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="摘要 MySQL练习题，基于不同的场景模拟进一步加强MySQl知识点练习～">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-06T14:33:36.000Z">
+<meta property="article:modified_time" content="2023-02-14T12:48:57.670Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="MySQL,练习题">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-MySQL/MySQL场景模拟初级篇" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/MySQL/">MySQL</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/MySQL/%E7%BB%83%E4%B9%A0%E9%A2%98%E9%9B%86/">练习题集</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/MySQL-%E7%BB%83%E4%B9%A0%E9%A2%98/" rel="tag">MySQL,练习题</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">
+            <time datetime="2021-10-06T14:33:36.000Z" itemprop="datePublished">2021-10-06</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/MySQL/MySQL场景模拟初级篇.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/MySQL/MySQL场景模拟初级篇.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/MySQL/MySQL场景模拟初级篇.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            MySQL练习 - 场景模拟初级篇(持续更新)
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql%E7%BB%83%E4%B9%A0-%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87"><span class="toc-number">1.</span> <span class="toc-text"> MySQL练习 - 场景模拟初级篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%96%AA%E6%B0%B4%E6%B6%A8%E5%B9%85%E5%8D%87%E5%BA%8F"><span class="toc-number">1.1.</span> <span class="toc-text"> 薪水涨幅升序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%94%E5%89%8D%E4%B8%80%E5%A4%A9%E9%AB%98%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">1.2.</span> <span class="toc-text"> 比前一天高的数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E7%9A%84n%E4%B8%AA%E6%95%B0"><span class="toc-number">1.3.</span> <span class="toc-text"> 最小的n个数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E5%87%BA%E7%8E%B0n%E6%AC%A1%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">1.4.</span> <span class="toc-text"> 连续出现n次的数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BE%E7%A8%8B%E6%BB%A1%E6%84%8F%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">1.5.</span> <span class="toc-text"> 课程满意度分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A2%E5%8C%85%E9%A2%86%E5%8F%96%E6%83%85%E5%86%B5"><span class="toc-number">1.6.</span> <span class="toc-text"> 红包领取情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E7%BB%9F%E8%AE%A1%E6%8E%92%E5%BA%8F"><span class="toc-number">1.7.</span> <span class="toc-text"> 登录统计排序</span></a></li></ol></li></ol>
+                </div>
+            
+        
+        
+            <blockquote>
+<p>摘要<br />
+MySQL练习题，基于不同的场景模拟进一步加强MySQl知识点练习～</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="mysql练习-场景模拟初级篇"><a class="markdownIt-Anchor" href="#mysql练习-场景模拟初级篇"></a> MySQL练习 - 场景模拟初级篇</h2>
+</br>
+<h3 id="薪水涨幅升序"><a class="markdownIt-Anchor" href="#薪水涨幅升序"></a> 薪水涨幅升序</h3>
+</br>
+<p><strong>[题目]</strong></p>
+<p>现在有两个表：</p>
+<ul>
+<li><strong>雇员表</strong>：记录了雇员基本信息，字段包括：雇员编号、出生日期、姓名、性别、雇用日期</li>
+<li><strong>薪水表</strong>：记录了雇员的<strong>薪水金额</strong>以及<strong>签订周期</strong>，字段包括：雇员编号、薪水、起始日期、结束日期</li>
+<li>两张表通过雇员编号进行连结</li>
+</ul>
+<p>现在需要查找当前所有雇员入职以来的薪水涨幅，给出雇员编号以及其对应的薪水涨幅，并按照薪水涨幅进行升序</p>
+<p>注意：薪水表中最大结束日期为2004-01-01，说明结束日期在此之前的均表示为已离职员工</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">#建雇员表</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> employees( </span><br><span class="line">    id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> comment &quot;雇员编号&quot;, </span><br><span class="line">    birthday <span class="type">date</span> comment &quot;出生日 期&quot;, </span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">64</span>) comment &quot;姓名&quot;, </span><br><span class="line">    sex <span class="type">varchar</span>(<span class="number">64</span>) comment &quot;性别&quot;, </span><br><span class="line">    employ_date <span class="type">date</span> comment &quot; 雇用日期&quot;);</span><br><span class="line"></span><br><span class="line">#查看表</span><br><span class="line"><span class="keyword">desc</span> employees;</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+-------------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> Field       <span class="operator">|</span> Type        <span class="operator">|</span> <span class="keyword">Null</span> <span class="operator">|</span> Key <span class="operator">|</span> <span class="keyword">Default</span> <span class="operator">|</span> Extra <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+-------------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>)     <span class="operator">|</span> <span class="keyword">NO</span>   <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> birthday    <span class="operator">|</span> <span class="type">date</span>        <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name        <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">64</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> sex         <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">64</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> employ_date <span class="operator">|</span> <span class="type">date</span>        <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+-------------+------+-----+---------+-------+</span></span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> employees(id,birthday,name,sex,employ_date) </span><br><span class="line"><span class="keyword">values</span> </span><br><span class="line">(<span class="number">10002</span>,&quot;1976-09-09&quot;,&quot;周周&quot;,&quot;女&quot;,&quot;2001-08-02&quot;),</span><br><span class="line">(<span class="number">10005</span>,&quot;1978-09-09&quot;,&quot;小明&quot;,&quot;男&quot;,&quot;2001-09-09&quot;),</span><br><span class="line">(<span class="number">10006</span>,&quot;1979-08-29&quot;,&quot;西西&quot;,&quot;女&quot;,&quot;2001-08-02&quot;)</span><br><span class="line">;</span><br><span class="line"></span><br><span class="line">#查看数据</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> employees;</span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------------+--------+------+-------------+</span></span><br><span class="line"><span class="operator">|</span> id    <span class="operator">|</span> birthday   <span class="operator">|</span> name   <span class="operator">|</span> sex  <span class="operator">|</span> employ_date <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------------+--------+------+-------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">10002</span> <span class="operator">|</span> <span class="number">1976</span><span class="number">-09</span><span class="number">-09</span> <span class="operator">|</span> 周周   <span class="operator">|</span> 女   <span class="operator">|</span> <span class="number">2001</span><span class="number">-08</span><span class="number">-02</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">10005</span> <span class="operator">|</span> <span class="number">1978</span><span class="number">-09</span><span class="number">-09</span> <span class="operator">|</span> 小明   <span class="operator">|</span> 男   <span class="operator">|</span> <span class="number">2001</span><span class="number">-09</span><span class="number">-09</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">10006</span> <span class="operator">|</span> <span class="number">1979</span><span class="number">-08</span><span class="number">-29</span> <span class="operator">|</span> 西西   <span class="operator">|</span> 女   <span class="operator">|</span> <span class="number">2001</span><span class="number">-08</span><span class="number">-02</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------------+--------+------+-------------+</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#建薪水表</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> salary(</span><br><span class="line">    id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> comment &quot;雇员编号&quot;,</span><br><span class="line">    pay <span class="type">int</span> comment &quot;薪资&quot;,</span><br><span class="line">    start_date <span class="type">date</span> comment &quot;起始日期&quot;,</span><br><span class="line">    finish_date <span class="type">date</span> comment &quot;结束日期&quot;);</span><br><span class="line"></span><br><span class="line">#查看表</span><br><span class="line"><span class="keyword">desc</span> salary;</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> Field       <span class="operator">|</span> Type    <span class="operator">|</span> <span class="keyword">Null</span> <span class="operator">|</span> Key <span class="operator">|</span> <span class="keyword">Default</span> <span class="operator">|</span> Extra <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>) <span class="operator">|</span> <span class="keyword">NO</span>   <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> pay         <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> start_date  <span class="operator">|</span> <span class="type">date</span>    <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> finish_date <span class="operator">|</span> <span class="type">date</span>    <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+------+-----+---------+-------+</span></span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> salary(id,pay,start_date,finish_date) </span><br><span class="line"><span class="keyword">values</span> </span><br><span class="line">(<span class="number">10002</span>,<span class="number">72527</span>,&quot;2001-08-02&quot;,&quot;2003-01-01&quot;),</span><br><span class="line">(<span class="number">10002</span>,<span class="number">75432</span>,&quot;2003-01-01&quot;,&quot;2004-01-01&quot;),</span><br><span class="line">(<span class="number">10005</span>,<span class="number">94692</span>,&quot;2001-09-09&quot;,&quot;2003-01-01&quot;),</span><br><span class="line">(<span class="number">10006</span>,<span class="number">43311</span>,&quot;2001-08-02&quot;,&quot;2004-01-01&quot;)</span><br><span class="line">;</span><br><span class="line"></span><br><span class="line">#查看数据</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> salary;</span><br><span class="line"><span class="operator">+</span><span class="comment">-------+-------+------------+-------------+</span></span><br><span class="line"><span class="operator">|</span> id    <span class="operator">|</span> pay   <span class="operator">|</span> start_date <span class="operator">|</span> finish_date <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+-------+------------+-------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">10002</span> <span class="operator">|</span> <span class="number">72527</span> <span class="operator">|</span> <span class="number">2001</span><span class="number">-08</span><span class="number">-02</span> <span class="operator">|</span> <span class="number">2003</span><span class="number">-01</span><span class="number">-01</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">10002</span> <span class="operator">|</span> <span class="number">75432</span> <span class="operator">|</span> <span class="number">2003</span><span class="number">-01</span><span class="number">-01</span> <span class="operator">|</span> <span class="number">2004</span><span class="number">-01</span><span class="number">-01</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">10005</span> <span class="operator">|</span> <span class="number">94692</span> <span class="operator">|</span> <span class="number">2001</span><span class="number">-09</span><span class="number">-09</span> <span class="operator">|</span> <span class="number">2003</span><span class="number">-01</span><span class="number">-01</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">10006</span> <span class="operator">|</span> <span class="number">43311</span> <span class="operator">|</span> <span class="number">2001</span><span class="number">-08</span><span class="number">-02</span> <span class="operator">|</span> <span class="number">2004</span><span class="number">-01</span><span class="number">-01</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+-------+------------+-------------+</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</br>
+<p><strong>[思路]</strong></p>
+<ul>
+<li><strong>读题</strong>：查找<strong>当前所有雇员</strong>入职以来的<strong>薪水涨幅</strong>，给出雇员编号以及对应的薪水涨幅，并按照薪水涨幅进行升序</li>
+<li><strong>解题</strong>：
+<ul>
+<li>输出为：雇员编号、薪水涨幅，且按照薪水涨幅进行升序排列</li>
+<li>限定条件为：当前雇员，即结束日期为表中最大日期2004 - 01 - 01</li>
+<li>薪水涨幅 = 当前薪水 - 入职薪水 ，根据最终输出要求，先分别找出雇员编号+当前薪水作为临时表a，在找出雇员编号+入职薪水作为临时表b，最后将临时表a和临时表b进行join方能运算出结果</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">select</span> a.id,(a.pay <span class="operator">-</span> b.pay) <span class="keyword">as</span> &quot;薪水涨幅&quot; </span><br><span class="line"><span class="keyword">from</span> </span><br><span class="line">(<span class="keyword">select</span> id,pay <span class="keyword">from</span> salary <span class="keyword">where</span> finish_date <span class="operator">=</span> &quot;2004-01-01&quot;) <span class="keyword">as</span> a </span><br><span class="line"><span class="keyword">join</span> </span><br><span class="line">(<span class="keyword">select</span> e.id,s.pay <span class="keyword">from</span> </span><br><span class="line"> employees <span class="keyword">as</span> e </span><br><span class="line"> <span class="keyword">join</span> salary <span class="keyword">as</span> s </span><br><span class="line"> <span class="keyword">on</span> e.id <span class="operator">=</span> s.id </span><br><span class="line"> <span class="keyword">where</span> e.employ_date <span class="operator">=</span> s.start_date </span><br><span class="line"> <span class="keyword">and</span> </span><br><span class="line"> e.id <span class="keyword">in</span> </span><br><span class="line"> (<span class="keyword">select</span> id <span class="keyword">from</span> salary <span class="keyword">where</span> finish_date <span class="operator">=</span> &quot;2004-01-01&quot;)) <span class="keyword">as</span> b </span><br><span class="line"> <span class="keyword">on</span> a.id <span class="operator">=</span> b.id </span><br><span class="line"> <span class="keyword">order</span> <span class="keyword">by</span> &quot;薪水涨幅&quot;;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="operator">+</span><span class="comment">-------+--------------+</span></span><br><span class="line"><span class="operator">|</span> id    <span class="operator">|</span> 薪水涨幅     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+--------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">10002</span> <span class="operator">|</span>         <span class="number">2905</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">10006</span> <span class="operator">|</span>            <span class="number">0</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+--------------+</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</br>
+<h3 id="比前一天高的数据"><a class="markdownIt-Anchor" href="#比前一天高的数据"></a> 比前一天高的数据</h3>
+</br>
+<p><strong>[题目]</strong></p>
+<p>&quot;日销&quot;表记录了某公司每天的营业额，字段有：id，日期，营业额(万元)</p>
+<p>现在需要找出所有比前一天(昨天)营业额更高的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#创建表</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> daysale(</span><br><span class="line">    id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    saledate <span class="type">date</span> comment &quot;日期&quot;,</span><br><span class="line">    turnover <span class="type">int</span> comment &quot;营业额(万元)&quot;);</span><br><span class="line">    </span><br><span class="line">#查看表</span><br><span class="line"><span class="keyword">desc</span> daysale;</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+---------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> Field    <span class="operator">|</span> Type    <span class="operator">|</span> <span class="keyword">Null</span> <span class="operator">|</span> Key <span class="operator">|</span> <span class="keyword">Default</span> <span class="operator">|</span> Extra <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+---------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> id       <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>) <span class="operator">|</span> <span class="keyword">NO</span>   <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> saledate <span class="operator">|</span> <span class="type">date</span>    <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> turnover <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+---------+------+-----+---------+-------+</span></span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> daysale(id,saledate,turnover) </span><br><span class="line"><span class="keyword">values</span> </span><br><span class="line">(<span class="number">1</span>,&quot;2019-01-01&quot;,<span class="number">97</span>),</span><br><span class="line">(<span class="number">2</span>,&quot;2019-01-02&quot;,<span class="number">87</span>),</span><br><span class="line">(<span class="number">3</span>,&quot;2019-01-03&quot;,<span class="number">88</span>),</span><br><span class="line">(<span class="number">4</span>,&quot;2019-01-04&quot;,<span class="number">98</span>),</span><br><span class="line">(<span class="number">5</span>,&quot;2019-01-05&quot;,<span class="number">100</span>),</span><br><span class="line">(<span class="number">6</span>,&quot;2019-01-06&quot;,<span class="number">80</span>),</span><br><span class="line">(<span class="number">7</span>,&quot;2019-01-07&quot;,<span class="number">77</span>),</span><br><span class="line">(<span class="number">8</span>,&quot;2019-01-08&quot;,<span class="number">92</span>);</span><br><span class="line"></span><br><span class="line">#查看数据</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> daysale;</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+----------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> saledate   <span class="operator">|</span> turnover <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+----------+</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">1</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-01</span> <span class="operator">|</span>       <span class="number">97</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">2</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-02</span> <span class="operator">|</span>       <span class="number">87</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">3</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-03</span> <span class="operator">|</span>       <span class="number">88</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">4</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-04</span> <span class="operator">|</span>       <span class="number">98</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">5</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-05</span> <span class="operator">|</span>      <span class="number">100</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">6</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-06</span> <span class="operator">|</span>       <span class="number">80</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">7</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-07</span> <span class="operator">|</span>       <span class="number">77</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">8</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-08</span> <span class="operator">|</span>       <span class="number">92</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+----------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<p><strong>[思路]</strong></p>
+<ul>
+<li>读题：找出所有<strong>营业额</strong>比**前一天(昨天)**营业额更高的数据</li>
+<li>解题：
+<ul>
+<li>比较同一个表内不同行的内容需要自join，连结条件为日期差为1天
+<ul>
+<li>日期比较方式1：datediff(日期1,日期2) ，即日期1 - 日期2的天数差</li>
+<li>日期比较方式2：timestampdiff(day/hour/second,日期1,日期2)，即日期2 - 日期1的差，与上面相反</li>
+</ul>
+</li>
+<li>结果限定条件为：营业额比前一天的高</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#datediff</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> b.<span class="operator">*</span> </span><br><span class="line"><span class="keyword">from</span> daysale <span class="keyword">as</span> a <span class="keyword">join</span> daysale <span class="keyword">as</span> b </span><br><span class="line"><span class="keyword">on</span> datediff(b.saledate,a.saledate) <span class="operator">=</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">where</span> b.turnover <span class="operator">&gt;</span> a.turnover;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+----------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> saledate   <span class="operator">|</span> turnover <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+----------+</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">3</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-03</span> <span class="operator">|</span>       <span class="number">88</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">4</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-04</span> <span class="operator">|</span>       <span class="number">98</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">5</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-05</span> <span class="operator">|</span>      <span class="number">100</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">8</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-08</span> <span class="operator">|</span>       <span class="number">92</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+----------+</span></span><br><span class="line"></span><br><span class="line">#timestempdiff</span><br><span class="line"><span class="keyword">select</span> b.<span class="operator">*</span> </span><br><span class="line"><span class="keyword">from</span> daysale <span class="keyword">as</span> a <span class="keyword">join</span> daysale <span class="keyword">as</span> b </span><br><span class="line"><span class="keyword">on</span> timestampdiff(<span class="keyword">day</span>,a.saledate,b.saledate) <span class="operator">=</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">where</span> b.turnover <span class="operator">&gt;</span> a.turnover;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+----------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> saledate   <span class="operator">|</span> turnover <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+----------+</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">3</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-03</span> <span class="operator">|</span>       <span class="number">88</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">4</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-04</span> <span class="operator">|</span>       <span class="number">98</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">5</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-05</span> <span class="operator">|</span>      <span class="number">100</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">8</span> <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-08</span> <span class="operator">|</span>       <span class="number">92</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+----------+</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</br>
+<h3 id="最小的n个数"><a class="markdownIt-Anchor" href="#最小的n个数"></a> 最小的n个数</h3>
+</br>
+[题目]
+<p>现在有两个表：</p>
+<ul>
+<li>学生表里记录了学生的学号、入学时间等信息，字段有：姓名、学号、班级、入学时间、年龄、专业</li>
+<li>成绩表里记录了学生选课成绩的信息，字段有：学号、课程号、分数</li>
+<li>两张表通过学号进行连结</li>
+</ul>
+<p>现在需要：</p>
+<ul>
+<li>筛选出2017年入学的&quot;计算机&quot;专业年龄最小的3位同学，输出格式为姓名、年龄</li>
+<li>统计每个班各位同学成绩平均分大于80分的人数和人数占比</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">#创建学生表</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> stu_07(</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">64</span>) comment &quot;姓名&quot;,</span><br><span class="line">    id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> comment &quot;学号&quot;,</span><br><span class="line">    class <span class="type">varchar</span>(<span class="number">64</span>) comment &quot;班级&quot;,</span><br><span class="line">    entrancedate <span class="type">date</span> comment &quot;入学时间&quot;,</span><br><span class="line">    age <span class="type">int</span> comment &quot;年龄&quot;,</span><br><span class="line">    professional <span class="type">varchar</span>(<span class="number">64</span>) comment &quot;专业&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#查看表</span><br><span class="line"><span class="keyword">desc</span> stu_07;</span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+-------------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> Field        <span class="operator">|</span> Type        <span class="operator">|</span> <span class="keyword">Null</span> <span class="operator">|</span> Key <span class="operator">|</span> <span class="keyword">Default</span> <span class="operator">|</span> Extra <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+-------------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> name         <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">64</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> id           <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>)     <span class="operator">|</span> <span class="keyword">NO</span>   <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> class        <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">64</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> entrancedate <span class="operator">|</span> <span class="type">date</span>        <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> age          <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>)     <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> professional <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">64</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+-------------+------+-----+---------+-------+</span></span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu_07(name,id,class,entrancedate,age,professional) </span><br><span class="line"><span class="keyword">values</span> </span><br><span class="line">(&quot;赵一&quot;,<span class="number">0001</span>,&quot;1班&quot;,&quot;2016-09-01&quot;,<span class="number">19</span>,&quot;计算机&quot;),</span><br><span class="line">(&quot;钱二&quot;,<span class="number">0002</span>,&quot;1班&quot;,&quot;2017-09-01&quot;,<span class="number">21</span>,&quot;计算机&quot;),</span><br><span class="line">(&quot;孙三&quot;,<span class="number">0003</span>,&quot;2班&quot;,&quot;2017-09-01&quot;,<span class="number">19</span>,&quot;金融&quot;),</span><br><span class="line">(&quot;李四&quot;,<span class="number">0004</span>,&quot;3班&quot;,&quot;2017-09-01&quot;,<span class="number">17</span>,&quot;计算机&quot;),</span><br><span class="line">(&quot;周周&quot;,<span class="number">0005</span>,&quot;3班&quot;,&quot;2017-09-01&quot;,<span class="number">20</span>,&quot;计算机&quot;),</span><br><span class="line">(&quot;吴五&quot;,<span class="number">0006</span>,&quot;3班&quot;,&quot;2017-09-01&quot;,<span class="number">18</span>,&quot;计算机&quot;);</span><br><span class="line"></span><br><span class="line">#查看数据</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> stu_07;</span><br><span class="line"><span class="operator">+</span><span class="comment">--------+----+-------+--------------+------+--------------+</span></span><br><span class="line"><span class="operator">|</span> name   <span class="operator">|</span> id <span class="operator">|</span> class <span class="operator">|</span> entrancedate <span class="operator">|</span> age  <span class="operator">|</span> professional <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------+----+-------+--------------+------+--------------+</span></span><br><span class="line"><span class="operator">|</span> 赵一   <span class="operator">|</span>  <span class="number">1</span> <span class="operator">|</span> <span class="number">1</span>班   <span class="operator">|</span> <span class="number">2016</span><span class="number">-09</span><span class="number">-01</span>   <span class="operator">|</span>   <span class="number">19</span> <span class="operator">|</span> 计算机       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 钱二   <span class="operator">|</span>  <span class="number">2</span> <span class="operator">|</span> <span class="number">1</span>班   <span class="operator">|</span> <span class="number">2017</span><span class="number">-09</span><span class="number">-01</span>   <span class="operator">|</span>   <span class="number">21</span> <span class="operator">|</span> 计算机       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 孙三   <span class="operator">|</span>  <span class="number">3</span> <span class="operator">|</span> <span class="number">2</span>班   <span class="operator">|</span> <span class="number">2017</span><span class="number">-09</span><span class="number">-01</span>   <span class="operator">|</span>   <span class="number">19</span> <span class="operator">|</span> 金融         <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 李四   <span class="operator">|</span>  <span class="number">4</span> <span class="operator">|</span> <span class="number">3</span>班   <span class="operator">|</span> <span class="number">2017</span><span class="number">-09</span><span class="number">-01</span>   <span class="operator">|</span>   <span class="number">17</span> <span class="operator">|</span> 计算机       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 周周   <span class="operator">|</span>  <span class="number">5</span> <span class="operator">|</span> <span class="number">3</span>班   <span class="operator">|</span> <span class="number">2017</span><span class="number">-09</span><span class="number">-01</span>   <span class="operator">|</span>   <span class="number">20</span> <span class="operator">|</span> 计算机       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 吴五   <span class="operator">|</span>  <span class="number">6</span> <span class="operator">|</span> <span class="number">3</span>班   <span class="operator">|</span> <span class="number">2017</span><span class="number">-09</span><span class="number">-01</span>   <span class="operator">|</span>   <span class="number">18</span> <span class="operator">|</span> 计算机       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------+----+-------+--------------+------+--------------+</span></span><br><span class="line"></span><br><span class="line">#创建成绩表</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> score_07(id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> comment &quot;学号&quot;,courseid <span class="type">int</span> comment &quot;课程号&quot;,score <span class="type">int</span> comment &quot;分数&quot;);</span><br><span class="line"></span><br><span class="line">#查看表</span><br><span class="line"><span class="keyword">desc</span> score_07;</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+---------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> Field    <span class="operator">|</span> Type    <span class="operator">|</span> <span class="keyword">Null</span> <span class="operator">|</span> Key <span class="operator">|</span> <span class="keyword">Default</span> <span class="operator">|</span> Extra <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+---------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> id       <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>) <span class="operator">|</span> <span class="keyword">NO</span>   <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> courseid <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> score    <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+---------+------+-----+---------+-------+</span></span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> score_07(id,courseid,score) </span><br><span class="line"><span class="keyword">values</span></span><br><span class="line">(<span class="number">0001</span>,<span class="number">01</span>,<span class="number">90</span>),</span><br><span class="line">(<span class="number">0002</span>,<span class="number">01</span>,<span class="number">70</span>),</span><br><span class="line">(<span class="number">0002</span>,<span class="number">02</span>,<span class="number">84</span>),</span><br><span class="line">(<span class="number">0003</span>,<span class="number">01</span>,<span class="number">90</span>),</span><br><span class="line">(<span class="number">0003</span>,<span class="number">03</span>,<span class="number">80</span>),</span><br><span class="line">(<span class="number">0004</span>,<span class="number">01</span>,<span class="number">90</span>),</span><br><span class="line">(<span class="number">0004</span>,<span class="number">02</span>,<span class="number">60</span>),</span><br><span class="line">(<span class="number">0005</span>,<span class="number">01</span>,<span class="number">85</span>),</span><br><span class="line">(<span class="number">0006</span>,<span class="number">02</span>,<span class="number">70</span>);</span><br><span class="line"></span><br><span class="line">#查看数据</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> score_07;</span><br><span class="line"><span class="operator">+</span><span class="comment">----+----------+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> courseid <span class="operator">|</span> score <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+----------+-------+</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">1</span> <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span>    <span class="number">90</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">2</span> <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span>    <span class="number">70</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">2</span> <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span>    <span class="number">84</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">3</span> <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span>    <span class="number">90</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">3</span> <span class="operator">|</span>        <span class="number">3</span> <span class="operator">|</span>    <span class="number">80</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">4</span> <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span>    <span class="number">90</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">4</span> <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span>    <span class="number">60</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">5</span> <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span>    <span class="number">85</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">6</span> <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span>    <span class="number">70</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+----------+-------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<p><strong>[解题1]</strong></p>
+<ul>
+<li>读题：筛选出<strong>2017年入学</strong>的&quot;<strong>计算机</strong>&quot;专业<strong>年龄最小</strong>的<strong>3位</strong>同学，输出格式为<strong>姓名、年龄</strong></li>
+<li>解题：
+<ul>
+<li>限定条件1：2017年入学，根据入学时间的年份进行限定</li>
+<li>限定条件2：专业 - 计算机</li>
+<li>限定条件3：年龄最小的3位同学，根据年龄进行倒序排列，limit输出前3行</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> name,age</span><br><span class="line"><span class="keyword">from</span> stu_07</span><br><span class="line"><span class="keyword">where</span> <span class="keyword">year</span>(entrancedate) <span class="operator">=</span> <span class="number">2017</span></span><br><span class="line"><span class="keyword">and</span> professional <span class="operator">=</span> &quot;计算机&quot;</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> age</span><br><span class="line">limit <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">--------+------+</span></span><br><span class="line"><span class="operator">|</span> name   <span class="operator">|</span> age  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------+------+</span></span><br><span class="line"><span class="operator">|</span> 李四   <span class="operator">|</span>   <span class="number">17</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 吴五   <span class="operator">|</span>   <span class="number">18</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 周周   <span class="operator">|</span>   <span class="number">20</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------+------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<p><strong>[解题2]</strong></p>
+<ul>
+<li>读题：统计<strong>每个班</strong>各位同学<strong>成绩平均分</strong>大于<strong>80</strong>分的<strong>人数</strong>和<strong>人数占比</strong></li>
+<li>解题：
+<ul>
+<li>每位同学成绩平均分 &gt; 80，成绩表根据 id 进行分组算出平均分，作为临时表</li>
+<li>统计每个班，则需要按照班级来分组，班级信息在学生表，而平均分信息在临时表，需要两表进行join</li>
+<li>输出为人数、人数占比，使用case when 进行统计平均分大于80的人数，以及后续的计算占比</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> </span><br><span class="line"><span class="built_in">sum</span>(<span class="keyword">case</span> <span class="keyword">when</span> 平均成绩 <span class="operator">&gt;</span> <span class="number">80</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">end</span>) <span class="keyword">as</span> &quot;人数&quot;,</span><br><span class="line"><span class="built_in">sum</span>(<span class="keyword">case</span> <span class="keyword">when</span> 平均成绩 <span class="operator">&gt;</span> <span class="number">80</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">end</span>)<span class="operator">/</span><span class="built_in">count</span>(st.id) <span class="keyword">as</span> &quot;人数占比&quot;</span><br><span class="line"><span class="keyword">from</span> stu_07 <span class="keyword">as</span> st </span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span></span><br><span class="line">(<span class="keyword">select</span> id,<span class="built_in">avg</span>(score) <span class="keyword">as</span> 平均成绩 <span class="keyword">from</span> score_07 <span class="keyword">group</span> <span class="keyword">by</span> id) </span><br><span class="line"><span class="keyword">as</span> a </span><br><span class="line"><span class="keyword">on</span> st.id <span class="operator">=</span> a.id</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> st.class;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">--------+--------------+</span></span><br><span class="line"><span class="operator">|</span> 人数   <span class="operator">|</span> 人数占比     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------+--------------+</span></span><br><span class="line"><span class="operator">|</span>      <span class="number">1</span> <span class="operator">|</span>       <span class="number">0.5000</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>      <span class="number">1</span> <span class="operator">|</span>       <span class="number">1.0000</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>      <span class="number">1</span> <span class="operator">|</span>       <span class="number">0.3333</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------+--------------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<h3 id="连续出现n次的数据"><a class="markdownIt-Anchor" href="#连续出现n次的数据"></a> 连续出现n次的数据</h3>
+</br>
+<p><strong>[题目]</strong></p>
+<p>成绩表记录了学生id以及分数，字段有：id、score</p>
+<p>先需要查找出所有至少连续出现3次的分数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#创建表</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> score_09(</span><br><span class="line">    id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> comment &quot;学号&quot;,</span><br><span class="line">    score <span class="type">int</span> comment &quot;分数&quot;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">#查看表</span><br><span class="line"><span class="keyword">desc</span> score_09;                                                                           <span class="operator">+</span><span class="comment">-------+---------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> Field <span class="operator">|</span> Type    <span class="operator">|</span> <span class="keyword">Null</span> <span class="operator">|</span> Key <span class="operator">|</span> <span class="keyword">Default</span> <span class="operator">|</span> Extra <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+---------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> id    <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>) <span class="operator">|</span> <span class="keyword">NO</span>   <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> score <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+---------+------+-----+---------+-------+</span></span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> score_09(id,score) <span class="keyword">values</span></span><br><span class="line">(<span class="number">0001</span>,<span class="number">89</span>),(<span class="number">0002</span>,<span class="number">76</span>),(<span class="number">0003</span>,<span class="number">76</span>),</span><br><span class="line">(<span class="number">0004</span>,<span class="number">83</span>),(<span class="number">0005</span>,<span class="number">83</span>),(<span class="number">0006</span>,<span class="number">83</span>),</span><br><span class="line">(<span class="number">0007</span>,<span class="number">77</span>),(<span class="number">0008</span>,<span class="number">90</span>),(<span class="number">0009</span>,<span class="number">88</span>),</span><br><span class="line">(<span class="number">0010</span>,<span class="number">86</span>);</span><br><span class="line"></span><br><span class="line">#查看数据</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> score_09;</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> score <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">1</span> <span class="operator">|</span>    <span class="number">89</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">2</span> <span class="operator">|</span>    <span class="number">76</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">3</span> <span class="operator">|</span>    <span class="number">76</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">4</span> <span class="operator">|</span>    <span class="number">83</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">5</span> <span class="operator">|</span>    <span class="number">83</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">6</span> <span class="operator">|</span>    <span class="number">83</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">7</span> <span class="operator">|</span>    <span class="number">77</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">8</span> <span class="operator">|</span>    <span class="number">90</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">9</span> <span class="operator">|</span>    <span class="number">88</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">10</span> <span class="operator">|</span>    <span class="number">86</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<p><strong>[思路]</strong>：</p>
+<ul>
+<li>读题：查找出<strong>所有</strong>、<strong>至少</strong>、<strong>连续出现3次</strong>的分数</li>
+<li>解题：
+<ul>
+<li><strong>注意：这个题目要求学号必须连续，以下语句才能正确执行</strong></li>
+<li>比较同一个表里的同一列的不同行的数据，需要自join</li>
+<li>连续出现3次，意思就是学号a的成绩=学号a+1的成绩=学号a+2的成绩，说明需要自join3次</li>
+<li>输出为这个至少出现3次的成绩是多少，distinct去除重复</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> a.score</span><br><span class="line"><span class="keyword">from</span> score_09 <span class="keyword">as</span> a <span class="keyword">join</span> score_09 <span class="keyword">as</span> b <span class="keyword">join</span> score_09 <span class="keyword">as</span> c</span><br><span class="line"><span class="keyword">on</span> a.id <span class="operator">=</span> b.id <span class="operator">-</span> <span class="number">1</span> <span class="keyword">and</span> b.id <span class="operator">=</span> c.id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">where</span> a.score <span class="operator">=</span> b.score <span class="keyword">and</span> b.score <span class="operator">=</span> c.score;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+</span></span><br><span class="line"><span class="operator">|</span> score <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">83</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<h3 id="课程满意度分析"><a class="markdownIt-Anchor" href="#课程满意度分析"></a> 课程满意度分析</h3>
+</br>
+<p><strong>[题目]</strong></p>
+<ul>
+<li>满意度记录了教师和学生对课程的满意程度，字段有：教师编号、学生编号、是否满意；
+<ul>
+<li>其中是否满意代表老师和学生对课程的评价，值&quot;是&quot;代表教师和学生都满意</li>
+</ul>
+</li>
+<li>用户表记录了学校教师和学生的信息，字段有：用户编号、是否在系统、角色
+<ul>
+<li>每个用户有唯一的编号</li>
+<li>是否在系统表示 这个用户是否还在这所学校里</li>
+<li>角色表示这个用户是教师还是学生</li>
+</ul>
+</li>
+<li>满意度表中的学生编号、教师编号与用户表的编号联结</li>
+</ul>
+<p>现需要分析学校里人员对课程的满意度</p>
+</br>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">#创建满意度表</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> satisfaction(</span><br><span class="line">    tno <span class="type">varchar</span>(<span class="number">10</span>) comment &quot;教师编号&quot;,</span><br><span class="line">    sno <span class="type">varchar</span>(<span class="number">10</span>) comment &quot;学生编号&quot;,</span><br><span class="line">    satisfied <span class="type">varchar</span>(<span class="number">64</span>) comment &quot;是否满意&quot;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">#查看表</span><br><span class="line"><span class="keyword">desc</span> satisfaction;</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+-------------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> Field     <span class="operator">|</span> Type        <span class="operator">|</span> <span class="keyword">Null</span> <span class="operator">|</span> Key <span class="operator">|</span> <span class="keyword">Default</span> <span class="operator">|</span> Extra <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+-------------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> tno       <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">10</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> sno       <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">10</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> satisfied <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">64</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+-------------+------+-----+---------+-------+</span></span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> satisfaction(tno,sno,satisfied)</span><br><span class="line"><span class="keyword">values</span></span><br><span class="line">(&quot;01&quot;,&quot;2&quot;,&quot;学生不满意&quot;),</span><br><span class="line">(&quot;01&quot;,&quot;1&quot;,&quot;是&quot;),</span><br><span class="line">(&quot;02&quot;,&quot;1&quot;,&quot;老师不满意&quot;),</span><br><span class="line">(&quot;02&quot;,&quot;2&quot;,&quot;是&quot;),</span><br><span class="line">(&quot;03&quot;,&quot;1&quot;,&quot;是&quot;),</span><br><span class="line">(&quot;03&quot;,&quot;2&quot;,&quot;是&quot;);</span><br><span class="line"></span><br><span class="line">#查看数据</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> satisfaction;</span><br><span class="line"><span class="operator">+</span><span class="comment">------+------+-----------------+</span></span><br><span class="line"><span class="operator">|</span> tno  <span class="operator">|</span> sno  <span class="operator">|</span> satisfied       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+------+-----------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">01</span>   <span class="operator">|</span> <span class="number">2</span>    <span class="operator">|</span> 学生不满意       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">01</span>   <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span> 是              <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">02</span>   <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span> 老师不满意       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">02</span>   <span class="operator">|</span> <span class="number">2</span>    <span class="operator">|</span> 是              <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">03</span>   <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span> 是              <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">03</span>   <span class="operator">|</span> <span class="number">2</span>    <span class="operator">|</span> 是              <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+------+-----------------+</span></span><br><span class="line"></span><br><span class="line">#创建用户表</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> sch_user(</span><br><span class="line">    id <span class="type">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">primary</span> key comment &quot;编号&quot;,</span><br><span class="line">    in_not_sys <span class="type">varchar</span>(<span class="number">64</span>) comment &quot;是否在系统中&quot;,</span><br><span class="line">    roles <span class="type">varchar</span>(<span class="number">64</span>) comment &quot;角色&quot;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">#查看表</span><br><span class="line"><span class="keyword">desc</span> sch_user;</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+-------------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> Field      <span class="operator">|</span> Type        <span class="operator">|</span> <span class="keyword">Null</span> <span class="operator">|</span> Key <span class="operator">|</span> <span class="keyword">Default</span> <span class="operator">|</span> Extra <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+-------------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> id         <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">10</span>) <span class="operator">|</span> <span class="keyword">NO</span>   <span class="operator">|</span> PRI <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> in_not_sys <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">64</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> roles      <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">64</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+-------------+------+-----+---------+-------+</span></span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> sch_user(id,in_not_sys,roles)</span><br><span class="line"><span class="keyword">values</span></span><br><span class="line">(&quot;1&quot;,&quot;是&quot;,&quot;学生&quot;),</span><br><span class="line">(&quot;2&quot;,&quot;是&quot;,&quot;学生&quot;),</span><br><span class="line">(&quot;01&quot;,&quot;是&quot;,&quot;教师&quot;),</span><br><span class="line">(&quot;02&quot;,&quot;否&quot;,&quot;教师&quot;),</span><br><span class="line">(&quot;03&quot;,&quot;是&quot;,&quot;教师&quot;);</span><br><span class="line"></span><br><span class="line">#查看数据</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> sch_user;</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> in_not_sys <span class="operator">|</span> roles  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">01</span> <span class="operator">|</span> 是         <span class="operator">|</span> 教师   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">02</span> <span class="operator">|</span> 否         <span class="operator">|</span> 教师   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">03</span> <span class="operator">|</span> 是         <span class="operator">|</span> 教师   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> 是         <span class="operator">|</span> 学生   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> 是         <span class="operator">|</span> 学生   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+--------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<p>[思路]</p>
+<ul>
+<li>读题：现需要分析<strong>学校里</strong>人员对课程的<strong>满意度</strong></li>
+<li>解题：
+<ul>
+<li>满意度信息在满意度表中，人员信息在用户表中，需要两表联结</li>
+<li>满意度计算：(对课程都满意且在系统中的教师和学生) / (在系统中的所有用户)</li>
+<li>限定条件1：是否在系统 - 是</li>
+<li>限定条件2：满意度 - 是</li>
+<li>找出在系统中的所有id，然后筛选满意度表中的数据，再进行计算</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">sum</span>(if(a.satisfied <span class="operator">=</span> &quot;是&quot;,<span class="number">1</span>,<span class="number">0</span>)) <span class="operator">/</span> <span class="built_in">count</span>(a.satisfied) <span class="keyword">as</span> &quot;课程满意度&quot;</span><br><span class="line"><span class="keyword">from</span> satisfaction <span class="keyword">as</span> a</span><br><span class="line"><span class="keyword">where</span> a.tno <span class="keyword">in</span> (<span class="keyword">select</span> id <span class="keyword">from</span> sch_user <span class="keyword">where</span> in_not_sys <span class="operator">=</span> &quot;是&quot;)</span><br><span class="line"><span class="keyword">and</span> a.sno <span class="keyword">in</span> (<span class="keyword">select</span> id <span class="keyword">from</span> sch_user <span class="keyword">where</span> in_not_sys <span class="operator">=</span> &quot;是&quot;);</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> 课程满意度      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span>          <span class="number">0.7500</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<h3 id="红包领取情况"><a class="markdownIt-Anchor" href="#红包领取情况"></a> 红包领取情况</h3>
+</br>
+<p><strong>[题目]</strong></p>
+<ul>
+<li>用户活跃表记录了用户的登录信息，字段有：登录日期、用户ID、新用户
+<ul>
+<li>其中新用户列的值为0、1；值为0为老用户、值为1为新用户</li>
+</ul>
+</li>
+<li>领取红包表里记录了用户领取红包的信息，字段有：抢红包日期、抢红包时间、用户id、金额</li>
+</ul>
+<p>现需要分析以下问题：</p>
+<ul>
+<li>计算2019年6月1日至今，每天DAU (即活跃用户，定义：有登录的用户)</li>
+<li>分析每天领红包的用户数、人均领取金额、人均领取次数，其中还有用户属性以及领取红包未登录的情况</li>
+<li>分析每个月按领红包取天数为1、2、3…30、31天区分，计算取每个月领取红包的用户数、人均领取金额、人均领取次数</li>
+<li>分析每个月领过红包用户和未领红包用户的数量</li>
+</ul>
+</br>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> dau_users(</span><br><span class="line">    log_date <span class="type">varchar</span>(<span class="number">64</span>) comment &quot;登录日期&quot;,</span><br><span class="line">    uid <span class="type">int</span> comment &quot;用户id&quot;,</span><br><span class="line">    new_old tinyint comment &quot;新用户&quot;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> grabred(</span><br><span class="line">    grab_date <span class="type">varchar</span>(<span class="number">64</span>) comment &quot;抢红包日期&quot;,</span><br><span class="line">    grab_time datetime comment &quot;抢红包时间&quot;,</span><br><span class="line">    uid <span class="type">int</span> comment &quot;用户id&quot;,</span><br><span class="line">    amount <span class="type">float</span> comment &quot;金额&quot;</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</br>
+<p><strong>[解题1]</strong></p>
+<ul>
+<li>读题：计算<strong>2019年6月1日至今</strong>，<strong>每天</strong>DAU (即活跃用户，定义：<strong>有登录的用户</strong>)</li>
+<li>解题
+<ul>
+<li>2019年6月1日到今天，限定条件为登录日期 &gt;= 2019年6月1日</li>
+<li>统计每天的登录用户</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> log_date,<span class="built_in">count</span>(uid) <span class="keyword">as</span> &quot;DAU-活跃用户&quot;</span><br><span class="line"><span class="keyword">from</span> dau_users</span><br><span class="line"><span class="keyword">where</span> log_date <span class="operator">&gt;=</span> &quot;20190601&quot;</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> log_date;</span><br></pre></td></tr></table></figure>
+</br>
+<p><strong>[解题2]</strong></p>
+<ul>
+<li>读题：分析<strong>每天</strong>领红包的<strong>用户数</strong>、<strong>人均</strong>领取<strong>金额</strong>、<strong>人均</strong>领取<strong>次数</strong>，其中还有用户属性以及领取红包未登录的情况</li>
+<li>解题
+<ul>
+<li>每天领红包的用户分为三种：新用户、老用户以及领取红包但是未登录的用户，而新用户、老用户的数据统计在用户活跃表中，领取红包但是未登录的用户需要用两表进行联结比对</li>
+<li>人均领取金额 = 领红包总金额 / 领红包总人数 (去重用户数)</li>
+<li>人均领取次数 = 总领取次数 / 领红包总人数 (去重用户数)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> c.grabdate,</span><br><span class="line"><span class="built_in">count</span>(<span class="keyword">distinct</span> <span class="keyword">case</span> <span class="keyword">when</span> c.new_or_old <span class="operator">=</span> &quot;新用户&quot; <span class="keyword">then</span> uid <span class="keyword">else</span> <span class="keyword">null</span> <span class="keyword">end</span>) <span class="keyword">as</span> &quot;日领新用户数&quot;,</span><br><span class="line"><span class="built_in">count</span>(<span class="keyword">distinct</span> <span class="keyword">case</span> <span class="keyword">when</span> c.new_or_old <span class="operator">=</span> &quot;老用户&quot; <span class="keyword">then</span> uid <span class="keyword">else</span> <span class="keyword">null</span> <span class="keyword">end</span>) <span class="keyword">as</span> &quot;日领老用户数&quot;,</span><br><span class="line"><span class="built_in">count</span>(<span class="keyword">distinct</span> <span class="keyword">case</span> <span class="keyword">when</span> c.new_or_old <span class="operator">=</span> &quot;未登录用户&quot; <span class="keyword">then</span> uid <span class="keyword">else</span> <span class="keyword">null</span> <span class="keyword">end</span>) <span class="keyword">as</span> &quot;日领未登录用户数&quot;,</span><br><span class="line"><span class="built_in">sum</span>(c.amount)<span class="operator">/</span> <span class="built_in">count</span>(<span class="keyword">distinct</span> c.uid) <span class="keyword">as</span> &quot;人均领取金额&quot;,</span><br><span class="line"><span class="built_in">count</span>(<span class="operator">*</span>)<span class="operator">/</span> <span class="built_in">count</span>(<span class="keyword">distinct</span> c.uid) <span class="keyword">as</span> &quot;人均领取次数&quot;</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">(<span class="keyword">select</span> b.grabdate,b.uid,b.amount,</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">when</span> a.new_old <span class="operator">=</span> <span class="number">1</span> <span class="keyword">then</span> &quot;新用户&quot;,</span><br><span class="line"> 		 <span class="keyword">when</span> a.new_old <span class="operator">=</span> <span class="number">0</span> <span class="keyword">then</span> &quot;老用户&quot;,</span><br><span class="line">    	 <span class="keyword">else</span> &quot;未登录用户&quot;</span><br><span class="line"><span class="keyword">end</span>) <span class="keyword">as</span> new_or_old</span><br><span class="line"><span class="keyword">from</span> dau_users <span class="keyword">as</span> a <span class="keyword">right</span> <span class="keyword">join</span> grabred <span class="keyword">as</span> b</span><br><span class="line"><span class="keyword">on</span> a.log_date <span class="operator">=</span> b.grabdate <span class="keyword">and</span> a.uid <span class="operator">=</span> b.uid) <span class="keyword">as</span> c</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> c.grabdate;</span><br></pre></td></tr></table></figure>
+</br>
+<p><strong>[解题3]</strong></p>
+<ul>
+<li>读题：分析<strong>每个月</strong>按领红包取天数为1、2、3…30、31天区分，计算取每个月领取红包的<strong>用户数</strong>、<strong>人均</strong>领取<strong>金额</strong>、<strong>人均</strong>领取<strong>次数</strong></li>
+<li>解题：
+<ul>
+<li>按照月份进行分组，然后统计该月有多少天有领红包行为，因为领红包日期为字符串格式，所以选用领红包时间列使用month()函数进行分组</li>
+<li>统计分组后每个月有多少用户领取红包，需要distinct</li>
+<li>人均领取金额 = 该月份领取红包总金额 / 该月份领取红包用户数 (distinct)</li>
+<li>人均领取次数 = 该月份总领取红包次数 / 该月份领取红包用户数 (distinct)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">month</span>(g.grab_time) <span class="keyword">as</span> &quot;月份&quot;,</span><br><span class="line"><span class="built_in">count</span>(<span class="keyword">distinct</span> g.grab_time) <span class="keyword">as</span> &quot;领取天数&quot;</span><br><span class="line"><span class="built_in">count</span>(<span class="keyword">distinct</span> uid) <span class="keyword">as</span> &quot;用户数&quot;,</span><br><span class="line"><span class="built_in">sum</span>(g.amount) <span class="operator">/</span> <span class="built_in">count</span>(<span class="keyword">distinct</span> uid) <span class="keyword">as</span> &quot;人均领取金额&quot;,</span><br><span class="line"><span class="built_in">count</span>(<span class="operator">*</span>) <span class="operator">/</span> <span class="built_in">count</span>(<span class="keyword">distinct</span> uid) <span class="keyword">as</span> &quot;人均领取次数&quot;</span><br><span class="line"><span class="keyword">from</span> grabred <span class="keyword">as</span> g</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">month</span>(g.grab_time);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#小问题<span class="number">1</span>：这样显示月份并不准确，<span class="keyword">month</span>()筛选分组后显示的只是月份，即<span class="number">03</span>、<span class="number">04</span>,如果有年份的区别，例如<span class="number">2019</span>、<span class="number">2018</span>这样的就会使数据不明确</span><br><span class="line">#解决：<span class="number">1</span>、再取出年份进行拼接concat() ；<span class="number">2</span>、直接用领红包日期来分组，因为是字符串，所以使用转换格式，然后在<span class="keyword">month</span>()，或者截取前<span class="number">6</span>个数字进行分组，这需要数据录入的格式以及准确性保持很高的要求</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</br>
+<p>[解题4]</p>
+<ul>
+<li>读题：分析<strong>每个月</strong> <strong>领过</strong>红包用户和<strong>未领</strong>红包用户的数量</li>
+<li>解题：
+<ul>
+<li>每个月，即按照月份来分组，month()</li>
+<li>领过红包用户信息存在领红包表中，而未领红包用户存在用户活跃表中，需要两表联结进行比对，用户活跃表作为 left join 的左表</li>
+<li>未领取红包用户 = 活跃用户 - 领红包用户</li>
+</ul>
+</li>
+</ul>
+</br>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">month</span>(c.grab_time),</span><br><span class="line"><span class="built_in">sum</span>(<span class="keyword">case</span> <span class="keyword">when</span> 是否领过红包 <span class="operator">=</span> &quot;领过红包用户&quot; <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">end</span>) <span class="keyword">as</span> &quot;领过红包用户数&quot;,</span><br><span class="line"><span class="built_in">sum</span>(<span class="keyword">case</span> <span class="keyword">when</span> 是否领过红包 <span class="operator">=</span> &quot;未领过红包用户&quot; <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">end</span>) <span class="keyword">as</span> &quot;未领过红包用户数&quot;</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">(<span class="keyword">select</span> b.grab_time,a.uid,b.uid <span class="keyword">as</span> &quot;领红包用户id&quot;,</span><br><span class="line"> (</span><br><span class="line">     <span class="keyword">case</span> <span class="keyword">when</span> b.uid <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">then</span> &quot;领过红包用户&quot;</span><br><span class="line">     <span class="keyword">else</span> &quot;未领过红包用户&quot;</span><br><span class="line"> <span class="keyword">end</span>) <span class="keyword">as</span> &quot;是否领过红包&quot;</span><br><span class="line"><span class="keyword">from</span> dau_users <span class="keyword">as</span> a </span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> grabred <span class="keyword">as</span> b </span><br><span class="line"><span class="keyword">on</span> a.log_date <span class="operator">=</span> b.grab_date <span class="keyword">and</span> a.uid <span class="operator">=</span> b.uid) <span class="keyword">as</span> c</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">month</span>(c.grab_time);</span><br><span class="line"></span><br><span class="line">#注意点</span><br><span class="line">#<span class="number">1</span>、还是跟问题<span class="number">3</span>一样的月份函数的使用列问题；<span class="number">2</span>、要注意联结后的列名在之后的语句中使用，即使用时要准确无误的引用</span><br></pre></td></tr></table></figure>
+</br>
+<h3 id="登录统计排序"><a class="markdownIt-Anchor" href="#登录统计排序"></a> 登录统计排序</h3>
+</br>
+<p><strong>[题目]</strong></p>
+<p>用户登录时间表中记录了用户登录的信息，字段有：用户id、姓名、邮箱、最后登录时间</p>
+<p>现需要输出一张表，字段为：姓名、最后登录时间、登录时间排名、登录天数排名</p>
+<ul>
+<li>登录时间排名：按时间给出每个人的登录次数，登录时间最早为1，依次排下去</li>
+<li>登录天数排名：按天给出每个人的登录次数，同一天多次登录设定为同一次，最多天数标记为1，之后依次类推</li>
+</ul>
+</br>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#创建表</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> user_loginfo(</span><br><span class="line">    uid <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> comment &quot;用户id&quot;,</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">64</span>) comment &quot;姓名&quot;,</span><br><span class="line">    email_addr <span class="type">varchar</span>(<span class="number">64</span>) comment &quot;邮箱地址&quot;,</span><br><span class="line">    last_logtime datetime comment &quot;最后登录时间&quot;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">#查看数据表</span><br><span class="line"><span class="keyword">desc</span> user_loginfo;</span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+-------------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> Field        <span class="operator">|</span> Type        <span class="operator">|</span> <span class="keyword">Null</span> <span class="operator">|</span> Key <span class="operator">|</span> <span class="keyword">Default</span> <span class="operator">|</span> Extra <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+-------------+------+-----+---------+-------+</span></span><br><span class="line"><span class="operator">|</span> uid          <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>)     <span class="operator">|</span> <span class="keyword">NO</span>   <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name         <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">64</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> email_addr   <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">64</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> last_logtime <span class="operator">|</span> datetime    <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+-------------+------+-----+---------+-------+</span></span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> user_loginfo(uid,name,email_addr,last_logtime)</span><br><span class="line"><span class="keyword">values</span> </span><br><span class="line">(<span class="number">100</span>,&quot;test4&quot;,&quot;test4@163.com&quot;,&quot;2007/11/25 16:31&quot;),</span><br><span class="line">(<span class="number">13</span>,&quot;test1&quot;,&quot;test1@163.com&quot;,&quot;2007/3/22 16:27&quot;),</span><br><span class="line">(<span class="number">19</span>,&quot;test1&quot;,&quot;test1@163.com&quot;,&quot;2007/10/25 14:13&quot;),</span><br><span class="line">(<span class="number">42</span>,&quot;test1&quot;,&quot;test1@163.com&quot;,&quot;2007/10/25 14:20&quot;),</span><br><span class="line">(<span class="number">45</span>,&quot;test2&quot;,&quot;test2@163.com&quot;,&quot;2007/4/25 14:17&quot;),</span><br><span class="line">(<span class="number">49</span>,&quot;test2&quot;,&quot;test2@163.com&quot;,&quot;2007/5/25 14:22&quot;);</span><br><span class="line"></span><br><span class="line">#查看数据</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> user_loginfo;</span><br><span class="line"><span class="operator">+</span><span class="comment">-----+-------+---------------+---------------------+</span></span><br><span class="line"><span class="operator">|</span> uid <span class="operator">|</span> name  <span class="operator">|</span> email_addr    <span class="operator">|</span> last_logtime        <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----+-------+---------------+---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">100</span> <span class="operator">|</span> test4 <span class="operator">|</span> test4<span class="variable">@163</span>.com <span class="operator">|</span> <span class="number">2007</span><span class="number">-11</span><span class="number">-25</span> <span class="number">16</span>:<span class="number">31</span>:<span class="number">00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">13</span> <span class="operator">|</span> test1 <span class="operator">|</span> test1<span class="variable">@163</span>.com <span class="operator">|</span> <span class="number">2007</span><span class="number">-03</span><span class="number">-22</span> <span class="number">16</span>:<span class="number">27</span>:<span class="number">00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">19</span> <span class="operator">|</span> test1 <span class="operator">|</span> test1<span class="variable">@163</span>.com <span class="operator">|</span> <span class="number">2007</span><span class="number">-10</span><span class="number">-25</span> <span class="number">14</span>:<span class="number">13</span>:<span class="number">00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">42</span> <span class="operator">|</span> test1 <span class="operator">|</span> test1<span class="variable">@163</span>.com <span class="operator">|</span> <span class="number">2007</span><span class="number">-10</span><span class="number">-25</span> <span class="number">14</span>:<span class="number">20</span>:<span class="number">00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">45</span> <span class="operator">|</span> test2 <span class="operator">|</span> test2<span class="variable">@163</span>.com <span class="operator">|</span> <span class="number">2007</span><span class="number">-04</span><span class="number">-25</span> <span class="number">14</span>:<span class="number">17</span>:<span class="number">00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">49</span> <span class="operator">|</span> test2 <span class="operator">|</span> test2<span class="variable">@163</span>.com <span class="operator">|</span> <span class="number">2007</span><span class="number">-05</span><span class="number">-25</span> <span class="number">14</span>:<span class="number">22</span>:<span class="number">00</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----+-------+---------------+---------------------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<p><strong>[思路]</strong></p>
+<ul>
+<li>
+<p>读题：现需要输出一张表，字段为：<strong>姓名</strong>、<strong>最后登录时间</strong>、<strong>登录时间排名</strong>、<strong>登录天数排名</strong></p>
+<ul>
+<li>登录时间排名：<strong>按时间</strong>给出每个人的<strong>登录次数</strong>，登录时间<strong>最早为1</strong>，依次排下去</li>
+<li>登录天数排名：<strong>按天</strong>给出每个人的登录次数，同一天<strong>多次登录设定为同一次</strong>，最<strong>多天数标记为1</strong>，之后依次类推</li>
+</ul>
+</li>
+<li>
+<p>解题(与出题者给出的答案理解不同，出于我自设定的业务场景)：</p>
+<ul>
+<li>
+<p>我觉得应该需要给出以下这样的列表</p>
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th>最后登录时间</th>
+<th>最早登录时间</th>
+<th>登录时间排名</th>
+<th>登录天数</th>
+<th>登录天数排名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>test1</td>
+<td>2007-05-25 14:22:00</td>
+<td>2007-02-25 14:17:00</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>test2</td>
+<td>2007-10-25 14:20:00</td>
+<td>2007-03-22 16:27:00</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>test4</td>
+<td>2007-11-25 16:31:00</td>
+<td>2007-11-25 16:31:00</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>下面语句分开的原因是：这种方式语句需要对要进行排名的列进行先排序，而同时对两列进行排列，会影响第二列的排名不准确，暂时不知道如何处理</p>
+</li>
+</ul>
+</li>
+</ul>
+</br>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.name,a.最后登录时间,a.最早登录时间,</span><br><span class="line">(<span class="keyword">case</span></span><br><span class="line"> 	<span class="keyword">when</span> <span class="variable">@predate</span> <span class="operator">=</span> a.最早登录时间 <span class="keyword">then</span> <span class="variable">@rank</span></span><br><span class="line">    <span class="keyword">when</span> <span class="variable">@predate</span> :<span class="operator">=</span> a.最早登录时间 <span class="keyword">then</span> <span class="variable">@rank</span> :<span class="operator">=</span> <span class="variable">@rank</span> <span class="operator">+</span> <span class="number">1</span></span><br><span class="line"> 	<span class="keyword">end</span></span><br><span class="line">) <span class="keyword">as</span> &quot;登录时间排名&quot;</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">(<span class="keyword">select</span> name,<span class="built_in">max</span>(last_logtime) <span class="keyword">as</span> &quot;最后登录时间&quot;,<span class="built_in">min</span>(last_logtime) <span class="keyword">as</span> &quot;最早登录时间&quot;</span><br><span class="line"><span class="keyword">from</span> user_loginfo</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> name) <span class="keyword">as</span> a,</span><br><span class="line">(<span class="keyword">select</span> <span class="variable">@rank</span> :<span class="operator">=</span> <span class="number">0</span> <span class="keyword">as</span> &quot;rank&quot;,<span class="variable">@predate</span> :<span class="operator">=</span> <span class="keyword">NULL</span> <span class="keyword">as</span> &quot;predate&quot;) <span class="keyword">as</span> t</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.最早登录时间</span><br><span class="line">;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+---------------------+---------------------+--------------------+</span></span><br><span class="line"><span class="operator">|</span> name  <span class="operator">|</span> 最后登录时间          <span class="operator">|</span> 最早登录时间          <span class="operator">|</span> 登录时间排名         <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+---------------------+---------------------+--------------------+</span></span><br><span class="line"><span class="operator">|</span> test2 <span class="operator">|</span> <span class="number">2007</span><span class="number">-05</span><span class="number">-25</span> <span class="number">14</span>:<span class="number">22</span>:<span class="number">00</span> <span class="operator">|</span> <span class="number">2007</span><span class="number">-02</span><span class="number">-25</span> <span class="number">14</span>:<span class="number">17</span>:<span class="number">00</span> <span class="operator">|</span>                  <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> test1 <span class="operator">|</span> <span class="number">2007</span><span class="number">-10</span><span class="number">-25</span> <span class="number">14</span>:<span class="number">20</span>:<span class="number">00</span> <span class="operator">|</span> <span class="number">2007</span><span class="number">-03</span><span class="number">-22</span> <span class="number">16</span>:<span class="number">27</span>:<span class="number">00</span> <span class="operator">|</span>                  <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> test4 <span class="operator">|</span> <span class="number">2007</span><span class="number">-11</span><span class="number">-25</span> <span class="number">16</span>:<span class="number">31</span>:<span class="number">00</span> <span class="operator">|</span> <span class="number">2007</span><span class="number">-11</span><span class="number">-25</span> <span class="number">16</span>:<span class="number">31</span>:<span class="number">00</span> <span class="operator">|</span>                  <span class="number">3</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+---------------------+---------------------+--------------------+</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> a.name,a.最后登录时间,a.登录天数,</span><br><span class="line">(<span class="keyword">case</span></span><br><span class="line"> 	<span class="keyword">when</span> <span class="variable">@predate</span> <span class="operator">=</span> a.登录天数 <span class="keyword">then</span> <span class="variable">@rank</span></span><br><span class="line">    <span class="keyword">when</span> <span class="variable">@predate</span> :<span class="operator">=</span> a.登录天数 <span class="keyword">then</span> <span class="variable">@rank</span> :<span class="operator">=</span> <span class="variable">@rank</span> <span class="operator">+</span> <span class="number">1</span></span><br><span class="line"> 	<span class="keyword">end</span></span><br><span class="line">) <span class="keyword">as</span> &quot;登录天数排名&quot;</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">(<span class="keyword">select</span> name,<span class="built_in">max</span>(last_logtime) <span class="keyword">as</span> &quot;最后登录时间&quot;,</span><br><span class="line"> <span class="built_in">count</span>(<span class="keyword">distinct</span> <span class="type">date</span>(last_logtime)) <span class="keyword">as</span> &quot;登录天数&quot;</span><br><span class="line"><span class="keyword">from</span> user_loginfo</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> name) <span class="keyword">as</span> a,</span><br><span class="line">(<span class="keyword">select</span> <span class="variable">@rank</span> :<span class="operator">=</span> <span class="number">0</span> <span class="keyword">as</span> &quot;rank&quot;,<span class="variable">@pretimes</span> :<span class="operator">=</span> <span class="keyword">NULL</span> <span class="keyword">as</span> &quot;pretimes&quot;) <span class="keyword">as</span> t</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.登录天数 <span class="keyword">desc</span></span><br><span class="line">;</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+---------------------+--------------+--------------------+</span></span><br><span class="line"><span class="operator">|</span> name  <span class="operator">|</span> 最后登录时间          <span class="operator">|</span> 登录天数      <span class="operator">|</span> 登录天数排名         <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+---------------------+--------------+--------------------+</span></span><br><span class="line"><span class="operator">|</span> test1 <span class="operator">|</span> <span class="number">2007</span><span class="number">-10</span><span class="number">-25</span> <span class="number">14</span>:<span class="number">20</span>:<span class="number">00</span> <span class="operator">|</span>            <span class="number">2</span> <span class="operator">|</span>                  <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> test2 <span class="operator">|</span> <span class="number">2007</span><span class="number">-05</span><span class="number">-25</span> <span class="number">14</span>:<span class="number">22</span>:<span class="number">00</span> <span class="operator">|</span>            <span class="number">2</span> <span class="operator">|</span>                  <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> test4 <span class="operator">|</span> <span class="number">2007</span><span class="number">-11</span><span class="number">-25</span> <span class="number">16</span>:<span class="number">31</span>:<span class="number">00</span> <span class="operator">|</span>            <span class="number">1</span> <span class="operator">|</span>                  <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+---------------------+--------------+--------------------+</span></span><br></pre></td></tr></table></figure>
+</br>
+<p><strong>持续更新中～</strong></p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    MySQL中如何对留存进行分析？
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">如何通过对比得出数据差异？以及什么是二八定律</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

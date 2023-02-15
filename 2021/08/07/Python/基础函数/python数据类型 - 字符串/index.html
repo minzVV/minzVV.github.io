@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>python数据类型 - 字符串 | Minz&#39;s DA_Wiki</title>
+    
+    
+        <meta name="keywords" content="Python,数据类型" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="摘要 python数据类型之字符串(String),基础特性以及常用场景～">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python数据类型 - 字符串">
+<meta property="og:url" content="http://example.com/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/index.html">
+<meta property="og:site_name" content="Minz&#39;s DA_Wiki">
+<meta property="og:description" content="摘要 python数据类型之字符串(String),基础特性以及常用场景～">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-07T12:41:02.000Z">
+<meta property="article:modified_time" content="2023-02-15T09:29:48.733Z">
+<meta property="article:author" content="Minz">
+<meta property="article:tag" content="Python,数据类型">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Minz&#39;s DA_Wiki" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Minz&#39;s DA_Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础学习
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/07/11/MySQL/mysql%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%A5%E5%8F%8A%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">一条MySQL语句的执行详析</a></li>  <li class="file"><a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/">MySQL数据库 - 初步认识</a></li>  <li class="file"><a href="/2021/10/07/MySQL/%E7%95%99%E5%AD%98%E7%8E%87%E6%A6%82%E5%BF%B5&MySQL%E6%A1%88%E4%BE%8B/">MySQL中如何对留存进行分析？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            练习题集
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/06/MySQL/MySQL%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E5%88%9D%E7%BA%A7%E7%AF%87/">MySQL练习 - 场景模拟初级篇(持续更新)</a></li>  <li class="file"><a href="/2022/10/03/MySQL/MySQL%E7%BB%83%E4%B9%A0%E7%AE%80%E6%98%93%E7%AF%87/">MySQL练习 - 基础篇(持续更新ing)</a></li>  <li class="file"><a href="/2022/10/07/MySQL/hack_no_easy/">HackerRank中SQL练习非简单部分</a></li>  <li class="file"><a href="/2022/11/07/MySQL/hacker/">HackerRank中SQL练习_简单</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            基础函数
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">python数据类型 - 字符串</a></li>  <li class="file"><a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/">python数据类型 - 列表与字典</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            库的使用
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/09/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Matplotlib%E5%85%A5%E9%97%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Matplotlib - 常用图表 & python表格样式</a></li>  <li class="file"><a href="/2021/08/11/Python/%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/Seaborn%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B0%83%E8%89%B2%E7%9B%98/">Seaborn - 基础风格展示 & 调色盘</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            业务指标
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/10/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87/">到底什么是数据指标？</a></li>  <li class="file"><a href="/2021/08/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%8C%87%E6%A0%87%E4%B8%8E%E7%BB%B4%E5%BA%A6/">数据分析中的度量和维度</a></li>  <li class="file"><a href="/2021/11/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E9%83%A8%E5%88%86%E5%90%8D%E8%AF%8D%E8%A7%A3%E6%9E%90/">什么是趋势分析、特征工程、因子分析 ？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分析框架
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/05/15/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/AB%20%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E8%AF%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88/">A/B 测试的概念认识</a></li>  <li class="file"><a href="/2021/08/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part2/">一眼就get到数据分布情况的图表？</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%90%8C%E6%9C%9F%E7%BE%A4%E5%88%86%E6%9E%90/">同期群分析</a></li>  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%8C%87%E6%A0%87/">框架下的指标</a></li>  <li class="file"><a href="/2021/09/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E5%88%86%E5%B8%83%E5%88%86%E6%9E%90/">快速了解数据分布的常用方法</a></li>  <li class="file"><a href="/2021/09/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90&%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E6%9E%90/">如何通过对比得出数据差异？以及什么是二八定律</a></li>  <li class="file"><a href="/2021/10/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E6%95%B0%E6%8D%AE%E7%89%B9%E5%BE%81%E4%B9%8B%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C/">什么是正态分布？如何进行正态性检验？</a></li>  <li class="file"><a href="/2021/10/22/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">数据的相关性分析 & 统计分析</a></li>  <li class="file"><a href="/2022/08/19/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/%E5%8F%AF%E8%A7%86%E5%8C%96%20-%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E5%9B%BE%E8%A1%A8part1/">如何用图表直观显示数据的分布情况？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据清洗
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/">数据分析中的数据清洗流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/10/29/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">什么是监督学习和非监督学习？</a></li>  <li class="file"><a href="/2021/11/13/%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97/">随机算法之蒙特卡罗</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具搭建
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2023/01/25/%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA/jupyter-notebook%20%E5%AE%89%E8%A3%85&%E7%BE%8E%E5%8C%96/">jupyter-notebook 安装&美化</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾记录
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ArchLinux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/ArchLinux/archlinux_common_operation/">archlinux的常用操作命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hexo
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2022/08/22/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/Hexo/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2&typography%E4%B8%BB%E9%A2%98/">Hexo搭建博客&选择主题</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/16/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/you-get-%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91/">如何使用you-get获取视频？</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据案例分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%AF%8D%E5%A9%B4%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">电商项目：母婴用品购买行为分析</a></li>  <li class="file"><a href="/2021/03/01/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/IMDB%E7%94%B5%E5%BD%B1%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">对比分析案例：IMDB电影数据分析及可视化</a></li>  <li class="file"><a href="/2021/03/19/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">泰坦尼克号幸存者分析</a></li>  <li class="file"><a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E4%B8%9C%E8%8E%9E%E5%9C%B0%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%A7%9F%E8%B5%81/">某壳网房屋租赁信息抓取与浅析</a></li>  <li class="file"><a href="/2021/04/14/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%81%A5%E8%BA%AB%E5%B9%B3%E5%8F%B0%E4%BC%9A%E5%91%98%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">会员用户消费行为浅度挖掘</a></li>  <li class="file"><a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/CDNow%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E6%B6%88%E8%B4%B9%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/">用户消费有哪些特征？用户质量又如何界定？</a></li>  <li class="file"><a href="/2021/05/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E5%A4%A9%E7%8C%AB%E5%8F%8C%E5%8D%81%E4%B8%80%E7%BE%8E%E5%A6%86%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">剖析天猫双十一的美妆产品销售数据</a></li>  <li class="file"><a href="/2021/11/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/HR_Analytics/">员工离职原因分析</a></li>  <li class="file"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/Bigmart%20Sale/">大型商场销售额分析</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2022/01/22/index/">Welcome Minz's DA_Wiki Site</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Python/基础函数/python数据类型 - 字符串" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Python/">Python</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/">基础函数</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Python-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">Python,数据类型</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/08/07/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+            <time datetime="2021-08-07T12:41:02.000Z" itemprop="datePublished">2021-08-07</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/raw/null/source/_posts/Python/基础函数/python数据类型 - 字符串.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/edit/null/source/_posts/Python/基础函数/python数据类型 - 字符串.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/minzVV/null/commits/null/source/_posts/Python/基础函数/python数据类型 - 字符串.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            python数据类型 - 字符串
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#join"><span class="toc-number">2.1.</span> <span class="toc-text"> join</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find"><span class="toc-number">2.2.</span> <span class="toc-text"> find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#split%E4%B8%8Ersplit"><span class="toc-number">2.3.</span> <span class="toc-text"> split与rsplit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace"><span class="toc-number">2.4.</span> <span class="toc-text"> replace</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9B%BF%E6%8D%A2%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="toc-number">2.4.1.</span> <span class="toc-text"> 字符串替换的另一种方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strip"><span class="toc-number">2.5.</span> <span class="toc-text"> strip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isupper%E5%92%8Cislower"><span class="toc-number">2.6.</span> <span class="toc-text"> isupper和islower</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#startswith%E5%92%8Cendswith"><span class="toc-number">2.7.</span> <span class="toc-text"> startswith和endswith</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BD%99%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text"> 其余方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%9E%8B"><span class="toc-number">3.1.</span> <span class="toc-text"> 判断型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#center-ljust-rjust"><span class="toc-number">3.2.</span> <span class="toc-text"> center、ljust、rjust</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#expandtabs"><span class="toc-number">3.3.</span> <span class="toc-text"> expandtabs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#swapcase"><span class="toc-number">3.4.</span> <span class="toc-text"> swapcase</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text"> 总结</span></a></li></ol>
+                </div>
+            
+        
+        
+            <blockquote>
+<p>摘要<br />
+python数据类型之字符串(String),基础特性以及常用场景～</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>这篇文章主要介绍python在数据分析中的字符串的常用魔法,结合实例形式总结字符串常用魔法的概念、功能、使用方法以及相关注意事项。</p>
+<h2 id="常用方法"><a class="markdownIt-Anchor" href="#常用方法"></a> 常用方法</h2>
+<h3 id="join"><a class="markdownIt-Anchor" href="#join"></a> <strong>join</strong></h3>
+<blockquote>
+<p>字符串拼接：将字符串中的每一个元素按照<strong>指定的分隔符</strong>进行拼接</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="string">&#x27;你是风儿我是沙&#x27;</span></span><br><span class="line">v = <span class="string">&#x27; &#x27;</span>.join(test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">你是风儿我是沙</span><br><span class="line">你 是 风 儿 我 是 沙</span><br></pre></td></tr></table></figure>
+<br>
+<p>字符串拼接拓展：</p>
+<ol>
+<li>连接少量字符串时，可以使用 <strong>+</strong> 号操作符 或者 <strong>f-string</strong></li>
+<li>连接大量字符串时，推荐使用 <strong>join</strong> 和 <strong>f-string</strong></li>
+</ol>
+<br>
+<h3 id="find"><a class="markdownIt-Anchor" href="#find"></a> <strong>find</strong></h3>
+<blockquote>
+<p>子序列查找：根据传入的参数寻找子序列，找到<strong>第一个</strong>后，获取其位置</p>
+<p>参数：<strong>sub</strong> 指定要查找的子序列</p>
+<p>​			<strong>start</strong>和<strong>end</strong> 指定寻找的区间</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="string">&#x27;hello world&#x27;</span></span><br><span class="line">v = test.find(<span class="string">&#x27;o&#x27;</span>,<span class="number">3</span>,-<span class="number">1</span>)</span><br><span class="line">v1 = test.find(<span class="string">&#x27;o&#x27;</span>,<span class="number">1</span>,<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line">-<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>通过上面的实例及输出，可以发现：</p>
+<ol>
+<li>在找到第一个符合传入的参数sub后，停止查找并获取sub在字符串中所在的位置(或者说下标)</li>
+<li>通过输出v和v1，得到的位置(下标)是在整个字符串中的位置，<strong>而当返回为-1时，则为传入的指定区间的末尾，并非整个字符串的末尾</strong></li>
+</ol>
+<br>
+<h3 id="split与rsplit"><a class="markdownIt-Anchor" href="#split与rsplit"></a> <strong>split与rsplit</strong></h3>
+<blockquote>
+<p>字符串分割：以传入参数为分割符，默认将字符串全部分割</p>
+<p>split：默认<strong>从左往右</strong>进行分割；rsplit：指定<strong>从右往左</strong>进行分割</p>
+<p>参数：<strong>sep</strong> 指定分割符</p>
+<p>​			<strong>maxsplit</strong> 指定分割次数</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="string">&#x27;hello world&#x27;</span></span><br><span class="line">v = test.split(<span class="string">&#x27;l&#x27;</span>,<span class="number">2</span>)</span><br><span class="line">v1 = test.split(<span class="string">&#x27;l&#x27;</span>,<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">[<span class="string">&#x27;he&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;o world&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;he&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;o wor&#x27;</span>, <span class="string">&#x27;d&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<p>通过输出对比，不难发现split需要注意的地方有：</p>
+<ol>
+<li>分割时，传入参数的匹配可视为<strong>贪婪匹配</strong>，如实例中v的输出为连续的 l 分割符视为一个整体进行前后分割</li>
+<li>结果输出并<strong>不会</strong>输出分割符</li>
+<li>分割次数若<strong>大于</strong>字符串中含有的分割符个数，不会报错，仅输出为最大分割次数所得到的结果</li>
+</ol>
+<blockquote>
+<p>关于字符串分割拓展：</p>
+<ol>
+<li><strong>partition</strong>：以参数为分割符，且在拿到第一个参数时，将字符串分割成<strong>3份</strong></li>
+<li><strong>rpartition</strong>：以参数为分割符，<strong>由右向左</strong>识别且在拿到第一个参数时，将字符串分割成3份</li>
+<li><strong>splitlines</strong>：只能根据<strong>换行符</strong>进行分割，传入的参数为<strong>True</strong>和<strong>False</strong>，结果为是否保留换行符显示</li>
+</ol>
+</blockquote>
+<br>
+<h3 id="replace"><a class="markdownIt-Anchor" href="#replace"></a> <strong>replace</strong></h3>
+<blockquote>
+<p><strong>替换</strong>：字符串中的指定子序列与传入参数进行<strong>替换</strong></p>
+<p>参数：<strong>old</strong>	指定被替换的子序列</p>
+<p>​			<strong>new</strong>	传入替换的参数</p>
+<p>​			<strong>count</strong>	替换个数(次数)，<strong>默认为全部替换</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="string">&#x27;hello world&#x27;</span></span><br><span class="line">v = test.replace(<span class="string">&#x27;hello&#x27;</span>,<span class="string">&#x27;hi&#x27;</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">hi world</span><br></pre></td></tr></table></figure>
+<br>
+<h4 id="字符串替换的另一种方法"><a class="markdownIt-Anchor" href="#字符串替换的另一种方法"></a> <strong>字符串替换的另一种方法</strong></h4>
+<blockquote>
+<p><strong>maketrans</strong>定义对应关系，<strong>translate</strong>进行替换</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="built_in">str</span>.maketrans(<span class="string">&#x27;aeiou&#x27;</span>,<span class="string">&#x27;12345&#x27;</span>)</span><br><span class="line">v = <span class="string">&#x27;osahodioashoioiwueuroiuapfhahweiuip&#x27;</span></span><br><span class="line">result = v.translate(s)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">4s1h4d341sh4343w525r4351pfh1hw2353p</span><br></pre></td></tr></table></figure>
+<br>
+<h3 id="strip"><a class="markdownIt-Anchor" href="#strip"></a> <strong>strip</strong></h3>
+<blockquote>
+<p>移除指定的字符串，并<strong>优先最多匹配</strong>，默认(即不传入参数时)情况下，去除左右空白以及 \t 、\n</p>
+<p><strong>lstrip</strong>：指定<strong>从左往右</strong>进行匹配并移除</p>
+<p><strong>rstrip</strong>：指定<strong>从右往左</strong>进行匹配并移除</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="string">&#x27;xaxexxaleaxaae&#x27;</span></span><br><span class="line">v = test.strip(<span class="string">&#x27;xa&#x27;</span>)</span><br><span class="line">v1 = test.lstrip(<span class="string">&#x27;xa&#x27;</span>)</span><br><span class="line">v2 = test.rstrip(<span class="string">&#x27;xae&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出v</span></span><br><span class="line"></span><br><span class="line">exxaleaxaae</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出v1</span></span><br><span class="line"></span><br><span class="line">exxaleaxaa</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出v2</span></span><br><span class="line"></span><br><span class="line">xaxexxal</span><br></pre></td></tr></table></figure>
+<p>strip使用总结：</p>
+<ol>
+<li>所谓优先最多匹配，指的是先传入参数为整体进行匹配，如果匹配不上再分解为单个字符或字符组合去进行匹配，如v2中传入的参数为xae，并指定从右往左进行匹配，匹配时优先顺序为 <strong>xae — xa、ae — x、a、e</strong></li>
+<li>strip是指从字符串的<strong>左右两边</strong>进行匹配移除，并<strong>停止于</strong>所谓匹配优先顺序中的所有情况都匹配不上</li>
+</ol>
+<br>
+<h3 id="isupper和islower"><a class="markdownIt-Anchor" href="#isupper和islower"></a> <strong>isupper和islower</strong></h3>
+<blockquote>
+<p><strong>isupper</strong>：判断字符串是否<strong>全部</strong>为大写</p>
+<p><strong>islower</strong>：判断字符串是否<strong>全部</strong>为小写</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="string">&#x27;ASDDss&#x27;</span></span><br><span class="line">v1 = test.isupper()</span><br><span class="line">v2 = test.islower()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line"><span class="literal">False</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<p>输出结果为<strong>布尔值</strong>，转换为大写用：<strong>upper</strong>；转换为小写用：<strong>lower</strong></p>
+<br>
+<h3 id="startswith和endswith"><a class="markdownIt-Anchor" href="#startswith和endswith"></a> <strong>startswith和endswith</strong></h3>
+<blockquote>
+<p>startswith：判断是否以传入的参数开头</p>
+<p>endswith：判断是否以传入的参数结尾</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="string">&#x27;djfkjahfkja&#x27;</span></span><br><span class="line">v = test.startswith(<span class="string">&#x27;dj&#x27;</span>)</span><br><span class="line">v1 = test.endswith(<span class="string">&#x27;aj&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出v</span></span><br><span class="line"></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出v1</span></span><br><span class="line"></span><br><span class="line"> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<p>输出结果为<strong>布尔值</strong></p>
+<br>
+<h2 id="其余方法"><a class="markdownIt-Anchor" href="#其余方法"></a> <strong>其余方法</strong></h2>
+<h3 id="判断型"><a class="markdownIt-Anchor" href="#判断型"></a> <strong>判断型</strong></h3>
+<ol>
+<li><strong>isalnum</strong>：判断字符串中是否只包含字母和数字（汉字也算）</li>
+<li><strong>isalpha</strong>：字符串中是否只包含字母（汉字也算）</li>
+<li><strong>isdecimal</strong>、<strong>isdigit</strong>、<strong>isnumeric</strong><br />
+字符串是否是数字，isdigit（包含一些<strong>特殊字符</strong>的数字）比isdecimal(<strong>十进制小数</strong>)牛逼点<br />
+isnumeric(<strong>包括汉字的数字也能识别</strong>)👈👈👈👈👈三者之中最牛，但使用最多是isdecimal</li>
+<li><strong>isidentifier</strong><br />
+标识符：查看字符串是否由字母，数字，下划线组成，数字不能为首</li>
+<li><strong>isprintable</strong>：判断字符串中是否存在不可显示的字符，例如：\t 制表符   \n 换行符</li>
+<li><strong>isspace</strong>：判断是否全部是空格</li>
+<li><strong>istitle</strong>：判断是否为标题，标题的定义为每个字符首字母为大写；转换为标题用：title</li>
+</ol>
+<br>
+<h3 id="center-ljust-rjust"><a class="markdownIt-Anchor" href="#center-ljust-rjust"></a> <strong>center、ljust、rjust</strong></h3>
+<blockquote>
+<p>设置字符串的宽度，并使用字符填充</p>
+<p><strong>center</strong>将内容居中，<strong>ljust</strong>将内容放左边，<strong>rjust</strong>将内容放右边</p>
+<p>参数：<strong>width</strong>	指定宽度</p>
+<p>​			<strong>fillchar</strong>	指定填充字符</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="string">&#x27;hello world&#x27;</span></span><br><span class="line">v1 = test.center(<span class="number">21</span>,<span class="string">&#x27;*&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">*****hello world*****</span><br></pre></td></tr></table></figure>
+<br>
+<h3 id="expandtabs"><a class="markdownIt-Anchor" href="#expandtabs"></a> <strong>expandtabs</strong></h3>
+<blockquote>
+<p>断句：<strong>匹配 \t</strong> ，将字符串以6个为一组进行断句，并在匹配到 \t 的位置，<strong>不够6个</strong>时以空格补满</p>
+<p>参数：<strong>tabsize</strong>	指定宽度</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">&#x27;hfaushfhoahsfoih\tuisagfiu\tjdsba&#x27;</span></span><br><span class="line">v = s.expandtabs(<span class="number">6</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">hfaushfhoahsfoih  uisagfiu    jdsba</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例应用</span></span><br><span class="line"></span><br><span class="line">text = <span class="string">&#x27;username\tage\tpassw\tsex\n张三\t12\t123\t男\n李四\t19\t123\t男\n陈陈\t18\t123\t女\n&#x27;</span></span><br><span class="line">v = text.expandtabs(<span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出结果</span></span><br><span class="line"></span><br><span class="line">username            age                 passw               sex</span><br><span class="line">张三                  <span class="number">12</span>                  <span class="number">123</span>                 男</span><br><span class="line">李四                  <span class="number">19</span>                  <span class="number">123</span>                 男</span><br><span class="line">陈陈                  <span class="number">18</span>                  <span class="number">123</span>                 女</span><br></pre></td></tr></table></figure>
+<br>
+<h3 id="swapcase"><a class="markdownIt-Anchor" href="#swapcase"></a> <strong>swapcase</strong></h3>
+<blockquote>
+<p>大小写转换：与lower、upper不同之处在于，swapcase把字符串中<strong>每一个</strong>元素进行转换，而并非统一转换成大写或小写</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="string">&#x27;LAsjSi&#x27;</span></span><br><span class="line">v = test.swapcase()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"></span><br><span class="line">laSJsI</span><br></pre></td></tr></table></figure>
+<br>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<p>以上为数据分析中python字符串自带的一下常用方法，重温一遍并记录下来，以便查漏补缺，有哪些地方出现错误或者疑义，欢迎讨论，感谢阅读～</p>
+<p>本文版权归作者所有，欢迎转载，转载请注明出处和链接来源。</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/08/08/Python/%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%20-%20%E5%88%97%E8%A1%A8%E4%B8%8E%E5%AD%97%E5%85%B8/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    python数据类型 - 列表与字典
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2021/08/03/MySQL/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%20-%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">MySQL数据库 - 初步认识</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Minz &copy; 2023 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>
